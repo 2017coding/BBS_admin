@@ -1,0 +1,41 @@
+{
+  "width": 300,
+  "height": 300,
+  "fitSize": false,
+  "clip": true,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "#3498DB",
+      "rect": [
+        0,
+        0,
+        300,
+        300
+      ]
+    },
+    {
+      "type": "image",
+      "name": "symbols/basic/cloud.json",
+      "rect": [
+        0,
+        0,
+        300,
+        300
+      ]
+    },
+    {
+      "type": "text",
+      "text": "2016-09-08T12:10:13.444Z",
+      "align": "center",
+      "color": "#34495E",
+      "font": "bold 36px Arial",
+      "rect": [
+        0,
+        120,
+        300,
+        100
+      ]
+    }
+  ]
+}

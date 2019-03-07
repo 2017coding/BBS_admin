@@ -1,0 +1,26 @@
+{
+  "width": 398,
+  "height": 207,
+  "fitSize": true,
+  "clip": true,
+  "comps": [
+    {
+      "type": "roundRect",
+      "background": "rgb(255,255,255)",
+      "borderColor": "rgb(138,138,138)",
+      "cornerRadius": 1,
+      "shadow": true,
+      "shadowColor": "rgba(0,0,0,0.2)",
+      "shadowBlur": 44,
+      "shadowOffsetX": 0,
+      "shadowOffsetY": 16,
+      "displayName": "节点",
+      "rect": [
+        22.7111,
+        6.1738,
+        352.57781,
+        163.45645
+      ]
+    }
+  ]
+}

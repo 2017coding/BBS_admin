@@ -1,0 +1,183 @@
+{
+  "background": "rgb(0,23,71)",
+  "width": 192,
+  "height": 29,
+  "comps": [
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "#277cf3",
+      "borderCap": "square",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        146.06021,
+        8,
+        146.06021,
+        14
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "#001d58",
+      "fillRule": "evenodd",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        191.5,
+        0,
+        191.5,
+        20.60063,
+        56.5,
+        21,
+        53.5,
+        24,
+        26,
+        24,
+        2,
+        0
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "#576da9",
+      "borderJoin": "bevel",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        1,
+        7,
+        22,
+        28.01468,
+        55.7182,
+        28.01468,
+        60.29586,
+        22.50369,
+        183.67037,
+        22.50369
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(214,11,41,0.50)",
+      "fillRule": "evenodd",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        1.5,
+        14,
+        15.5,
+        28,
+        1.5,
+        28,
+        1.5,
+        14,
+        1.5,
+        14
+      ]
+    },
+    {
+      "type": "text",
+      "text": "TOPXX",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "10px sans-serif",
+      "rect": [
+        122.82535,
+        0,
+        65.67465,
+        22.5
+      ]
+    },
+    {
+      "type": "text",
+      "text": "文字文字文字标题",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "10px sans-serif",
+      "rect": [
+        1.31152,
+        0,
+        150.44563,
+        23
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(245,27,27)",
+      "fillRule": "evenodd",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        63.00559,
+        24.01468,
+        72.09983,
+        24.01468,
+        69.06841,
+        28.01468,
+        59.97418,
+        28.01468,
+        63.00559,
+        24.01468,
+        63.00559,
+        24.01468
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(245,27,27,0.8)",
+      "fillRule": "evenodd",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        75.13125,
+        24.01468,
+        84.2255,
+        24.01468,
+        81.19407,
+        28.01468,
+        72.09983,
+        28.01468,
+        75.13125,
+        24.01468,
+        75.13125,
+        24.01468
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(245,27,27,0.6)",
+      "fillRule": "evenodd",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        87.2569,
+        24.01468,
+        96.35114,
+        24.01468,
+        93.31973,
+        28.01468,
+        84.2255,
+        28.01468,
+        87.2569,
+        24.01468,
+        87.2569,
+        24.01468
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(245,27,27,0.4)",
+      "fillRule": "evenodd",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        99.38256,
+        24.01468,
+        108.4768,
+        24.01468,
+        105.44538,
+        28.01468,
+        96.35114,
+        28.01468,
+        99.38256,
+        24.01468,
+        99.38256,
+        24.01468
+      ]
+    }
+  ]
+}

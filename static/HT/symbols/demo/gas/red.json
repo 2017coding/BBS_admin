@@ -1,0 +1,33 @@
+{
+  "width": 12,
+  "height": 12,
+  "comps": [
+    {
+      "type": "circle",
+      "background": "rgb(255,0,0)",
+      "borderWidth": 1,
+      "borderColor": "rgb(250,120,120)",
+      "opacity": 0.3,
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        0.27326,
+        0.86572,
+        11.45347,
+        10.26857
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(255,0,0)",
+      "borderWidth": 1,
+      "borderColor": "rgb(250,120,120)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        2.50648,
+        3.01412,
+        6.98705,
+        5.97177
+      ]
+    }
+  ]
+}

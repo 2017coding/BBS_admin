@@ -1,0 +1,33 @@
+{
+  "width": 12,
+  "height": 12,
+  "comps": [
+    {
+      "type": "oval",
+      "background": "#3399FF",
+      "borderColor": "#3399FF",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        0,
+        0,
+        12,
+        12
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        4.76,
+        2.56,
+        8.2,
+        5.98,
+        4.76,
+        9.44
+      ]
+    }
+  ]
+}

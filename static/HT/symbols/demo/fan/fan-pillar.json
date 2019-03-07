@@ -1,0 +1,40 @@
+{
+  "width": 200,
+  "height": 240,
+  "comps": [
+    {
+      "type": "trapezoid",
+      "background": "rgb(180, 180, 180)",
+      "gradient": "linear.west",
+      "rect": [
+        89.75,
+        104.64000000000001,
+        10.42,
+        127.95
+      ]
+    },
+    {
+      "type": "trapezoid",
+      "background": "rgb(180, 180, 180)",
+      "gradient": "linear.west",
+      "rect": [
+        85.21,
+        232.24,
+        20,
+        2.93
+      ]
+    },
+    {
+      "type": "roundRect",
+      "background": "rgb(180, 180, 180)",
+      "gradient": "radial.east",
+      "rect": [
+        81.62,
+        94.75,
+        20,
+        10
+      ],
+      "rotation": 0.09
+    }
+  ]
+}

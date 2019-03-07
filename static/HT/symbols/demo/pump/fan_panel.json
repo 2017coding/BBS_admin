@@ -1,0 +1,48 @@
+{
+  "gridBlockSize": 1,
+  "gridThickLinesEvery": 20,
+  "gridThickColor": "rgb(191, 191, 191)",
+  "gridLightColor": "rgba(191, 191, 191, 0.2)",
+  "gridZoomThreshold": 0.25,
+  "width": 125,
+  "height": 125,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "roundRect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 2,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        1,
+        1,
+        123,
+        123
+      ]
+    },
+    {
+      "type": "oval",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "rect": [
+        13.5,
+        13.5,
+        98,
+        98
+      ]
+    },
+    {
+      "type": "oval",
+      "background": "rgb(255,255,255)",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "rect": [
+        20,
+        20,
+        85,
+        85
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "width": 100,
+  "height": 50,
+  "comps": [
+    {
+      "type": "shape",
+      "borderWidth": 5,
+      "borderColor": "black",
+      "border3d": true,
+      "points": [
+        20,
+        25,
+        70,
+        25
+      ]
+    },
+    {
+      "type": "shape",
+      "background": {
+        "func": "attr@arrow.color",
+        "value": "black"
+      },
+      "borderWidth": 1,
+      "borderColor": "#40ACFF",
+      "gradient": "spread.vertical",
+      "points": [
+        60,
+        10,
+        60,
+        40,
+        80,
+        25,
+        60,
+        10
+      ]
+    }
+  ]
+}

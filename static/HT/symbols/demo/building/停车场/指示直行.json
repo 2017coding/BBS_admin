@@ -1,0 +1,33 @@
+{
+  "background": "rgb(122,122,122)",
+  "width": 24,
+  "height": 9,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(255,255,255)",
+      "borderColor": "#979797",
+      "shadowColor": "#1ABC9C",
+      "rotation": 3.14159,
+      "rect": [
+        7,
+        3.79337,
+        17,
+        1.41325
+      ]
+    },
+    {
+      "type": "triangle",
+      "background": "rgb(255,255,255)",
+      "borderColor": "#979797",
+      "shadowColor": "#1ABC9C",
+      "rotation": -1.5708,
+      "rect": [
+        3.25495,
+        -0.12694,
+        4.0008,
+        9.25388
+      ]
+    }
+  ]
+}

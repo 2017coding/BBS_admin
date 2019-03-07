@@ -1,0 +1,90 @@
+{
+  "dataBindings": [
+    {
+      "attr": "powerLevel",
+      "valueType": "PowerLevel",
+      "defaultValue": "red",
+      "name": "电压等级"
+    },
+    {
+      "attr": "powerOffColor",
+      "valueType": "Color",
+      "defaultValue": "rgb(128,128,128)",
+      "name": "失电颜色"
+    },
+    {
+      "attr": "powerOn",
+      "valueType": "Boolean",
+      "defaultValue": true,
+      "name": "是否带电"
+    }
+  ],
+  "width": 24,
+  "height": 64,
+  "comps": [
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "shadowColor": "#1ABC9C",
+      "points": [
+        12,
+        19.73358,
+        12,
+        0
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "shadowColor": "#1ABC9C",
+      "points": [
+        12.00001,
+        64,
+        12.00001,
+        44.26642
+      ]
+    },
+    {
+      "type": "triangle",
+      "borderWidth": 6,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "borderJoin": "miter",
+      "shadowColor": "#1ABC9C",
+      "rotation": 3.14159,
+      "rect": [
+        10.50002,
+        18.34241,
+        3,
+        4
+      ]
+    },
+    {
+      "type": "triangle",
+      "borderWidth": 6,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "borderJoin": "miter",
+      "shadowColor": "#1ABC9C",
+      "rotation": 6.28319,
+      "rect": [
+        10.50002,
+        41.65759,
+        3,
+        4
+      ]
+    }
+  ]
+}

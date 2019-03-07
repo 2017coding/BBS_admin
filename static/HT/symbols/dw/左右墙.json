@@ -1,0 +1,79 @@
+{
+  "dataBindings": [
+    {
+      "attr": "background",
+      "valueType": "Color",
+      "name": "背景"
+    }
+  ],
+  "width": 73,
+  "height": 100,
+  "comps": [
+    {
+      "type": "shape",
+      "background": {
+        "func": "attr@background",
+        "value": "#c6d9ef"
+      },
+      "shadowColor": "#1ABC9C",
+      "points": [
+        73.58723,
+        58.15167,
+        73.58723,
+        0,
+        0.04385,
+        42.11148,
+        50.49446,
+        71.23934,
+        73.58723,
+        58.15167,
+        73.58723,
+        58.15167
+      ]
+    },
+    {
+      "type": "shape",
+      "background": {
+        "func": "attr@background",
+        "value": "#9cb5d0"
+      },
+      "shadowColor": "#1ABC9C",
+      "points": [
+        0,
+        99.85734,
+        50.49446,
+        71.23934,
+        0.04385,
+        42.11148,
+        0,
+        42.13675,
+        0,
+        99.85734,
+        0,
+        99.85734
+      ]
+    },
+    {
+      "type": "shape",
+      "background": {
+        "func": "attr@background",
+        "value": "#9ebee0"
+      },
+      "shadowColor": "#1ABC9C",
+      "points": [
+        2.85218,
+        97.04604,
+        73.58723,
+        56.20661,
+        73.58723,
+        2.97741,
+        2.85218,
+        43.8161,
+        2.85218,
+        97.04604,
+        2.85218,
+        97.04604
+      ]
+    }
+  ]
+}

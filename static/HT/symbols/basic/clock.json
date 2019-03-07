@@ -1,0 +1,159 @@
+{
+  "dataBindings": [
+    {
+      "valueType": "Int",
+      "name": "ClockHours",
+      "attr": "clock.hour"
+    },
+    {
+      "valueType": "Int",
+      "name": "ClockMinutes",
+      "attr": "clock.minute"
+    },
+    {
+      "valueType": "Int",
+      "name": "ClockSeconds",
+      "attr": "clock.second"
+    },
+    {
+      "valueType": "Color",
+      "name": "ClockHourColor",
+      "attr": "clock.hour.color"
+    },
+    {
+      "valueType": "Color",
+      "name": "ClockMinuteColor",
+      "attr": "clock.minute.color"
+    },
+    {
+      "valueType": "Color",
+      "name": "ClockSecondColor",
+      "attr": "clock.second.color"
+    },
+    {
+      "valueType": "Color",
+      "name": "ClockNumberColor",
+      "attr": "clock.number.color"
+    },
+    {
+      "valueType": "String",
+      "name": "ClockNumberFont",
+      "attr": "clock.number.font"
+    },
+    {
+      "valueType": "Color",
+      "name": "ClockScaleColor",
+      "attr": "clock.scale.color"
+    },
+    {
+      "valueType": "Opacity",
+      "name": "ClockScaleRadius",
+      "attr": "clock.scale.radius"
+    },
+    {
+      "valueType": "Int",
+      "name": "ClockScaleWidth",
+      "attr": "clock.scale.width"
+    },
+    {
+      "valueType": "Color",
+      "name": "ClockBackground",
+      "attr": "clock.background"
+    },
+    {
+      "valueType": "Color",
+      "name": "ClockBorderColor",
+      "attr": "clock.border.color"
+    },
+    {
+      "valueType": "Int",
+      "name": "ClockBorderWidth",
+      "attr": "clock.border.width"
+    },
+    {
+      "attr": "clock.number.visible",
+      "valueType": "Boolean",
+      "name": "ClockNumberVisible"
+    }
+  ],
+  "width": 100,
+  "height": 100,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "oval",
+      "background": {
+        "func": "attr@clock.background",
+        "value": "rgb(34,53,69)"
+      },
+      "borderWidth": {
+        "func": "attr@clock.border.width",
+        "value": 2
+      },
+      "borderColor": {
+        "func": "attr@clock.border.color",
+        "value": "#DBEEFD"
+      },
+      "rect": [
+        1,
+        1,
+        98,
+        98
+      ]
+    },
+    {
+      "type": "components/clock/clock-scale.json",
+      "rect": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "color": {
+        "func": "attr@clock.scale.color"
+      },
+      "thickness": {
+        "func": "attr@clock.scale.width"
+      },
+      "radius": {
+        "func": "attr@clock.scale.radius"
+      }
+    },
+    {
+      "type": "components/clock/clock-pointer.json",
+      "rect": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "hours": {
+        "func": "attr@clock.hour"
+      },
+      "minutes": {
+        "func": "attr@clock.minute"
+      },
+      "seconds": {
+        "func": "attr@clock.second"
+      },
+      "hourColor": {
+        "func": "attr@clock.hour.color"
+      },
+      "minuteColor": {
+        "func": "attr@clock.minute.color"
+      },
+      "secondColor": {
+        "func": "attr@clock.second.color"
+      },
+      "numberColor": {
+        "func": "attr@clock.number.color"
+      },
+      "numberFont": {
+        "func": "attr@clock.number.font"
+      },
+      "numberVisible": {
+        "func": "attr@clock.number.visible"
+      }
+    }
+  ]
+}

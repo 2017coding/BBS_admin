@@ -1,0 +1,29 @@
+{
+  "width": 8,
+  "height": 8,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(0,0,0)",
+      "borderColor": "#979797",
+      "rect": [
+        0,
+        3,
+        8,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(0,0,0)",
+      "borderColor": "#979797",
+      "rotation": 1.5708,
+      "rect": [
+        0,
+        3,
+        8,
+        2
+      ]
+    }
+  ]
+}

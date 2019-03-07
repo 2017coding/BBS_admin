@@ -1,0 +1,140 @@
+{
+  "dataBindings": [
+    {
+      "attr": "tang.volume",
+      "valueType": "Percentage",
+      "name": "液量",
+      "defaultValue": 0.679
+    },
+    {
+      "attr": "tang.background",
+      "valueType": "Color",
+      "name": "颜色",
+      "defaultValue": "#3498DB"
+    }
+  ],
+  "width": 100,
+  "height": 100,
+  "fitSize": true,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(107,99,99)",
+      "borderWidth": 1,
+      "borderColor": "rgb(0,0,0)",
+      "gradient": "spread.horizontal",
+      "gradientColor": "rgb(255,255,255)",
+      "rect": [
+        11.11862401959528,
+        10.721530304609729,
+        79.26746920092415,
+        78.22746185215249
+      ]
+    },
+    {
+      "type": "roundRect",
+      "background": "rgb(33,26,26)",
+      "borderWidth": 1,
+      "borderColor": "rgb(0,0,0)",
+      "gradient": "spread.horizontal",
+      "gradientColor": "rgb(255,255,255)",
+      "rect": [
+        5.922597636604436,
+        87.24716194968133,
+        90,
+        10
+      ]
+    },
+    {
+      "type": "roundRect",
+      "background": "rgb(33,26,26)",
+      "borderWidth": 1,
+      "borderColor": "rgb(0,0,0)",
+      "gradient": "spread.horizontal",
+      "gradientColor": "rgb(255,255,255)",
+      "rect": [
+        5.922597636604436,
+        2.666200657760106,
+        90,
+        10
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgb(0,0,0)",
+      "points": [
+        60.88770296445034,
+        23.825622899132743,
+        77.68686839591408,
+        23.903651814127407
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgb(0,0,0)",
+      "points": [
+        60.88770296445034,
+        50.86581396719609,
+        77.39349727493517,
+        50.81391235223017
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgb(0,0,0)",
+      "points": [
+        60.88770296445034,
+        77.90600503525943,
+        77.78601623314762,
+        77.94315970028529
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgb(0,0,0)",
+      "points": [
+        60.88770296445034,
+        37.34571843316442,
+        69.68765122591566,
+        37.412440962631
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgb(0,0,0)",
+      "points": [
+        60.88770296445033,
+        64.38590950122776,
+        70.02268801065561,
+        64.32706267007599
+      ]
+    },
+    {
+      "type": "components/progressBar/progressBar.json",
+      "rect": [
+        42.56515623699339,
+        22.458273341040126,
+        13.6222537745668,
+        56.78038180346783
+      ],
+      "background": "rgb(0,0,0)",
+      "borderColor": "rgb(0,0,0)",
+      "borderWidth": 1,
+      "foreColor": {
+        "func": "attr@tang.background",
+        "value": "#04FDFF"
+      },
+      "value": {
+        "func": "attr@tang.volume",
+        "value": 0.7999999999999999
+      },
+      "valueVisible": false,
+      "direction": "v"
+    }
+  ]
+}

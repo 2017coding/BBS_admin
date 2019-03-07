@@ -1,0 +1,17 @@
+{
+  "width": 100,
+  "height": 50,
+  "comps": [
+    {
+      "type": "image",
+      "name": "symbols/basic/toArrow.json",
+      "rect": [
+        0,
+        0,
+        100,
+        50
+      ],
+      "rotation": 3.141592653589793
+    }
+  ]
+}

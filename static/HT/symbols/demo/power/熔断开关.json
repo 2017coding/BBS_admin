@@ -1,0 +1,121 @@
+{
+  "dataBindings": [
+    {
+      "attr": "powerLevel",
+      "valueType": "PowerLevel",
+      "defaultValue": "red",
+      "name": "电压等级"
+    },
+    {
+      "attr": "powerOffColor",
+      "valueType": "Color",
+      "defaultValue": "rgb(128,128,128)",
+      "name": "失电颜色"
+    },
+    {
+      "attr": "powerOn",
+      "valueType": "Boolean",
+      "defaultValue": true,
+      "name": "是否带电"
+    },
+    {
+      "attr": "enabled",
+      "valueType": "Boolean",
+      "defaultValue": true,
+      "name": "是否有效"
+    },
+    {
+      "attr": "state",
+      "valueType": "Boolean",
+      "defaultValue": true,
+      "name": "开关状态"
+    }
+  ],
+  "width": 48,
+  "height": 64,
+  "comps": [
+    {
+      "type": "rect",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,0,0)",
+      "shadowColor": "#1ABC9C",
+      "anchorY": 1.18328,
+      "rotation": {
+        "func": "__ht__function(data, view) {\nif (data.a('state')) {\nreturn 0\n} else {\nreturn Math.PI / 180 * 30\n}\n}",
+        "value": 0.5236
+      },
+      "rect": [
+        18.98884,
+        19.04976,
+        10.02232,
+        23.90048
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,0,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        24,
+        13,
+        24,
+        0
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,0,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        24,
+        64,
+        24,
+        54
+      ]
+    },
+    {
+      "type": "circle",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,0,0)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        21,
+        48,
+        6,
+        6
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,0,0)",
+      "shadowColor": "#1ABC9C",
+      "anchorY": 1,
+      "rotation": {
+        "func": "__ht__function(data, view) {\nif (data.a('state')) {\nreturn 0\n} else {\nreturn Math.PI / 180 * 30\n}\n}",
+        "value": 0.5236
+      },
+      "points": [
+        24,
+        48,
+        24,
+        14
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,0,0)",
+      "shadowColor": "#1ABC9C",
+      "rotation": 1.5708,
+      "points": [
+        24,
+        19.5,
+        24,
+        6.5
+      ]
+    }
+  ]
+}

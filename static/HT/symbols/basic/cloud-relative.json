@@ -1,0 +1,77 @@
+{
+  "width": 300,
+  "height": 300,
+  "boundExtend": 10,
+  "comps": [
+    {
+      "type": "image",
+      "name": "symbols/basic/cloud.json",
+      "shadow": true,
+      "shadowColor": "rgb(255,10,10)",
+      "shadowBlur": 27,
+      "rect": [
+        0,
+        0,
+        150,
+        150
+      ]
+    },
+    {
+      "type": "image",
+      "color": "yellow",
+      "name": "symbols/basic/cloud.json",
+      "shadow": true,
+      "shadowColor": "rgb(255,10,10)",
+      "shadowBlur": 27,
+      "rotation": 0.7854,
+      "rect": [
+        150,
+        150,
+        150,
+        150
+      ]
+    },
+    {
+      "type": "image",
+      "color": "orange",
+      "name": "symbols/basic/cloud.json",
+      "shadow": true,
+      "shadowColor": "rgb(255,10,10)",
+      "shadowBlur": 27,
+      "rect": [
+        150,
+        0,
+        150,
+        150
+      ]
+    },
+    {
+      "type": "image",
+      "color": "green",
+      "name": "symbols/basic/cloud.json",
+      "shadow": true,
+      "shadowColor": "rgb(255,10,10)",
+      "shadowBlur": 27,
+      "rect": [
+        0,
+        150,
+        150,
+        150
+      ]
+    },
+    {
+      "type": "image",
+      "color": "red",
+      "name": "symbols/basic/cloud.json",
+      "shadow": true,
+      "shadowColor": "rgb(255,10,10)",
+      "shadowBlur": 27,
+      "rect": [
+        30,
+        120,
+        240,
+        60
+      ]
+    }
+  ]
+}

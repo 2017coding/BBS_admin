@@ -1,0 +1,46 @@
+{
+  "width": 44,
+  "height": 69,
+  "comps": [
+    {
+      "type": "image",
+      "name": "symbols/demo/it/服务器组件.json",
+      "rect": [
+        0,
+        34.15095,
+        43,
+        35
+      ]
+    },
+    {
+      "type": "image",
+      "name": "symbols/demo/it/服务器组件.json",
+      "rect": [
+        0,
+        22.66747,
+        43,
+        35
+      ]
+    },
+    {
+      "type": "image",
+      "name": "symbols/demo/it/服务器组件.json",
+      "rect": [
+        0,
+        11.28686,
+        43,
+        35
+      ]
+    },
+    {
+      "type": "image",
+      "name": "symbols/demo/it/服务器组件.json",
+      "rect": [
+        0,
+        0,
+        43,
+        35
+      ]
+    }
+  ]
+}

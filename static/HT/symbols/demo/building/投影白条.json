@@ -1,0 +1,23 @@
+{
+  "background": "rgb(79,79,79)",
+  "width": 1440,
+  "height": 100,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(255,255,255)",
+      "borderColor": "rgb(150,150,150)",
+      "shadow": true,
+      "shadowColor": "rgba(99,99,99,0.10)",
+      "shadowBlur": 16,
+      "shadowOffsetX": 0,
+      "shadowOffsetY": 16,
+      "rect": [
+        0,
+        0,
+        1440,
+        32
+      ]
+    }
+  ]
+}

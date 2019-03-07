@@ -1,0 +1,65 @@
+{
+  "gridBlockSize": 1,
+  "gridThickLinesEvery": 20,
+  "gridThickColor": "rgb(191, 191, 191)",
+  "gridLightColor": "rgba(191, 191, 191, 0.2)",
+  "gridZoomThreshold": 0.25,
+  "width": 75,
+  "height": 45,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "triangle",
+      "shadow": true,
+      "shadowColor": "rgb(38,226,255)",
+      "shadowBlur": 20,
+      "shadowOffsetX": 0,
+      "shadowOffsetY": 0,
+      "background": "rgb(38,226,255)",
+      "borderColor": "#979797",
+      "rotation": 1.5707963267948966,
+      "rect": [
+        41.153153153153156,
+        10,
+        30,
+        25
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(38,226,255)",
+      "borderColor": "#979797",
+      "rotation": 1.5707963267948966,
+      "rect": [
+        33.604729729729726,
+        17.5,
+        10,
+        10
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(38,226,255)",
+      "borderColor": "#979797",
+      "rotation": 1.5707963267948966,
+      "rect": [
+        16.793640694161976,
+        17.5,
+        10,
+        10
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(38,226,255)",
+      "borderColor": "#979797",
+      "rotation": 1.5707963267948966,
+      "rect": [
+        -0.017448341405775558,
+        17.5,
+        10,
+        10
+      ]
+    }
+  ]
+}

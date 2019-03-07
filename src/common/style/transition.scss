@@ -1,0 +1,70 @@
+/** 自定义过渡效果 **/
+
+/*fade*/
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.28s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+.left-enter-active,
+.left-leave-active {
+  transition: all 0.5s;
+}
+
+.left-enter,
+.left-leave-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+/*fade-transform*/
+.fade1-transform-leave-active,
+.fade1-transform-enter-active {
+  transition: all .3s;
+}
+.fade1-transform-enter {
+  opacity: 0;
+  transform: translateX(-5px);
+}
+.fade1-transform-leave-to {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all .3s;
+}
+.fade-transform-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+/*breadcrumb transition*/
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  transition: all .5s;
+}
+
+.breadcrumb-enter,
+.breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.breadcrumb-move {
+  transition: all .5s;
+}
+
+.breadcrumb-leave-active {
+  position: absolute;
+}

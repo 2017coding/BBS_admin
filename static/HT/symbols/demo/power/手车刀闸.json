@@ -1,0 +1,202 @@
+{
+  "dataBindings": [
+    {
+      "attr": "powerLevel",
+      "valueType": "PowerLevel",
+      "defaultValue": "red",
+      "name": "电压等级"
+    },
+    {
+      "attr": "powerOffColor",
+      "valueType": "Color",
+      "defaultValue": "rgb(128,128,128)",
+      "name": "失电颜色"
+    },
+    {
+      "attr": "powerOn",
+      "valueType": "Boolean",
+      "defaultValue": true,
+      "name": "是否带电"
+    },
+    {
+      "attr": "state",
+      "valueType": "Boolean",
+      "defaultValue": true,
+      "name": "工作"
+    },
+    {
+      "attr": "test",
+      "valueType": "Boolean",
+      "defaultValue": false,
+      "name": "试验",
+      "description": "手车试验"
+    }
+  ],
+  "width": 48,
+  "height": 54,
+  "comps": [
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "visible": {
+        "func": "__ht__function(data, view) {\nreturn !data.a('state') && !data.a('test')\n}",
+        "value": false
+      },
+      "shadowColor": "#1ABC9C",
+      "displayName": "1111ng",
+      "rotation": 1.5708,
+      "points": [
+        6.16726,
+        36.16713,
+        14.25145,
+        36.1671,
+        34.48511,
+        17.83281,
+        52.81964,
+        36.16696,
+        60.16726,
+        36.16693
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "visible": {
+        "func": "__ht__function(data, view) {\nreturn !data.a('state') && !data.a('test')\n}",
+        "value": false
+      },
+      "shadowColor": "#1ABC9C",
+      "displayName": "1111ng",
+      "rotation": 1.5708,
+      "points": [
+        -2.56923,
+        36.55616,
+        15.5417,
+        17.97359,
+        33.73278,
+        36.55616
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "visible": {
+        "func": "attr@state",
+        "value": true
+      },
+      "shadowColor": "#1ABC9C",
+      "displayName": "22222",
+      "points": [
+        5.849,
+        27.81343,
+        24.05904,
+        9.47915,
+        42.151,
+        27.81343
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "visible": {
+        "func": "attr@state",
+        "value": true
+      },
+      "shadowColor": "#1ABC9C",
+      "displayName": "222222",
+      "points": [
+        24,
+        54,
+        24,
+        0
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "visible": {
+        "func": "attr@state",
+        "value": true
+      },
+      "shadowColor": "#1ABC9C",
+      "displayName": "22222",
+      "points": [
+        5.849,
+        45.69117,
+        23.95993,
+        27.1086,
+        42.151,
+        45.69117
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "visible": {
+        "func": "__ht__function(data, view) {\nreturn data.a('test') && !data.a('state')\n}",
+        "value": false
+      },
+      "shadowColor": "#1ABC9C",
+      "displayName": "333333",
+      "points": [
+        5.849,
+        20.6811,
+        24.05904,
+        2.34682,
+        42.151,
+        20.6811
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "visible": {
+        "func": "__ht__function(data, view) {\nreturn data.a('test') && !data.a('state')\n}",
+        "value": false
+      },
+      "shadowColor": "#1ABC9C",
+      "displayName": "333333",
+      "rotation": 1.5708,
+      "points": [
+        9.349,
+        39.00417,
+        27.64571,
+        20.56796,
+        27.64581,
+        49.56796,
+        27.64571,
+        20.56796,
+        45.65101,
+        39.00417
+      ]
+    }
+  ]
+}

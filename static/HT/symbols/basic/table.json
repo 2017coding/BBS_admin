@@ -1,0 +1,192 @@
+{
+  "dataBindings": [
+    {
+      "attr": "table.columns",
+      "valueType": "String",
+      "name": "TableColumnDef"
+    },
+    {
+      "attr": "table.dataSource",
+      "valueType": "String",
+      "name": "TableDataSource"
+    },
+    {
+      "attr": "table.head.background",
+      "valueType": "Color",
+      "name": "TableHeadBackground"
+    },
+    {
+      "attr": "table.body.background",
+      "valueType": "Color",
+      "name": "TableBodyBackground"
+    },
+    {
+      "attr": "table.border.width",
+      "valueType": "PositiveNumber",
+      "name": "TableBorderWidth"
+    },
+    {
+      "attr": "table.border.color",
+      "valueType": "Color",
+      "name": "TableBorderColor"
+    },
+    {
+      "attr": "table.column.line.color",
+      "valueType": "Color",
+      "name": "TableColumnLineColor"
+    },
+    {
+      "attr": "table.column.line.width",
+      "valueType": "PositiveNumber",
+      "name": "TableColumnLineWidth"
+    },
+    {
+      "attr": "table.row.line.color",
+      "valueType": "Color",
+      "name": "TableRowLineColor"
+    },
+    {
+      "attr": "table.row.line.width",
+      "valueType": "PositiveNumber",
+      "name": "TableRowLineWidth"
+    },
+    {
+      "attr": "table.head.font.size",
+      "valueType": "PositiveNumber",
+      "name": "TableHeadFontSize"
+    },
+    {
+      "attr": "table.body.font.size",
+      "valueType": "PositiveNumber",
+      "name": "TableBodyFontSize"
+    },
+    {
+      "attr": "table.head.height",
+      "valueType": "PositiveNumber",
+      "name": "TableHeadHeight"
+    },
+    {
+      "attr": "table.body.height",
+      "valueType": "PositiveNumber",
+      "name": "TableBodyHeight"
+    },
+    {
+      "attr": "table.head.color",
+      "valueType": "Color",
+      "name": "TableHeadColor"
+    },
+    {
+      "attr": "table.body.color",
+      "valueType": "Color",
+      "name": "TableBodyColor"
+    },
+    {
+      "attr": "table.cell.padding",
+      "valueType": "PositiveNumber",
+      "name": "TableCellPadding"
+    },
+    {
+      "attr": "table.head.font.family",
+      "valueType": "String",
+      "name": "TableHeadFontFamily"
+    },
+    {
+      "attr": "table.body.font.family",
+      "valueType": "String",
+      "name": "TableBodyFontFamily"
+    }
+  ],
+  "width": 500,
+  "height": 360,
+  "fitSize": true,
+  "clip": true,
+  "comps": [
+    {
+      "type": "components/table/table.json",
+      "displayName": "tableComp",
+      "rotation": 6.28319,
+      "rect": [
+        0.00084,
+        -0.26419,
+        499.61877,
+        359.73516
+      ],
+      "columns": {
+        "func": "attr@table.columns",
+        "value": "[{ \t\"displayName\": \"Name\", \t\"key\": \"username\", \t\"width\": 120, \t\"headColor\": \"#c8fe00\" }, { \t\"displayName\": \"Sex\", \t\"align\": \"right\", \t\"key\": \"sex\", \t\"width\": 0.1, \t\"bodyColor\": \"red\" }, { \t\"displayName\": \"Age\", \t\"align\": \"center\", \t\"key\": \"userAge\", \t\"width\": \"30+0.1\", \t\"color\": \"green\" }, { \t\"displayName\": \"Address\", \t\"key\": \"address\", \t\"width\": 180 }]"
+      },
+      "dataSource": {
+        "func": "attr@table.dataSource",
+        "value": "[{ \t\"username\": \"Joe\", \t\"userAge\": \"23\", \t\"sex\":\"female\", \t\"address\": \"New York No. 1 Lake Park\" }, { \t\"username\": \"Jim Green\", \t\"userAge\": \"29\", \t\"sex\":\"male\", \t\"address\": \"London No. 1 Lake Park\" }, { \t\"username\": \"Conor\", \t\"userAge\": \"29\", \t\"sex\":\"male\", \t\"address\": \"Sidney No. 1 Lake Park\" }, { \t\"username\": \"Evie Frye\", \t\"userAge\": \"29\", \t\"sex\":\"female\", \t\"address\": \"London No. 2 Lake Park\" }, { \t\"username\": \"Jacob Frye\", \t\"userAge\": \"29\", \t\"sex\":\"male\", \t\"address\": \"New York No. 3\" }]"
+      },
+      "thBackground": {
+        "func": "attr@table.head.background",
+        "value": "#1d2350"
+      },
+      "tdBackground": {
+        "func": "attr@table.body.background",
+        "value": "rgb(0,0,0)"
+      },
+      "borderWidth": {
+        "func": "attr@table.border.width",
+        "value": 0
+      },
+      "borderColor": {
+        "func": "attr@table.border.color",
+        "value": "rgb(255,255,255)"
+      },
+      "columnLineColor": {
+        "func": "attr@table.column.line.color",
+        "value": "rgb(212,212,212)"
+      },
+      "columnLineWidth": {
+        "func": "attr@table.column.line.width",
+        "value": 1
+      },
+      "rowLineColor": {
+        "func": "attr@table.row.line.color",
+        "value": "rgb(212,212,212)"
+      },
+      "rowLineWidth": {
+        "func": "attr@table.row.line.width",
+        "value": 1
+      },
+      "thFontSize": {
+        "func": "attr@table.head.font.size",
+        "value": 19
+      },
+      "tdFontSize": {
+        "func": "attr@table.body.font.size",
+        "value": 14
+      },
+      "thHeight": {
+        "func": "attr@table.head.height",
+        "value": 32
+      },
+      "tdHeight": {
+        "func": "attr@table.body.height",
+        "value": 30
+      },
+      "thColor": {
+        "func": "attr@table.head.color",
+        "value": "rgb(255,255,255)"
+      },
+      "tdColor": {
+        "func": "attr@table.body.color",
+        "value": "#F6A623"
+      },
+      "cellPadding": {
+        "func": "attr@table.cell.padding",
+        "value": 0
+      },
+      "thFontFamily": {
+        "func": "attr@table.head.font.family",
+        "value": "Kai,sans-serif, arial"
+      },
+      "tdFontFamily": {
+        "func": "attr@table.body.font.family",
+        "value": "sans-serif, arial"
+      }
+    }
+  ]
+}

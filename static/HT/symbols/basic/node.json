@@ -1,0 +1,111 @@
+{
+  "background": "rgb(179,179,179)",
+  "width": 41,
+  "height": 38,
+  "blendMode": "override",
+  "comps": [
+    {
+      "type": "roundRect",
+      "background": "rgb(99,99,99)",
+      "borderColor": "#979797",
+      "cornerRadius": 1,
+      "rect": [
+        0.5,
+        23.36754,
+        40,
+        6.91861
+      ]
+    },
+    {
+      "type": "oval",
+      "background": "rgb(255,255,255)",
+      "borderColor": "rgb(255,255,255)",
+      "rect": [
+        19.41617,
+        26.95889,
+        2,
+        2
+      ]
+    },
+    {
+      "type": "trapezoid",
+      "background": "rgb(56,55,59)",
+      "borderColor": "#979797",
+      "rect": [
+        16.19835,
+        30.28615,
+        8.64307,
+        4.08968
+      ]
+    },
+    {
+      "type": "roundRect",
+      "background": "rgb(99,99,99)",
+      "borderColor": "#979797",
+      "cornerRadius": 1,
+      "rect": [
+        11.08178,
+        34.31171,
+        18.92321,
+        2.3545
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(56,55,59)",
+      "borderColor": "#979797",
+      "rect": [
+        0.5,
+        2.87194,
+        40,
+        22.78089
+      ]
+    },
+    {
+      "type": "roundRect",
+      "background": "rgb(56,55,59)",
+      "borderColor": "#979797",
+      "cornerRadius": 1,
+      "rect": [
+        0.5,
+        1.33379,
+        40,
+        4.78719
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(255,255,255)",
+      "borderColor": "#979797",
+      "rect": [
+        2.07053,
+        3.15702,
+        36.69128,
+        20.21052
+      ]
+    },
+    {
+      "type": "arc",
+      "background": "rgb(51,153,255)",
+      "borderColor": "#979797",
+      "rect": [
+        12.60965,
+        16.5915,
+        15.61304,
+        13.69465
+      ]
+    },
+    {
+      "type": "arc",
+      "background": "rgb(51,153,255)",
+      "borderColor": "#979797",
+      "arcFrom": 0,
+      "rect": [
+        15.96608,
+        6.81431,
+        9.10761,
+        8.87429
+      ]
+    }
+  ]
+}

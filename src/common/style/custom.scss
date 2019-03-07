@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system,"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB",
+  "WenQuanYi Micro Hei","Microsoft Yahei",sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 62.5%;
+  overflow: auto;
+  background-color: #fbf9fe;
+  -webkit-text-size-adjust: none; // 全局字体可设置小于12px
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 禁止ios点击元素的背景
+}
+
+.app-container{
+  height: 100%; // 继承父级高度
+}
+
+.disabled-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+  not supported by any browser */
+}

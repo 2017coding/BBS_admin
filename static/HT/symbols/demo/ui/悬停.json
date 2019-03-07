@@ -1,0 +1,52 @@
+{
+  "width": 20,
+  "height": 20,
+  "comps": [
+    {
+      "type": "rect",
+      "borderWidth": 1,
+      "borderColor": "rgb(138,138,138)",
+      "rect": [
+        3.52,
+        4,
+        12.96,
+        12
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(138,138,138)",
+      "borderColor": "rgb(138,138,138)",
+      "rect": [
+        3.52,
+        4,
+        12.96,
+        3
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(138,138,138)",
+      "borderColor": "rgb(138,138,138)",
+      "rotation": 3.14159,
+      "rect": [
+        6,
+        12.46396,
+        8,
+        1
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(138,138,138)",
+      "borderColor": "rgb(138,138,138)",
+      "rotation": 3.14159,
+      "rect": [
+        6,
+        9.5,
+        8,
+        1
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "dataBindings": [
+    {
+      "attr": "powerLevel",
+      "valueType": "PowerLevel",
+      "defaultValue": "red",
+      "name": "电压等级"
+    },
+    {
+      "attr": "powerOffColor",
+      "valueType": "Color",
+      "defaultValue": "rgb(128,128,128)",
+      "name": "失电颜色"
+    },
+    {
+      "attr": "powerOn",
+      "valueType": "Boolean",
+      "defaultValue": true,
+      "name": "是否带电"
+    }
+  ],
+  "gridBlockSize": 6,
+  "width": 48,
+  "height": 64,
+  "comps": [
+    {
+      "type": "arc",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "borderCap": "round",
+      "arcFrom": 3.14159,
+      "arcTo": 7.85398,
+      "arcClose": false,
+      "shadowColor": "#1ABC9C",
+      "displayName": "1",
+      "rect": [
+        14.08455,
+        16.25674,
+        19.83089,
+        19.83089
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "shadowColor": "#1ABC9C",
+      "displayName": "1",
+      "points": [
+        24,
+        64.02852,
+        24,
+        36.08763
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "shadowColor": "#1ABC9C",
+      "displayName": "1",
+      "points": [
+        13.17104,
+        26.59881,
+        24,
+        26.59881,
+        24,
+        0
+      ]
+    }
+  ]
+}

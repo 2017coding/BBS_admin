@@ -1,0 +1,35 @@
+{
+  "background": "rgb(232,232,232)",
+  "width": 1440,
+  "height": 256,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(255,255,255)",
+      "borderColor": "#979797",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        0,
+        0,
+        1440,
+        48
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(255,255,255)",
+      "borderColor": "rgb(150,150,150)",
+      "shadow": true,
+      "shadowColor": "rgba(99,99,99,0.10)",
+      "shadowBlur": 16,
+      "shadowOffsetX": 0,
+      "shadowOffsetY": 16,
+      "rect": [
+        0,
+        48,
+        1440,
+        32
+      ]
+    }
+  ]
+}

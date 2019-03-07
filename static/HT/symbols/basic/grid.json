@@ -1,0 +1,89 @@
+{
+  "dataBindings": [
+    {
+      "attr": "grid.border.color",
+      "valueType": "Color",
+      "name": "GridBorderColor"
+    },
+    {
+      "attr": "grid.border.width",
+      "valueType": "PositiveNumber",
+      "name": "GridBorderWidth"
+    },
+    {
+      "attr": "grid.background",
+      "valueType": "Color",
+      "name": "GridBackground"
+    },
+    {
+      "attr": "grid.row.count",
+      "valueType": "Number",
+      "name": "GridRowCount"
+    },
+    {
+      "attr": "grid.column.count",
+      "valueType": "Number",
+      "name": "GridColumnCount"
+    },
+    {
+      "attr": "grid.line.color",
+      "valueType": "Color",
+      "name": "GridRowLineColor"
+    },
+    {
+      "attr": "grid.line.width",
+      "valueType": "Int",
+      "name": "GridRowLineWidth"
+    }
+  ],
+  "width": 200,
+  "height": 100,
+  "fitSize": true,
+  "comps": [
+    {
+      "type": "components/table/grid.json",
+      "rect": [
+        0,
+        0,
+        200,
+        100
+      ],
+      "borderColor": {
+        "func": "attr@grid.border.color",
+        "value": "#6EF99A"
+      },
+      "borderWidth": {
+        "func": "attr@grid.border.width",
+        "value": 1
+      },
+      "background": {
+        "func": "attr@grid.background",
+        "value": "#3D4E63"
+      },
+      "rowCount": {
+        "func": "attr@grid.row.count",
+        "value": 2
+      },
+      "columnCount": {
+        "func": "attr@grid.column.count",
+        "value": 3
+      },
+      "rowLineColor": {
+        "func": "attr@grid.line.color",
+        "value": "#6EF99A"
+      },
+      "columnLineColor": {
+        "func": "attr@grid.line.color",
+        "value": "#6EF99A"
+      },
+      "rowLineWidth": {
+        "func": "attr@grid.line.width",
+        "value": 1
+      },
+      "columnLineWidth": {
+        "func": "attr@grid.line.width",
+        "value": 1
+      }
+    }
+  ]
+}

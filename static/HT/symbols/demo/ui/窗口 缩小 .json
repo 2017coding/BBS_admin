@@ -1,0 +1,28 @@
+{
+  "width": 16,
+  "height": 16,
+  "comps": [
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgb(138,138,138)",
+      "borderCap": "round",
+      "points": [
+        2,
+        7.46941,
+        14,
+        7.46941,
+        8,
+        3,
+        8,
+        13
+      ],
+      "segments": [
+        1,
+        2,
+        1,
+        2
+      ]
+    }
+  ]
+}

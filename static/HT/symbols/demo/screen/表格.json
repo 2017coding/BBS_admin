@@ -1,0 +1,22 @@
+{
+  "width": 100,
+  "height": 100,
+  "fitSize": true,
+  "comps": [
+    {
+      "type": "components/table/table.json",
+      "rect": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "borderColor": null,
+      "background": null,
+      "rowCount": 8,
+      "columnCount": 12,
+      "rowLineColor": "rgba(111,252,153,0.6)",
+      "columnLineColor": "rgba(110,241,250,0.3)"
+    }
+  ]
+}

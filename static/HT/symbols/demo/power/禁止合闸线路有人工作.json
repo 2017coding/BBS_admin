@@ -1,0 +1,109 @@
+{
+  "width": 200,
+  "height": 140,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(255,255,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        5.83615,
+        3.78554,
+        188.3277,
+        132.42891
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(207,12,12)",
+      "borderWidth": 3,
+      "borderColor": "rgb(255,0,0)",
+      "borderJoin": "miter",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        12.75798,
+        10.43564,
+        174.48405,
+        119.12873
+      ]
+    },
+    {
+      "type": "text",
+      "text": "禁止合闸",
+      "align": "center",
+      "color": "rgb(255,255,255)",
+      "scaleX": 2,
+      "scaleY": 2,
+      "rect": [
+        68.61205,
+        34.14494,
+        62.7759,
+        31.61797
+      ]
+    },
+    {
+      "type": "text",
+      "text": "线路有人工作",
+      "align": "center",
+      "color": "rgb(255,255,255)",
+      "scaleX": 2,
+      "scaleY": 2,
+      "rect": [
+        68.61205,
+        83.56772,
+        62.7759,
+        26.95266
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(61,61,61)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        17.16496,
+        13.69975,
+        3,
+        3
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(61,61,61)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        17.16496,
+        121.05903,
+        3,
+        3
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(61,61,61)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        179.826,
+        13.43863,
+        3,
+        3
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(61,61,61)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        179.826,
+        120.79792,
+        3,
+        3
+      ]
+    }
+  ]
+}

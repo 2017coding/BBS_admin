@@ -1,0 +1,96 @@
+{
+  "width": 800,
+  "height": 200,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "pieChart",
+      "label": "__ht__function (value, i, sum, data){return value + '%';}",
+      "labelColor": "white",
+      "values": [
+        56.15,
+        19.15,
+        17.17,
+        5.55,
+        1.98
+      ],
+      "colors": [
+        "#E74C3C",
+        "#E2E2E2",
+        "#34495E",
+        "#3498DB",
+        "#1ABC9C"
+      ],
+      "rect": [
+        5,
+        5,
+        190,
+        190
+      ]
+    },
+    {
+      "type": "pieChart",
+      "label": true,
+      "labelColor": "white",
+      "hollow": true,
+      "startAngle": 0.7853981633974483,
+      "values": [
+        56.15,
+        19.15,
+        17.17,
+        5.55,
+        1.98
+      ],
+      "colors": [
+        "#E74C3C",
+        "#E2E2E2",
+        "#34495E",
+        "#3498DB",
+        "#1ABC9C"
+      ],
+      "rect": [
+        205,
+        5,
+        190,
+        190
+      ]
+    },
+    {
+      "type": "pieChart",
+      "label": "__ht__function (value, index, sum, data){return ['IE', 'Firefox', 'Chrome', 'Safari', 'Other'][index];}",
+      "labelColor": "white",
+      "labelFont": "11px Arial",
+      "values": [
+        56.15,
+        19.15,
+        17.17,
+        5.55,
+        1.98
+      ],
+      "rect": [
+        405,
+        5,
+        190,
+        190
+      ]
+    },
+    {
+      "type": "pieChart",
+      "hollow": true,
+      "startAngle": -0.7853981633974483,
+      "values": [
+        56.15,
+        19.15,
+        17.17,
+        5.55,
+        1.98
+      ],
+      "rect": [
+        605,
+        5,
+        190,
+        190
+      ]
+    }
+  ]
+}

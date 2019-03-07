@@ -1,0 +1,50 @@
+{
+  "width": 240,
+  "height": 130,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "arc",
+      "shadowColor": "#1ABC9C",
+      "borderWidth": 18,
+      "borderColor": "rgb(255,201,92)",
+      "arcFrom": 5.235987755982989,
+      "arcClose": false,
+      "rect": [
+        21.895799954573448,
+        19.027058452326216,
+        200,
+        200
+      ]
+    },
+    {
+      "type": "arc",
+      "shadowColor": "#1ABC9C",
+      "borderWidth": 24,
+      "borderColor": "rgb(171,255,92)",
+      "arcFrom": 4.1887902047863905,
+      "arcTo": 5.235987755982989,
+      "arcClose": false,
+      "rect": [
+        21.895799954573448,
+        13.882370203854393,
+        200,
+        200
+      ]
+    },
+    {
+      "type": "arc",
+      "shadowColor": "#1ABC9C",
+      "borderWidth": 18,
+      "borderColor": "rgb(24,190,201)",
+      "arcTo": -2.0943951023931953,
+      "arcClose": false,
+      "rect": [
+        21.895799954573448,
+        19.027058452326216,
+        200,
+        200
+      ]
+    }
+  ]
+}

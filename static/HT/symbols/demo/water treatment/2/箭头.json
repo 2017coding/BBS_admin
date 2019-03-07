@@ -1,0 +1,30 @@
+{
+  "width": 20,
+  "height": 32,
+  "comps": [
+    {
+      "type": "shape",
+      "background": "rgb(232,232,232)",
+      "borderColor": "#979797",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        10,
+        0,
+        0,
+        14,
+        5,
+        14,
+        7,
+        32,
+        13,
+        32,
+        15,
+        14,
+        20,
+        14,
+        10,
+        0
+      ]
+    }
+  ]
+}

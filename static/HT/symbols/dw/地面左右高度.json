@@ -1,0 +1,35 @@
+{
+  "dataBindings": [
+    {
+      "attr": "background",
+      "valueType": "Color",
+      "name": "背景"
+    }
+  ],
+  "width": 100,
+  "height": 64,
+  "comps": [
+    {
+      "type": "shape",
+      "background": {
+        "func": "attr@background",
+        "value": "#9cb5d0"
+      },
+      "shadowColor": "#1ABC9C",
+      "points": [
+        99.93406,
+        63.86152,
+        -0.06594,
+        5.95596,
+        -0.06594,
+        -0.13848,
+        99.93406,
+        57.76708,
+        99.93406,
+        63.86152,
+        99.93406,
+        63.86152
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "dataBindings": [],
+  "width": 200,
+  "height": 240,
+  "comps": [
+    {
+      "type": "image",
+      "name": "symbols/demo/fan/fan-pillar.json",
+      "rect": [
+        0,
+        0,
+        200,
+        240
+      ]
+    },
+    {
+      "type": "image",
+      "name": "symbols/demo/fan/fan-head.json",
+      "rect": [
+        5.07,
+        5.42,
+        190,
+        190
+      ]
+    }
+  ]
+}

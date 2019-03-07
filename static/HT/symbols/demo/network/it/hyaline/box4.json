@@ -1,0 +1,106 @@
+{
+  "background": "rgb(38,38,38)",
+  "width": 59,
+  "height": 50,
+  "comps": [
+    {
+      "type": "shape",
+      "background": "rgba(63,176,224,0.8)",
+      "borderColor": "rgba(180,250,238,0.50)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        13.67126,
+        0.87994,
+        57.3,
+        23.34,
+        57.3,
+        38.34,
+        44.39476,
+        46.04562,
+        1.3906,
+        22.9884,
+        1.3906,
+        7.30648
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgba(180,250,238,0.50)",
+      "shadowColor": "#1ABC9C",
+      "closePath": true,
+      "points": [
+        44.60808,
+        30.21838,
+        1.60424,
+        7.23244,
+        13.71815,
+        0.79092,
+        57.12712,
+        23.31132
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(63,176,224,0.8)",
+      "borderWidth": 1,
+      "borderColor": "rgba(180,250,238,0.50)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        44.58207,
+        31.71282,
+        44.58207,
+        44.35014
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(61,173,224,0.3)",
+      "borderColor": "rgba(180,250,238,0.50)",
+      "borderCap": "round",
+      "gradient": "linear.south",
+      "gradientColor": "rgba(61,173,224,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        57.74217,
+        38.72256,
+        57.74217,
+        40.60174,
+        44.33799,
+        49.06861,
+        0.97563,
+        25.48225,
+        0.97563,
+        23.47239,
+        44.33799,
+        47.02795
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgba(180,250,238,0.50)",
+      "borderCap": "round",
+      "gradientColor": "rgba(0,0,0,0.00)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        57.22416,
+        24.80793,
+        57.22416,
+        38.36528,
+        44.4833,
+        46.05365,
+        1.3906,
+        22.99009,
+        1.3906,
+        8.76952
+      ]
+    }
+  ]
+}

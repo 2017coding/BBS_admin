@@ -1,0 +1,83 @@
+{
+  "width": 8,
+  "height": 8,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(0,0,0)",
+      "borderColor": "#979797",
+      "rect": [
+        0,
+        7,
+        1,
+        1
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(0,0,0)",
+      "borderColor": "#979797",
+      "rect": [
+        1,
+        5,
+        2,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(0,0,0)",
+      "borderColor": "#979797",
+      "rect": [
+        3,
+        3,
+        2,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(0,0,0)",
+      "borderColor": "#979797",
+      "rect": [
+        5,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(0,0,0)",
+      "borderColor": "#979797",
+      "rect": [
+        7,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(0,0,0)",
+      "borderColor": "#979797",
+      "rect": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(0,0,0)",
+      "borderColor": "#979797",
+      "rect": [
+        7,
+        7,
+        1,
+        1
+      ]
+    }
+  ]
+}

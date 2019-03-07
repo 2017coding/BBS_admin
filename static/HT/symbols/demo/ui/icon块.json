@@ -1,0 +1,56 @@
+{
+  "background": "rgb(179,179,179)",
+  "width": 16,
+  "height": 16,
+  "blendMode": "override",
+  "comps": [
+    {
+      "type": "shape",
+      "background": "rgb(255,227,199)",
+      "borderWidth": 1,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        15,
+        14.5,
+        1,
+        14.5,
+        1,
+        1.50001,
+        7,
+        1.50001,
+        8,
+        3.50001,
+        15,
+        3.50001,
+        15,
+        14.5
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(255,255,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(138,138,138)",
+      "rect": [
+        5.5,
+        7.22625,
+        6,
+        5
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(255,255,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(138,138,138)",
+      "rect": [
+        2.5,
+        4.72625,
+        6,
+        5
+      ]
+    }
+  ]
+}

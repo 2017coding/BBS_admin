@@ -1,0 +1,229 @@
+{
+  "background": "rgb(0,0,0)",
+  "gridThickLinesEvery": 25,
+  "gridAngle": 2.0944,
+  "gridRotation": 0.2618,
+  "width": 64,
+  "height": 91,
+  "comps": [
+    {
+      "type": "shape",
+      "background": "rgba(63,173,224,0.40)",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(0,0,0,0.00)",
+      "shadowColor": "#1ABC9C",
+      "rotation": 3.14159,
+      "points": [
+        31.9881,
+        75.87635,
+        34.13469,
+        75.87636,
+        54.85896,
+        87.5042,
+        54.85896,
+        87.5042,
+        54.85896,
+        79.77816,
+        54.85896,
+        79.77816,
+        54.83523,
+        65.701,
+        31.98813,
+        65.701,
+        9.14104,
+        65.701,
+        9.14104,
+        79.77816,
+        9.14104,
+        79.77816,
+        9.14104,
+        79.77816,
+        9.14104,
+        87.44167,
+        9.14104,
+        89.28457,
+        9.14104,
+        89.86023,
+        20.39135,
+        82.48369,
+        31.9881,
+        75.87635
+      ],
+      "segments": [
+        1,
+        4,
+        2,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(54,122,224)",
+      "borderWidth": 2,
+      "borderColor": "rgb(63,176,224)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        53.52182,
+        22.84463,
+        53.52182,
+        67.5974,
+        55.99743,
+        66.12378,
+        53.52182,
+        67.5974,
+        31.71453,
+        79.89811,
+        10.30642,
+        67.5974,
+        10.30642,
+        22.84463
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(63,176,224)",
+      "shadowColor": "#1ABC9C",
+      "closePath": true,
+      "points": [
+        31.36635,
+        32.20351,
+        10.21921,
+        19.78542,
+        31.36635,
+        6.78526,
+        53.52048,
+        19.78542
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(63,176,224,0.8)",
+      "borderWidth": 2,
+      "borderColor": "rgb(63,176,224)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        32.36984,
+        51.37137,
+        32.36984,
+        75.50633
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(63,176,224)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        49.86242,
+        64.48553,
+        35.80742,
+        72.03681,
+        35.80742,
+        65.70094,
+        32.36984,
+        65.70094
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(63,176,224,0.8)",
+      "borderWidth": 2,
+      "borderColor": "rgb(63,176,224)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        32.36984,
+        35.77702,
+        32.36984,
+        46.97959
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "rotation": 0.73657,
+      "points": [
+        12.88073,
+        33.27171,
+        8.80543,
+        34.82991,
+        12.88073,
+        39.98396,
+        8.80543,
+        42.26133
+      ],
+      "segments": [
+        1,
+        4
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "rotation": 0.73657,
+      "points": [
+        18.48062,
+        36.8835,
+        14.40533,
+        38.4417,
+        18.48062,
+        43.59575,
+        14.40533,
+        45.87312
+      ],
+      "segments": [
+        1,
+        4
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "rotation": 0.73657,
+      "points": [
+        24.08052,
+        40.49529,
+        20.00522,
+        42.05349,
+        24.08052,
+        47.20754,
+        20.00522,
+        49.48491
+      ],
+      "segments": [
+        1,
+        4
+      ]
+    }
+  ]
+}

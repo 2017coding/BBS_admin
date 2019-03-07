@@ -1,0 +1,92 @@
+{
+  "width": 140,
+  "height": 140,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(34,150,26)",
+      "borderWidth": 1,
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        2.52481,
+        2.26583,
+        134.95037,
+        136.43748
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(255,255,255)",
+      "borderColor": "#979797",
+      "rect": [
+        10.743,
+        19.69549,
+        119.96346,
+        103.84896
+      ]
+    },
+    {
+      "type": "text",
+      "text": "在此工作",
+      "align": "center",
+      "color": "rgb(61,61,61)",
+      "scaleX": 2,
+      "scaleY": 2,
+      "rect": [
+        36.26241,
+        36.3752,
+        67.47519,
+        68.21874
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(255,255,255)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        9.71758,
+        12.02554,
+        4,
+        4
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(255,255,255)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        9.71758,
+        122.63454,
+        4,
+        4
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(255,255,255)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        126.27593,
+        11.75651,
+        4,
+        4
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(255,255,255)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        126.27593,
+        122.36552,
+        4,
+        4
+      ]
+    }
+  ]
+}

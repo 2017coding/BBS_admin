@@ -1,0 +1,16 @@
+{
+  "width": 12,
+  "height": 12,
+  "comps": [
+    {
+      "type": "circle",
+      "background": "red",
+      "rect": [
+        1,
+        1,
+        10,
+        10
+      ]
+    }
+  ]
+}

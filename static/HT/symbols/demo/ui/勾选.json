@@ -1,0 +1,72 @@
+{
+  "background": "rgb(110,110,110)",
+  "width": 16,
+  "height": 16,
+  "comps": [
+    {
+      "type": "shape",
+      "background": "#3399ff",
+      "borderWidth": 1,
+      "borderColor": "#3399ff",
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "closePath": true,
+      "points": [
+        1,
+        1,
+        15,
+        1,
+        15,
+        1,
+        15,
+        1,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        1,
+        15,
+        1,
+        15,
+        1,
+        15,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "segments": [
+        1,
+        2,
+        3,
+        2,
+        3,
+        2,
+        3,
+        2,
+        3,
+        2
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "points": [
+        3,
+        9,
+        6,
+        12,
+        13,
+        5
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "width": 9,
+  "height": 13,
+  "comps": [
+    {
+      "type": "oval",
+      "background": "rgb(152,240,29)",
+      "borderWidth": 1,
+      "borderColor": "rgb(176,250,120)",
+      "opacity": 0.3,
+      "shadowColor": "#1ABC9C",
+      "rotation": -1.55741,
+      "rect": [
+        -1.09244,
+        2.92361,
+        11.18489,
+        7.15278
+      ]
+    },
+    {
+      "type": "oval",
+      "background": "rgb(152,240,29)",
+      "borderWidth": 1,
+      "borderColor": "rgb(176,250,120)",
+      "shadowColor": "#1ABC9C",
+      "rotation": -1.55741,
+      "rect": [
+        1.0884,
+        4.42012,
+        6.8232,
+        4.15976
+      ]
+    }
+  ]
+}

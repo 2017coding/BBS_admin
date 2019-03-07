@@ -1,0 +1,130 @@
+/** 公有的样式方法 **/
+
+// 清除浮动
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+// 阴影
+@mixin shadow(){
+  padding: 10px 0;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(200 , 200, 200);
+}
+// 垂直水平居中方法
+@mixin center($type: 'vertical', $both: false) {
+  // 主轴方向水平
+  @if $type == 'vertical' {
+    display: flex;
+    align-items: center;
+    @if $both{
+      justify-content: center;
+    }
+  }
+  // 主轴方向垂直
+  @if $type == 'horizontal' {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @if $both{
+      align-items: center;
+    }
+  }
+}
+
+// 绝对定位--垂直水平居中
+@mixin ct {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 伪元素0.5边框实现
+@mixin border-1px($directional: 'bottom', $color: #999999) {
+  position: absolute;
+  content: "";
+  background: $color;
+  @if $directional == 'top' {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    transform: scaleY(.5);
+  }
+  @if $directional == 'bottom' {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    transform: scaleY(.5);
+  }
+  @if $directional == 'left' {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    transform: scaleX(.5);
+  }
+  @if $directional == 'right' {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    transform: scaleX(.5);
+  }
+}
+
+// 背景图标设置
+@mixin  setBgImage ($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+// 不同分辨率图片
+@mixin bgImage($url) {
+  background-image: url("./image/"+ $url + "@2x.png");
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    {
+      background-image: url("./image/"+ $url + "@3x.png")
+    }
+}
+
+// 文字超出隐藏
+@mixin textHide() {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+// 重写按钮样式
+@mixin newBt($color) {
+  margin: 0 2px;
+  padding: 0;
+  width: 40px;
+  height: 20px;
+  line-height: 20px;
+  box-sizing: border-box;
+  border: 1px solid $color;
+  border-radius: 5px;
+  color: $color;
+  background: none;
+  font-size: 12px;
+}
+
+// 设置字体
+@mixin setFontSize ($size, $rem) {
+  font-size: $size;
+  font-size: $rem ;
+}
+
+// 字体小于12px的方法
+@mixin smallFont ($scale) {
+  -webkit-transform-origin: 0% 0%;
+  -webkit-transform: scale($scale);
+}

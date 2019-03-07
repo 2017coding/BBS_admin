@@ -1,0 +1,94 @@
+{
+  "width": 160,
+  "height": 110,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(255,255,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        2.91808,
+        2.26583,
+        154.16385,
+        105.46833
+      ]
+    },
+    {
+      "type": "rect",
+      "borderWidth": 3,
+      "borderColor": "rgb(255,0,0)",
+      "borderJoin": "miter",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        8.58424,
+        7.56207,
+        142.83153,
+        94.87587
+      ]
+    },
+    {
+      "type": "text",
+      "text": "停电",
+      "align": "center",
+      "color": "rgb(255,0,0)",
+      "scaleX": 4,
+      "scaleY": 4,
+      "rect": [
+        60.72952,
+        41.81645,
+        38.54096,
+        26.36708
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(61,61,61)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        11.91966,
+        9.85627,
+        3,
+        3
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(61,61,61)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        11.91966,
+        95.35878,
+        3,
+        3
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(61,61,61)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        145.07294,
+        9.64831,
+        3,
+        3
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(61,61,61)",
+      "borderColor": "rgb(61,61,61)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        145.07294,
+        95.15083,
+        3,
+        3
+      ]
+    }
+  ]
+}

@@ -1,18 +1,32 @@
 {
-  "name": "BBS_admin",
+  "name": "BEMS_Front",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "lyh <1695304848@qq.com>",
+  "description": "华力特能源管理云平台",
+  "author": "farad",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "cross-env BABEL_ENV=development env_config=dev webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev:prod": "cross-env BABEL_ENV=development env_config=prod webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build": "cross-env NODE_ENV=production env_config=prod node build/build.js",
+    "build:test": "cross-env NODE_ENV=production env_config=prod node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "driver.js": "^0.6.1",
+    "echarts": "^4.1.0",
+    "element-ui": "^2.4.3",
+    "js-cookie": "^2.2.0",
+    "node-sass": "^4.9.1",
+    "sass-loader": "^7.0.3",
+    "normalize.css": "^8.0.0",
+    "nprogress": "^0.2.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
+    "wangeditor": "^3.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -26,6 +40,7 @@
     "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
     "chalk": "^2.0.1",
+    "cross-env": "5.2.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "eslint": "^4.15.0",
@@ -37,7 +52,7 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^4.0.0",
-    "extract-text-webpack-plugin": "^3.0.0",
+    "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",

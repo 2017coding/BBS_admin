@@ -1,0 +1,57 @@
+{
+  "width": 240,
+  "height": 160,
+  "fitSize": false,
+  "clip": true,
+  "comps": [
+    {
+      "type": "image",
+      "name": "symbols/basic/sunrise.json",
+      "rect": [
+        0,
+        0,
+        120,
+        80
+      ]
+    },
+    {
+      "type": "image",
+      "color": "red",
+      "name": "symbols/basic/sunrise.json",
+      "rect": [
+        120,
+        0,
+        120,
+        80
+      ],
+      "rotation": 0.7853981633974483
+    },
+    {
+      "type": "image",
+      "shadow": true,
+      "shadowBlur": 11,
+      "shadowOffsetX": 6,
+      "shadowOffsetY": 10,
+      "color": null,
+      "stretch": "uniform",
+      "name": "symbols/basic/sunrise.json",
+      "rect": [
+        -7.798836238730111,
+        89.1408563820558,
+        120.59767247746024,
+        78.71828723588841
+      ],
+      "rotation": 5.8468529941810035
+    },
+    {
+      "type": "image",
+      "name": "symbols/basic/sunrise.json",
+      "rect": [
+        120,
+        80,
+        120,
+        80
+      ]
+    }
+  ]
+}

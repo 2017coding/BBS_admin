@@ -1,0 +1,133 @@
+{
+  "gridBlockSize": 1,
+  "gridThickLinesEvery": 20,
+  "gridThickColor": "rgb(191, 191, 191)",
+  "gridLightColor": "rgba(191, 191, 191, 0.2)",
+  "gridZoomThreshold": 0.25,
+  "width": 125,
+  "height": 125,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "oval",
+      "background": "rgba(255,255,255,0)",
+      "borderWidth": 1,
+      "borderColor": "rgb(136,197,227)",
+      "rect": [
+        25.5,
+        24.5,
+        75,
+        75
+      ]
+    },
+    {
+      "type": "oval",
+      "background": "rgba(255,255,255,0)",
+      "borderWidth": 1,
+      "borderColor": "rgb(136,197,227)",
+      "rect": [
+        33,
+        32,
+        60,
+        60
+      ]
+    },
+    {
+      "type": "oval",
+      "background": "rgba(255,255,255,0)",
+      "borderWidth": 1,
+      "borderColor": "rgb(136,197,227)",
+      "rect": [
+        43,
+        42,
+        40,
+        40
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(20,113,163)",
+      "borderColor": "#979797",
+      "rotation": -0.7853981633974483,
+      "rect": [
+        -6.874308982666697,
+        61.4508736792576,
+        138.2993279029927,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 2,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        108,
+        12.5,
+        4,
+        4
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(20,113,163)",
+      "borderColor": "#979797",
+      "rotation": 0.7853981633974483,
+      "rect": [
+        -5.48115403370489,
+        61.375834939256045,
+        135.71397794592187,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 2,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        12.5,
+        108,
+        4,
+        4
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 2,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        12.5,
+        12.5,
+        4,
+        4
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 2,
+      "borderColor": "rgb(20,113,163)",
+      "rotation": 0.008726646259971648,
+      "rect": [
+        108,
+        108,
+        4,
+        4
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 2,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        52.5,
+        52.5,
+        20,
+        20
+      ]
+    }
+  ]
+}

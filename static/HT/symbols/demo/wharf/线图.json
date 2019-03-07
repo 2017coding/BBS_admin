@@ -1,0 +1,177 @@
+{
+  "gridBlockSize": 1,
+  "gridThickLinesEvery": 20,
+  "gridThickColor": "rgb(191, 191, 191)",
+  "gridLightColor": "rgba(191, 191, 191, 0.2)",
+  "gridZoomThreshold": 0.25,
+  "width": 500,
+  "height": 200,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "shape",
+      "shadowColor": "rgb(110,205,240)",
+      "background": "rgb(79,229,240)",
+      "borderColor": "#979797",
+      "gradient": "linear.south",
+      "gradientColor": "rgba(68,219,194,0.1)",
+      "displayName": "线图",
+      "points": [
+        28.98880507356772,
+        171.47230897153372,
+        28.98880507356772,
+        116.84391175843325,
+        90.17079493779345,
+        76.84450119679832,
+        153.89205628242166,
+        102.25204901958614,
+        216.41102967715116,
+        116.84391175843325,
+        277.72771512198204,
+        21.53925550146073,
+        339.0444005668129,
+        102.25204901958614,
+        405.1702378112384,
+        116.84391175843325,
+        474.93853254297585,
+        61.88840505313874,
+        474.93853254297585,
+        171.47230897153372
+      ]
+    },
+    {
+      "type": "shape",
+      "shadow": true,
+      "shadowColor": "rgb(46,55,66)",
+      "shadowBlur": 8,
+      "shadowOffsetX": 0,
+      "shadowOffsetY": 8,
+      "borderWidth": 2,
+      "borderColor": "rgb(98,222,220)",
+      "points": [
+        26.08759396853728,
+        150.37201174555543,
+        93.01918892118061,
+        123.67808449052266,
+        155.41016543451093,
+        142.0120024512637,
+        219.58374127679383,
+        89.62937970628832,
+        285.4969799596348,
+        134.1671371703544,
+        342.58309497450284,
+        136.77374017676607,
+        410.12801534657603,
+        156.11762999023654,
+        477.67804669951715,
+        94.84508059047356
+      ]
+    },
+    {
+      "type": "circle",
+      "shadowColor": "#1ABC9C",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,163,194)",
+      "rect": [
+        22.988805073567733,
+        147.26603693237118,
+        6,
+        6
+      ]
+    },
+    {
+      "type": "circle",
+      "shadowColor": "#1ABC9C",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,163,194)",
+      "anchorX": 11.106532317373498,
+      "anchorY": -3.849098300995545,
+      "rect": [
+        89.74151976344422,
+        120.94529018459428,
+        6,
+        6
+      ]
+    },
+    {
+      "type": "circle",
+      "shadowColor": "#1ABC9C",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,163,194)",
+      "rect": [
+        151.80900837292177,
+        138.9751372631365,
+        6,
+        6
+      ]
+    },
+    {
+      "type": "circle",
+      "shadowColor": "#1ABC9C",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,163,194)",
+      "rect": [
+        216.39271505272507,
+        86.92450633505655,
+        6,
+        6
+      ]
+    },
+    {
+      "type": "circle",
+      "shadowColor": "#1ABC9C",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,163,194)",
+      "rect": [
+        282.4692614904616,
+        131.1739370503285,
+        6,
+        6
+      ]
+    },
+    {
+      "type": "circle",
+      "shadowColor": "#1ABC9C",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,163,194)",
+      "rect": [
+        338.9099249522343,
+        134.1739370503285,
+        6,
+        6
+      ]
+    },
+    {
+      "type": "circle",
+      "shadowColor": "#1ABC9C",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,163,194)",
+      "rect": [
+        407.67876195920746,
+        152.13933021612206,
+        6,
+        6
+      ]
+    },
+    {
+      "type": "circle",
+      "shadowColor": "#1ABC9C",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,163,194)",
+      "rect": [
+        475.62980353044816,
+        91.13000570355673,
+        6,
+        6
+      ]
+    }
+  ]
+}

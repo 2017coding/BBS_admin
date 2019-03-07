@@ -1,0 +1,144 @@
+{
+  "dataBindings": [
+    {
+      "attr": "powerLevel",
+      "valueType": "PowerLevel",
+      "defaultValue": "red",
+      "name": "电压等级"
+    },
+    {
+      "attr": "powerOffColor",
+      "valueType": "Color",
+      "defaultValue": "rgb(128,128,128)",
+      "name": "失电颜色"
+    },
+    {
+      "attr": "powerOn",
+      "valueType": "Boolean",
+      "defaultValue": true,
+      "name": "是否带电"
+    }
+  ],
+  "gridBlockSize": 6,
+  "width": 47,
+  "height": 64,
+  "comps": [
+    {
+      "type": "triangle",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "displayName": "2",
+      "rotation": 3.14159,
+      "rect": [
+        29.31446,
+        25.99936,
+        12.18259,
+        12.35571
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "borderJoin": "miter",
+      "shadowColor": "#1ABC9C",
+      "displayName": "2",
+      "points": [
+        35.40575,
+        25.37662,
+        35.40575,
+        13.53903,
+        11.59421,
+        13.53903,
+        11.59421,
+        25.68776,
+        5.08364,
+        18.8809,
+        11.59421,
+        25.68776,
+        18.58287,
+        25.68776,
+        5.08364,
+        25.68776
+      ]
+    },
+    {
+      "type": "triangle",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "displayName": "2",
+      "rotation": 6.28319,
+      "rect": [
+        5.50292,
+        25.99936,
+        12.18259,
+        12.35571
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "borderJoin": "miter",
+      "shadowColor": "#1ABC9C",
+      "displayName": "2",
+      "rotation": 3.14159,
+      "points": [
+        41.91631,
+        50.19267,
+        41.91631,
+        38.35507,
+        18.10476,
+        38.35507,
+        18.10476,
+        50.50381,
+        11.5942,
+        43.69694,
+        18.10476,
+        50.50381,
+        25.09342,
+        50.50381,
+        11.5942,
+        50.50381
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(250,0,0)",
+      "points": [
+        23.5,
+        0,
+        23.5,
+        13.72895
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(250,0,0)",
+      "points": [
+        23.5,
+        50.27105,
+        23.5,
+        64
+      ]
+    }
+  ]
+}

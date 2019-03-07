@@ -1,0 +1,90 @@
+{
+  "width": 48,
+  "height": 48,
+  "comps": [
+    {
+      "type": "oval",
+      "background": "rgba(0,0,0,0.1)",
+      "borderColor": "#979797",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        0,
+        0,
+        48,
+        48
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        19.84721,
+        19.69091,
+        19.84721,
+        32.25123
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        24.10371,
+        19.69091,
+        24.10371,
+        32.25123
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        28.15279,
+        19.69091,
+        28.15279,
+        32.25123
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        11.23055,
+        15.22377,
+        36.76945,
+        15.189,
+        19.12302,
+        15.17121,
+        20.94722,
+        11.5228,
+        26.41985,
+        11.5228,
+        28.24406,
+        15.17121
+      ]
+    },
+    {
+      "type": "rect",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        15.48702,
+        15.22377,
+        17.02595,
+        21.25344
+      ]
+    }
+  ]
+}

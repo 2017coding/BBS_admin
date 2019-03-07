@@ -1,0 +1,71 @@
+{
+  "width": 678,
+  "height": 278,
+  "comps": [
+    {
+      "type": "shape",
+      "borderWidth": 1.3561,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "rotation": 3.14159,
+      "points": [
+        380.02195,
+        259.01463,
+        380.02195,
+        18.98537
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.3561,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "rotation": 3.14159,
+      "points": [
+        300.69024,
+        259.01463,
+        300.69024,
+        18.98537
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.3561,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "rotation": 3.14159,
+      "points": [
+        19.3,
+        139.67805,
+        300.69024,
+        139.67805
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.3561,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "rotation": 3.14159,
+      "points": [
+        380.02195,
+        139.67805,
+        658.02195,
+        139.67805
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.3561,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "rotation": 3.14159,
+      "points": [
+        259.32927,
+        18.98537,
+        420.70488,
+        259.01463
+      ]
+    }
+  ]
+}

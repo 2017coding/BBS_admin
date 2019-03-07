@@ -1,0 +1,304 @@
+{
+  "background": "rgb(255,255,255)",
+  "width": 180,
+  "height": 38,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgba(61,6,6,0.80)",
+      "borderWidth": 1,
+      "borderColor": "rgb(0,11,33)",
+      "borderJoin": "bevel",
+      "gradient": "spread.north",
+      "gradientColor": "rgba(184,17,17,0.60)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        1.99118,
+        1.99118,
+        164.43645,
+        32.01801
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgba(255,23,23,0.60)",
+      "points": [
+        5,
+        1,
+        0.99167,
+        5.01196,
+        0.99167,
+        31,
+        5,
+        35,
+        164,
+        35,
+        168,
+        31,
+        168,
+        5,
+        164,
+        0.99167,
+        5,
+        1,
+        0.99167,
+        5
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1,
+      "borderColor": "rgba(47,99,204,0.50)",
+      "borderJoin": "bevel",
+      "shadow": true,
+      "shadowBlur": 1,
+      "shadowOffsetX": 1,
+      "shadowOffsetY": 0,
+      "points": [
+        141.722,
+        0.97303,
+        137.85115,
+        3.92817,
+        166.67763,
+        3.92817,
+        169.75799,
+        0.97303,
+        169.75799,
+        13.9993,
+        172.65128,
+        16.3241,
+        172.65128,
+        19.74734,
+        169.75799,
+        21.95374,
+        169.75799,
+        35.07307,
+        166.67763,
+        31.66,
+        148.21202,
+        31.66,
+        143.66653,
+        35.07307,
+        48.76871,
+        35.07307,
+        44.28179,
+        31.66,
+        16.21622,
+        31.66,
+        11.64345,
+        35.07307,
+        6.20448,
+        35.07307
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(83,17,184,0.60)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "points": [
+        166.26599,
+        16.92234,
+        163.48775,
+        14.77526,
+        163.48775,
+        10.4811,
+        171.82248,
+        16.92234,
+        171.82248,
+        19.06942,
+        163.48775,
+        25.51066,
+        163.48775,
+        21.2165,
+        166.26599,
+        19.06942
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(13,56,143)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "shadow": true,
+      "shadowBlur": 2,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 0,
+      "points": [
+        164.5928,
+        14.53821,
+        168.26245,
+        17.25434,
+        168.26245,
+        18.66356,
+        164.5928,
+        21.4046
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(13,56,143)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "shadowBlur": 2,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 0,
+      "points": [
+        162.21539,
+        0.33183,
+        167.95865,
+        0.33183,
+        165.03512,
+        2.75943,
+        159.02468,
+        2.75943
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(13,56,143)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "shadowBlur": 2,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 0,
+      "points": [
+        154.39862,
+        0.33183,
+        160.14188,
+        0.33183,
+        157.21835,
+        2.75943,
+        151.20791,
+        2.75943
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(13,56,143)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "shadowBlur": 2,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 0,
+      "points": [
+        146.24922,
+        0.33183,
+        151.99249,
+        0.33183,
+        149.06895,
+        2.75943,
+        143.05851,
+        2.75943
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(13,56,143)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "shadowBlur": 2,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 0,
+      "points": [
+        0.44469,
+        32.08597,
+        0.44469,
+        35.56842,
+        4.02528,
+        35.56842
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(13,56,143)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "shadowBlur": 2,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 0,
+      "points": [
+        33.78554,
+        33.14083,
+        39.52881,
+        33.14083,
+        36.60528,
+        35.56842,
+        30.59484,
+        35.56842
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(13,56,143)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "shadowBlur": 2,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 0,
+      "points": [
+        25.96877,
+        33.14083,
+        31.71204,
+        33.14083,
+        28.78851,
+        35.56842,
+        22.77807,
+        35.56842
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(13,56,143)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "shadowBlur": 2,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 0,
+      "points": [
+        17.81938,
+        33.14083,
+        23.56264,
+        33.14083,
+        20.63911,
+        35.56842,
+        14.62867,
+        35.56842
+      ]
+    },
+    {
+      "type": "text",
+      "text": "否定-按钮",
+      "align": "center",
+      "color": "rgb(255,255,255)",
+      "font": "16px arial, sans-serif",
+      "rect": [
+        1.99118,
+        1.99118,
+        164.43645,
+        32.6603
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(13,56,143)",
+      "borderColor": "rgb(49,101,204)",
+      "borderJoin": "bevel",
+      "shadow": true,
+      "shadowBlur": 2,
+      "shadowOffsetX": 2,
+      "shadowOffsetY": 0,
+      "points": [
+        149.49232,
+        33.21103,
+        164.94526,
+        33.21103,
+        167.5919,
+        36.02842,
+        146.09108,
+        36.02842
+      ]
+    }
+  ]
+}

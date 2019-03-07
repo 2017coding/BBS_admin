@@ -1,0 +1,43 @@
+{
+  "dataBindings": [
+    {
+      "attr": "【 O(∩_∩)O 中文 % 路径 % 测试 ^_^ 】",
+      "valueType": "Color",
+      "name": "屏幕背景"
+    },
+    {
+      "attr": "center.image",
+      "valueType": "String",
+      "name": "中心图片"
+    }
+  ],
+  "width": 100,
+  "height": 100,
+  "comps": [
+    {
+      "type": "components/【 O(∩_∩)O 中文 % 路径 % 测试 ^_^ 】/【 O(∩_∩)O 中文 % 路径 % 测试 ^_^ 】.json",
+      "anchorX": 0,
+      "anchorY": 0,
+      "rect": [
+        0,
+        0,
+        100,
+        100
+      ],
+      "【 O(∩_∩)O 中文 % 路径 % 测试 ^_^ 】": {
+        "func": "attr@【 O(∩_∩)O 中文 % 路径 % 测试 ^_^ 】",
+        "value": "rgb(242,246,247)"
+      }
+    },
+    {
+      "type": "image",
+      "name": "symbols/【 O(∩_∩)O 中文 % 路径 % 测试 ^_^ 】/圆形图片.json",
+      "rect": [
+        27.5,
+        9.46923,
+        45,
+        45
+      ]
+    }
+  ]
+}

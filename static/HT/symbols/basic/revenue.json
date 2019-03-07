@@ -1,0 +1,327 @@
+{
+  "width": 650,
+  "height": 380,
+  "comps": [
+    {
+      "type": "columnChart",
+      "rect": [
+        10,
+        60,
+        630,
+        260
+      ],
+      "label": true,
+      "labelColor": "#20284C",
+      "labelFont": "8px Arial",
+      "series": [
+        {
+          "color": "#20284C",
+          "values": [
+            471,
+            482,
+            567,
+            525,
+            590,
+            637,
+            780,
+            679,
+            848
+          ]
+        },
+        {
+          "color": "#303F74",
+          "values": [
+            275,
+            290,
+            361,
+            328,
+            346,
+            341,
+            440,
+            423,
+            505
+          ]
+        },
+        {
+          "color": "#7E93CD",
+          "values": [
+            82,
+            104,
+            115,
+            118,
+            135,
+            154,
+            198,
+            197,
+            247
+          ]
+        },
+        {
+          "color": "#A9B6DB",
+          "values": [
+            65,
+            78,
+            87,
+            87,
+            113,
+            130,
+            167,
+            159,
+            213
+          ]
+        }
+      ]
+    },
+    {
+      "type": "rect",
+      "rect": [
+        0,
+        0,
+        650,
+        40
+      ],
+      "background": "#566CB0"
+    },
+    {
+      "type": "text",
+      "rect": [
+        16,
+        0,
+        600,
+        40
+      ],
+      "align": "left",
+      "font": "20px Arial",
+      "color": "white",
+      "text": "Revenue by User Geography"
+    },
+    {
+      "type": "text",
+      "rect": [
+        40,
+        50,
+        16,
+        16
+      ],
+      "align": "left",
+      "font": "16px Arial",
+      "text": "In Millions"
+    },
+    {
+      "type": "rect",
+      "rect": [
+        40,
+        70,
+        16,
+        16
+      ],
+      "background": "#A9B6DB"
+    },
+    {
+      "type": "rect",
+      "rect": [
+        40,
+        90,
+        16,
+        16
+      ],
+      "background": "#7E93CD"
+    },
+    {
+      "type": "rect",
+      "rect": [
+        40,
+        110,
+        16,
+        16
+      ],
+      "background": "#303F74"
+    },
+    {
+      "type": "rect",
+      "rect": [
+        40,
+        130,
+        16,
+        16
+      ],
+      "background": "#20284C"
+    },
+    {
+      "type": "text",
+      "rect": [
+        60,
+        70,
+        100,
+        16
+      ],      
+      "align": "left",
+      "text": "Rest of World"
+    },
+    {
+      "type": "text",
+      "rect": [
+        60,
+        90,
+        0,
+        16
+      ],
+      "align": "left",
+      "text": "Asia"
+    },
+    {
+      "type": "text",
+      "rect": [
+        60,
+        110,
+        0,
+        16
+      ],
+      "align": "left",
+      "text": "Europe"
+    },
+    {
+      "type": "text",
+      "rect": [
+        60,
+        130,
+        0,
+        16
+      ],
+      "align": "left",
+      "text": "US & Canada"
+    },
+    {
+      "type": "text",
+      "rect": [
+        55,
+        322,
+        0,
+        16
+      ],
+      "align": "center",
+      "text": "Q2'11"
+    },
+    {
+      "type": "text",
+      "rect": [
+        124,
+        322,
+        0,
+        16
+      ],
+      "align": "center",
+      "text": "Q3'11"
+    },
+    {
+      "type": "text",
+      "rect": [
+        191,
+        322,
+        0,
+        16
+      ],
+      "align": "center",
+      "text": "Q4'11"
+    },
+    {
+      "type": "text",
+      "rect": [
+        259,
+        322,
+        0,
+        16
+      ],
+      "align": "center",
+      "text": "Q1'12"
+    },
+    {
+      "type": "text",
+      "rect": [
+        327,
+        322,
+        0,
+        16
+      ],
+      "align": "center",
+      "text": "Q2'12"
+    },
+    {
+      "type": "text",
+      "rect": [
+        394,
+        322,
+        0,
+        16
+      ],
+      "align": "center",
+      "text": "Q3'12"
+    },
+    {
+      "type": "text",
+      "rect": [
+        462,
+        322,
+        0,
+        16
+      ],
+      "align": "center",
+      "text": "Q4'12"
+    },
+    {
+      "type": "text",
+      "rect": [
+        529,
+        322,
+        0,
+        16
+      ],
+      "align": "center",
+      "text": "Q1'13"
+    },
+    {
+      "type": "text",
+      "rect": [
+        596,
+        322,
+        0,
+        16
+      ],
+      "align": "center",
+      "text": "Q2'13"
+    },
+    {
+      "type": "rect",
+      "rect": [
+        15,
+        320,
+        620,
+        1
+      ],
+      "background": "#566CB0"
+    },
+    {
+      "type": "rect",
+      "rect": [
+        0,
+        340,
+        650,
+        40
+      ],
+      "background": "#566CB0"
+    },
+    {
+      "type": "text",
+      "rect": [
+        0,
+        340,
+        640,
+        40
+      ],
+      "align": "right",
+      "font": "20px Arial",
+      "color": "white",
+      "text": "facebook."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "gridBlockSize": 1,
+  "gridThickLinesEvery": 20,
+  "gridThickColor": "rgb(191, 191, 191)",
+  "gridLightColor": "rgba(191, 191, 191, 0.2)",
+  "gridZoomThreshold": 0.25,
+  "width": 240,
+  "height": 240,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "arc",
+      "shadowColor": "rgba(2,85,115,0.35)",
+      "background": "rgb(255,122,92)",
+      "borderColor": "#979797",
+      "arcFrom": 4.363323129985823,
+      "arcTo": 0,
+      "rect": [
+        20,
+        6.486486486486484,
+        212.43243243243245,
+        214.51351351351352
+      ]
+    },
+    {
+      "type": "arc",
+      "shadowColor": "rgba(69,147,176,0.35)",
+      "shadowOffsetY": -3,
+      "background": "rgb(140,181,184)",
+      "borderColor": "#979797",
+      "arcFrom": 0,
+      "arcTo": 4.363323129985823,
+      "rect": [
+        20,
+        21,
+        200,
+        200
+      ]
+    }
+  ]
+}

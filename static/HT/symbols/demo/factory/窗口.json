@@ -1,0 +1,273 @@
+{
+  "width": 234,
+  "height": 195,
+  "boundExtend": 11,
+  "comps": [
+    {
+      "type": "shape",
+      "background": "#ffffff",
+      "borderWidth": 1,
+      "borderColor": "rgb(89,87,87)",
+      "fillRule": "evenodd",
+      "shadow": true,
+      "shadowColor": "rgba(11,14,61,0.4)",
+      "shadowBlur": 25,
+      "shadowOffsetX": -1,
+      "shadowOffsetY": 18,
+      "points": [
+        52.74553,
+        159.41118,
+        9.47998,
+        159.41118,
+        9.47998,
+        7.10741,
+        208.1309,
+        7.10741,
+        224.05345,
+        19.00961,
+        224.05345,
+        159.41118,
+        74.95405,
+        159.41118,
+        64.04948,
+        178.31081,
+        52.74553,
+        159.41118,
+        52.74553,
+        159.41118
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(49,98,232)",
+      "fillRule": "evenodd",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        10.98245,
+        9.0139,
+        208.04136,
+        9.0139,
+        222.44016,
+        19.59592,
+        222.44016,
+        19.59592,
+        222.44016,
+        41.02879,
+        222.44016,
+        41.02879,
+        10.98245,
+        41.02879,
+        10.98245,
+        41.02879,
+        10.98245,
+        9.0139,
+        10.98245,
+        9.0139,
+        10.98245,
+        9.0139
+      ]
+    },
+    {
+      "type": "text",
+      "text": "某某名称",
+      "color": "#ffffff",
+      "font": "16px MicrosoftYaHei",
+      "rect": [
+        21.85582,
+        9.0139,
+        74.04418,
+        32.01489
+      ]
+    },
+    {
+      "type": "text",
+      "text": "时间数据：",
+      "vAlign": "bottom",
+      "color": "#000000",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        21.87765,
+        51.93597,
+        55.5322,
+        16.89701
+      ]
+    },
+    {
+      "type": "text",
+      "text": "次数数据：",
+      "vAlign": "bottom",
+      "color": "#000000",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        21.87765,
+        70.44835,
+        77.20015,
+        17.04725
+      ]
+    },
+    {
+      "type": "text",
+      "text": "金额数据：",
+      "vAlign": "bottom",
+      "color": "#000000",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        21.87766,
+        87.49559,
+        65.31917,
+        18.66262
+      ]
+    },
+    {
+      "type": "text",
+      "text": "车辆数据：",
+      "vAlign": "bottom",
+      "color": "#000000",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        21.87765,
+        106.15821,
+        89.08114,
+        18.66262
+      ]
+    },
+    {
+      "type": "text",
+      "text": "金额数据：",
+      "vAlign": "bottom",
+      "color": "#000000",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        21.87765,
+        126.44927,
+        89.08114,
+        17.03418
+      ]
+    },
+    {
+      "type": "text",
+      "text": "12",
+      "align": "right",
+      "color": "#1e6aab",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        124.95134,
+        52.81942,
+        55.7612,
+        14.71069
+      ]
+    },
+    {
+      "type": "text",
+      "text": "200",
+      "align": "right",
+      "color": "#1e6aab",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        147.8487,
+        69.14548,
+        32.86385,
+        17.04725
+      ]
+    },
+    {
+      "type": "text",
+      "text": "300",
+      "align": "right",
+      "color": "#1e6aab",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        152.83194,
+        91.40624,
+        27.8806,
+        13.44909
+      ]
+    },
+    {
+      "type": "text",
+      "text": "鲁B AB123",
+      "align": "right",
+      "color": "#1e6aab",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        104.74324,
+        104.85534,
+        75.9693,
+        18.66262
+      ]
+    },
+    {
+      "type": "text",
+      "text": "28.00",
+      "align": "right",
+      "color": "#1e6aab",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        140.76203,
+        128.43662,
+        39.95052,
+        13.74396
+      ]
+    },
+    {
+      "type": "text",
+      "text": "小时",
+      "color": "rgb(0,0,0)",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        188.1363,
+        52.81942,
+        55.7612,
+        14.71069
+      ]
+    },
+    {
+      "type": "text",
+      "text": "次",
+      "color": "rgb(0,0,0)",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        188.1363,
+        69.14548,
+        32.86385,
+        17.04725
+      ]
+    },
+    {
+      "type": "text",
+      "text": "元",
+      "color": "rgb(0,0,0)",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        188.1363,
+        91.40624,
+        27.8806,
+        13.44909
+      ]
+    },
+    {
+      "type": "text",
+      "align": "right",
+      "color": "rgb(0,0,0)",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        142.72789,
+        104.85534,
+        75.9693,
+        18.66262
+      ]
+    },
+    {
+      "type": "text",
+      "text": "$",
+      "color": "rgb(0,0,0)",
+      "font": "14px MicrosoftYaHei",
+      "rect": [
+        188.1363,
+        128.43662,
+        39.95052,
+        13.74396
+      ]
+    }
+  ]
+}

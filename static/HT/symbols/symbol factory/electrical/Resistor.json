@@ -1,0 +1,54 @@
+{
+  "width": 678,
+  "height": 143,
+  "comps": [
+    {
+      "type": "shape",
+      "borderWidth": 5.72,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        497.73,
+        71.5,
+        660.75,
+        71.5
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 5.72,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        17.25,
+        71.5,
+        177.41,
+        71.5
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 5.72,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        177.41,
+        71.5,
+        203.15,
+        125.84,
+        257.49,
+        17.16,
+        311.83,
+        125.84,
+        366.17,
+        17.16,
+        417.65,
+        125.84,
+        471.99,
+        17.16,
+        497.73,
+        71.5
+      ]
+    }
+  ]
+}

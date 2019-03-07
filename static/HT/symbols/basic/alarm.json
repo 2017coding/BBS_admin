@@ -1,0 +1,43 @@
+{
+  "width": 100,
+  "height": 100,
+  "fitSize": false,
+  "opacity": {
+    "func": "attr@alarm.opacity"
+  },
+  "comps": [
+    {
+      "type": "triangle",
+      "background": {
+        "func": "attr@alarm.color",
+        "value": "gray"
+      },
+      "rect": [
+        2,
+        2,
+        96,
+        96
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "white",
+      "rect": [
+        45,
+        30,
+        10,
+        40
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "white",
+      "rect": [
+        39,
+        72,
+        22,
+        20
+      ]
+    }
+  ]
+}

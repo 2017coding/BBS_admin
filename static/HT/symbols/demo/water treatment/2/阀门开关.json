@@ -1,0 +1,90 @@
+{
+  "dataBindings": [
+    {
+      "attr": "closed",
+      "valueType": "Boolean",
+      "defaultValue": false
+    },
+    {
+      "attr": "switch",
+      "valueType": "Boolean",
+      "defaultValue": true
+    }
+  ],
+  "width": 32,
+  "height": 32,
+  "comps": [
+    {
+      "type": "arc",
+      "background": {
+        "func": "__ht__function(data, view) {\nreturn data.a('closed') ? 'rgb(232,232,232)' : 'red';\n}",
+        "value": "rgb(232,232,232)"
+      },
+      "borderColor": "rgb(0,0,0)",
+      "rotation": 4.71239,
+      "rect": [
+        5.24855,
+        9.1092,
+        13.78162,
+        13.78162
+      ]
+    },
+    {
+      "type": "triangle",
+      "background": {
+        "func": "__ht__function(data, view) {\nreturn data.a('closed') ? 'rgb(232,232,232)' : 'red';\n}",
+        "value": "rgb(232,232,232)"
+      },
+      "borderColor": "rgb(0,0,0)",
+      "rotation": 3.14159,
+      "rect": [
+        12.96981,
+        2.21839,
+        13.78162,
+        13.78162
+      ]
+    },
+    {
+      "type": "triangle",
+      "background": {
+        "func": "__ht__function(data, view) {\nreturn data.a('closed') ? 'rgb(232,232,232)' : 'red';\n}",
+        "value": "rgb(232,232,232)"
+      },
+      "borderColor": "rgb(0,0,0)",
+      "rect": [
+        12.96981,
+        16.00001,
+        13.78162,
+        13.78162
+      ]
+    },
+    {
+      "type": "rect",
+      "background": {
+        "func": "__ht__function(data, view) {\nreturn data.a('closed') ? 'rgb(232,232,232)' : 'red';\n}",
+        "value": "rgb(232,232,232)"
+      },
+      "rect": [
+        18.86062,
+        13.10949,
+        2,
+        6
+      ]
+    },
+    {
+      "type": "rect",
+      "background": {
+        "func": "__ht__function(data, view) {\nreturn data.a('closed') ? 'rgb(232,232,232)' : 'red';\n}",
+        "value": "rgb(232,232,232)"
+      },
+      "borderColor": "rgb(0,0,0)",
+      "rotation": 3.14159,
+      "rect": [
+        13.31404,
+        15.25698,
+        4.80384,
+        1.70502
+      ]
+    }
+  ]
+}

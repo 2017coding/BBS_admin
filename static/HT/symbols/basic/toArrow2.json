@@ -1,0 +1,35 @@
+{
+  "width": 40,
+  "height": 20,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "red",
+      "rect": [
+        2,
+        8,
+        8,
+        4
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "red",
+      "borderWidth": 1,
+      "borderColor": "red",
+      "gradient": "spread.vertical",
+      "closePath": true,
+      "points": [
+        5,
+        2,
+        10,
+        10,
+        5,
+        18,
+        20,
+        10
+      ]
+    }
+  ]
+}

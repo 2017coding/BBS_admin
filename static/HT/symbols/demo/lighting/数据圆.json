@@ -1,0 +1,76 @@
+{
+  "width": 357,
+  "height": 357,
+  "comps": [
+    {
+      "type": "circle",
+      "background": "rgba(3,12,33,0.60)",
+      "borderWidth": 8,
+      "borderColor": "rgba(117,175,255,0.40)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        58.51159,
+        55.10985,
+        239.97682,
+        246.78029
+      ]
+    },
+    {
+      "type": "circle",
+      "borderWidth": 14,
+      "borderColor": "rgba(3,12,33,0.60)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        21.5,
+        21.5,
+        314,
+        314
+      ]
+    },
+    {
+      "type": "arc",
+      "borderWidth": 14,
+      "borderColor": "rgb(117,175,255)",
+      "arcFrom": 0.7854,
+      "arcTo": 2.35619,
+      "arcClose": false,
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        57.70266,
+        54.278,
+        241.59467,
+        248.444
+      ]
+    },
+    {
+      "type": "circle",
+      "borderWidth": 2,
+      "borderColor": "rgb(117,175,255)",
+      "borderCap": "round",
+      "borderPattern": [
+        4,
+        4
+      ],
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        44.18092,
+        40.37291,
+        268.63815,
+        276.25418
+      ]
+    },
+    {
+      "type": "circle",
+      "borderWidth": 1,
+      "borderColor": "rgb(117,175,255)",
+      "borderCap": "round",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        70.25279,
+        67.18393,
+        216.49442,
+        222.63215
+      ]
+    }
+  ]
+}

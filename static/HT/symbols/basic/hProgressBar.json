@@ -1,0 +1,91 @@
+{
+  "background": "rgb(62,79,99)",
+  "dataBindings": [
+    {
+      "valueType": "Color",
+      "name": "PBGradientColor",
+      "attr": "pb.gradient.color"
+    },
+    {
+      "valueType": "Color",
+      "name": "PBBackground",
+      "attr": "pb.background"
+    },
+    {
+      "valueType": "Color",
+      "name": "PBBorderColor",
+      "attr": "pb.border.color"
+    },
+    {
+      "valueType": "Number",
+      "name": "PBBorderWidth",
+      "attr": "pb.border.width"
+    },
+    {
+      "valueType": "Color",
+      "name": "PBForeColor",
+      "attr": "pb.fore.color"
+    },
+    {
+      "valueType": "Percentage",
+      "name": "PBValue",
+      "attr": "pb.value"
+    },
+    {
+      "valueType": "Color",
+      "name": "PBValueColor",
+      "attr": "pb.value.color"
+    },
+    {
+      "valueType": "String",
+      "name": "PBValueFont",
+      "attr": "pb.value.font"
+    },
+    {
+      "valueType": "Boolean",
+      "name": "PBValueVisible",
+      "attr": "pb.value.visible"
+    }
+  ],
+  "width": 100,
+  "height": 30,
+  "fitSize": true,
+  "comps": [
+    {
+      "type": "components/progressBar/progressBar.json",
+      "rect": [
+        0,
+        0,
+        100,
+        30
+      ],
+      "background": {
+        "func": "attr@pb.background"
+      },
+      "borderColor": {
+        "func": "attr@pb.border.color"
+      },
+      "borderWidth": {
+        "func": "attr@pb.border.width"
+      },
+      "foreColor": {
+        "func": "attr@pb.fore.color"
+      },
+      "value": {
+        "func": "attr@pb.value"
+      },
+      "valueVisible": {
+        "func": "attr@pb.value.visible"
+      },
+      "valueColor": {
+        "func": "attr@pb.value.color"
+      },
+      "valueFont": {
+        "func": "attr@pb.value.font"
+      },
+      "gradientColor": {
+        "func": "attr@pb.gradient.color"
+      }
+    }
+  ]
+}

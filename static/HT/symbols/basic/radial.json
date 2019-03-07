@@ -1,0 +1,30 @@
+{
+  "dataBindings": [
+    {
+      "attr": "radius",
+      "valueType": "Percentage"
+    },
+    {
+      "attr": "startColor",
+      "valueType": "Color"
+    },
+    {
+      "attr": "endColor",
+      "valueType": "Color"
+    }
+  ],
+  "width": 100,
+  "height": 100,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "__ht__function(g, rect, comp, data, view) {\nvar startColor = (data && data.a('startColor')) || 'red';\nvar endColor = (data && data.a('endColor')) || 'black';\nvar radius = (data && data.a('radius')) || 1;\nvar centerX = rect.x + rect.width / 2;\nvar centerY = rect.y + rect.height / 2;    \nvar grd = g.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius * Math.max(rect.width, rect.height));\ngrd.addColorStop(0, startColor);\ngrd.addColorStop(1, endColor);\ng.fillStyle = grd;\ng.fillRect(0, 0, rect.width, rect.height);\n}",
+      "rect": [
+        0,
+        0,
+        100,
+        100
+      ]
+    }
+  ]
+}

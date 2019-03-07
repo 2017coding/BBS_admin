@@ -1,0 +1,194 @@
+{
+  "gridBlockSize": 1,
+  "gridThickLinesEvery": 20,
+  "gridThickColor": "rgb(191, 191, 191)",
+  "gridLightColor": "rgba(191, 191, 191, 0.2)",
+  "gridZoomThreshold": 0.25,
+  "width": 38,
+  "height": 31,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rotation": 1.5707963267948966,
+      "rect": [
+        -9.531640486416302,
+        12.590799366071648,
+        26.382506754662916,
+        5
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        28.159612890915156,
+        27.282052743403106,
+        8,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        27.159612890915156,
+        7.282052743403108,
+        10,
+        16
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        29.159612890915156,
+        3.2820527434031117,
+        6,
+        4
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        28.159612890915156,
+        1.2820527434031117,
+        8,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        29.159612890915156,
+        23.282052743403106,
+        6,
+        4
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        0.659612890915156,
+        27.282052743403106,
+        6,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rotation": 1.5707963267948966,
+      "rect": [
+        23.159612890915156,
+        14.282052743403108,
+        6,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rotation": 1.5707963267948966,
+      "rect": [
+        19.159612890915156,
+        13.282052743403108,
+        8,
+        4
+      ]
+    },
+    {
+      "type": "oval",
+      "background": "rgb(255,255,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        1.159612890915156,
+        5.282052743403108,
+        20,
+        20
+      ]
+    },
+    {
+      "type": "oval",
+      "background": "rgb(255,255,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        3.659612890915156,
+        7.782052743403108,
+        15,
+        15
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "#898989",
+      "borderColor": "#979797",
+      "rect": [
+        8.659612890915156,
+        11.282052743403108,
+        5,
+        8
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderColor": "rgb(20,113,163)",
+      "rect": [
+        1.659612890915156,
+        26.282052743403106,
+        4,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderWidth": 1,
+      "borderColor": "rgb(20,113,163)",
+      "rotation": -3.141592653589793,
+      "rect": [
+        0.659612890915156,
+        0.6849214632969787,
+        6,
+        2
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(136,197,227)",
+      "borderColor": "rgb(20,113,163)",
+      "rotation": -3.141592653589793,
+      "rect": [
+        1.659612890915156,
+        1.6849214632969787,
+        4,
+        2
+      ]
+    }
+  ]
+}

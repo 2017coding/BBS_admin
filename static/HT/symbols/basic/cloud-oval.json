@@ -1,0 +1,39 @@
+{
+  "width": 300,
+  "height": 300,
+  "clip": "__ht__function(g, width, height, data, view, image) {\ng.beginPath();\ng.arc(width / 2, height / 2, Math.min(width, height) * 0.42, 0, Math.PI * 2, true);\ng.clip();\n}",
+  "comps": [
+    {
+      "type": "rect",
+      "background": "#3498DB",
+      "rect": [
+        0,
+        0,
+        300,
+        300
+      ]
+    },
+    {
+      "type": "image",
+      "name": "symbols/basic/cloud.json",
+      "rect": [
+        0,
+        0,
+        300,
+        300
+      ]
+    },
+    {
+      "type": "text",
+      "text": "2016-09-08T17:44:06.930Z",
+      "color": "#34495E",
+      "font": "bold 18px Arial",
+      "rect": [
+        39.0159,
+        121.31863,
+        220.18416,
+        100
+      ]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "dataBindings": [
+    {
+      "attr": "tb.content",
+      "valueType": "Multiline",
+      "name": "TBContent"
+    },
+    {
+      "attr": "tb.autoScale",
+      "valueType": "Boolean",
+      "name": "TBAutoScale"
+    },
+    {
+      "attr": "tb.wordBreak",
+      "valueType": "Boolean",
+      "name": "TBWordBreak"
+    },
+    {
+      "attr": "tb.fontSize",
+      "valueType": "PositiveNumber",
+      "name": "TBFontSize"
+    },
+    {
+      "attr": "tb.textAlign",
+      "valueType": "Align",
+      "name": "TBTextAlign"
+    },
+    {
+      "attr": "tb.verticalAlign",
+      "valueType": "VAlign",
+      "name": "TBVerticalAlign"
+    },
+    {
+      "attr": "tb.color",
+      "valueType": "Color",
+      "name": "TBColor"
+    },
+    {
+      "attr": "tb.lineHeight",
+      "valueType": "PositiveNumber",
+      "name": "TBLineHeight"
+    },
+    {
+      "attr": "tb.background",
+      "valueType": "Color",
+      "name": "TBBackground"
+    },
+    {
+      "attr": "TBPadding",
+      "valueType": "String",
+      "name": "TBPadding",
+      "description": "like CSS"
+    }
+  ],
+  "width": 100,
+  "height": 100,
+  "fitSize": true,
+  "clip": true,
+  "comps": [
+    {
+      "type": "components/textBox/textBox.json",
+      "displayName": "TextBox",
+      "rect": [
+        0.20975,
+        0,
+        99.79025,
+        100
+      ],
+      "content": {
+        "func": "attr@tb.content",
+        "value": "通过下面firePropertyChange的代码片段可以知道，oldValue和newValue相同时属性变化事件不会派发， 属性变化事件通过handleDataPropertyChange传递给DataModel继续做处理， 后续处理包括继续派发事件给通过addDataPropertyChangeListener添加到DataModel的属性变化监听器。"
+      },
+      "autoScale": {
+        "func": "attr@tb.autoScale",
+        "value": true
+      },
+      "wordBreak": {
+        "func": "attr@tb.wordBreak",
+        "value": false
+      },
+      "fontSize": {
+        "func": "attr@tb.fontSize",
+        "value": 14
+      },
+      "textAlign": {
+        "func": "attr@tb.textAlign",
+        "value": "left"
+      },
+      "vAlign": {
+        "func": "attr@tb.verticalAlign",
+        "value": "top"
+      },
+      "color": {
+        "func": "attr@tb.color",
+        "value": "rgb(0,0,0)"
+      },
+      "lineHeight": {
+        "func": "attr@tb.lineHeight",
+        "value": 18
+      },
+      "background": {
+        "func": "attr@tb.background",
+        "value": null
+      },
+      "padding": {
+        "func": "attr@TBPadding",
+        "value": "0"
+      }
+    }
+  ]
+}

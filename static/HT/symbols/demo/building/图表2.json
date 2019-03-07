@@ -1,0 +1,259 @@
+{
+  "background": "rgb(128,128,128)",
+  "width": 330,
+  "height": 250,
+  "comps": [
+    {
+      "type": "roundRect",
+      "background": "rgba(255,255,255,0.6)",
+      "borderColor": "#979797",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        0,
+        0,
+        329.22847,
+        243.60382
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(96,192,240)",
+      "borderColor": "#979797",
+      "gradient": "linear.south",
+      "gradientColor": "rgba(68,159,219,0.1)",
+      "shadowColor": "#1ABC9C",
+      "displayName": "线图",
+      "points": [
+        19.29359,
+        215.74087,
+        19.29359,
+        161.75879,
+        60.52777,
+        147.33956,
+        98.18706,
+        114.70309,
+        129.56981,
+        122.23262,
+        181.5755,
+        85.11365,
+        221.92474,
+        134.42939,
+        265.86058,
+        107.45347,
+        309.93487,
+        107.45347,
+        309.93487,
+        215.74087
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(100,98,222)",
+      "shadow": true,
+      "shadowColor": "rgb(102,102,209)",
+      "shadowBlur": 8,
+      "shadowOffsetX": 0,
+      "shadowOffsetY": 8,
+      "points": [
+        17.40277,
+        194.89021,
+        61.02447,
+        168.51211,
+        101.68688,
+        186.62911,
+        143.51108,
+        134.86623,
+        186.46908,
+        178.87706,
+        223.67413,
+        181.45282,
+        267.69556,
+        200.56785,
+        311.72031,
+        140.02023
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,40,194)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        15.38318,
+        191.82099,
+        3.91041,
+        5.92901
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,40,194)",
+      "shadowColor": "#1ABC9C",
+      "anchorX": 11.10653,
+      "anchorY": -3.8491,
+      "rect": [
+        58.88829,
+        165.81164,
+        3.91041,
+        5.92901
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,40,194)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        99.33988,
+        183.62818,
+        3.91041,
+        5.92901
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,40,194)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        141.43138,
+        132.19336,
+        3.91041,
+        5.92901
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,40,194)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        184.49581,
+        175.91927,
+        3.91041,
+        5.92901
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,40,194)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        221.2802,
+        178.88378,
+        3.91041,
+        5.92901
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,40,194)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        266.09929,
+        196.63662,
+        3.91041,
+        5.92901
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(212,248,255)",
+      "borderWidth": 1,
+      "borderColor": "rgb(10,40,194)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        310.3854,
+        136.34911,
+        3.91041,
+        5.92901
+      ]
+    },
+    {
+      "type": "text",
+      "text": "本日流量趋势",
+      "color": "#666666",
+      "anchorX": 2,
+      "anchorY": 0.7203,
+      "rect": [
+        129.65457,
+        12.31215,
+        78.11205,
+        20.5
+      ]
+    },
+    {
+      "type": "text",
+      "text": "入流量",
+      "color": "#666666",
+      "rect": [
+        54.28923,
+        38.3783,
+        75.80222,
+        20.5
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(100,98,222)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        22.14462,
+        48.67546,
+        44.0465,
+        48.6283
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(100,98,222)",
+      "borderColor": "#979797",
+      "gradient": "linear.south",
+      "gradientColor": "rgba(11,101,191,0)",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        19.29359,
+        62.80295,
+        23.88562,
+        10.79446
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(110,225,240)",
+      "borderWidth": 1,
+      "borderColor": "rgb(100,98,222)",
+      "shadowColor": "#1ABC9C",
+      "anchorX": 0.42402,
+      "rect": [
+        19.29359,
+        45.6283,
+        6,
+        6
+      ]
+    },
+    {
+      "type": "text",
+      "text": "出流量",
+      "color": "#666666",
+      "rect": [
+        54.28923,
+        57.33169,
+        75.80222,
+        20.5
+      ]
+    }
+  ]
+}

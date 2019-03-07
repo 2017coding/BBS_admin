@@ -1,0 +1,199 @@
+{
+  "background": "rgb(0,0,0)",
+  "gridThickLinesEvery": 25,
+  "gridAngle": 2.0944,
+  "gridRotation": 0.2618,
+  "width": 64,
+  "height": 64,
+  "comps": [
+    {
+      "type": "shape",
+      "background": "rgba(63,173,224,0.40)",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(0,0,0,0.00)",
+      "shadowColor": "#1ABC9C",
+      "rotation": 3.14159,
+      "points": [
+        31.85795,
+        51.96476,
+        34.00454,
+        51.96476,
+        54.72879,
+        63.50462,
+        54.72879,
+        63.50462,
+        54.72881,
+        55.32284,
+        54.72881,
+        55.32284,
+        54.70508,
+        43.20738,
+        31.85798,
+        43.20738,
+        9.01089,
+        43.20738,
+        9.01089,
+        55.32284,
+        9.01089,
+        55.32284,
+        9.01089,
+        55.32284,
+        9.01089,
+        61.91841,
+        9.01089,
+        63.5045,
+        9.01089,
+        63.99994,
+        20.2612,
+        57.65134,
+        31.85795,
+        51.96476
+      ],
+      "segments": [
+        1,
+        4,
+        2,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgb(54,122,224)",
+      "borderWidth": 2,
+      "borderColor": "rgb(63,176,224)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        53.52182,
+        23.70351,
+        53.52182,
+        43.90279,
+        55.99743,
+        42.42917,
+        53.52182,
+        43.90279,
+        31.71453,
+        56.20351,
+        10.30642,
+        43.90279,
+        10.30642,
+        22.70351
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(63,176,224)",
+      "shadowColor": "#1ABC9C",
+      "closePath": true,
+      "points": [
+        31.36635,
+        32.20351,
+        10.21921,
+        19.78542,
+        31.36635,
+        6.78526,
+        53.52048,
+        19.78542
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        38.10512,
+        15.5,
+        33.77499,
+        18
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        38.10512,
+        25,
+        32.11761,
+        25.75
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(255,255,255)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        24.24871,
+        16,
+        22.59133,
+        19.75
+      ]
+    },
+    {
+      "type": "shape",
+      "background": "rgba(63,176,224,0.8)",
+      "borderWidth": 2,
+      "borderColor": "rgb(63,176,224)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        31.36984,
+        37.64136,
+        31.36984,
+        46.39811
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 2,
+      "borderColor": "rgb(63,176,224)",
+      "borderCap": "round",
+      "gradient": "linear.north",
+      "gradientColor": "rgba(255,255,255,0)",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        59.9677,
+        56.20351,
+        34.80742,
+        56.20351,
+        34.80742,
+        46.39811,
+        31.36984,
+        46.39811,
+        31.36984,
+        51.64692
+      ]
+    },
+    {
+      "type": "text",
+      "text": "插座",
+      "color": "rgb(255,255,255)",
+      "rect": [
+        33.77499,
+        42.09753,
+        27.68254,
+        14.10598
+      ]
+    }
+  ]
+}

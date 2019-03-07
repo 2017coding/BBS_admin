@@ -1,0 +1,789 @@
+{
+  "width": 678,
+  "height": 468,
+  "comps": [
+    {
+      "type": "shape",
+      "background": "#00ffff",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        338.66087,
+        18.9913,
+        469.01928,
+        18.9913,
+        574.69565,
+        114.95031,
+        574.69565,
+        233.32174,
+        574.69565,
+        351.69317,
+        469.01928,
+        447.65217,
+        338.66087,
+        447.65217,
+        208.30246,
+        447.65217,
+        102.62609,
+        351.69317,
+        102.62609,
+        233.32174,
+        102.62609,
+        114.95031,
+        208.30246,
+        18.9913,
+        338.66087,
+        18.9913,
+        338.66087,
+        18.9913
+      ],
+      "segments": [
+        1,
+        4,
+        4,
+        4,
+        4,
+        2
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        338.66087,
+        18.9913,
+        469.01928,
+        18.9913,
+        574.69565,
+        114.95031,
+        574.69565,
+        233.32174,
+        574.69565,
+        351.69317,
+        469.01928,
+        447.65217,
+        338.66087,
+        447.65217,
+        208.30246,
+        447.65217,
+        102.62609,
+        351.69317,
+        102.62609,
+        233.32174,
+        102.62609,
+        114.95031,
+        208.30246,
+        18.9913,
+        338.66087,
+        18.9913,
+        338.66087,
+        18.9913
+      ],
+      "segments": [
+        1,
+        4,
+        4,
+        4,
+        4,
+        2
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        298.64348,
+        232.64348,
+        300,
+        248.24348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        300,
+        248.24348,
+        303.3913,
+        263.84348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        303.3913,
+        263.84348,
+        309.49565,
+        278.08696
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        309.49565,
+        278.08696,
+        317.63478,
+        291.65217
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        317.63478,
+        291.65217,
+        327.8087,
+        304.53913
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        327.8087,
+        304.53913,
+        340.01739,
+        315.3913
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        340.01739,
+        315.3913,
+        353.58261,
+        324.88696
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        353.58261,
+        324.88696,
+        368.50435,
+        332.34783
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        368.50435,
+        332.34783,
+        384.78261,
+        337.77391
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        384.78261,
+        337.77391,
+        401.73913,
+        341.16522
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        401.73913,
+        341.16522,
+        418.69565,
+        342.52174
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        418.69565,
+        342.52174,
+        435.65217,
+        341.16522
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        435.65217,
+        341.16522,
+        452.6087,
+        337.77391
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        452.6087,
+        337.77391,
+        468.2087,
+        332.34783
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        468.2087,
+        332.34783,
+        483.13043,
+        324.88696
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        483.13043,
+        324.88696,
+        497.37391,
+        315.3913
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        497.37391,
+        315.3913,
+        508.90435,
+        304.53913
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        508.90435,
+        304.53913,
+        519.07826,
+        291.65217
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        519.07826,
+        291.65217,
+        527.89565,
+        278.08696
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        527.89565,
+        278.08696,
+        533.32174,
+        263.84348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        533.32174,
+        263.84348,
+        537.3913,
+        248.24348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        537.3913,
+        248.24348,
+        538.06957,
+        232.64348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        378.67826,
+        232.64348,
+        377.32174,
+        223.14783
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        377.32174,
+        223.14783,
+        373.25217,
+        214.33043
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        373.25217,
+        214.33043,
+        367.14783,
+        206.86957
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        367.14783,
+        206.86957,
+        359.0087,
+        201.44348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        359.0087,
+        201.44348,
+        348.83478,
+        197.37391
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        348.83478,
+        197.37391,
+        338.66087,
+        196.01739
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        338.66087,
+        196.01739,
+        328.48696,
+        197.37391
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        328.48696,
+        197.37391,
+        318.9913,
+        201.44348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        318.9913,
+        201.44348,
+        310.17391,
+        206.86957
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        310.17391,
+        206.86957,
+        304.06957,
+        214.33043
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        304.06957,
+        214.33043,
+        300,
+        223.14783
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        300,
+        223.14783,
+        298.64348,
+        232.64348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        139.25217,
+        232.64348,
+        139.93043,
+        248.24348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        139.93043,
+        248.24348,
+        144,
+        263.84348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        144,
+        263.84348,
+        149.42609,
+        278.08696
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        149.42609,
+        278.08696,
+        158.24348,
+        291.65217
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        158.24348,
+        291.65217,
+        168.41739,
+        304.53913
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        168.41739,
+        304.53913,
+        179.94783,
+        315.3913
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        179.94783,
+        315.3913,
+        194.1913,
+        324.88696
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        194.1913,
+        324.88696,
+        209.11304,
+        332.34783
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        209.11304,
+        332.34783,
+        224.71304,
+        337.77391
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        224.71304,
+        337.77391,
+        241.66957,
+        341.16522
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        241.66957,
+        341.16522,
+        258.62609,
+        342.52174
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        258.62609,
+        342.52174,
+        275.58261,
+        341.16522
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        275.58261,
+        341.16522,
+        292.53913,
+        337.77391
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        292.53913,
+        337.77391,
+        308.81739,
+        332.34783
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        308.81739,
+        332.34783,
+        323.73913,
+        324.88696
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        323.73913,
+        324.88696,
+        337.30435,
+        315.3913
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        337.30435,
+        315.3913,
+        349.51304,
+        304.53913
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        349.51304,
+        304.53913,
+        359.68696,
+        291.65217
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        359.68696,
+        291.65217,
+        367.82609,
+        278.08696
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        367.82609,
+        278.08696,
+        373.93043,
+        263.84348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        373.93043,
+        263.84348,
+        377.32174,
+        248.24348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        377.32174,
+        248.24348,
+        378.67826,
+        232.64348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        538.06957,
+        232.64348,
+        658.12174,
+        232.64348
+      ]
+    },
+    {
+      "type": "shape",
+      "borderWidth": 1.35652,
+      "borderColor": "#000000",
+      "shadowColor": "#1ABC9C",
+      "points": [
+        19.2,
+        232.64348,
+        139.25217,
+        232.64348
+      ]
+    }
+  ]
+}

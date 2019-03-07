@@ -1,0 +1,50 @@
+{
+  "gridBlockSize": 1,
+  "gridThickLinesEvery": 20,
+  "gridThickColor": "rgb(191, 191, 191)",
+  "gridLightColor": "rgba(191, 191, 191, 0.2)",
+  "gridZoomThreshold": 0.25,
+  "width": 237,
+  "height": 268,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "text",
+      "text": "HT for Web",
+      "color": "rgb(255,43,43)",
+      "font": "italic small-caps bolder 28px cursive",
+      "shadow": true,
+      "shadowColor": "rgba(5,82,247,0.5)",
+      "shadowBlur": 18,
+      "anchorX": 1,
+      "anchorY": 0,
+      "rotation": 6.021385919380436,
+      "rect": [
+        20.187890472032393,
+        21.83141571295787,
+        248.83357949797966,
+        54.00889267809045
+      ]
+    },
+    {
+      "type": "text",
+      "text": "图扑软件",
+      "align": "right",
+      "vAlign": "bottom",
+      "color": "rgb(43,255,110)",
+      "font": "italic small-caps bolder 28px cursive",
+      "shadow": true,
+      "shadowColor": "rgb(247,5,5)",
+      "shadowBlur": 18,
+      "anchorX": 0,
+      "anchorY": 0,
+      "rotation": 0.2617993877991494,
+      "rect": [
+        57.500033627439336,
+        138.40286943510947,
+        165.8928784570421,
+        69.18696719925249
+      ]
+    }
+  ]
+}

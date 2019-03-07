@@ -1,0 +1,32 @@
+{
+  "width": 32,
+  "height": 16,
+  "comps": [
+    {
+      "type": "roundRect",
+      "background": "rgb(217,217,217)",
+      "borderColor": "#979797",
+      "cornerRadius": 3,
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        4,
+        5,
+        23.04409,
+        6
+      ]
+    },
+    {
+      "type": "circle",
+      "background": "rgb(255,255,255)",
+      "borderWidth": 1,
+      "borderColor": "#666666",
+      "shadowColor": "#1ABC9C",
+      "rect": [
+        4.52205,
+        2.5,
+        11,
+        11
+      ]
+    }
+  ]
+}

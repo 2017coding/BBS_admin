@@ -1,0 +1,48 @@
+{
+  "width": 40,
+  "height": 28,
+  "comps": [
+    {
+      "type": "rect",
+      "background": {
+        "func": "attr@color",
+        "value": "yellow"
+      },
+      "rect": [
+        0,
+        0,
+        40,
+        28
+      ]
+    },
+    {
+      "type": "border",
+      "visible": {
+        "func": "__ht__function(data, view) {\nreturn (view && data && view.isSelected) ?  view.isSelected(data) : true;\n}"
+      },
+      "color": "red",
+      "width": 1,
+      "rect": [
+        0,
+        0,
+        40,
+        28
+      ]
+    },
+    {
+      "type": "text",
+      "text": {
+        "func": "style@attach.index",
+        "value": "图扑"
+      },
+      "align": "center",
+      "font": "bold 12px Arial",
+      "rect": [
+        0,
+        0,
+        40,
+        28
+      ]
+    }
+  ]
+}

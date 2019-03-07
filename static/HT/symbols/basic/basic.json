@@ -1,0 +1,169 @@
+{
+  "width": 750,
+  "height": 240,
+  "comps": [
+    {
+      "type": "rect",
+      "background": "#E74C3C",
+      "borderWidth": 1,
+      "borderColor": "#34495E",
+      "depth": 5,
+      "rect": [
+        11,
+        20,
+        130,
+        80
+      ]
+    },
+    {
+      "type": "oval",
+      "borderWidth": 12,
+      "borderColor": "#34495E",
+      "border3d": true,
+      "borderPattern": [
+        12,
+        12
+      ],
+      "rect": [
+        161,
+        20,
+        130,
+        80
+      ]
+    },
+    {
+      "type": "polygon",
+      "background": "#3498DB",
+      "borderWidth": 10,
+      "borderColor": "#34495E",
+      "borderJoin": "miter",
+      "gradient": "spread.vertical",
+      "gradientColor": "white",
+      "polygonSide": 7,
+      "rect": [
+        311,
+        20,
+        130,
+        80
+      ]
+    },
+    {
+      "type": "star",
+      "background": "red",
+      "gradient": "radial.center",
+      "gradientColor": "yellow",
+      "rect": [
+        461,
+        20,
+        130,
+        80
+      ]
+    },
+    {
+      "type": "arc",
+      "borderWidth": 6,
+      "borderColor": "blue",
+      "dash": true,
+      "dashPattern": [
+        5,
+        12
+      ],
+      "dashColor": "yellow",
+      "arcFrom": 1.5708,
+      "arcClose": false,
+      "rect": [
+        611,
+        20,
+        130,
+        80
+      ]
+    },
+    {
+      "type": "roundRect",
+      "repeatImage": "assets/tile/floor2.png",
+      "borderWidth": 5,
+      "borderColor": "blue",
+      "dash": true,
+      "dashColor": "yellow",
+      "cornerRadius": 6,
+      "rect": [
+        11,
+        136.81172,
+        130,
+        80
+      ]
+    },
+    {
+      "type": "oval",
+      "borderWidth": 12,
+      "borderColor": "#34495E",
+      "border3d": true,
+      "dash": true,
+      "dashColor": "red",
+      "dashWidth": 8,
+      "dash3d": true,
+      "dash3dColor": "yellow",
+      "rect": [
+        161,
+        136.81172,
+        130,
+        80
+      ]
+    },
+    {
+      "type": "polygon",
+      "repeatImage": "assets/tile/floor2.png",
+      "borderWidth": 5,
+      "borderColor": "#34495E",
+      "borderJoin": "miter",
+      "gradient": "spread.vertical",
+      "gradientColor": "white",
+      "dash": true,
+      "dashPattern": [
+        10
+      ],
+      "dashColor": "yellow",
+      "polygonSide": 7,
+      "rect": [
+        311,
+        136.81172,
+        130,
+        80
+      ]
+    },
+    {
+      "type": "star",
+      "background": "red",
+      "borderWidth": 2,
+      "borderColor": "#34495E",
+      "borderPattern": [
+        10,
+        4,
+        4,
+        4
+      ],
+      "gradient": "radial.center",
+      "gradientColor": "yellow",
+      "rect": [
+        461,
+        136.81172,
+        130,
+        80
+      ]
+    },
+    {
+      "type": "arc",
+      "repeatImage": "assets/tile/floor2.png",
+      "gradient": "radial.center",
+      "gradientColor": "white",
+      "arcFrom": 1.5708,
+      "arcOval": true,
+      "rect": [
+        611,
+        136.81172,
+        130,
+        80
+      ]
+    }
+  ]
+}

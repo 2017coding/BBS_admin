@@ -1,0 +1,290 @@
+{
+  "background": "rgb(41,32,40)",
+  "dataBindings": [
+    {
+      "valueType": "String",
+      "name": "PVOutputPower",
+      "attr": "outputPower"
+    },
+    {
+      "valueType": "String",
+      "name": "PVResValue",
+      "attr": "rescourceValue"
+    },
+    {
+      "valueType": "String",
+      "name": "PVRadiDayGen",
+      "attr": "radiDayGen"
+    },
+    {
+      "valueType": "String",
+      "name": "PVDayGen",
+      "attr": "dayGen"
+    },
+    {
+      "valueType": "String",
+      "name": "PVRefreshTime",
+      "attr": "lastRefreshTime"
+    },
+    {
+      "valueType": "String",
+      "name": "PVCapacity",
+      "attr": "capacity"
+    }
+  ],
+  "width": 480,
+  "height": 100,
+  "fitSize": false,
+  "comps": [
+    {
+      "type": "text",
+      "text": "实时功率",
+      "color": "white",
+      "rect": [
+        10.360252532767909,
+        11.925160729975286,
+        79.14129957187549,
+        20.598231486722725
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "rgb(111,112,130)",
+      "borderColor": "#979797",
+      "gradientColor": "rgb(255,255,255)",
+      "dashPattern": [
+        16,
+        16
+      ],
+      "rect": [
+        10,
+        48,
+        160,
+        4
+      ]
+    },
+    {
+      "type": "rect",
+      "background": "#FCB32B",
+      "borderColor": "#979797",
+      "gradientColor": "rgb(255,255,255)",
+      "dashPattern": [
+        16,
+        16
+      ],
+      "rect": {
+        "func": "__ht__function(data, view) {\nvar outputPower = data.a('outputPower') || 0;\nvar capacity = data.a('capacity') || 21;\nvar width = 160 * outputPower / capacity;\nreturn [10,48,width,4]\n}",
+        "value": [
+          10,
+          48,
+          84.69266210604121,
+          4
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "text": "装机容量",
+      "align": "right",
+      "color": "white",
+      "rect": [
+        95.53668673282587,
+        11.925160729975286,
+        79.14129957187549,
+        20.598231486722725
+      ]
+    },
+    {
+      "type": "text",
+      "text": "瞬时辐射",
+      "align": "center",
+      "color": "white",
+      "rect": [
+        214.19677297734114,
+        9.925160729975286,
+        79.14129957187549,
+        20.598231486722725
+      ]
+    },
+    {
+      "type": "text",
+      "text": "日曝辐值",
+      "align": "center",
+      "color": "white",
+      "rect": [
+        301.4693235366229,
+        9.925160729975286,
+        79.14129957187549,
+        20.598231486722725
+      ]
+    },
+    {
+      "type": "text",
+      "text": "日发电量",
+      "align": "center",
+      "color": "white",
+      "rect": [
+        388.7418740959046,
+        10.61636737907379,
+        79.14129957187549,
+        20.598231486722725
+      ]
+    },
+    {
+      "type": "text",
+      "text": {
+        "func": "attr@outputPower",
+        "value": "10.51"
+      },
+      "align": "right",
+      "color": "#FCB32B",
+      "font": "15px arial, sans-serif",
+      "rect": [
+        7.828879881648636,
+        64.80442838381714,
+        43.546783728569174,
+        20.59823148672274
+      ]
+    },
+    {
+      "type": "text",
+      "text": {
+        "func": "attr@capacity",
+        "value": "21.00"
+      },
+      "align": "right",
+      "color": "rgb(150,150,150)",
+      "font": "15px arial, sans-serif",
+      "rect": [
+        103.37983510008473,
+        64.80442838381714,
+        46.567970231030685,
+        20.59823148672274
+      ]
+    },
+    {
+      "type": "text",
+      "text": "MW",
+      "color": "rgb(150,150,150)",
+      "font": "11px arial, sans-serif",
+      "rect": [
+        152.1537577148307,
+        64.80442838381714,
+        24.94011418073859,
+        20.59823148672274
+      ]
+    },
+    {
+      "type": "text",
+      "text": "MW",
+      "color": "rgb(150,150,150)",
+      "font": "11px arial, sans-serif",
+      "rect": [
+        53.45646102408031,
+        64.80442838381714,
+        24.94011418073859,
+        20.59823148672274
+      ]
+    },
+    {
+      "type": "text",
+      "text": {
+        "func": "attr@rescourceValue",
+        "value": "798.3"
+      },
+      "align": "right",
+      "color": "#FCB32B",
+      "font": "15px arial, sans-serif",
+      "rect": [
+        199.6019150328353,
+        37.37702226176356,
+        52.2559875072103,
+        20.59823148672273
+      ]
+    },
+    {
+      "type": "text",
+      "text": "W/m2",
+      "color": "rgb(150,150,150)",
+      "font": "11px arial, sans-serif",
+      "rect": [
+        254.53828952616863,
+        37.37702226176356,
+        30.469767373526537,
+        20.59823148672274
+      ]
+    },
+    {
+      "type": "text",
+      "text": {
+        "func": "attr@radiDayGen",
+        "value": "3.7"
+      },
+      "align": "right",
+      "color": "#FCB32B",
+      "font": "15px arial, sans-serif",
+      "rect": [
+        285.38515946834514,
+        37.37702226176356,
+        52.2559875072103,
+        20.59823148672273
+      ]
+    },
+    {
+      "type": "text",
+      "text": "MJ/m2",
+      "color": "rgb(150,150,150)",
+      "font": "11px arial, sans-serif",
+      "rect": [
+        340.32153396167854,
+        37.37702226176356,
+        35.308213917215994,
+        20.59823148672274
+      ]
+    },
+    {
+      "type": "text",
+      "text": {
+        "func": "attr@dayGen",
+        "value": "1.66"
+      },
+      "align": "right",
+      "color": "#FCB32B",
+      "font": "15px arial, sans-serif",
+      "rect": [
+        373.86554376196943,
+        37.37702226176356,
+        52.2559875072103,
+        20.59823148672273
+      ]
+    },
+    {
+      "type": "text",
+      "text": "万kwh",
+      "color": "rgb(150,150,150)",
+      "font": "11px arial, sans-serif",
+      "rect": [
+        429.0761512737494,
+        37.37702226176356,
+        35.308213917215994,
+        20.59823148672274
+      ]
+    },
+    {
+      "type": "text",
+      "text": {
+        "func": "attr@lastRefreshTime",
+        "value": "更新时间：12/24/2016, 12:27:09 PM"
+      },
+      "align": "right",
+      "color": "rgb(150,150,150)",
+      "font": "11px arial, sans-serif",
+      "rect": [
+        265.70497252492055,
+        62.435487379529235,
+        198.4860439952551,
+        30
+      ]
+    }
+  ]
+}

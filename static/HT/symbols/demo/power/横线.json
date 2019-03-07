@@ -1,0 +1,21 @@
+{
+  "width": 100,
+  "height": 10,
+  "comps": [
+    {
+      "type": "shape",
+      "borderWidth": 10,
+      "borderColor": {
+        "func": "attr@lineColor",
+        "value": "rgb(250,0,0)"
+      },
+      "shadowColor": "#1ABC9C",
+      "points": [
+        0,
+        5,
+        100,
+        5
+      ]
+    }
+  ]
+}

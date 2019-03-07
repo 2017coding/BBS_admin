@@ -1,0 +1,239 @@
+{
+  "background": "rgb(0,0,0)",
+  "width": 1110,
+  "height": 817,
+  "fitSize": true,
+  "comps": [
+    {
+      "type": "shape",
+      "background": "rgba(1,13,36,0.6)",
+      "borderColor": "#979797",
+      "scaleX": 0.8,
+      "scaleY": 0.8,
+      "points": [
+        -136.00067,
+        -3.02124,
+        1242.68727,
+        -3.02124,
+        1242.68727,
+        76.35588,
+        -136.00067,
+        76.35588,
+        -136.00067,
+        -3.02124
+      ]
+    },
+    {
+      "type": "components/table/table.json",
+      "rect": [
+        0,
+        0,
+        1107.01791,
+        810.24365
+      ],
+      "borderColor": null,
+      "background": null,
+      "rowCount": 12,
+      "columnCount": 4,
+      "rowLineColor": "rgb(49,101,204)",
+      "columnLineColor": "rgb(40,58,92)",
+      "rowLineWidth": 2
+    },
+    {
+      "type": "text",
+      "text": "文字文字",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        280.45893,
+        0.00066,
+        279.40147,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "文字文字",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        560.9177,
+        0.00066,
+        279.40147,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "文字文字",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        841.37647,
+        0.00066,
+        279.40147,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        68.41882,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        406.34643,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        136.00434,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        473.93195,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        271.17539,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        541.51748,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        609.103,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        676.68852,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        338.76091,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "1",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        4.00388,
+        203.58987,
+        275.39775,
+        69.31605
+      ]
+    },
+    {
+      "type": "text",
+      "text": "文字文字",
+      "align": "center",
+      "color": "#ffffff",
+      "font": "24px sans-serif",
+      "rotation": 6.28319,
+      "rect": [
+        0.00016,
+        0.00066,
+        279.40147,
+        69.31605
+      ]
+    }
+  ]
+}
