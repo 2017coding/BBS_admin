@@ -33,13 +33,12 @@ export const constantRouterMap = [
     meta: {title: '登录', icon: ''}
   },
   // 默认进入的页面
-  // {
-  //   path: '/',
-  //   component: horizontal,
-  //   redirect: '/P01/P0101A',
-  //   hidden: true,
-  //   type: 'platform'
-  // },
+  {
+    path: '/',
+    component: () => import('@/views/home/index'),
+    hidden: true,
+    type: 'platform'
+  },
   // 错误页面定义
   {
     path: '/401',

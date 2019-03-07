@@ -1,35 +1,41 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="formInfo.data" :rules="formInfo.rules" class="login-form">
-      <div class="title">
-        <!-- <img :src="require('@/assets/image/logo.png')" alt="logo" class="logo"> -->
-        <p class="name">{{$config.SYSTEMNAME}}</p>
-      </div>
-      <el-form-item prop="username">
-        <el-input
-          type="text"
-          prefix-icon="el-icon-people_fill"
-          v-model.trim="formInfo.data.username"
-          @keyup.enter.native="_handleLogin()"
-          placeholder="请输入账号">
-        </el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input
-          type="password"
-          prefix-icon="el-icon-lock_fill"
-          v-model.trim="formInfo.data.password"
-          @keyup.enter.native="_handleLogin()"
-          placeholder="请输入密码">
-        </el-input>
-      </el-form-item>
-      <div class="remember">
-        <el-checkbox v-model="formInfo.remember" style="color: rgb(210, 215, 220)">记住密码</el-checkbox>
-      </div>
-      <el-form-item>
-        <el-button :loading="buttonInfo.loading" type="primary" class="login-bt" @click="_handleLogin()">登录</el-button>
-      </el-form-item>
-    </el-form>
+    <div class="ground-glass"></div>
+    <div class="content">
+      <el-form ref="form" :model="formInfo.data" :rules="formInfo.rules" class="login-form">
+        <div class="title">
+          <p class="logo">
+            <span class="LLL">LLL</span>
+            <span class="yh">yh</span>
+          </p>
+          <p class="name">{{$config.SYSTEMNAME}}</p>
+        </div>
+        <el-form-item prop="username">
+          <el-input
+            type="text"
+            prefix-icon="el-icon-people_fill"
+            v-model.trim="formInfo.data.username"
+            @keyup.enter.native="_handleLogin()"
+            placeholder="请输入账号">
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            type="password"
+            prefix-icon="el-icon-lock_fill"
+            v-model.trim="formInfo.data.password"
+            @keyup.enter.native="_handleLogin()"
+            placeholder="请输入密码">
+          </el-input>
+        </el-form-item>
+        <div class="remember">
+          <el-checkbox v-model="formInfo.remember" style="color: rgb(100, 100, 100)">记住密码</el-checkbox>
+        </div>
+        <el-form-item>
+          <el-button :loading="buttonInfo.loading" type="primary" class="login-bt" @click="_handleLogin()">登录</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -91,16 +97,70 @@
 @import '@/common/style/mixin.scss';
   .app-container{
     @include center('vertical', true);
-    background: rgb(100, 100, 100);
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+    .ground-glass{
+      background: url('./image/bg.jpg') no-repeat;
+      background-size: cover;
+      background-position: center center;
+      position: absolute;
+      top: 0;
+      right: 0; 
+      left: 0;
+      bottom: 0;
+      // filter: blur(5px);
+      z-index: -1;
+    }
+    .content{
+      @include center('vertical', true);
+      position: relative;
+      padding: 50px;
+      width: 30%;
+      min-width: 500px;
+      height: 100%;
+      background: rgba(255, 255, 255, .5);
+      overflow: hidden;
+      &::after{
+        content: '';
+        background: url('./image/bg.jpg') no-repeat fixed;
+        background-size: cover;
+        background-position: center center;
+        position: absolute;
+        top: 0;
+        right: 0; 
+        left: 0;
+        bottom: 0;
+        filter: blur(5px);
+        z-index: -1;
+      }
+    }
     .login-form{
-      width: 50%;
-      max-width: 600px;
+      width: 100%;
+      // margin-bottom: 40px;
       .title{
         @include center('vertical', true);
-        padding: 20px 0;
+        align-items: flex-end;
+        margin-bottom: 60px;
+        .logo{
+          font-size: 0;
+          cursor: pointer;
+          padding-right: 2px;
+          .LLL, .yh{
+            font-weight: bold;
+            font-size: 54px;
+          }
+          .LLL{
+            color: rgb(100, 100, 100);
+          }
+          .yh{
+            color: $g_theme;
+          }
+        }
         .name{
-          font-size: 32px;
-          font-weight: bold;
+          font-size: 30px;
+          // font-weight: bold;
+          letter-spacing: 2px;
           color: $g_theme;
         }
       }
@@ -109,6 +169,8 @@
       }
       .login-bt{
         width: 100%;
+        // font-weight: bold;
+        letter-spacing: 10px;
       }
     }
   }
