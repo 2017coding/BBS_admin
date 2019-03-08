@@ -19,9 +19,9 @@ Vue.use(Router)
  */
 
 /**
- * 静态路由，不需要权限，所有人都有
+ * 基础路由
  */
-export const constantRouterMap = [
+export const baseRouter = [
   // 登录页面
   {
     path: '/login',
@@ -222,5 +222,5 @@ export const constantRouterMap = [
 export default new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap
+  routes: baseRouter
 })

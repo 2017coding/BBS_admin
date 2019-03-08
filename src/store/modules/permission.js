@@ -1,10 +1,10 @@
-import { constantRouterMap } from '@/router'
+import { baseRouter } from '@/router'
 
 const permission = {
   namespaced: true,
   state: {
     // 静态路由
-    routers: constantRouterMap,
+    routers: baseRouter,
     // 动态添加的路由
     addRouters: []
   },
@@ -12,7 +12,7 @@ const permission = {
     // 设置路由
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
-      state.routers = constantRouterMap.concat(routers)
+      state.routers = baseRouter.concat(routers)
     }
   },
   actions: {
