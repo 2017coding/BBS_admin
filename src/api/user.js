@@ -1,41 +1,37 @@
 import request from '@/common/js/request'
 
-// 平台用户获取平台级目录和项目级目录
-export function getPlatformMenusApi (params) {
+// 注册
+export function registeredApi (data) {
   return request({
-    // url: 'static/json/menuList.json',
-    url: '/api/Home/GetPlatformMenu',
-    method: 'get',
-    params
-  })
-}
-
-// 企业用户获取项目级目录
-export function getProjectMenusApi (params) {
-  return request({
-    // url: 'static/json/menuList1.json',
-    url: '/api/SHome/GetProjectMenu',
-    method: 'get',
-    params
-  })
-}
-
-// 更新用户信息
-export function updateUserInfoApi (data) {
-  return request({
-    // url: 'static/json/menuList1.json',
-    url: '/api/Login/UpdataUser',
+    url: '/api/user/registered',
     method: 'post',
     data
   })
 }
 
-// 更新用户密码
-export function updateUserPwdApi (data) {
+// 登陆
+export function loginApi (data) {
   return request({
-    // url: 'static/json/menuList1.json',
-    url: '/api/Login/UpdataPwd',
+    url: '/api/user/login',
     method: 'post',
     data
+  })
+}
+
+// 得到用户信息
+export function getUserInfoApi (params) {
+  return request({
+    url: '/api/user/GetUserinfo',
+    method: 'get',
+    params
+  })
+}
+
+// 退出登录
+export function loginOutApi (params) {
+  return request({
+    url: '/api/user/WriteLog',
+    method: 'get',
+    params
   })
 }

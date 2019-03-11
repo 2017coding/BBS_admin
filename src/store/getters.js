@@ -1,12 +1,13 @@
 const getters = {
   // 用户模块
-  sign: state => state.user.sign,
+  token: state => state.user.token,
   userInfo: state => state.user.userInfo,
   // app模块
-  lock: state => state.app.lock,
-  lockStatus: state => state.app.lockStatus,
-  loadingStatus: state => state.app.loadingStatus,
-  routerType: state => state.app.routerType,
-  projectInfo: state => state.app.projectInfo
+  sidebar: state => state.app.sidebar,
+  // tags模块
+  visitedViews: state => state.tagsView.visitedViews,
+  cachedViews: state => state.tagsView.cachedViews,
+  // 错误日志模块
+  errorLogs: state => state.errorLog.logs
 }
 export default getters

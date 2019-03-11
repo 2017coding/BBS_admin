@@ -1,7 +1,7 @@
 {
-  "name": "BEMS_Front",
+  "name": "BBS",
   "version": "1.0.0",
-  "description": "华力特能源管理云平台",
+  "description": "后台管理系统",
   "author": "farad",
   "private": true,
   "scripts": {

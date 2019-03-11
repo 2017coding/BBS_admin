@@ -45,7 +45,7 @@
 }
 
 // 伪元素0.5边框实现
-@mixin border-1px($directional: 'bottom', $color: #999999) {
+@mixin border-1px($directional: 'bottom', $color: rgb(230, 230, 230)) {
   position: absolute;
   content: "";
   background: $color;

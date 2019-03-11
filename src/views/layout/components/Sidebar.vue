@@ -1,29 +1,36 @@
 <template>
   <el-menu
     :default-active="$route.path"
-    :collapse="true"
-    mode="vertical">
-    <sidebar-item v-for="route in baseRouter" :key="route.path" :data="route"/>
+    :collapse="sidebar.opened"
+    :background-color="''"
+    :text-color="baseScss.textColor"
+    :active-text-color="baseScss.theme"
+    mode="vertical"
+    unique-opened>
+    <sidebar-item v-for="route in baseRouter" :key="route.path" :item="route"/>
   </el-menu>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { baseRouter } from '@/router'
-// import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
-// import variables from '@/styles/variables.scss'
+import baseScss from '@/common/style/base.scss'
 
 export default {
   components: { SidebarItem },
   computed: {
+    ...mapGetters([
+      'sidebar'
+    ])
   },
   data () {
     return {
+      baseScss,
       baseRouter
     }
   },
   mounted () {
-    console.log(this.baseRouter)
   }
 }
 </script>

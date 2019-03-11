@@ -34,13 +34,15 @@ export const baseRouter = [
   {
     path: '',
     component: Layout,
-    redirect: '/home',
+    redirect: '/',
+    meta: {title: '首页', icon: 'homepage'},
     children: [
       {
-        path: '/home',
+        path: '/',
         component: () => import('@/views/home/index'),
         name: 'home',
-        meta: {title: '首页', icon: ''}
+        meta: {title: '首页', icon: 'el-icon-homepage'},
+        children: []
       }
     ]
   },
@@ -49,36 +51,42 @@ export const baseRouter = [
     path: '/B04',
     component: Layout,
     redirect: '/B04/B0401',
+    meta: {title: '运维中心', icon: 'el-icon-addressbook'},
     children: [
       {
         path: '/B0401',
         component: () => import('@/views/B04/B0401/index'),
         name: 'B0401',
-        meta: {title: '问答管理', icon: ''}
+        meta: {title: '问答管理', icon: ''},
+        children: []
       },
       {
         path: '/B0402',
         component: () => import('@/views/B04/B0402/index'),
         name: 'B0402',
-        meta: {title: '专栏管理', icon: ''}
+        meta: {title: '专栏管理', icon: ''},
+        children: []
       },
       {
         path: '/B0403',
         component: () => import('@/views/B04/B0403/index'),
         name: 'B0403',
-        meta: {title: '文章管理', icon: ''}
+        meta: {title: '文章管理', icon: ''},
+        children: []
       },
       {
         path: '/B0404',
         component: () => import('@/views/B04/B0404/index'),
         name: 'B0404',
-        meta: {title: '讲堂管理', icon: ''}
+        meta: {title: '讲堂管理', icon: ''},
+        children: []
       },
       {
         path: '/B0405',
         component: () => import('@/views/B04/B0405/index'),
         name: 'B0405',
-        meta: {title: '活动管理', icon: ''}
+        meta: {title: '活动管理', icon: ''},
+        children: []
       }
     ]
   },
@@ -87,18 +95,21 @@ export const baseRouter = [
     path: '/B03',
     component: Layout,
     redirect: '/B03/B0301',
+    meta: {title: '文件库', icon: 'el-icon-workbench'},
     children: [
       {
         path: '/B0301',
         component: () => import('@/views/B03/B0301/index'),
         name: 'B0301',
-        meta: {title: '图片管理', icon: ''}
+        meta: {title: '图片管理', icon: ''},
+        children: []
       },
       {
         path: '/B0302',
         component: () => import('@/views/B03/B0302/index'),
         name: 'B0302',
-        meta: {title: '文件管理', icon: ''}
+        meta: {title: '文件管理', icon: ''},
+        children: []
       }
     ]
   },
@@ -107,54 +118,63 @@ export const baseRouter = [
     path: '/B02',
     component: Layout,
     redirect: '/B02/B0201',
+    meta: {title: '论坛配置', icon: 'el-icon-label'},
     children: [
       {
         path: '/B0201',
         component: () => import('@/views/B02/B0201/index'),
         name: 'B0201',
-        meta: {title: '首页轮播', icon: ''}
+        meta: {title: '首页轮播', icon: ''},
+        children: []
       },
       {
         path: '/B0202',
         component: () => import('@/views/B02/B0202/index'),
         name: 'B0202',
-        meta: {title: '技术频道', icon: ''}
+        meta: {title: '技术频道', icon: ''},
+        children: []
       },
       {
         path: '/B0203',
         component: () => import('@/views/B02/B0203/index'),
         name: 'B0203',
-        meta: {title: '提示语', icon: ''}
+        meta: {title: '提示语', icon: ''},
+        children: []
       },
       {
         path: '/B0204',
         component: () => import('@/views/B02/B0204/index'),
         name: 'B0204',
-        meta: {title: '广告位', icon: ''}
+        meta: {title: '广告位', icon: ''},
+        children: []
       },
       {
         path: '/B0205',
         component: () => import('@/views/B02/B0205/index'),
         name: 'B0205',
-        meta: {title: '讲座推荐', icon: ''}
+        meta: {title: '讲座推荐', icon: ''},
+        children: []
       },
       {
         path: '/B0206',
         component: () => import('@/views/B02/B0206/index'),
         name: 'B0206',
-        meta: {title: '活动推荐', icon: ''}
+        meta: {title: '活动推荐', icon: ''},
+        children: []
       },
       {
         path: '/B0207',
         component: () => import('@/views/B02/B0207/index'),
         name: 'B0207',
-        meta: {title: '标签类型管理', icon: ''}
+        meta: {title: '标签类型管理', icon: ''},
+        children: []
       },
       {
         path: '/B0208',
         component: () => import('@/views/B02/B0208/index'),
         name: 'B0208',
-        meta: {title: '标签管理', icon: ''}
+        meta: {title: '标签管理', icon: ''},
+        children: []
       }
     ]
   },
@@ -163,42 +183,49 @@ export const baseRouter = [
     path: '/B01',
     component: Layout,
     redirect: '/B01/B0101',
+    meta: {title: '系统管理', icon: 'el-icon-setup'},
     children: [
       {
         path: '/B0101',
         component: () => import('@/views/B01/B0101/index'),
         name: 'B0101',
-        meta: {title: '用户管理', icon: ''}
+        meta: {title: '用户管理', icon: ''},
+        children: []
       },
       {
         path: '/B0102',
         component: () => import('@/views/B01/B0102/index'),
         name: 'B0102',
-        meta: {title: '角色管理', icon: ''}
+        meta: {title: '角色管理', icon: ''},
+        children: []
       },
       {
         path: '/B0103',
         component: () => import('@/views/B01/B0103/index'),
         name: 'B0103',
-        meta: {title: '菜单管理', icon: ''}
+        meta: {title: '菜单管理', icon: ''},
+        children: []
       },
       {
         path: '/B0104',
         component: () => import('@/views/B01/B0104/index'),
         name: 'B0104',
-        meta: {title: '区域管理', icon: ''}
+        meta: {title: '区域管理', icon: ''},
+        children: []
       },
       {
         path: '/B0105',
         component: () => import('@/views/B01/B0105/index'),
         name: 'B0105',
-        meta: {title: '字典管理', icon: ''}
+        meta: {title: '字典管理', icon: ''},
+        children: []
       },
       {
         path: '/B0106',
         component: () => import('@/views/B01/B0106/index'),
         name: 'B0106',
-        meta: {title: '系统日志', icon: ''}
+        meta: {title: '系统日志', icon: ''},
+        children: []
       }
     ]
   },

@@ -1,1 +1,11 @@
 // 覆盖element-ui
+.app-wrapper{
+  .el-menu--collapse {
+    width: 60px!important;
+    .el-submenu__title{
+      span, .el-submenu__icon-arrow{
+        display: none;
+      }
+    }
+  }
+}

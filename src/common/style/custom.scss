@@ -10,7 +10,7 @@ html,
 body {
   height: 100%;
   font-size: 62.5%;
-  overflow: auto;
+  overflow: hidden;
   background-color: #fbf9fe;
   -webkit-text-size-adjust: none; // 全局字体可设置小于12px
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 禁止ios点击元素的背景
