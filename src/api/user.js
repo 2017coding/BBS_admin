@@ -18,8 +18,34 @@ export function loginApi (data) {
   })
 }
 
-// 得到用户信息
-export function getUserInfoApi (params) {
+// 退出登录
+export function loginOutApi (params) {
+  return request({
+    url: '/api/user/WriteLog',
+    method: 'get',
+    params
+  })
+}
+
+// 编辑
+export function updateApi (data) {
+  return request({
+    url: '/api/user/update',
+    method: 'put',
+    data
+  })
+}
+
+// 删除
+export function deleteApi (id) {
+  return request({
+    url: `/api/user/delete/${id}`,
+    method: 'delete'
+  })
+}
+
+// 得到单条数据
+export function getRowApi (params) {
   return request({
     url: '/api/user/GetUserinfo',
     method: 'get',
@@ -27,10 +53,10 @@ export function getUserInfoApi (params) {
   })
 }
 
-// 退出登录
-export function loginOutApi (params) {
+// 获取列表
+export function getListApi (params) {
   return request({
-    url: '/api/user/WriteLog',
+    url: '/api/user/getList',
     method: 'get',
     params
   })

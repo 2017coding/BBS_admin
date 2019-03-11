@@ -106,16 +106,17 @@ export default {
             _setCookie('token', res.token)
             // 记住用户信息
             this.$store.dispatch('user/setUserInfo', res.content.data).then(() => {
-              // this.$router.push('/')
+              this.$router.push('/')
+            })
+          } else {
+            this.$message({
+              showClose: true,
+              message: res.message,
+              type: res.success ? 'success' : 'error',
+              duration: 3500
             })
           }
           this.buttonInfo.btLoading = false
-          this.$message({
-            showClose: true,
-            message: res.message,
-            type: res.success ? 'success' : 'error',
-            duration: 3500
-          })
         }).catch(() => {
           this.buttonInfo.btLoading = false
         })

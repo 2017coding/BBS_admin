@@ -9,7 +9,7 @@
       <div id="tp-weather-widget" style="padding: 10px"></div>
       <el-dropdown @command="_handleCommand">
         <span class="el-dropdown-link">
-          用户名<i class="el-icon-arrow-down el-icon--right"></i>
+          {{userInfo.name}}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-for="(item, index) in dropdownList" :key="index" :command="item.command">{{item.key}}</el-dropdown-item>
@@ -38,7 +38,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'sidebar'
+      'sidebar',
+      'userInfo'
     ])
   },
   mounted () {
