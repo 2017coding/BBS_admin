@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'chart',
   props: {
@@ -95,6 +97,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      'sidebar'
+    ])
   },
   mounted () {
     this.init()
@@ -108,6 +113,14 @@ export default {
     chartData (val) {
       this.removeChart('reset')
       this.initData()
+    },
+    // 左侧菜单变化触发
+    'sidebar.opened' () {
+      setTimeout(() => {
+        if (this.chart) {
+          this.chart.resize()
+        }
+      }, 300)
     }
   },
   methods: {
@@ -189,7 +202,7 @@ export default {
           axisPointer: {
             type: 'cross',
             label: {
-              backgroundColor: '#00374F'
+              backgroundColor: 'red'
             }
           }
         },

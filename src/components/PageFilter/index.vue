@@ -1,7 +1,7 @@
 <template>
   <div class="page-filter">
     <div class="filter-item" v-for="(item, index) in filterList" :key="index">
-      <label class="filter-label" v-if="item.type !== 'button'">{{item.key}}</label>
+      <!-- <label class="filter-label" v-if="item.type !== 'button'">{{item.key}}</label> -->
       <!-- 输入框 -->
       <el-input
         :class="`filter-${item.type}`"
@@ -50,6 +50,7 @@
       <el-button
         :class="`filter-${item.type}`"
         v-else-if="item.type === 'button'"
+        v-waves
         :type="item.btType"
         :icon="item.icon"
         @click="handleEvent(item.event)">{{item.key}}</el-button>

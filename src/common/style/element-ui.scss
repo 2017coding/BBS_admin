@@ -1,5 +1,8 @@
 // 覆盖element-ui
 .app-wrapper{
+  .el-menu{
+    // background:	#FFF5EE;
+  }
   // 菜单收起时的样式
   .el-menu--collapse {
     width: 60px!important;
@@ -12,5 +15,17 @@
   // 设置表格高度为自适应，当未达到最大高度时为自适应高度
   .el-table{
     height: auto!important;
+  }
+  .el-input__inner{
+    height: 36px;
+  }
+  .el-button{
+    padding: 10px 20px;
+    &:hover, &:focus{
+      color: $g_theme;
+      border-color: $g_theme;
+      background-color: rgb(245, 245, 245);
+      transform: all .3s linear;
+    }
   }
 }

@@ -12,13 +12,14 @@ import 'normalize.css/normalize.css' // 样式初始化
 import ElementUI from 'element-ui'
 import '@/common/style/index.scss' // 自定义样式
 // import 'element-ui/lib/theme-chalk/index.css'
-
+import vueWaves from '@/directive/waves/index'// 水波纹指令
 import '@/common/config/errorLog' // 错误日志
 import '@/common/config/permission' // 路由动态配置
 import commonPlug from '@/common/js/commonPlug' // 自定义插件
 
 Vue.use(commonPlug)
 Vue.use(ElementUI)
+Vue.use(vueWaves)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
