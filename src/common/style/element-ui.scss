@@ -1,5 +1,6 @@
 // 覆盖element-ui
 .app-wrapper{
+  // 菜单收起时的样式
   .el-menu--collapse {
     width: 60px!important;
     .el-submenu__title{
@@ -7,5 +8,9 @@
         display: none;
       }
     }
+  }
+  // 设置表格高度为自适应，当未达到最大高度时为自适应高度
+  .el-table{
+    height: auto!important;
   }
 }

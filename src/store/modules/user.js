@@ -1,6 +1,4 @@
 import {
-  _getCookie,
-  _removeCookie,
   _setSessionStore,
   _getSessionStore,
   _removeSessionStore
@@ -9,7 +7,7 @@ import {
 const user = {
   namespaced: true,
   state: {
-    token: _getCookie('token'),
+    token: _getSessionStore('token'),
     userInfo: _getSessionStore('userInfo', 'JSONStr')
   },
   mutations: {
@@ -31,7 +29,7 @@ const user = {
     // 退出登录,将用户数据清除
     loginOut ({commit, dispatch}) {
       return new Promise(resolve => {
-        _removeCookie('token')
+        _removeSessionStore('token')
         commit('SET_USERINFO', '')
         _removeSessionStore('userInfo')
         // // 清除app模块中的相关信息

@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div class="navbar-container">
     <div class="left">
       <i :class="sidebar.opened ? 'el-icon-more toggle open' : 'el-icon-more toggle close'" @click="_handleToggle"></i>
       <breadcrumb class="breadcrumb-container"/>
@@ -22,6 +22,26 @@
 <script>
 import { mapGetters } from 'vuex'
 import Breadcrumb from './Breadcrumb' // 导航
+
+// 显示天气的方法， 要在这个位置初始化
+(function (T, h, i, n, k, P, a, g, e) {
+  g = function () {
+    P = h.createElement(i)
+    a = h.getElementsByTagName(i)[0]
+    P.src = k
+    P.charset = 'utf-8'
+    P.async = 1
+    a.parentNode.insertBefore(P, a)
+  }
+  T['ThinkPageWeatherWidgetObject'] = n
+  T[n] || (T[n] = function () { (T[n].q = T[n].q || []).push(arguments) })
+  T[n].l = +new Date()
+  if (T.attachEvent) {
+    T.attachEvent('onload', g)
+  } else {
+    T.addEventListener('load', g, false)
+  }
+}(window, document, 'script', 'tpwidget', '//widget.seniverse.com/widget/chameleon.js'))
 
 export default {
   components: {
@@ -48,25 +68,6 @@ export default {
   methods: {
     // 使用天气
     _initWeather () {
-      // 显示天气的方法， 要在这个位置初始化
-      (function (T, h, i, n, k, P, a, g, e) {
-        g = function () {
-          P = h.createElement(i)
-          a = h.getElementsByTagName(i)[0]
-          P.src = k
-          P.charset = 'utf-8'
-          P.async = 1
-          a.parentNode.insertBefore(P, a)
-        }
-        T['ThinkPageWeatherWidgetObject'] = n
-        T[n] || (T[n] = function () { (T[n].q = T[n].q || []).push(arguments) })
-        T[n].l = +new Date()
-        if (T.attachEvent) {
-          T.attachEvent('onload', g)
-        } else {
-          T.addEventListener('load', g, false)
-        }
-      }(window, document, 'script', 'tpwidget', '//widget.seniverse.com/widget/chameleon.js'))
       // 方法存在开始加载
       if (typeof tpwidget === 'function') {
         tpwidget('init', {
@@ -110,7 +111,7 @@ export default {
 <style scoped lang="scss">
 @import '@/common/style/base.scss';
 @import '@/common/style/mixin.scss';
-  .navbar{
+  .navbar-container{
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -131,7 +132,7 @@ export default {
         color: rgb(130, 130, 130);
         font-size: 24px;
         cursor: pointer;
-        transition: transform .3s ease-in-out;
+        transition: transform .3s linear;
       }
       .open{
         transform: rotate(0deg);

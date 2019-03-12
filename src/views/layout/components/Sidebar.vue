@@ -1,7 +1,7 @@
 <template>
   <el-menu
     :default-active="$route.path"
-    :collapse="sidebar.opened"
+    :collapse="!sidebar.opened"
     :background-color="''"
     :text-color="baseScss.textColor"
     :active-text-color="baseScss.theme"
@@ -37,4 +37,3 @@ export default {
 
 <style lang="scss" scoped>
 </style>
-

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import {_setCookie} from '@/common/js/storage'
+import {_setSessionStore} from '@/common/js/storage'
 import { loginApi } from '@/api/user'
 export default {
   data () {
@@ -47,8 +47,8 @@ export default {
         remember: false, // 记住密码
         // 表单参数
         data: {
-          account: '13798313747',
-          password: 'As123456'
+          account: 'test',
+          password: '123456'
         },
         // 验证规则
         rules: {
@@ -88,8 +88,8 @@ export default {
         data.account = localStorage.getItem('account')
         data.password = localStorage.getItem('password')
       } else {
-        data.account = ''
-        data.password = ''
+        // data.account = ''
+        // data.password = ''
         localStorage.removeItem('remember')
         localStorage.removeItem('account')
         localStorage.removeItem('password')
@@ -103,7 +103,7 @@ export default {
             // 登录成功后，对账号密码的操作
             this._initRemember(this.formInfo.remember)
             // 记住cookie
-            _setCookie('token', res.token)
+            _setSessionStore('token', res.token)
             // 记住用户信息
             this.$store.dispatch('user/setUserInfo', res.content.data).then(() => {
               this.$router.push('/')

@@ -219,6 +219,7 @@ export default {
    * @param {String} staticName 属性不存在时使用的值
    */
   useWhichData (obj, key, staticName) {
+    console.log(obj)
     if (obj && obj[key]) {
       return obj[key]
     } else {

@@ -10,15 +10,14 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      '/api': {
-        target: 'http://www.lyh.red:1313',
-        // target: 'http://www.faradems.com',
-        pathRewrite: {
-          '^/api': '/api'
-        }
-      }
-    },
+    // proxyTable: {
+    //   '/api': {
+    //     target: 'https://www.lyh.red',
+    //     pathRewrite: {
+    //       '^/api': '/api'
+    //     }
+    //   }
+    // },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -53,10 +52,10 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../admin/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../admin'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
 
