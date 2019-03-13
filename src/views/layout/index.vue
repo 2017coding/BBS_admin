@@ -4,10 +4,12 @@
       <Sidebar class="sidebar-container" v-show="!fullScreen"></Sidebar>
     </transition>
     <div class="main-container">
-      <transition-group name="el-fade-in-linear">
-        <navbar v-show="!fullScreen" :key="'navbar'" />
-        <tags-view v-show="!fullScreen" :key="'tags-view'" />
-      </transition-group>
+      <transition name="el-fade-in-linear">
+        <div style="position: relative; z-index: 99">
+          <navbar v-show="!fullScreen" />
+          <tags-view v-show="!fullScreen"/>
+        </div>
+      </transition>
       <app-main/>
     </div>
   </div>

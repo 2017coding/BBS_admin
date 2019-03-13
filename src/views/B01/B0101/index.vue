@@ -42,6 +42,8 @@ export default {
         {type: 'button', key: '搜索', btType: 'primary', icon: 'el-icon-search'}
       ]
     }
+  },
+  methods: {
   }
 }
 </script>

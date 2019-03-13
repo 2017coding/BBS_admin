@@ -46,7 +46,7 @@ export default {
           let arr = [[], [], [], [], [], [], []]
           arr.forEach((item, index) => {
             for (let i = 0, len = 24; i < len; i++) {
-              let max = 50, min = 1
+              let max = 10, min = 1
               arr[index].push(Math.floor(Math.random() * (max - min + 1) + min))
             }
           })
@@ -55,7 +55,7 @@ export default {
       this.chartList = [
         {
           title: '近七天用户在线分析',
-          height: '95%',
+          height: '300px',
           chartType: 'line',
           chartData: {
             nameList: ['3/1', '3/2', '3/3', '3/4', '3/5', '3/6', '3/7'],
@@ -65,7 +65,7 @@ export default {
         },
         {
           title: '本年注册用户分析',
-          height: '100%',
+          height: '300px',
           chartType: 'bar',
           chartData: {
             nameList: ['今年年', '去年'],
@@ -85,7 +85,6 @@ export default {
     flex-direction: column;
     .charts{
       margin-bottom: 20px;
-      flex: 1;
       padding: 10px;
       box-shadow: 4px 4px 40px rgba(0, 0, 0, .1);
       border-color: rgba(0, 0, 0, .05);

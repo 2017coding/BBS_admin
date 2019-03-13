@@ -121,16 +121,10 @@ export default {
       this.visible = true
       this.selectedTag = tag
       // 不同布局下的位置
-      if (this.layoutType === 'horizontal') {
-        this.left = e.clientX
-      } else if (this.layoutType === 'vertical') {
-        if (this.sidebar.opened) {
-          this.left = e.clientX - 60
-        } else {
-          this.left = e.clientX - 220
-        }
+      if (!this.sidebar.opened) {
+        this.left = e.clientX - 60
       } else {
-        this.left = e.clientX
+        this.left = e.clientX - 220
       }
       this.top = e.clientY + 10
     },
@@ -144,6 +138,8 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
  @import '@/common/style/base.scss';
 .tags-view-container {
+  // position: relative;
+  // z-index: 1;
   .tags-view-wrapper {
     background: #fff;
     height: 34px;

@@ -9,7 +9,9 @@
       <div id="tp-weather-widget" style="padding: 10px"></div>
       <el-dropdown @command="_handleCommand">
         <span class="el-dropdown-link">
-          {{userInfo.name}}<i class="el-icon-arrow-down el-icon--right"></i>
+          {{userInfo.name}}
+          <span class="avatar" :style="`background-image: url(${userInfo.avatar || 'https://www.lyh.red/image/b2.jpg'})`"></span>
+          <!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-for="(item, index) in dropdownList" :key="index" :command="item.command">{{item.key}}</el-dropdown-item>
@@ -145,6 +147,23 @@ export default {
       cursor: pointer;
       .tp-weather-widget{
         padding-right: 20px;
+      }
+      .el-dropdown-link{
+        display: flex;
+        align-items: center;
+        color: $g_theme;
+        padding-top: 3px;
+        font-size: 13px;
+      }
+      .avatar{
+        margin-left: 10px;
+        cursor: pointer;
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
       }
     }
   }

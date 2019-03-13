@@ -15,22 +15,24 @@ body {
   -webkit-text-size-adjust: none; // 全局字体可设置小于12px
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // 禁止ios点击元素的背景
 }
-
+.login-container{
+  height: 100%; // 继承父级高度
+}
 .main-container{
   display: flex;
   flex-direction: column;
   height: 100%; // 继承父级高度
   .app-main{
     flex: 1;
+    overflow: auto;
     .app-container{
-      height: 100%;
+      min-height: 100%;
     }
   }
 }
 
 .app-container{
   padding: 20px;
-  overflow: auto;
   .page-filter {
     padding-bottom: 5px;
     .filter-item {

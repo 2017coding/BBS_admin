@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="login-container">
     <div class="ground-glass"></div>
     <el-form ref="form" :model="formInfo.data" :rules="formInfo.rules" class="login-form">
       <div class="title">
@@ -129,7 +129,7 @@ export default {
 <style scoped lang="scss">
 @import '@/common/style/base.scss';
 @import '@/common/style/mixin.scss';
-  .app-container{
+  .login-container{
     @include center('vertical', true);
     position: relative;
     z-index: 1;
@@ -142,7 +142,7 @@ export default {
       right: 0;
       left: 0;
       bottom: 0;
-      filter: blur(5px);
+      // filter: blur(5px);
       z-index: -1;
     }
     .login-form{
@@ -165,7 +165,7 @@ export default {
         right: 0;
         left: 0;
         bottom: 0;
-        // filter: blur(5px);
+        filter: blur(5px);
         z-index: -1;
       }
       .title{
