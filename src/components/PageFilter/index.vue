@@ -10,13 +10,13 @@
         :disabled="item.disabled"
         :placeholder="getPlaceholder(item)"
         @focus="handleEvent(item.event)"
-        v-model="query[item.value]">
+        v-model="searchQuery[item.value]">
       </el-input>
       <!-- 选择框 -->
       <el-select
         :class="`filter-${item.type}`"
         v-if="item.type === 'select'"
-        v-model="query[item.value]"
+        v-model="searchQuery[item.value]"
         :disabled="item.disabled"
         @change="handleEvent(item.even)"
         :clearable="item.clearable"
@@ -28,7 +28,7 @@
       <el-time-select
         :class="`filter-${item.type}`"
         v-if="item.type === 'time'"
-        v-model="query[item.value]"
+        v-model="searchQuery[item.value]"
         :picker-options="item.TimePickerOptions"
         :clearable="item.clearable"
         :disabled="item.disabled"
@@ -38,7 +38,7 @@
       <el-date-picker
         :class="`filter-${item.type}`"
         v-if="item.type === 'date'"
-        v-model="query[item.value]"
+        v-model="searchQuery[item.value]"
         :picker-options="item.datePickerOptions || datePickerOptions"
         :type="item.dateType"
         :clearable="item.clearable"
@@ -53,7 +53,7 @@
         v-waves
         :type="item.btType"
         :icon="item.icon"
-        @click="handleEvent(item.event)">{{item.key}}</el-button>
+        @click="handleClickBt(item.event)">{{item.label}}</el-button>
     </div>
   </div>
 </template>
@@ -63,7 +63,10 @@ export default {
   name: 'PageFilter',
   props: {
     listTypeInfo: {
-      type: Array
+      type: Object,
+      default: () => {
+        return {}
+      }
     },
     filterList: {
       type: Array
@@ -80,25 +83,41 @@ export default {
           // 大于当前的时间都不能选 (+十分钟让点击此刻的时候可以选择到当前时间)
           return time.getTime() > +new Date() + 1000 * 600 * 1
         }
-      }
+      },
+      searchQuery: {}
     }
+  },
+  watch: {
+    searchQuery: {
+      handler: function (val) {
+        this.$emit('update:query', val)
+      },
+      deep: true // 深度监听
+    }
+  },
+  mounted () {
+    this.searchQuery = JSON.parse(JSON.stringify(this.query))
   },
   methods: {
     // 得到placeholder的显示
     getPlaceholder (row) {
       let placeholder
       if (row.type === 'input' || row.type === 'textarea') {
-        placeholder = '请输入' + row.key
+        placeholder = '请输入' + row.label
       } else if (row.type === 'select' || row.type === 'time' || row.type === 'date') {
-        placeholder = '请选择' + row.key
+        placeholder = '请选择' + row.label
       } else {
-        placeholder = row.key
+        placeholder = row.label
       }
       return placeholder
     },
     // 绑定的相关事件
     handleEvent (evnet) {
       this.$emit('handleEvent', evnet)
+    },
+    // 派发按钮点击事件
+    handleClickBt (event, data) {
+      this.$emit('handleClickBt', event, data)
     }
   }
 }

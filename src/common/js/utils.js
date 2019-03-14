@@ -12,6 +12,7 @@ export default {
    */
   getDataName: (obj) => {
     let name = obj.data
+    console.log(obj)
     if (Array.isArray(obj.dataList) && obj.dataList.length > 0) {
       for (let i = 0; i < obj.dataList.length; i++) {
         if (obj.dataList[i][obj.value] === obj.data) {

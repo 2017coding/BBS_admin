@@ -2,30 +2,57 @@
   <div class="page-table">
       <!-- 显示表格 -->
       <el-table ref="table" :max-height="listInfo.tableHeight || undefined" :data="listInfo.data" border style="width:100%" v-loading="listInfo.loading">
-        <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="index">
+        <!-- <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="index">
           <template slot-scope="scope">
             <span>{{scope.$index + 1 + (listInfo.query.curPage - 1) * listInfo.query.pageSize}}</span>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
           v-for="(item, index) in fieldList"
           :key="index"
           :prop="item.value"
-          :label="item.key"
+          :label="item.label"
           :fixed="item.fixed"
           align="center"
           :width="item.width"
           :min-width="item.minwidth || '100px'">
-          <template v-if="item.children">
-            <el-table-column
-              v-for="(childItem, childIndex) in item.children"
-              :key="childIndex"
-              :prop="childItem.value"
-              :label="childItem.key"
-              align="center"
-              :width="item.width"
-              :min-width="item.minwidth || '85px'">
-            </el-table-column>
+          <!-- <template slot-scope="scope" v-if="item.children">
+            <template v-if="item.children">
+              <el-table-column
+                v-for="(childItem, childIndex) in item.children"
+                :key="childIndex"
+                :prop="childItem.value"
+                :label="childItem.label"
+                align="center"
+                :width="item.width"
+                :min-width="item.minwidth || '85px'">
+              </el-table-column>
+            </template>
+            <span v-else>
+              {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: scope.row[item.value]})}}
+            </span>
+          </template> -->
+        </el-table-column>
+        <el-table-column
+          v-if="handle"
+          :fixed="handle.fixed"
+          align="center"
+          :label="handle.label"
+          :width="handle.width"
+          :key="'handle'">
+          <template slot-scope="scope">
+            <el-button
+              v-for="(item, index) in handle.btList"
+              :key="index"
+              size="mini"
+              :type="item.type"
+              :icon="item.icon"
+              v-waves
+              @click="handleClickBt(item.event, scope.row)"
+              :disabled="item.disabled"
+              :loading="item.roleLoading">
+              {{item.label}}
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -49,17 +76,18 @@
 export default {
   name: 'PageTable',
   props: {
+    api: {
+      type: Function,
+      required: true
+    },
     // 是否显示序号
     index: {
       type: Boolean,
       default: true
     },
-    // 表格数据
-    data: {
-      type: Array,
-      default: () => {
-        return []
-      }
+    // 类型列表
+    listTypeInfo: {
+      type: Object
     },
     // 表格字段配置
     fieldList: {
@@ -70,25 +98,42 @@ export default {
     },
     // 操作栏配置
     handle: {
-      type: Array,
-      default: () => {
-        return []
-      }
+      type: Object
     },
     // 是否分页
     pager: {
       type: Boolean,
       default: true
     },
-    // 列表相关
-    listInfo: {
-      type: Object,
-      default: () => {
-        return {query: {}}
+    // 查询条件
+    query: {
+      type: Object
+    }
+  },
+  data () {
+    return {
+      // 列表相关
+      listInfo: {
+        tableHeight: 0, // 表格最大高度
+        data: [], // 数据
+        total: 0, // 总条数
+        loading: false, // 加载动画
+        pageSizes: [5, 10, 20, 50, 100], // 分页数量列表
+        query: { // 查询条件
+          curPage: 1,
+          pageSize: 10
+        }
       }
     }
   },
+  watch: {
+    query (val) {
+      this.listInfo.query = {...this.listInfo.query, ...val}
+    }
+  },
   mounted () {
+    this.getList(this.api)
+
     // 得到表格的高度
     this.listInfo.tableHeight = this.getTableHeight()
     // 监听页面大小改变
@@ -98,11 +143,47 @@ export default {
     })
   },
   methods: {
-    handleSizeChange (val) {
-      this.$emit('handleSizeChange', val)
+    // 得到数据
+    getList (api) {
+      this.listInfo.loading = true
+      return new Promise((resolve, reject) => {
+        api(this.listInfo.query).then(res => {
+          this.listInfo.loading = false
+          if (res.success) {
+            this.listInfo.data = res.content.result
+            this.listInfo.total = res.content.totals
+            this.listInfo.query.curPage = +res.content.curPage
+            this.listInfo.query.pageSize = +res.content.pageSize
+            resolve(res)
+            this.$emit('handleEvent', 'list', res.content.result)
+          } else {
+            this.$message({
+              showClose: true,
+              message: res.message,
+              type: 'error',
+              duration: 3500
+            })
+            reject()
+          }
+        }).catch(() => {
+          reject()
+          this.listInfo.loading = false
+        })
+      })
     },
+    // 页面切换
+    handleSizeChange (val) {
+      this.listInfo.query.curPage = val // 当前页
+      this.getList(this.api)
+    },
+    // 页数改变
     handleCurrentChange (val) {
-      this.$emit('handleCurrentChange', val)
+      this.listInfo.query.pageSize = val // 一页几个
+      this.getList(this.api)
+    },
+    // 派发按钮点击事件
+    handleClickBt (event, data) {
+      this.$emit('handleClickBt', event, data)
     },
     // 根据页面的头部, 功能框, 分页组件等高度，计算出table的高度
     getTableHeight () {
@@ -111,9 +192,9 @@ export default {
         return
       }
       let boxH = document.body.clientHeight,
-        navH = document.getElementsByClassName('navbar-container')[0].clientHeight,
-        tagH = document.getElementsByClassName('tags-view-container')[0].clientHeight,
-        searchH = document.getElementsByClassName('page-filter')[0].clientHeight,
+        navH = document.getElementsByClassName('navbar-container')[0] ? document.getElementsByClassName('navbar-container')[0].clientHeight : 0,
+        tagH = document.getElementsByClassName('tags-view-container')[0] ? document.getElementsByClassName('tags-view-container')[0].clientHeight : 0,
+        searchH = document.getElementsByClassName('page-filter')[0] ? document.getElementsByClassName('page-filter')[0].clientHeight : 0,
         pagerH = document.getElementsByClassName('pagination-container')[0] || {clientHeight: 0},
         bottomH = pagerH.clientHeight ? pagerH.clientHeight + 15 : pagerH.clientHeight - 35,
         tab = document.getElementsByClassName('el-table')[0] || {offsetTop: 0},
