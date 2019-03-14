@@ -90,6 +90,7 @@ export default {
   watch: {
     searchQuery: {
       handler: function (val) {
+        // 修改传入进来的参数
         this.$emit('update:query', val)
       },
       deep: true // 深度监听

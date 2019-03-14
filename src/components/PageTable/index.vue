@@ -76,6 +76,9 @@
 export default {
   name: 'PageTable',
   props: {
+    refresh: {
+      type: Boolean
+    },
     api: {
       type: Function,
       required: true
@@ -127,8 +130,14 @@ export default {
     }
   },
   watch: {
-    query (val) {
-      this.listInfo.query = {...this.listInfo.query, ...val}
+    refresh () {
+      this.getList(this.api)
+    },
+    query: {
+      handler: function (val) {
+        this.listInfo.query = {...this.listInfo.query, ...val}
+      },
+      deep: true
     }
   },
   mounted () {
@@ -202,7 +211,7 @@ export default {
 
       // 表格的高度 = 视口高度 - 表格到头部导航的距离 - 头部导航的高度137 - 分页组件的高度100 - 分页组件
       document.getElementsByClassName('el-table')[0].style.height = (boxH - tabOffT - navH - tagH - searchH - bottomH) + 'px'
-      console.log('表格最大高度为:' + (boxH - navH - tagH - searchH - bottomH))
+      // console.log('表格最大高度为:' + (boxH - navH - tagH - searchH - bottomH))
       return (boxH - navH - tagH - searchH - bottomH)
     }
   }
