@@ -41,18 +41,20 @@
           :width="handle.width"
           :key="'handle'">
           <template slot-scope="scope">
-            <el-button
-              v-for="(item, index) in handle.btList"
-              :key="index"
-              size="mini"
-              :type="item.type"
-              :icon="item.icon"
-              v-waves
-              @click="handleClickBt(item.event, scope.row)"
-              :disabled="item.disabled"
-              :loading="item.roleLoading">
-              {{item.label}}
-            </el-button>
+            <template v-for="(item, index) in handle.btList">
+              <el-button
+                v-if="item.show"
+                :key="index"
+                size="mini"
+                :type="item.type"
+                :icon="item.icon"
+                v-waves
+                @click="handleClickBt(item.event, scope.row)"
+                :disabled="item.disabled"
+                :loading="item.roleLoading">
+                {{item.label}}
+              </el-button>
+            </template>
           </template>
         </el-table-column>
       </el-table>
@@ -117,6 +119,7 @@ export default {
     return {
       // 列表相关
       listInfo: {
+        initPage: true,
         tableHeight: 0, // 表格最大高度
         data: [], // 数据
         total: 0, // 总条数
@@ -135,14 +138,19 @@ export default {
     },
     query: {
       handler: function (val) {
-        this.listInfo.query = {...this.listInfo.query, ...val}
+        const listInfo = this.listInfo
+        listInfo.query = {...listInfo.query, ...val}
+        // 页面初始化加载数据
+        if (listInfo.initPage) {
+          // TODO: 先放在这里
+          this.getList(this.api)
+          listInfo.initPage = false
+        }
       },
       deep: true
     }
   },
   mounted () {
-    this.getList(this.api)
-
     // 得到表格的高度
     this.listInfo.tableHeight = this.getTableHeight()
     // 监听页面大小改变

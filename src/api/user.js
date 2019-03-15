@@ -27,6 +27,15 @@ export function loginOutApi (params) {
   })
 }
 
+// 创建
+export function createApi (data) {
+  return request({
+    url: '/api/user/create',
+    method: 'post',
+    data
+  })
+}
+
 // 编辑
 export function updateApi (data) {
   return request({

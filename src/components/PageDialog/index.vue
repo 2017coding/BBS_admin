@@ -17,7 +17,7 @@
         :class="item.className">
         <!-- 普通输入框 -->
         <el-input
-          v-if="item.type === 'input'"
+          v-if="item.type === 'input' || item.type === 'password'"
           :type="item.type"
           :disabled="item.disabled"
           :placeholder="getPlaceholder(item)"
@@ -38,10 +38,10 @@
         <el-select
           v-if="item.type === 'select'"
           v-model="formInfo.data[item.value]"
-          :disabled="item.disabled"
           @change="handleEvent(item.event, formInfo.data[item.value])"
-          :clearable="!item.required"
-          :filterable="!item.required"
+          :disabled="item.disabled"
+          :clearable="item.clearable"
+          :filterable="item.filterable"
           :placeholder="getPlaceholder(item)">
           <el-option v-for="(item ,index) in  listTypeInfo[item.list]" :key="index" :label="item.key" :value="item.value"></el-option>
         </el-select>
@@ -50,6 +50,7 @@
           v-if="item.type === 'date'"
           v-model="formInfo.data[item.value]"
           :type="item.dateType"
+          :clearable="item.clearable"
           :disabled="item.disabled"
           @focus="handleEvent(item.event)"
           :placeholder="getPlaceholder(item)">

@@ -49,7 +49,7 @@
       <!-- 按钮 -->
       <el-button
         :class="`filter-${item.type}`"
-        v-else-if="item.type === 'button'"
+        v-else-if="item.type === 'button' && item.show"
         v-waves
         :type="item.btType"
         :icon="item.icon"
