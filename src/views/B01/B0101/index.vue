@@ -123,6 +123,11 @@ export default {
           {key: '女', value: 1},
           {key: '男', value: 0}
         ],
+        accountTypeList: [
+          {key: '手机用户', value: 0},
+          {key: '论坛用户', value: 1},
+          {key: '平台用户', value: 2}
+        ],
         statusList: [
           {key: '启用', value: 1},
           {key: '停用', value: 0}
@@ -153,8 +158,8 @@ export default {
         fieldList: [
           {label: '账号', value: 'account'},
           {label: '用户名', value: 'name'},
-          {label: '性别', value: 'sex', width: 80},
-          {label: '账号类型', value: 'type', width: 100},
+          {label: '性别', value: 'sex', width: 80, list: 'sexList'},
+          {label: '账号类型', value: 'type', width: 100, list: 'accountTypeList'},
           {label: '状态', value: 'status', width: 90, list: 'statusList'},
           {label: '创建人', value: 'create_user'},
           {label: '创建时间', value: 'create_time'},

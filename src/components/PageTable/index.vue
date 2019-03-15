@@ -16,7 +16,7 @@
           align="center"
           :width="item.width"
           :min-width="item.minwidth || '100px'">
-          <!-- <template slot-scope="scope" v-if="item.children">
+          <template slot-scope="scope">
             <template v-if="item.children">
               <el-table-column
                 v-for="(childItem, childIndex) in item.children"
@@ -31,7 +31,7 @@
             <span v-else>
               {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: scope.row[item.value]})}}
             </span>
-          </template> -->
+          </template>
         </el-table-column>
         <el-table-column
           v-if="handle"
