@@ -11,12 +11,25 @@ const user = {
     userInfo: _getSessionStore('userInfo', 'JSONStr')
   },
   mutations: {
+    // 设置Token
+    SET_TOKEN: (state, token) => {
+      state.token = token
+    },
     // 设置用户信息
     SET_USERINFO: (state, userInfo) => {
       state.userInfo = userInfo
     }
   },
   actions: {
+    // 存储Token
+    setToken ({commit}, data) {
+      return new Promise((resolve, reject) => {
+        commit('SET_TOKEN', data)
+        // 将数据存到缓存
+        _setSessionStore('token', data)
+        resolve()
+      })
+    },
     // 存储用户数据
     setUserInfo ({commit}, data) {
       return new Promise((resolve, reject) => {

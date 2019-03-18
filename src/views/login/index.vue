@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import {_setSessionStore} from '@/common/js/storage'
 import { loginApi } from '@/api/user'
 export default {
   data () {
@@ -103,7 +102,7 @@ export default {
             // 登录成功后，对账号密码的操作
             this._initRemember(this.formInfo.remember)
             // 记住cookie
-            _setSessionStore('token', res.token)
+            this.$store.dispatch('user/setToken', res.token)
             // 记住用户信息
             this.$store.dispatch('user/setUserInfo', res.content.data).then(() => {
               this.$router.push('/')

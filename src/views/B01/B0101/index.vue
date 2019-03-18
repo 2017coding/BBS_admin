@@ -136,7 +136,7 @@ export default {
       // 查询配置
       filterInfo: {
         query: {
-          create_user: 1,
+          create_user: '',
           account: '',
           name: ''
         },
