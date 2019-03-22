@@ -57,6 +57,9 @@ const user = {
             // dispatch('app/removeLock', {}, {root: true})
             resolve()
           } else {
+            sessionStorage.clear()
+            localStorage.clear()
+            commit('SET_USERINFO', '')
             reject()
           }
         })

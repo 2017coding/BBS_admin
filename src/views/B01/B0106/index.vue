@@ -90,8 +90,15 @@ export default {
   created () {
     this.initParams()
   },
+  mounted () {
+    this.getList()
+  },
   methods: {
     initParams () {
+    },
+    // 获取列表
+    getList () {
+      this.tableInfo.refresh = !this.tableInfo.refresh
     },
     // 按钮点击
     handleClickBt (event, data) {

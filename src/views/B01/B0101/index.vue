@@ -249,9 +249,16 @@ export default {
     // 初始化字段验证规则
     this.initRules()
   },
+  mounted () {
+    this.getList()
+  },
   methods: {
     initParams () {
       this.filterInfo.query.create_user = this.userInfo.id
+    },
+    // 获取列表
+    getList () {
+      this.tableInfo.refresh = !this.tableInfo.refresh
     },
     // 初始化验证数据
     initRules () {

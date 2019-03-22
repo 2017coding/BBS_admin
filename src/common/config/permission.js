@@ -29,6 +29,9 @@ router.beforeEach((to, from, next) => {
           store.dispatch('user/loginOut').then(() => {
             Message.error(err || '验证失败，请重新登录')
             next({path: '/'})
+          }).catch(() => {
+            Message.error(err || '验证失败，请重新登录')
+            next({path: '/'})
           })
         })
       } else {

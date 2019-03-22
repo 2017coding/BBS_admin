@@ -62,11 +62,10 @@ export function getUserInfoApi (params) {
 }
 
 // 得到单条数据
-export function getRowApi (params) {
+export function getRowApi (id) {
   return request({
-    url: '/api/user/getRow',
-    method: 'get',
-    params
+    url: `/api/user/getRow/${id}`,
+    method: 'get'
   })
 }
 

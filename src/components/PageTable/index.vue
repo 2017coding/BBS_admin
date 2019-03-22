@@ -112,14 +112,16 @@ export default {
     },
     // 查询条件
     query: {
-      type: Object
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   },
   data () {
     return {
       // 列表相关
       listInfo: {
-        initPage: true,
         tableHeight: 0, // 表格最大高度
         data: [], // 数据
         total: 0, // 总条数
@@ -135,19 +137,6 @@ export default {
   watch: {
     refresh () {
       this.getList(this.api)
-    },
-    query: {
-      handler: function (val) {
-        const listInfo = this.listInfo
-        listInfo.query = {...listInfo.query, ...val}
-        // 页面初始化加载数据
-        if (listInfo.initPage) {
-          // TODO: 先放在这里
-          this.getList(this.api)
-          listInfo.initPage = false
-        }
-      },
-      deep: true
     }
   },
   mounted () {
@@ -160,17 +149,28 @@ export default {
     })
   },
   methods: {
+    // 处理参数
+    handleParams () {
+      let obj = {}
+      for (let key in this.query) {
+        if (this.query[key]) {
+          obj[key] = this.query[key]
+        }
+      }
+      return {...this.listInfo.query, ...obj}
+    },
     // 得到数据
     getList (api) {
       this.listInfo.loading = true
       return new Promise((resolve, reject) => {
-        api(this.listInfo.query).then(res => {
+        // 每次调用接口时都自动绑定最新的数据
+        api(this.handleParams()).then(res => {
           this.listInfo.loading = false
           if (res.success) {
             this.listInfo.data = res.content.result
             this.listInfo.total = res.content.totals
-            this.listInfo.query.curPage = +res.content.curPage
-            this.listInfo.query.pageSize = +res.content.pageSize
+            this.listInfo.query.curPage = res.content.curPage - 0
+            this.listInfo.query.pageSize = res.content.pageSize - 0
             resolve(res)
             this.$emit('handleEvent', 'list', res.content.result)
           } else {
@@ -188,14 +188,12 @@ export default {
         })
       })
     },
-    // 页面切换
     handleSizeChange (val) {
-      this.listInfo.query.curPage = val // 当前页
+      this.listInfo.query.pageSize = val // 一页几个
       this.getList(this.api)
     },
-    // 页数改变
     handleCurrentChange (val) {
-      this.listInfo.query.pageSize = val // 一页几个
+      this.listInfo.query.curPage = val // 当前页
       this.getList(this.api)
     },
     // 派发按钮点击事件
@@ -213,7 +211,7 @@ export default {
         tagH = document.getElementsByClassName('tags-view-container')[0] ? document.getElementsByClassName('tags-view-container')[0].clientHeight : 0,
         searchH = document.getElementsByClassName('page-filter')[0] ? document.getElementsByClassName('page-filter')[0].clientHeight : 0,
         pagerH = document.getElementsByClassName('pagination-container')[0] || {clientHeight: 0},
-        bottomH = pagerH.clientHeight ? pagerH.clientHeight + 25 : pagerH.clientHeight - 35,
+        bottomH = pagerH.clientHeight ? pagerH.clientHeight + 40 : pagerH.clientHeight - 35,
         tab = document.getElementsByClassName('el-table')[0] || {offsetTop: 0},
         tabOffT = tab.offsetTop
 
