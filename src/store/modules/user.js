@@ -1,14 +1,15 @@
 import {
   _setSessionStore,
-  _getSessionStore,
-  _removeSessionStore
+  _getSessionStore
 } from '@/common/js/storage'
+import { getUserInfoApi, loginOutApi } from '@/api/user'
 
 const user = {
   namespaced: true,
   state: {
     token: _getSessionStore('token'),
-    userInfo: _getSessionStore('userInfo', 'JSONStr')
+    userInfo: '',
+    menu: ''
   },
   mutations: {
     // 设置Token
@@ -31,24 +32,34 @@ const user = {
       })
     },
     // 存储用户数据
-    setUserInfo ({commit}, data) {
+    setUserInfo ({commit, state}) {
       return new Promise((resolve, reject) => {
-        commit('SET_USERINFO', data)
-        // 将数据存到缓存
-        _setSessionStore('userInfo', data, 'JSONStr')
-        resolve()
+        getUserInfoApi().then(res => {
+          if (res.success) {
+            commit('SET_USERINFO', res.content[0])
+            resolve()
+          } else {
+            reject()
+          }
+        })
       })
     },
     // 退出登录,将用户数据清除
     loginOut ({commit, dispatch}) {
-      return new Promise(resolve => {
-        _removeSessionStore('token')
-        commit('SET_USERINFO', '')
-        _removeSessionStore('userInfo')
-        // // 清除app模块中的相关信息
-        // dispatch('app/removeProjectInfo', {}, {root: true})
-        // dispatch('app/removeLock', {}, {root: true})
-        resolve()
+      return new Promise((resolve, reject) => {
+        loginOutApi().then(res => {
+          if (res.success) {
+            sessionStorage.clear()
+            localStorage.clear()
+            commit('SET_USERINFO', '')
+            // // 清除app模块中的相关信息
+            // dispatch('app/removeProjectInfo', {}, {root: true})
+            // dispatch('app/removeLock', {}, {root: true})
+            resolve()
+          } else {
+            reject()
+          }
+        })
       })
     }
   }

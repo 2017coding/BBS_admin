@@ -15,7 +15,7 @@
           :fixed="item.fixed"
           align="center"
           :width="item.width"
-          :min-width="item.minwidth || '100px'">
+          :min-width="item.minWidth || '100px'">
           <template slot-scope="scope">
             <template v-if="item.children">
               <el-table-column
@@ -25,7 +25,7 @@
                 :label="childItem.label"
                 align="center"
                 :width="item.width"
-                :min-width="item.minwidth || '85px'">
+                :min-width="item.minWidth || '85px'">
               </el-table-column>
             </template>
             <span v-else>
@@ -59,7 +59,7 @@
         </el-table-column>
       </el-table>
       <!-- 分页组件 -->
-      <template>
+      <template v-if="pager">
         <div v-show="!listInfo.loading" class="pagination-container">
           <el-pagination
             @size-change="handleSizeChange"
@@ -213,7 +213,7 @@ export default {
         tagH = document.getElementsByClassName('tags-view-container')[0] ? document.getElementsByClassName('tags-view-container')[0].clientHeight : 0,
         searchH = document.getElementsByClassName('page-filter')[0] ? document.getElementsByClassName('page-filter')[0].clientHeight : 0,
         pagerH = document.getElementsByClassName('pagination-container')[0] || {clientHeight: 0},
-        bottomH = pagerH.clientHeight ? pagerH.clientHeight + 15 : pagerH.clientHeight - 35,
+        bottomH = pagerH.clientHeight ? pagerH.clientHeight + 25 : pagerH.clientHeight - 35,
         tab = document.getElementsByClassName('el-table')[0] || {offsetTop: 0},
         tabOffT = tab.offsetTop
 

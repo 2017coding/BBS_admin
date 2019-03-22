@@ -8,6 +8,7 @@
         v-if="item.type === 'input'"
         :type="item.type"
         :disabled="item.disabled"
+        :clearable="item.clearable || true"
         :placeholder="getPlaceholder(item)"
         @focus="handleEvent(item.event)"
         v-model="searchQuery[item.value]">
@@ -19,8 +20,8 @@
         v-model="searchQuery[item.value]"
         :disabled="item.disabled"
         @change="handleEvent(item.even)"
-        :clearable="item.clearable"
-        :filterable="item.filterable"
+        :clearable="item.clearable || true"
+        :filterable="item.filterable || true"
         :placeholder="getPlaceholder(item)">
         <el-option v-for="(item ,index) in  listTypeInfo[item.list]" :key="index" :label="item.key" :value="item.value"></el-option>
       </el-select>
@@ -30,7 +31,7 @@
         v-if="item.type === 'time'"
         v-model="searchQuery[item.value]"
         :picker-options="item.TimePickerOptions"
-        :clearable="item.clearable"
+        :clearable="item.clearable || true"
         :disabled="item.disabled"
         :placeholder="getPlaceholder(item)">
       </el-time-select>
@@ -41,7 +42,7 @@
         v-model="searchQuery[item.value]"
         :picker-options="item.datePickerOptions || datePickerOptions"
         :type="item.dateType"
-        :clearable="item.clearable"
+        :clearable="item.clearable || true"
         :disabled="item.disabled"
         @focus="handleEvent(item.event)"
         :placeholder="getPlaceholder(item)">
@@ -91,15 +92,24 @@ export default {
     searchQuery: {
       handler: function (val) {
         // 修改传入进来的参数
-        this.$emit('update:query', val)
+        this.$emit('update:query', {...this.query, ...val})
       },
       deep: true // 深度监听
     }
   },
   mounted () {
-    this.searchQuery = JSON.parse(JSON.stringify(this.query))
+    this.initParams()
   },
   methods: {
+    initParams () {
+      let obj = {}
+      for (let key in this.query) {
+        if (this.query[key]) {
+          obj[key] = this.query[key]
+        }
+      }
+      this.searchQuery = obj
+    },
     // 得到placeholder的显示
     getPlaceholder (row) {
       let placeholder

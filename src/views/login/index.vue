@@ -47,7 +47,8 @@ export default {
         // 表单参数
         data: {
           account: 'test',
-          password: '123456'
+          password: '123456',
+          type: 2 // 平台用户
         },
         // 验证规则
         rules: {

@@ -19,11 +19,10 @@ export function loginApi (data) {
 }
 
 // 退出登录
-export function loginOutApi (params) {
+export function loginOutApi () {
   return request({
-    url: '/api/user/WriteLog',
-    method: 'get',
-    params
+    url: '/api/user/loginOut',
+    method: 'post'
   })
 }
 
@@ -53,10 +52,19 @@ export function deleteApi (id) {
   })
 }
 
+// 得到用户xixni
+export function getUserInfoApi (params) {
+  return request({
+    url: '/api/user/userInfo',
+    method: 'get',
+    params
+  })
+}
+
 // 得到单条数据
 export function getRowApi (params) {
   return request({
-    url: '/api/user/GetUserinfo',
+    url: '/api/user/getRow',
     method: 'get',
     params
   })

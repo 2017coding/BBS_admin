@@ -100,6 +100,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { getListApi, createApi, updateApi, deleteApi } from '@/api/user'
 import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
@@ -143,8 +144,8 @@ export default {
         list: [
           {type: 'input', label: '账户', value: 'account'},
           {type: 'input', label: '用户名', value: 'name'},
-          {type: 'select', label: '创建人', value: 'create_user'},
-          {type: 'date', label: '创建时间', value: 'create_time'},
+          // {type: 'select', label: '创建人', value: 'create_user'},
+          // {type: 'date', label: '创建时间', value: 'create_time'},
           {type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true},
           {type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'add', show: true}
         ]
@@ -162,9 +163,9 @@ export default {
           {label: '账号类型', value: 'type', width: 100, list: 'accountTypeList'},
           {label: '状态', value: 'status', width: 90, list: 'statusList'},
           {label: '创建人', value: 'create_user'},
-          {label: '创建时间', value: 'create_time'},
+          {label: '创建时间', value: 'create_time', minWidth: 180},
           {label: '更新人', value: 'update_user'},
-          {label: '更新时间', value: 'update_time'}
+          {label: '更新时间', value: 'update_time', minWidth: 180}
         ],
         handle: {
           fixed: 'right',
@@ -227,6 +228,11 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'userInfo'
+    ])
+  },
   watch: {
     'dialogInfo.visible' (val) {
       if (!val) {
@@ -238,15 +244,14 @@ export default {
       }
     }
   },
-  mounted () {
-    this.initPage()
+  created () {
+    this.initParams()
     // 初始化字段验证规则
     this.initRules()
   },
   methods: {
-    initPage () {
-      // this.filterInfo.query.create_user = 1
-      // console.log(this.filterInfo)
+    initParams () {
+      this.filterInfo.query.create_user = this.userInfo.id
     },
     // 初始化验证数据
     initRules () {
