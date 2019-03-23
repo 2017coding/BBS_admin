@@ -157,7 +157,8 @@ export default {
           obj[key] = this.query[key]
         }
       }
-      return {...this.listInfo.query, ...obj}
+      // 如果不需要分页，则无分页相关参数
+      return this.pager ? {...this.listInfo.query, ...obj} : obj
     },
     // 得到数据
     getList (api) {
