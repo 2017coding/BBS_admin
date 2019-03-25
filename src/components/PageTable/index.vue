@@ -110,6 +110,10 @@ export default {
       type: Boolean,
       default: true
     },
+    // 重置当前页
+    initCurpage: {
+      type: Boolean
+    },
     // 查询条件
     query: {
       type: Object,
@@ -128,13 +132,16 @@ export default {
         loading: false, // 加载动画
         pageSizes: [5, 10, 20, 50, 100], // 分页数量列表
         query: { // 查询条件
-          curPage: 1,
-          pageSize: 10
+          curPage: 1, // 当前页
+          pageSize: 10 // 每页条数
         }
       }
     }
   },
   watch: {
+    initCurpage () {
+      this.listInfo.query.curPage = 1
+    },
     refresh () {
       this.getList(this.api)
     }
@@ -190,7 +197,7 @@ export default {
       })
     },
     handleSizeChange (val) {
-      this.listInfo.query.pageSize = val // 一页几个
+      this.listInfo.query.pageSize = val // 每页条数
       this.getList(this.api)
     },
     handleCurrentChange (val) {

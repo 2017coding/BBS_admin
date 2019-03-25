@@ -3,7 +3,7 @@
     <transition name="el-fade-in-linear">
       <Sidebar class="sidebar-container" v-show="!fullScreen"></Sidebar>
     </transition>
-    <div class="main-container">
+    <div class="main-container" :style="fullScreen ? 'margin-left: 0' : ''">
       <transition name="el-fade-in-linear">
         <div style="position: relative; z-index: 99">
           <navbar v-show="!fullScreen" />

@@ -26,13 +26,53 @@ body {
     flex: 1;
     overflow: auto;
     .app-container{
+      position: relative;
+      padding: 20px;
       min-height: 100%;
     }
   }
 }
 
+$treeWidth: 240px;
+
 .app-container{
-  padding: 20px;
+  .left{
+    position: absolute;
+    width: $treeWidth;
+    left: 15px;
+    top: 20px;
+    bottom: 15px;
+    .page-tree{
+      height: 100%;
+      width: $treeWidth;
+      overflow: auto;
+      border: 1px solid rgb(200, 200, 200);
+      .contextmenu {
+        margin: 0;
+        background: #fff;
+        z-index: 100;
+        position: fixed;
+        list-style-type: none;
+        padding: 5px 0;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #333;
+        box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3);
+        li {
+          margin: 0;
+          padding: 7px 16px;
+          cursor: pointer;
+          &:hover {
+            background: #eee;
+          }
+        }
+      }
+    }
+  }
+  .right{
+    margin-left: 250px
+  }
   .page-filter {
     padding-bottom: 5px;
     .filter-item {

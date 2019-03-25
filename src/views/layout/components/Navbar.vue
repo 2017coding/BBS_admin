@@ -52,6 +52,7 @@ export default {
   data () {
     return {
       dropdownList: [
+        {key: 'GitHub地址', command: 'GitHub'},
         {key: '个人中心', command: 'userInfo'},
         {key: '修改密码', command: 'updatePassword'},
         {key: '退出登录', command: 'loginOut'}
@@ -95,6 +96,9 @@ export default {
     },
     _handleCommand (command) {
       switch (command) {
+      case 'GitHub':
+        this.$fn.openWindow('https://github.com/2017coding/BBS_admin')
+        break
       case 'userInfo':
         break
       case 'updatePassword':
