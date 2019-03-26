@@ -1,7 +1,7 @@
 <template>
   <div class="page-table">
       <!-- 显示表格 -->
-      <el-table ref="table" :max-height="listInfo.tableHeight || undefined" :data="listInfo.data" border style="width:100%" v-loading="listInfo.loading">
+      <el-table ref="table" :max-height="listInfo.tableHeight || undefined" :data="data" border style="width:100%" v-loading="listInfo.loading">
         <!-- <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="index">
           <template slot-scope="scope">
             <span>{{scope.$index + 1 + (listInfo.query.curPage - 1) * listInfo.query.pageSize}}</span>
@@ -120,6 +120,10 @@ export default {
       default: () => {
         return {}
       }
+    },
+    // 列表数据
+    data: {
+      type: Array
     }
   },
   data () {
@@ -127,7 +131,6 @@ export default {
       // 列表相关
       listInfo: {
         tableHeight: 0, // 表格最大高度
-        data: [], // 数据
         total: 0, // 总条数
         loading: false, // 加载动画
         pageSizes: [5, 10, 20, 50, 100], // 分页数量列表
@@ -160,7 +163,7 @@ export default {
     handleParams () {
       let obj = {}
       for (let key in this.query) {
-        if (this.query[key]) {
+        if (this.query[key] || this.query[key] === 0) {
           obj[key] = this.query[key]
         }
       }
@@ -175,7 +178,8 @@ export default {
         api(this.handleParams()).then(res => {
           this.listInfo.loading = false
           if (res.success) {
-            this.listInfo.data = res.content.result
+            // 使外面可以访问到表格数据
+            this.$emit('update:data', res.content.result)
             this.listInfo.total = res.content.totals
             this.listInfo.query.curPage = res.content.curPage - 0
             this.listInfo.query.pageSize = res.content.pageSize - 0
