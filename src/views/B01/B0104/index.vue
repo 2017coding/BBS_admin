@@ -62,14 +62,14 @@ export default {
         type: 0,
         lazyInfo: [
           {
-            key: 'key',
+            key: 'id',
             label: 'name',
             type: 1,
             api: getAllApi,
             params: {key: 'pid', value: 1}
           },
           {
-            key: 'key',
+            key: 'id',
             label: 'name',
             type: 2,
             api: getAllApi,

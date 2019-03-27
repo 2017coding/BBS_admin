@@ -178,6 +178,7 @@ export default {
     },
     treeRefresh (val) {
       let level = 'node' + (this.refreshLevel - 1 >= 0 ? this.refreshLevel - 1 : 0)
+      this.nodeInfoList[level].node.childNodes = [] // 清空子节点, 保证数据不会重复渲染
       this.handleLoadNode(this.nodeInfoList[level].node, this.nodeInfoList[level].resolve)
       // 关闭菜单
       this.handlecCloseMenu()
@@ -313,7 +314,7 @@ export default {
           arr = JSON.parse(JSON.stringify(res.content))
           arr.forEach(item => {
             // 保证刷新之后key的唯一
-            item.key = levelInfo.type + item.id + Math.random()
+            item.key = levelInfo.type + item[levelInfo.key] + Math.random()
             item['level' + node.level + 'data'] = node.data
             item[treeProps.label] = item[levelInfo.label]
             item.type = levelInfo.type
