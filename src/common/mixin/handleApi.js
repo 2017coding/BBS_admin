@@ -6,6 +6,7 @@ export default {
       case 'update':
         return new Promise((resolve, reject) => {
           api(data).then(res => {
+            if (!res) return
             this.$message({
               showClose: true,
               message: res.message,

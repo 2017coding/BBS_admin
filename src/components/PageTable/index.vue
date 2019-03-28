@@ -46,13 +46,13 @@
                 v-if="item.show"
                 :key="index"
                 size="mini"
-                :type="item.type"
+                :type="handBtShow('type', item, scope.row)"
                 :icon="item.icon"
                 v-waves
                 @click="handleClickBt(item.event, scope.row)"
                 :disabled="item.disabled"
-                :loading="item.roleLoading">
-                {{item.label}}
+                :loading="scope.row[item.loading]">
+                {{handBtShow('label', item, scope.row)}}
               </el-button>
             </template>
           </template>
@@ -169,6 +169,23 @@ export default {
       }
       // 如果不需要分页，则无分页相关参数
       return this.pager ? {...this.listInfo.query, ...obj} : obj
+    },
+    // 处理按钮显示
+    handBtShow (type, bt, row) {
+      switch (type) {
+      case 'type':
+        if (bt.event === 'status') {
+          return row.status - 1 >= 0 ? 'danger' : 'success'
+        } else {
+          return bt[type]
+        }
+      case 'label':
+        if (bt.event === 'status') {
+          return row.status - 1 >= 0 ? '停用' : '启用'
+        } else {
+          return bt[type]
+        }
+      }
     },
     // 得到数据
     getList (api) {

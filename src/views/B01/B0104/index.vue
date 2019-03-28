@@ -6,7 +6,9 @@
         :nodeKey="treeInfo.nodeKey"
         :lazy="true"
         :lazyInfo="treeInfo.lazyInfo"
+        :rightMenuList="treeInfo.rightMenuList"
         :treeRefresh="treeInfo.refresh"
+        :refreshLevel="treeInfo.refreshLevel"
         @handleClickBt="handleClickBt"
         @handleEvent="handleEvent"></page-tree>
     </div>
@@ -57,23 +59,25 @@ export default {
       },
       // 树相关信息
       treeInfo: {
+        refresh: false,
+        refreshLevel: 0,
         nodeKey: 'key',
         lazy: true,
-        type: 0,
+        type: 0, // 省市区类型
         lazyInfo: [
           {
             key: 'id',
             label: 'name',
             type: 1,
             api: getAllApi,
-            params: {key: 'pid', value: 1}
+            params: {key: 'pid', value: 1, type: 'url'}
           },
           {
             key: 'id',
             label: 'name',
             type: 2,
             api: getAllApi,
-            params: {key: 'pid', value: ''},
+            params: {key: 'pid', value: '', type: 'url'},
             leaf: true
           }
         ],
@@ -100,7 +104,7 @@ export default {
           label: '操作',
           width: '100',
           btList: [
-            {label: '启用', type: '', icon: 'el-icon-edit', event: 'update', show: true}
+            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: true}
           ]
         }
       }
@@ -132,12 +136,33 @@ export default {
     // 按钮点击
     handleClickBt (event, data) {
       switch (event) {
+      case 'status':
+        let params = JSON.parse(JSON.stringify(data))
+        params.status = params.status - 1 >= 0 ? 0 : 1
+        data.statusLoading = true
+        this.handleAPI('update', updateApi, params).then(res => {
+          data.statusLoading = false
+          if (res.success) {
+            data.status = params.status
+          }
+        }).catch(() => {
+          data.statusLoading = false
+        })
+        break
       }
     },
     // 触发事件
     handleEvent (event, data) {
       switch (event) {
       // 对表格获取到的数据做处理
+      case 'list':
+        if (!data) return
+        // 初始化数据
+        data.forEach(item => {
+          item.statusLoading = false
+        })
+        break
+      // 左键点击的处理
       case 'leftClick':
         this.treeInfo.type = data.data.type + 1
         this.filterInfo.query.pid = data.data.id
@@ -164,7 +189,10 @@ export default {
         this.filterInfo.query.pid = 1
         this.tableInfo.initCurpage = !this.tableInfo.initCurpage
         this.tableInfo.refresh = !this.tableInfo.refresh
-        // 树初始化
+        // falls through 告诉ESlint不检查这一行
+      case 'refresh':
+        // 树刷新
+        this.treeInfo.refreshLevel = !data.node ? 0 : data.node.level
         this.treeInfo.refresh = !this.treeInfo.refresh
         break
       }

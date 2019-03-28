@@ -1,5 +1,5 @@
 <template>
-  <div class="page-tree" @contextmenu.prevent="handleTreeClick">
+  <div class="page-tree" v-loading="treeLoading" @contextmenu.prevent="handleTreeClick">
     <el-tree
       class="tree-component disabled-select"
       ref="TreeComponent"
@@ -41,10 +41,6 @@ export default {
       type: Boolean,
       defalult: false
     },
-    // 树状数据
-    treeData: {
-      type: Array
-    },
     // 是否懒加载
     lazy: {
       type: Boolean,
@@ -63,11 +59,20 @@ export default {
             label: 'name',
             type: '',
             api: () => {},
-            params: {key: '', value: ''},
+            params: {key: '', value: '', type: 'url'}, // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
             leaf: true
           }
         ]
       }
+    },
+    /**
+     * 正常加载相关
+     */
+    loadInfo: {
+      key: 'id',
+      label: 'name',
+      api: () => {},
+      params: {key: '', value: '', type: 'url'} // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
     },
     // 默认选中的项
     defaultChecked: {
@@ -151,6 +156,8 @@ export default {
   },
   data () {
     return {
+      treeLoading: false,
+      treeData: [],
       rightMenu: {
         show: false,
         left: 0,
@@ -159,6 +166,7 @@ export default {
           {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
         ]
       },
+      node: null,
       // 每个level的节点信息
       nodeInfoList: {}
     }
@@ -177,12 +185,19 @@ export default {
       this.rightMenu.list = val
     },
     treeRefresh (val) {
-      let level = 'node' + (this.refreshLevel - 1 >= 0 ? this.refreshLevel - 1 : 0)
-      this.nodeInfoList[level].node.childNodes = [] // 清空子节点, 保证数据不会重复渲染
-      this.handleLoadNode(this.nodeInfoList[level].node, this.nodeInfoList[level].resolve)
+      if (this.lazy) {
+        let level = 'node' + (this.refreshLevel - 1 >= 0 ? this.refreshLevel - 1 : 0)
+        this.nodeInfoList[level].node.childNodes = [] // 清空子节点, 保证数据不会重复渲染
+        this.handleLoadNode(this.nodeInfoList[level].node, this.nodeInfoList[level].resolve)
+      } else {
+        this.initData()
+      }
       // 关闭菜单
       this.handlecCloseMenu()
     }
+  },
+  created () {
+    this.initData()
   },
   methods: {
     // 自定义渲染内容
@@ -273,19 +288,44 @@ export default {
     initData () {
       // 懒加载不往下处理
       if (this.lazy) return
-      // 空数据不往下处理
-      if (this.treeData.length === 0) return
-      // 设置默认高亮
-      if (this.defaultHighLight) {
-        this.$nextTick(() => {
-          this.$refs.TreeComponent.setCurrentKey(this.defaultHighLight)
-        })
+      // 加载loading
+      this.treeLoading = true
+      let treeProps = this.treeProps,
+        loadInfo = this.loadInfo,
+        params = loadInfo.params, data
+      if (params) {
+
       }
-      // 设置默认点击
-      if (this.defaultClicked) {
-        // 页面初始化，设置默认点击项， 并将点击事件派发到父级
-        this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(this.treeData, this.defaultClicked)})
-      }
+      loadInfo.api(data).then(res => {
+        let arr = []
+        if (res.success) {
+          arr = JSON.parse(JSON.stringify(res.content))
+          arr.forEach(item => {
+            // 保证刷新之后key的唯一
+            item.key = loadInfo.type + item[loadInfo.key] + Math.random()
+            item[treeProps.label] = item[loadInfo.label]
+          })
+          this.treeData = this.$fn.getTreeArr({
+            key: loadInfo.key, pKey: loadInfo.pKey, rootPValue: loadInfo.rootPValue, data: arr
+          })
+          // 设置默认高亮
+          if (this.defaultHighLight) {
+            this.$nextTick(() => {
+              this.$refs.TreeComponent.setCurrentKey(this.defaultHighLight)
+            })
+          }
+          // 设置默认点击
+          if (this.defaultClicked) {
+            // 页面初始化，设置默认点击项， 并将点击事件派发到父级
+            this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(this.treeData, this.defaultClicked)})
+          }
+        }
+        // 加载loading
+        this.treeLoading = false
+      }).catch(() => {
+        // 加载loading
+        this.treeLoading = false
+      })
     },
     // 在树状数据中找到某一条数据
     getSelectData (data, val) {
@@ -299,16 +339,27 @@ export default {
     },
     // 懒加载数据
     handleLoadNode (node, resolve) {
+      // 加载loading
+      if (node.level === 0) {
+        this.treeLoading = true
+      }
       // 存下每个懒加载的数据
       this.$set(this.nodeInfoList, 'node' + node.level, {node, resolve})
       // 懒加载延迟时间
       let timeStamp = 100,
         treeProps = this.treeProps,
         levelInfo = this.lazyInfo[node.level],
-        params = levelInfo.params,
-        // TODO: 参数暂时设置为pid类型，之后考虑扩展
-        query = params.value || params.value === 0 ? params.value : node.data[levelInfo.key]
-      levelInfo.api(query).then(res => {
+        params = levelInfo.params, data
+      if (params.type === 'url') {
+        data = this.refreshLevel > 0 ? node.data[levelInfo.key] : params.value || params.value === 0 ? params.value : node.data[levelInfo.key]
+      } else if (params.type === 'query') {
+        params.data.forEach(item => {
+          data[item.key] = item.default || node.data[item.value]
+        })
+      } else {
+        console.log('没有传参数类型')
+      }
+      levelInfo.api(data).then(res => {
         let arr = []
         if (res.success) {
           arr = JSON.parse(JSON.stringify(res.content))
@@ -339,11 +390,19 @@ export default {
         setTimeout(() => {
           resolve(arr)
         }, timeStamp)
+        // 加载loading
+        if (node.level === 0) {
+          this.treeLoading = false
+        }
       }).catch(() => {
         // 延迟加载，保证加载动画
         setTimeout(() => {
           resolve([])
         }, timeStamp)
+        // 加载loading
+        if (node.level === 0) {
+          this.treeLoading = false
+        }
       })
     }
   }
