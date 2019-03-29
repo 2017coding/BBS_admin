@@ -11,13 +11,15 @@
     <!-- 表格 -->
     <page-table
       :refresh="tableInfo.refresh"
-      :api="getListApi"
-      :query="filterInfo.query"
-      :fieldList="tableInfo.fieldList"
-      :listTypeInfo="listTypeInfo"
-      :handle="tableInfo.handle"
-      @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
+        :initCurpage="tableInfo.initCurpage"
+        :data.sync="tableInfo.data"
+        :api="getListApi"
+        :query="filterInfo.query"
+        :fieldList="tableInfo.fieldList"
+        :listTypeInfo="listTypeInfo"
+        :handle="tableInfo.handle"
+        @handleClickBt="handleClickBt"
+        @handleEvent="handleEvent">
     </page-table>
     <!-- 弹窗 -->
     <el-dialog
@@ -153,6 +155,7 @@ export default {
       // 表格相关
       tableInfo: {
         refresh: false,
+        initCurpage: false,
         data: [
           {accpunt: 1, accpunt1: 2, accpunt2: 3, name: '测试', sex: '性别', type: '管理'}
         ],
