@@ -70,7 +70,7 @@ export default {
         },
         rightMenuList: []
       },
-      // 查询配置
+      // 过滤相关配置
       filterInfo: {
         query: {
           pid: 1

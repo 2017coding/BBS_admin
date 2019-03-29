@@ -134,7 +134,7 @@ export default {
           {key: '停用', value: 0}
         ]
       },
-      // 查询配置
+      // 过滤相关配置
       filterInfo: {
         query: {
           create_user: '',

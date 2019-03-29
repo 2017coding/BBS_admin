@@ -22,82 +22,24 @@
         @handleEvent="handleEvent">
     </page-table>
     <!-- 弹窗 -->
-    <el-dialog
+    <page-dialog
       :title="dialogInfo.title[dialogInfo.type]"
       :visible.sync="dialogInfo.visible"
       :width="dialogInfo.width"
-      :class="dialogInfo.className">
-      <el-form
-        :model="formInfo.data"
-        :rules="formInfo.rules"
-        ref="form"
-        :label-width="formInfo.labelWidth || '120px'">
-        <el-form-item
-          v-for="(item, index) in formInfo.fieldList"
-          :key="index"
-          :prop="item.value"
-          :label="item.label"
-          :class="item.className">
-          <!-- 普通输入框 -->
-          <el-input
-            v-if="item.type === 'input' || item.type === 'password'"
-            :type="item.type"
-            :disabled="item.disabled"
-            :placeholder="getPlaceholder(item)"
-            @focus="handleEvent(item.event)"
-            v-model="formInfo.data[item.value]">
-          </el-input>
-          <!-- 文本输入框 -->
-          <el-input
-            v-if="item.type === 'textarea'"
-            :type="item.type"
-            :disabled="item.disabled"
-            :placeholder="getPlaceholder(item)"
-            :autosize="{minRows: 2, maxRows: 10}"
-            @focus="handleEvent(item.event)"
-            v-model.trim="formInfo.data[item.value]">
-          </el-input>
-          <!-- 选择框 -->
-          <el-select
-            v-if="item.type === 'select'"
-            v-model="formInfo.data[item.value]"
-            @change="handleEvent(item.event, formInfo.data[item.value])"
-            :disabled="item.disabled"
-            :clearable="item.clearable"
-            :filterable="item.filterable"
-            :placeholder="getPlaceholder(item)">
-            <el-option v-for="(item ,index) in  listTypeInfo[item.list]" :key="index" :label="item.key" :value="item.value"></el-option>
-          </el-select>
-          <!-- 日期选择框 -->
-          <el-date-picker
-            v-if="item.type === 'date'"
-            v-model="formInfo.data[item.value]"
-            :type="item.dateType"
-            :clearable="item.clearable"
-            :disabled="item.disabled"
-            @focus="handleEvent(item.event)"
-            :placeholder="getPlaceholder(item)">
-          </el-date-picker>
-          <!-- 信息展示框 -->
-          <el-tag v-if="item.type === 'tag'">
-            {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: formInfo.data[item.value]})}}
-          </el-tag>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer" v-if="dialogInfo.btList">
-        <el-button
-            v-for="(item, index) in dialogInfo.btList"
-            :key="index"
-            :type="item.type"
-            :icon="item.icon"
-            v-waves
-            @click="handleClickBt(item.event)"
-            :disabled="item.disabled"
-            :loading="dialogInfo.btLoading">
-            {{item.label}}
-          </el-button>
-      </div>
-    </el-dialog>
+      :btLoading="dialogInfo.btLoading"
+      :btList="dialogInfo.btList"
+      @handleClickBt="handleClickBt"
+      @handleEvent="handleEvent">
+      <!-- form -->
+      <page-form
+      :refObj.sync="formInfo.ref"
+      :data="formInfo.data"
+      :fieldList="formInfo.fieldList"
+      :rules="formInfo.rules"
+      :labelWidth="formInfo.labelWidth"
+      :listTypeInfo="listTypeInfo">
+      </page-form>
+    </page-dialog>
   </div>
 </template>
 
@@ -107,12 +49,16 @@ import { getListApi, createApi, updateApi, deleteApi } from '@/api/user'
 import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
+import PageDialog from '@/components/PageDialog'
+import PageForm from '@/components/PageForm'
 
 export default {
   mixins: [HandleApi],
   components: {
     PageFilter,
-    PageTable
+    PageTable,
+    PageDialog,
+    PageForm
   },
   data () {
     return {
@@ -136,7 +82,7 @@ export default {
           {key: '停用', value: 0}
         ]
       },
-      // 查询配置
+      // 过滤相关配置
       filterInfo: {
         query: {
           create_user: '',
@@ -182,6 +128,7 @@ export default {
       },
       // 表单相关
       formInfo: {
+        ref: null,
         data: {
           id: '', // *唯一ID
           account: '', // *用户账号
@@ -339,7 +286,7 @@ export default {
         break
       // 弹窗点击保存
       case 'save':
-        this.$refs.form.validate(valid => {
+        this.formInfo.ref.validate(valid => {
           if (valid) {
             let api, params = this.formInfo.data,
               type = this.dialogInfo.type

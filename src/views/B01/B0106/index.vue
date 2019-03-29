@@ -52,7 +52,7 @@ export default {
           {key: '功能操作', value: 4}
         ]
       },
-      // 查询配置
+      // 过滤相关配置
       filterInfo: {
         query: {
           origin: '',

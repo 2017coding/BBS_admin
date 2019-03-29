@@ -12,41 +12,24 @@
         @handleEvent="handleEvent"></page-tree>
     </div>
     <div class="right">
-      <!-- 表格 -->
-      <page-table
-        :refresh="tableInfo.refresh"
-        :initCurpage="tableInfo.initCurpage"
-        :data.sync="tableInfo.data"
-        :api="getListApi"
-        :query="filterInfo.query"
-        :fieldList="tableInfo.fieldList"
-        :listTypeInfo="listTypeInfo"
-        :handle="tableInfo.handle"
-        @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent">
-      </page-table>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { getListApi, updateApi, getAllApi } from '@/api/role'
+import { getRowApi, updateApi, getAllApi } from '@/api/role'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
-import PageFilter from '@/components/PageFilter'
-import PageTable from '@/components/PageTable'
 
 export default {
   mixins: [HandleApi],
   components: {
-    PageTree,
-    PageFilter,
-    PageTable
+    PageTree
   },
   data () {
     return {
-      getListApi,
+      getRowApi,
       updateApi,
       getAllApi,
       // 相关列表
@@ -70,30 +53,50 @@ export default {
         },
         rightMenuList: []
       },
-      // 查询配置
+      // 过滤相关配置
       filterInfo: {
         query: {
           pid: 1
         }
       },
-      // 表格相关
-      tableInfo: {
-        refresh: false,
-        initCurpage: false,
-        data: [],
+      // 表单相关
+      formInfo: {
+        data: {
+          id: '', // *唯一ID
+          pid: '', // *父ID
+          name: '', // *角色名称
+          columns: 1, // 专栏数量, 0为无限
+          users: 10, // 可创建多少个用户, 0为无限
+          desc: '', // 描述
+          status: 1 // *状态: 0：停用，1：启用(默认为1)',
+          // create_user: '', // 创建人
+          // create_time: '', // 创建时间
+          // update_user: '', // 修改人
+          // update_time: '' // 修改时间
+        },
         fieldList: [
-          {label: '名称', value: 'name'},
-          {label: '级别', value: 'level'},
-          {label: '状态', value: 'status', list: 'statusList'}
+          {label: '名称', value: 'name', type: 'input', required: true},
+          {label: '可创建专栏数', value: 'columns', type: 'inputNumber', min: 1, max: 1},
+          {label: '可创建用户数', value: 'users', type: 'inputNumber', min: 1, max: 10},
+          {label: '描述', value: 'desc', type: 'input', required: true},
+          {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
         ],
-        handle: {
-          fixed: 'right',
-          label: '操作',
-          width: '100',
-          btList: [
-            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: true}
-          ]
-        }
+        rules: {},
+        labelWidth: '120px'
+      },
+      // 弹窗相关
+      dialogInfo: {
+        title: {
+          add: '添加',
+          update: '编辑'
+        },
+        visible: false,
+        type: '',
+        btLoading: false,
+        btList: [
+          {label: '关闭', type: '', icon: '', event: 'close', show: true},
+          {label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true}
+        ]
       }
     }
   },
@@ -115,52 +118,36 @@ export default {
     },
     // 获取列表
     getList () {
-      this.tableInfo.refresh = !this.tableInfo.refresh
     },
     // 按钮点击
     handleClickBt (event, data) {
       switch (event) {
-      case 'status':
-        let params = JSON.parse(JSON.stringify(data))
-        params.status = params.status - 1 >= 0 ? 0 : 1
-        data.statusLoading = true
-        this.handleAPI('update', updateApi, params).then(res => {
-          data.statusLoading = false
-          if (res.success) {
-            data.status = params.status
-          }
-        }).catch(() => {
-          data.statusLoading = false
-        })
-        break
       }
     },
     // 触发事件
     handleEvent (event, data) {
       switch (event) {
-      // 对表格获取到的数据做处理
-      case 'list':
-        if (!data) return
-        // 初始化数据
-        data.forEach(item => {
-          item.statusLoading = false
-        })
-        break
       // 左键点击的处理
       case 'leftClick':
-        this.treeInfo.type = data.data.type + 1
-        this.filterInfo.query.pid = data.data.id
-        this.tableInfo.initCurpage = !this.tableInfo.initCurpage
-        this.tableInfo.refresh = !this.tableInfo.refresh
         break
       // 根据右键点击创建节点对应菜单
       case 'rightClick':
-        this.treeInfo.rightMenuList = [
-          {name: '添加下级', type: 'create', data: data.data, node: data.node, vm: data.vm},
-          {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm},
-          {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm},
-          {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
-        ]
+        let arr = [{name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}]
+        // 根节点
+        if (data.node.level === 1) {
+          arr = [
+            {name: '添加下级', type: 'create', data: data.data, node: data.node, vm: data.vm},
+            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
+          ]
+        } else if (data.node.level) {
+          arr = [
+            {name: '添加下级', type: 'create', data: data.data, node: data.node, vm: data.vm},
+            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm},
+            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm},
+            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
+          ]
+        }
+        this.treeInfo.rightMenuList = arr
         break
       // 右键菜单对应的事件处理
       case 'rightEvent':
@@ -172,16 +159,28 @@ export default {
     handleRightEvent (type, data) {
       switch (type) {
       case 'refreshTree':
-        // 表格初始化
-        this.filterInfo.query.pid = 1
-        this.tableInfo.initCurpage = !this.tableInfo.initCurpage
-        this.tableInfo.refresh = !this.tableInfo.refresh
         // falls through 告诉ESlint不检查这一行
       case 'refresh':
         // 树刷新
         this.treeInfo.refreshLevel = !data.node ? 0 : data.node.level
         this.treeInfo.refresh = !this.treeInfo.refresh
         break
+      }
+    },
+    // 初始化表单
+    resetForm () {
+      this.formInfo.data = {
+        id: '', // *唯一ID
+        pid: '', // *父ID
+        name: '', // *角色昵称
+        columns: 1, // 专栏数量, 0为无限
+        users: 10, // 可创建多少个用户, 0为无限
+        desc: '', // 描述
+        status: 1 // *状态: 0：停用，1：启用(默认为1)',
+        // create_user: '', // 创建人
+        // create_time: '', // 创建时间
+        // update_user: '', // 修改人
+        // update_time: '' // 修改时间
       }
     }
   }
