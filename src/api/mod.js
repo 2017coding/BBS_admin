@@ -44,9 +44,10 @@ export function getListApi (params) {
 }
 
 // 获取所有
-export function getAllApi () {
+export function getAllApi (params) {
   return request({
     url: `/api/mod/getAll`,
-    method: 'get'
+    method: 'get',
+    params
   })
 }

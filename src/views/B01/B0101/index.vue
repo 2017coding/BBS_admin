@@ -306,7 +306,7 @@ export default {
               }
               dialogInfo.btLoading = false
             }).catch(e => {
-              dialogInfo.btLoading = true
+              dialogInfo.btLoading = false
             })
           }
         })

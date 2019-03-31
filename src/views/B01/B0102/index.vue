@@ -107,14 +107,14 @@ export default {
         fieldList: [
           {label: '所属角色', value: 'pid', list: 'treeList'},
           {label: '角色名称', value: 'name'},
-          {label: '可创建专栏数', value: 'columns', width: 120},
-          {label: '可创建用户数', value: 'users', width: 120},
-          {label: '描述', value: 'desc', minWidth: 200},
-          {label: '状态', value: 'status', list: 'statusList'},
+          {label: '可创建专栏数', value: 'columns'},
+          {label: '可创建用户数', value: 'users'},
+          {label: '描述', value: 'desc'},
+          {label: '状态', value: 'status'},
           {label: '创建人', value: 'create_user'},
-          {label: '创建时间', value: 'create_time', minWidth: 180},
+          {label: '创建时间', value: 'create_time'},
           {label: '更新人', value: 'update_user'},
-          {label: '更新时间', value: 'update_time', minWidth: 180}
+          {label: '更新时间', value: 'update_time'}
         ]
       },
       // 表单相关
@@ -258,7 +258,7 @@ export default {
               }
               dialogInfo.btLoading = false
             }).catch(e => {
-              dialogInfo.btLoading = true
+              dialogInfo.btLoading = false
             })
           }
         })
