@@ -2,7 +2,7 @@ export default {
   methods: {
     handleAPI (type, api, data) {
       switch (type) {
-      case 'add':
+      case 'create':
       case 'update':
         return new Promise((resolve, reject) => {
           api(data).then(res => {
@@ -39,6 +39,10 @@ export default {
           }).catch(e => {
             reject(e)
           })
+        })
+      default:
+        return new Promise((resolve, reject) => {
+          reject('找不到的类型设置')
         })
       }
     }

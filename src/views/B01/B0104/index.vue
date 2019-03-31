@@ -3,6 +3,7 @@
     <!-- 左侧树 -->
     <div class="left">
       <page-tree
+        :baseData.sync="treeInfo.baseData"
         :nodeKey="treeInfo.nodeKey"
         :lazy="true"
         :lazyInfo="treeInfo.lazyInfo"
@@ -64,13 +65,14 @@ export default {
         nodeKey: 'key',
         lazy: true,
         type: 0, // 省市区类型
+        baseData: [], // 树的基础数据，从组件中获取到
         lazyInfo: [
           {
-            key: 'id',
-            label: 'name',
-            type: 1,
-            api: getAllApi,
-            params: {key: 'pid', value: 1, type: 'url'}
+            key: 'id', // 节点唯一标识字段
+            label: 'name', // 节点显示字段
+            type: 1, // 数据类型
+            api: getAllApi, // 获取数据的接口
+            params: {key: 'pid', value: 1, type: 'url'} // 获取数据的参数
           },
           {
             key: 'id',

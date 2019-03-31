@@ -95,7 +95,7 @@ export default {
           // {type: 'select', label: '创建人', value: 'create_user'},
           // {type: 'date', label: '创建时间', value: 'create_time'},
           {type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true},
-          {type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'add', show: true}
+          {type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'create', show: true}
         ]
       },
       // 表格相关
@@ -163,7 +163,7 @@ export default {
       // 弹窗相关
       dialogInfo: {
         title: {
-          add: '添加',
+          create: '添加',
           update: '编辑'
         },
         visible: false,
@@ -256,8 +256,8 @@ export default {
       case 'search':
         tableInfo.refresh = !tableInfo.refresh
         break
-      // 添加
-      case 'add':
+      // 创建
+      case 'create':
         dialogInfo.type = event
         dialogInfo.visible = true
         break
@@ -266,8 +266,11 @@ export default {
         dialogInfo.type = event
         dialogInfo.visible = true
         // 显示信息
-        for (let key in formInfo.data) {
-          formInfo.data[key] = data[key]
+        for (let key in data) {
+          // 存在则赋值
+          if (key in formInfo.data) {
+            formInfo.data[key] = data[key]
+          }
         }
         break
       // 删除
@@ -288,7 +291,7 @@ export default {
           if (valid) {
             let api, params = this.formInfo.data,
               type = this.dialogInfo.type
-            if (type === 'add') {
+            if (type === 'create') {
               api = createApi
             } else if (type === 'update') {
               api = updateApi

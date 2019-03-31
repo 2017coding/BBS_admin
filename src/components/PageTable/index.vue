@@ -103,8 +103,7 @@ export default {
     },
     // 获取数据的接口
     api: {
-      type: Function,
-      required: true
+      type: Function
     },
     // 是否显示序号
     index: {
@@ -167,6 +166,7 @@ export default {
       this.listInfo.query.curPage = 1
     },
     refresh () {
+      if (!this.api) return
       this.getList(this.api)
     }
   },

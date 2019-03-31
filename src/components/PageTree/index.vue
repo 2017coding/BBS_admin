@@ -36,6 +36,10 @@
 export default {
   name: 'PageTree',
   props: {
+    // 容器，内部获取到的数据提供外部的接口
+    baseData: {
+      type: Array
+    },
     // 是否手风琴点击
     clickNode: {
       type: Boolean,
@@ -55,6 +59,7 @@ export default {
       default: () => {
         return [
           {
+            data: [],
             key: 'id',
             label: 'name',
             type: '',
@@ -69,18 +74,27 @@ export default {
      * 正常加载相关
      */
     loadInfo: {
-      key: 'id',
-      label: 'name',
-      api: () => {},
-      params: {key: '', value: '', type: 'url'} // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
+      type: Object,
+      default: () => {
+        return {
+          data: [],
+          key: 'id',
+          label: 'name',
+          api: () => {},
+          params: {key: '', value: '', type: 'url'} // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
+        }
+      }
     },
     // 默认选中的项
     defaultChecked: {
       type: Array
     },
-    // 默认点击的项
+    // 默认点击的项 (设置为obj，保证能一直监听到数据的变化)
     defaultClicked: {
-      type: Number
+      type: Object,
+      defalult: () => {
+        return {}
+      }
     },
     // 默认展开项
     defaultExpanded: {
@@ -88,7 +102,7 @@ export default {
     },
     // 默认高亮
     defaultHighLight: {
-      type: String || Number
+      // type: String || Number
     },
     // 是否全部展开
     expandAll: {
@@ -190,6 +204,17 @@ export default {
       }
       // 关闭菜单
       this.handlecCloseMenu()
+    },
+    // 树组件默认高亮的节点
+    defaultHighLight (val) {
+      this.$nextTick(() => {
+        this.$refs.TreeComponent.setCurrentKey(val)
+      })
+    },
+    // 页面默认点击的节点
+    defaultClicked (val) {
+      const data = this.lazy ? this.lazyInfo : this.loadInfo
+      this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(data.key, this.baseData, val.id)})
     }
   },
   created () {
@@ -309,25 +334,27 @@ export default {
       loadInfo.api(data).then(res => {
         let arr = []
         if (res.success) {
+          // 得到数据后把数据给到父级，方便父级用到
+          this.$emit('update:baseData', res.content)
           arr = JSON.parse(JSON.stringify(res.content))
           arr.forEach(item => {
             // 保证刷新之后key的唯一
-            item.key = loadInfo.type + item[loadInfo.key] + Math.random()
+            item.key = item[loadInfo.key]
             item[treeProps.label] = item[loadInfo.label]
           })
           this.treeData = this.$fn.getTreeArr({
             key: loadInfo.key, pKey: loadInfo.pKey, rootPValue: loadInfo.rootPValue, data: arr
           })
           // 设置默认高亮
-          if (this.defaultHighLight) {
+          if (this.defaultHighLight || this.defaultHighLight === 0) {
             this.$nextTick(() => {
               this.$refs.TreeComponent.setCurrentKey(this.defaultHighLight)
             })
           }
           // 设置默认点击
-          if (this.defaultClicked) {
+          if ((this.defaultClicked && (this.defaultClicked.id || this.defaultClicked.id === 0))) {
             // 页面初始化，设置默认点击项， 并将点击事件派发到父级
-            this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(this.treeData, this.defaultClicked)})
+            this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(loadInfo.key, this.baseData, this.defaultClicked.id)})
           }
         }
         // 加载loading
@@ -338,12 +365,10 @@ export default {
       })
     },
     // 在树状数据中找到某一条数据
-    getSelectData (data, val) {
+    getSelectData (key, data, val) {
       for (let item of data) {
-        if (item[this.nodeKey] === val) {
+        if (item[key] === val) {
           return item
-        } else if (Array.isArray(item.children) && item.children.length > 0) {
-          this.getSelectData(item.children, val)
         }
       }
     },
@@ -372,28 +397,27 @@ export default {
       levelInfo.api(data).then(res => {
         let arr = []
         if (res.success) {
+          // 得到数据后把数据给到父级，方便父级用到
+          this.$emit('update:baseData', [...this.baseData, ...res.content])
           arr = JSON.parse(JSON.stringify(res.content))
           arr.forEach(item => {
-            // 保证刷新之后key的唯一
-            item.key = levelInfo.type + item[levelInfo.key] + Math.random()
+            // 保证key的唯一
+            item.key = levelInfo.type + item[levelInfo.key]
             item['level' + node.level + 'data'] = node.data
             item[treeProps.label] = item[levelInfo.label]
             item.type = levelInfo.type
             item[treeProps.isLeaf] = levelInfo.leaf
           })
-          // 初始化时设置相关参数
-          if (node.level === 0) {
-            // 设置默认高亮
-            if (this.defaultHighLight) {
-              this.$nextTick(() => {
-                this.$refs.TreeComponent.setCurrentKey(this.defaultHighLight)
-              })
-            }
-            // 设置默认点击
-            if (this.defaultClicked) {
-              // 页面初始化，设置默认点击项， 并将点击事件派发到父级
-              this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(this.treeData, this.defaultClicked)})
-            }
+          // 设置默认高亮
+          if (this.defaultHighLight || this.defaultHighLight === 0) {
+            this.$nextTick(() => {
+              this.$refs.TreeComponent.setCurrentKey(this.defaultHighLight)
+            })
+          }
+          // 设置默认点击
+          if ((this.defaultClicked && (this.defaultClicked.id || this.defaultClicked.id === 0))) {
+            // 页面初始化，设置默认点击项， 并将点击事件派发到父级
+            this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(levelInfo.key, this.baseData, this.defaultClicked.id)})
           }
         }
         // 延迟加载，保证加载动画

@@ -63,7 +63,7 @@
       </el-date-picker>
       <!-- 信息展示框 -->
       <el-tag v-if="item.type === 'tag'">
-        {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: data[item.value]})}}
+        {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: data[item.value]}) || '-'}}
       </el-tag>
     </el-form-item>
   </el-form>

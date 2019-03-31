@@ -129,6 +129,30 @@ $treeWidth: 240px;
       }
     }
   }
+  .page-form-block{
+    .el-form-item{
+      display: block;
+      .el-form-item__content{
+        .el-input, .el-select, .el-textarea{
+          width: inherit;
+        }
+        .el-input-number{
+          .el-input{
+            width: inherit;
+          }
+        }
+      }
+    }
+    .el-form-block{
+      display: block;
+      width: 100%;
+      .el-form-item__content{
+        .el-textarea{
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
 .disabled-select {
