@@ -11,15 +11,15 @@
     <!-- 表格 -->
     <page-table
       :refresh="tableInfo.refresh"
-        :initCurpage="tableInfo.initCurpage"
-        :data.sync="tableInfo.data"
-        :api="getListApi"
-        :query="filterInfo.query"
-        :fieldList="tableInfo.fieldList"
-        :listTypeInfo="listTypeInfo"
-        :handle="tableInfo.handle"
-        @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent">
+      :initCurpage="tableInfo.initCurpage"
+      :data.sync="tableInfo.data"
+      :api="getListApi"
+      :query="filterInfo.query"
+      :fieldList="tableInfo.fieldList"
+      :listTypeInfo="listTypeInfo"
+      :handle="tableInfo.handle"
+      @handleClickBt="handleClickBt"
+      @handleEvent="handleEvent">
     </page-table>
     <!-- 弹窗 -->
     <page-dialog
@@ -102,9 +102,7 @@ export default {
       tableInfo: {
         refresh: false,
         initCurpage: false,
-        data: [
-          {accpunt: 1, accpunt1: 2, accpunt2: 3, name: '测试', sex: '性别', type: '管理'}
-        ],
+        data: [],
         fieldList: [
           {label: '账号', value: 'account'},
           {label: '用户名', value: 'name'},

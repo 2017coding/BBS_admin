@@ -97,7 +97,7 @@ export default {
         fieldList: [
           {label: '名称', value: 'name'},
           {label: '级别', value: 'level'},
-          {label: '状态', value: 'status', list: 'statusList'}
+          {label: '状态', value: 'status', width: 80}
         ],
         handle: {
           fixed: 'right',

@@ -50,7 +50,7 @@ const user = {
         loginOutApi().then(res => {
           if (res.success) {
             sessionStorage.clear()
-            localStorage.clear()
+            // localStorage.clear()
             commit('SET_USERINFO', '')
             // // 清除app模块中的相关信息
             // dispatch('app/removeProjectInfo', {}, {root: true})
@@ -58,7 +58,7 @@ const user = {
             resolve()
           } else {
             sessionStorage.clear()
-            localStorage.clear()
+            // localStorage.clear()
             commit('SET_USERINFO', '')
             reject()
           }

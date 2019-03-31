@@ -1,6 +1,6 @@
 <template>
-  <div class="page-filter">
-    <div class="filter-item" v-for="(item, index) in filterList" :key="index">
+  <div class="page-filter" :class="className">
+    <div class="filter-item" v-for="(item, index) in getConfigList()" :key="index">
       <!-- <label class="filter-label" v-if="item.type !== 'button'">{{item.key}}</label> -->
       <!-- 输入框 -->
       <el-input
@@ -50,7 +50,7 @@
       <!-- 按钮 -->
       <el-button
         :class="`filter-${item.type}`"
-        v-else-if="item.type === 'button' && item.show"
+        v-else-if="item.type === 'button'"
         v-waves
         :type="item.btType"
         :icon="item.icon"
@@ -63,15 +63,22 @@
 export default {
   name: 'PageFilter',
   props: {
+    // 自定义类名
+    className: {
+      type: String
+    },
+    // 相关列表
     listTypeInfo: {
       type: Object,
       default: () => {
         return {}
       }
     },
+    // 过滤器列表
     filterList: {
       type: Array
     },
+    // 参数
     query: {
       type: Object
     }
@@ -109,6 +116,10 @@ export default {
         }
       }
       this.searchQuery = obj
+    },
+    // 获取列表
+    getConfigList () {
+      return this.filterList.filter(item => !item.hasOwnProperty('show') || (item.hasOwnProperty('show') && item.show))
     },
     // 得到placeholder的显示
     getPlaceholder (row) {

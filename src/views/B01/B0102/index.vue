@@ -12,7 +12,35 @@
         @handleEvent="handleEvent"></page-tree>
     </div>
     <div class="right">
+      <!-- form -->
+      <page-form
+      :refObj.sync="formInfo.ref"
+      :data="formInfo.data"
+      :fieldList="formInfo.fieldList"
+      :rules="formInfo.rules"
+      :labelWidth="formInfo.labelWidth"
+      :listTypeInfo="listTypeInfo">
+      </page-form>
     </div>
+    <!-- 弹窗 -->
+    <page-dialog
+      :title="dialogInfo.title[dialogInfo.type]"
+      :visible.sync="dialogInfo.visible"
+      :width="dialogInfo.width"
+      :btLoading="dialogInfo.btLoading"
+      :btList="dialogInfo.btList"
+      @handleClickBt="handleClickBt"
+      @handleEvent="handleEvent">
+      <!-- form -->
+      <page-form
+      :refObj.sync="formInfo.ref"
+      :data="formInfo.data"
+      :fieldList="formInfo.fieldList"
+      :rules="formInfo.rules"
+      :labelWidth="formInfo.labelWidth"
+      :listTypeInfo="listTypeInfo">
+      </page-form>
+    </page-dialog>
   </div>
 </template>
 
@@ -21,11 +49,15 @@ import { mapGetters } from 'vuex'
 import { getRowApi, updateApi, getAllApi } from '@/api/role'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
+import PageDialog from '@/components/PageDialog'
+import PageForm from '@/components/PageForm'
 
 export default {
   mixins: [HandleApi],
   components: {
-    PageTree
+    PageTree,
+    PageDialog,
+    PageForm
   },
   data () {
     return {
@@ -126,20 +158,27 @@ export default {
     },
     // 触发事件
     handleEvent (event, data) {
+      const tableInfo = this.tableInfo,
+        dialogInfo = this.dialogInfo,
+        formInfo = this.formInfo
       switch (event) {
       // 左键点击的处理
       case 'leftClick':
+        // 显示信息
+        for (let key in formInfo.data) {
+          formInfo.data[key] = data.data[key]
+        }
         break
       // 根据右键点击创建节点对应菜单
       case 'rightClick':
-        let arr = [{name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}]
+        let arr = []
         // 根节点
         if (data.node.level === 1) {
           arr = [
             {name: '添加下级', type: 'create', data: data.data, node: data.node, vm: data.vm},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
           ]
-        } else if (data.node.level) {
+        } else {
           arr = [
             {name: '添加下级', type: 'create', data: data.data, node: data.node, vm: data.vm},
             {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm},

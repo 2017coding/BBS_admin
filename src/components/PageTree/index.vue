@@ -119,9 +119,7 @@ export default {
     rightMenuList: {
       type: Array,
       default: () => {
-        return [
-          {name: '刷新树', type: 'refreshTree'}
-        ]
+        return []
       }
     },
     // 设置节点过滤文本
@@ -162,9 +160,7 @@ export default {
         show: false,
         left: 0,
         top: 0,
-        list: [
-          {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
-        ]
+        list: []
       },
       node: null,
       // 每个level的节点信息
@@ -203,17 +199,25 @@ export default {
     // 自定义渲染内容
     renderContent (h, { node, data, store }) {
       let dom
-      if (data.leaf) {
-        dom = (
-          <p class="custom-tree-node">
-            <img src={require('@/assets/image/doc.png')}></img>
-            <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
-          </p>
-        )
+      if (this.lazy) {
+        if (data.leaf) {
+          dom = (
+            <p class="custom-tree-node">
+              <img src={require('@/assets/image/doc.png')}></img>
+              <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
+            </p>
+          )
+        } else {
+          dom = (
+            <p class="custom-tree-node">
+              <img src={node.expanded ? require('@/assets/image/file-open.png') : require('@/assets/image/file-close.png')}></img>
+              <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
+            </p>
+          )
+        }
       } else {
         dom = (
           <p class="custom-tree-node">
-            <img src={node.expanded ? require('@/assets/image/file-open.png') : require('@/assets/image/file-close.png')}></img>
             <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
           </p>
         )
@@ -228,6 +232,10 @@ export default {
     // 树盒子的右键点击事件
     handleTreeClick (e) {
       if (!this.rightClick) return
+      // 初始菜单
+      this.rightMenu.list = [
+        {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
+      ]
       // 显示菜单，并且根据点击的位置生成菜单显示的坐标
       this.rightMenu.show = true
       let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
@@ -242,6 +250,8 @@ export default {
     },
     // 节点左键点击
     handleClickLeft (data, node, vm) {
+      // 关闭菜单
+      this.handlecCloseMenu()
       this.$emit('handleEvent', 'leftClick', {data, node, vm})
     },
     // 右键的点击事件 => 参数依次为 event, 数据， 节点， 节点组件本身

@@ -1,7 +1,13 @@
 <template>
-  <div class="page-table">
+  <div class="page-table" :class="className">
       <!-- 显示表格 -->
-      <el-table ref="table" :max-height="listInfo.tableHeight || undefined" :data="data" border style="width:100%" v-loading="listInfo.loading">
+      <el-table
+        ref="table"
+        :max-height="listInfo.tableHeight || undefined"
+        :data="data"
+        border
+        style="width:100%"
+        v-loading="listInfo.loading">
         <!-- <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="index">
           <template slot-scope="scope">
             <span>{{scope.$index + 1 + (listInfo.query.curPage - 1) * listInfo.query.pageSize}}</span>
@@ -17,6 +23,7 @@
           :width="item.width"
           :min-width="item.minWidth || '100px'">
           <template slot-scope="scope">
+            <!-- 嵌套表格 -->
             <template v-if="item.children">
               <el-table-column
                 v-for="(childItem, childIndex) in item.children"
@@ -28,6 +35,14 @@
                 :min-width="item.minWidth || '85px'">
               </el-table-column>
             </template>
+            <!-- 状态 -->
+            <span v-else-if="item.value === 'status'">
+              <i
+                :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
+                :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
+              </i>
+            </span>
+            <!-- 其他 -->
             <span v-else>
               {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: scope.row[item.value]})}}
             </span>
@@ -78,9 +93,15 @@
 export default {
   name: 'PageTable',
   props: {
+    // 自定义类名
+    className: {
+      type: String
+    },
+    // 刷新
     refresh: {
       type: Boolean
     },
+    // 获取数据的接口
     api: {
       type: Function,
       required: true

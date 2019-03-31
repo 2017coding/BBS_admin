@@ -14,7 +14,7 @@
           type="text"
           prefix-icon="el-icon-people_fill"
           v-model.trim="formInfo.data.account"
-          @keyup.enter.native="_handleLogin()"
+          @keyup.enter.native="handleLogin()"
           placeholder="请输入账号">
         </el-input>
       </el-form-item>
@@ -23,7 +23,7 @@
           type="password"
           prefix-icon="el-icon-lock_fill"
           v-model.trim="formInfo.data.password"
-          @keyup.enter.native="_handleLogin()"
+          @keyup.enter.native="handleLogin()"
           placeholder="请输入密码">
         </el-input>
       </el-form-item>
@@ -31,7 +31,7 @@
         <el-checkbox v-model="formInfo.remember" style="color: rgb(100, 100, 100)">记住密码</el-checkbox>
       </div>
       <el-form-item>
-        <el-button :loading="buttonInfo.btLoading" type="primary" class="login-bt" @click="_handleLogin()">登录</el-button>
+        <el-button :loading="buttonInfo.btLoading" type="primary" class="login-bt" @click="handleLogin()">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -65,11 +65,11 @@ export default {
     }
   },
   created () {
-    this._initRemember()
+    this.initRemember()
   },
   methods: {
     // 初始化记住选择
-    _initRemember (remember) {
+    initRemember (remember) {
       let formInfo = this.formInfo,
         data = formInfo.data
       // 登录成功进入这里
@@ -95,13 +95,13 @@ export default {
         localStorage.removeItem('password')
       }
     },
-    _handleLogin () {
+    handleLogin () {
       this.$refs.form.validate(valid => {
         this.buttonInfo.btLoading = true
         loginApi(this.formInfo.data).then(res => {
           if (res.success) {
             // 登录成功后，对账号密码的操作
-            this._initRemember(this.formInfo.remember)
+            this.initRemember(this.formInfo.remember)
             // 记住cookie
             this.$store.dispatch('user/setToken', res.token)
             // 记住用户信息

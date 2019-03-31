@@ -11,6 +11,7 @@
     <!-- 表格 -->
     <page-table
       :refresh="tableInfo.refresh"
+      :data.sync="tableInfo.data"
       :api="getListApi"
       :query="filterInfo.query"
       :fieldList="tableInfo.fieldList"
@@ -67,9 +68,7 @@ export default {
       // 表格相关
       tableInfo: {
         refresh: false,
-        data: [
-          {accpunt: 1, accpunt1: 2, accpunt2: 3, name: '测试', sex: '性别', type: '管理'}
-        ],
+        data: [],
         fieldList: [
           {label: '日志来源', value: 'origin', list: 'originList'},
           {label: '日志类型', value: 'type', list: 'typeList'},

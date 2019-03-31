@@ -1,12 +1,13 @@
 <template>
   <el-form
     class="page-form"
+    :class="className"
     :model="data"
     :rules="rules"
     ref="form"
     :label-width="labelWidth">
     <el-form-item
-      v-for="(item, index) in fieldList"
+      v-for="(item, index) in getConfigList()"
       :key="index"
       :prop="item.value"
       :label="item.label"
@@ -30,6 +31,15 @@
         @focus="handleEvent(item.event)"
         v-model.trim="data[item.value]">
       </el-input>
+      <!-- 计数器 -->
+      <el-input-number
+        v-if="item.type === 'inputNumber'"
+        v-model="data[item.value]"
+        @change="handleEvent(item.event)"
+        size="small"
+        :min="item.min"
+        :max="item.max">
+      </el-input-number>
       <!-- 选择框 -->
       <el-select
         v-if="item.type === 'select'"
@@ -63,6 +73,10 @@
 export default {
   name: 'PageForm',
   props: {
+    // 自定义类名
+    className: {
+      type: String
+    },
     // 表单数据
     data: {
       type: Object
@@ -106,6 +120,10 @@ export default {
     this.$emit('update:refObj', this.$refs.form)
   },
   methods: {
+    // 获取字段列表
+    getConfigList () {
+      return this.fieldList.filter(item => !item.hasOwnProperty('show') || (item.hasOwnProperty('show') && item.show))
+    },
     // 得到placeholder的显示
     getPlaceholder (row) {
       let placeholder

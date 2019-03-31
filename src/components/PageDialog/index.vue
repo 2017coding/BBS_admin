@@ -3,11 +3,13 @@
       :title="title"
       :visible.sync="visible"
       :width="width"
-      class="page-dialog">
+      :before-close="handleClose"
+      class="page-dialog"
+      :class="className">
       <slot></slot>
       <div slot="footer" class="dialog-footer" v-if="btList">
         <el-button
-          v-for="(item, index) in btList"
+          v-for="(item, index) in getConfigList()"
           :key="index"
           :type="item.type"
           :icon="item.icon"
@@ -25,6 +27,10 @@
 export default {
   name: 'PageDialog',
   props: {
+    // 自定义类名
+    className: {
+      type: String
+    },
     // 弹窗标题
     title: {
       type: String
@@ -36,10 +42,6 @@ export default {
     },
     // 弹窗宽度
     width: {
-      type: String
-    },
-    // 弹窗class
-    className: {
       type: String
     },
     // 按钮加载
@@ -61,6 +63,10 @@ export default {
     }
   },
   methods: {
+    // 获取按钮列表
+    getConfigList () {
+      return this.btList.filter(item => !item.hasOwnProperty('show') || (item.hasOwnProperty('show') && item.show))
+    },
     // 绑定的相关事件
     handleEvent (evnet) {
       this.$emit('handleEvent', evnet)
@@ -68,6 +74,10 @@ export default {
     // 派发按钮点击事件
     handleClickBt (event, data) {
       this.$emit('handleClickBt', event, data)
+    },
+    // 关闭弹窗前的回调
+    handleClose (done) {
+      this.$emit('update:visible', false)
     }
   }
 }

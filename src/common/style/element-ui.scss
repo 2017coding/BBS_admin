@@ -35,26 +35,4 @@
     min-width: 750px;
     border-radius: 6px!important;
   }
-  // 表单样式
-  .el-form{
-    .el-form-item{
-      display: inline-block;
-      // float: left;
-      width: 48%;
-      .el-form-item__content{
-        .el-input, .el-select, .el-textarea{
-          width: 240px;
-        }
-      }
-    }
-    .el-form-block{
-      display: block;
-      width: 100%;
-      .el-form-item__content{
-        .el-textarea{
-          width: 100%;
-        }
-      }
-    }
-  }
 }
