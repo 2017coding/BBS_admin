@@ -337,7 +337,7 @@ export default {
           data[item.key] = item.value
         })
       } else {
-        console.log('没有传参数类型')
+        // console.log('没有传参数类型')
       }
       loadInfo.api(data).then(res => {
         let arr = []

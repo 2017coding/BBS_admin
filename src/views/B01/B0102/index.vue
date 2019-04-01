@@ -172,6 +172,8 @@ export default {
           this.$refs.form.resetFields()
         }
         this.resetForm()
+        // 重置弹窗按钮loading
+        this.dialogInfo.btLoading = false
       }
     },
     // 得到树组件数据，处理相关事件
@@ -185,14 +187,6 @@ export default {
   methods: {
     initTree (val) {
       const treeInfo = this.treeInfo
-      // 初始化树
-      if (!treeInfo.initTree) {
-        treeInfo.initTree = true
-        // 设置默认
-        treeInfo.defaultClicked = {id: val[0].id}
-        treeInfo.defaultHighLight = val[0].id
-        treeInfo.defaultExpanded = [val[0].id]
-      }
       // 操作完后，树刷新，重新设置默认项
       if (treeInfo.initTree) {
         if (treeInfo.defaultClickedAsyc || treeInfo.defaultClickedAsyc === 0) {
@@ -204,6 +198,14 @@ export default {
         if (treeInfo.defaultExpandedAsyc.length > 0) {
           treeInfo.defaultExpanded = treeInfo.defaultExpandedAsyc
         }
+      }
+      // 初始化树
+      if (!treeInfo.initTree) {
+        treeInfo.initTree = true
+        // 设置默认
+        treeInfo.defaultClicked = {id: val[0].id}
+        treeInfo.defaultHighLight = val[0].id
+        treeInfo.defaultExpanded = [val[0].id]
       }
       // 设置列表
       this.listTypeInfo.treeList = val.map(item => {
@@ -298,6 +300,8 @@ export default {
           ]
         } else {
           arr = [
+            {name: '绑定用户', type: 'user', data: data.data, node: data.node, vm: data.vm},
+            {name: '分配权限', type: 'role', data: data.data, node: data.node, vm: data.vm},
             {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm},
             {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm},
             {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm},

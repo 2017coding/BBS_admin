@@ -189,6 +189,8 @@ export default {
           this.$refs.form.resetFields()
         }
         this.resetForm()
+        // 重置弹窗按钮loading
+        this.dialogInfo.btLoading = false
       }
     }
   },

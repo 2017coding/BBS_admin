@@ -4,8 +4,8 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  // BASE_API: '"http://localhost:1313"',
-  BASE_API: '"https://www.lyh.red"',
+  BASE_API: '"http://localhost:1313"',
+  // BASE_API: '"https://www.lyh.red"',
   fileHost: '"http://10.61.16.187:7009"',
   socketURL: '"http://10.61.16.181:3000"'
 })

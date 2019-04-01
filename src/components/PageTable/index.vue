@@ -217,12 +217,14 @@ export default {
           this.listInfo.loading = false
           if (res.success) {
             // 使外面可以访问到表格数据
-            this.$emit('update:data', res.content.result)
-            this.listInfo.total = res.content.totals
-            this.listInfo.query.curPage = res.content.curPage - 0
-            this.listInfo.query.pageSize = res.content.pageSize - 0
+            this.$emit('update:data', Array.isArray(res.content) ? res.content : res.content.result)
+            if (this.pager) {
+              this.listInfo.total = res.content.totals
+              this.listInfo.query.curPage = res.content.curPage - 0
+              this.listInfo.query.pageSize = res.content.pageSize - 0
+            }
             resolve(res)
-            this.$emit('handleEvent', 'list', res.content.result)
+            this.$emit('handleEvent', 'list', Array.isArray(res.content) ? res.content : res.content.result)
           } else {
             this.$message({
               showClose: true,

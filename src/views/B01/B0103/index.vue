@@ -22,13 +22,52 @@
         @handleEvent="handleEvent"></page-tree>
     </div>
     <div class="right">
-      <!-- 卡片 -->
-      <page-card
-        :title="cardInfo.title"
-        :data.sync="cardInfo.data"
-        :fieldList="cardInfo.fieldList"
-        :listTypeInfo="listTypeInfo">
-      </page-card>
+      <el-tabs v-model="tabActive" @tab-click="handleEvent('tabClick')">
+        <el-tab-pane label="菜单详情" name="mod">
+          <!-- 卡片 -->
+          <page-card
+            :class="'card'"
+            :title="cardInfo.title"
+            :data.sync="cardInfo.data"
+            :fieldList="cardInfo.fieldList"
+            :listTypeInfo="listTypeInfo">
+          </page-card>
+        </el-tab-pane>
+        <el-tab-pane label="数据权限" name="modData">
+          <template>
+            <div class="">
+              <el-button
+                v-waves
+                icon="el-icon-plus"
+                type="primary"
+                style="margin-bottom: 10px;"
+                @click="handleClickBt('addModData')">添加
+              </el-button>
+              <el-button
+                v-waves
+                icon="el-icon-search"
+                type="primary"
+                style="margin-bottom: 10px;"
+                @click="tableInfo.refresh = !tableInfo.refresh">刷新
+              </el-button>
+            </div>
+            <!-- 表格 -->
+            <page-table
+              :class="'table'"
+              :refresh="tableInfo.refresh"
+              :pager="tableInfo.pager"
+              :data.sync="tableInfo.data"
+              :api="modDataGetAllApi"
+              :query="{modId: treeInfo.leftClickData.id}"
+              :fieldList="tableInfo.fieldList"
+              :listTypeInfo="listTypeInfo"
+              :handle="tableInfo.handle"
+              @handleClickBt="handleClickBt"
+              @handleEvent="handleEvent">
+            </page-table>
+          </template>
+        </el-tab-pane>
+      </el-tabs>
     </div>
     <!-- 弹窗 -->
     <page-dialog
@@ -41,12 +80,22 @@
       @handleEvent="handleEvent">
       <!-- form -->
       <page-form
-      :refObj.sync="formInfo.ref"
-      :data="formInfo.data"
-      :fieldList="formInfo.fieldList"
-      :rules="formInfo.rules"
-      :labelWidth="formInfo.labelWidth"
-      :listTypeInfo="listTypeInfo">
+        v-if="dialogInfo.type === 'create' || dialogInfo.type === 'update'"
+        :refObj.sync="formInfo.ref"
+        :data="formInfo.data"
+        :fieldList="formInfo.fieldList"
+        :rules="formInfo.rules"
+        :labelWidth="formInfo.labelWidth"
+        :listTypeInfo="listTypeInfo">
+      </page-form>
+      <page-form
+        v-if="dialogInfo.type === 'addModData' || dialogInfo.type === 'updateModData'"
+        :refObj.sync="modDataFormInfo.ref"
+        :data="modDataFormInfo.data"
+        :fieldList="modDataFormInfo.fieldList"
+        :rules="modDataFormInfo.rules"
+        :labelWidth="modDataFormInfo.labelWidth"
+        :listTypeInfo="listTypeInfo">
       </page-form>
     </page-dialog>
   </div>
@@ -55,10 +104,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import { createApi, updateApi, deleteApi, getAllApi } from '@/api/mod'
-import { createApi as modDataCreateApi, updateApi as modDataUpdateApi, deleteApi as modDataDeltetApi, getAllApi as modDataGetAllApi} from '@/api/modData'
+import { createApi as modDataCreateApi, updateApi as modDataUpdateApi, deleteApi as modDataDeltetApi, getAllApi as modDataGetAllApi } from '@/api/modData'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageCard from '@/components/PageCard'
+import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 
@@ -67,6 +117,7 @@ export default {
   components: {
     PageTree,
     PageCard,
+    PageTable,
     PageDialog,
     PageForm
   },
@@ -80,6 +131,8 @@ export default {
       modDataUpdateApi,
       modDataDeltetApi,
       modDataGetAllApi,
+      // 选项卡默认点击
+      tabActive: 'mod',
       // 相关列表
       listTypeInfo: {
         statusList: [
@@ -90,6 +143,17 @@ export default {
           {key: '平台端', value: 1},
           {key: '论坛端', value: 2},
           {key: '移动端', value: 3}
+        ],
+        modDataTypeList: [
+          {key: '按钮点击', value: 1},
+          {key: '右键菜单', value: 2},
+          {key: '链接访问', value: 3}
+        ],
+        reqTypeList: [
+          {key: 'GET', value: 1},
+          {key: 'POST', value: 2},
+          {key: 'PUT', value: 3},
+          {key: 'DELETE', value: 4}
         ],
         treeList: []
       },
@@ -115,6 +179,8 @@ export default {
           api: getAllApi, // 获取数据的接口
           params: {data: [{key: 'type', value: 1}], type: 'query'}
         },
+        leftClickData: {},
+        rightClickData: {},
         rightMenuList: []
       },
       // 卡片相关
@@ -137,32 +203,35 @@ export default {
           {label: '更新时间', value: 'update_time'}
         ]
       },
-      // // 表格相关
-      // tableInfo: {
-      //   refresh: false,
-      //   initCurpage: false,
-      //   data: [],
-      //   fieldList: [
-      //     {label: '账号', value: 'account'},
-      //     {label: '用户名', value: 'name'},
-      //     {label: '性别', value: 'sex', width: 80, list: 'sexList'},
-      //     {label: '账号类型', value: 'type', width: 100, list: 'accountTypeList'},
-      //     {label: '状态', value: 'status', width: 90, list: 'statusList'},
-      //     {label: '创建人', value: 'create_user'},
-      //     {label: '创建时间', value: 'create_time', minWidth: 180},
-      //     {label: '更新人', value: 'update_user'},
-      //     {label: '更新时间', value: 'update_time', minWidth: 180}
-      //   ],
-      //   handle: {
-      //     fixed: 'right',
-      //     label: '操作',
-      //     width: '180',
-      //     btList: [
-      //       {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: true},
-      //       {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: true}
-      //     ]
-      //   }
-      // },
+      // 表格相关
+      tableInfo: {
+        refresh: false,
+        initTable: false,
+        initCurpage: false,
+        pager: false,
+        data: [],
+        fieldList: [
+          {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
+          {label: '类型', value: 'type', list: 'modDataTypeList', required: true},
+          {label: '编码', value: 'code', required: true},
+          {label: '名称', value: 'name', required: true},
+          {label: 'api', value: 'api', list: 'reqTypeList', required: true},
+          {label: '请求方式', value: 'method', required: true},
+          {label: '创建人', value: 'create_user'},
+          {label: '创建时间', value: 'create_time', minWidth: 180},
+          {label: '更新人', value: 'update_user'},
+          {label: '更新时间', value: 'update_time', minWidth: 180}
+        ],
+        handle: {
+          fixed: 'right',
+          label: '操作',
+          width: '180',
+          btList: [
+            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'updateModData', show: true},
+            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'deleteModData', show: true}
+          ]
+        }
+      },
       // 表单相关
       formInfo: {
         data: {
@@ -211,7 +280,7 @@ export default {
         },
         fieldList: [
           {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
-          {label: '类型', value: 'type', type: 'tag', list: 'modTypeList', required: true},
+          {label: '类型', value: 'type', type: 'select', list: 'modTypeList', required: true},
           {label: '编码', value: 'code', type: 'input', required: true},
           {label: '名称', value: 'name', type: 'input', required: true},
           {label: 'api', value: 'api', type: 'input'},
@@ -223,8 +292,10 @@ export default {
       // 弹窗相关
       dialogInfo: {
         title: {
-          create: '添加',
-          update: '编辑'
+          create: '添加菜单',
+          update: '编辑菜单',
+          addModData: '添加菜单权限',
+          updateModData: '编辑菜单权限'
         },
         visible: false,
         type: '',
@@ -249,6 +320,8 @@ export default {
           this.$refs.form.resetFields()
         }
         this.resetForm()
+        // 重置弹窗按钮loading
+        this.dialogInfo.btLoading = false
       }
     },
     'formInfo.data.type' (val) {
@@ -271,14 +344,6 @@ export default {
   methods: {
     initTree (val) {
       const treeInfo = this.treeInfo
-      // 初始化树
-      if (!treeInfo.initTree) {
-        treeInfo.initTree = true
-        // 设置默认
-        treeInfo.defaultClicked = {id: val[0].id}
-        treeInfo.defaultHighLight = val[0].id
-        treeInfo.defaultExpanded = [val[0].id]
-      }
       // 操作完后，树刷新，重新设置默认项
       if (treeInfo.initTree) {
         if (treeInfo.defaultClickedAsyc || treeInfo.defaultClickedAsyc === 0) {
@@ -290,6 +355,14 @@ export default {
         if (treeInfo.defaultExpandedAsyc.length > 0) {
           treeInfo.defaultExpanded = treeInfo.defaultExpandedAsyc
         }
+      }
+      // 初始化树
+      if (!treeInfo.initTree) {
+        treeInfo.initTree = true
+        // 设置默认
+        treeInfo.defaultClicked = {id: val[0].id}
+        treeInfo.defaultHighLight = val[0].id
+        treeInfo.defaultExpanded = [val[0].id]
       }
       // 设置列表
       this.listTypeInfo.treeList = val.map(item => {
@@ -305,23 +378,63 @@ export default {
     // 按钮点击
     handleClickBt (event, data) {
       const treeInfo = this.treeInfo,
+        tableInfo = this.tableInfo,
         dialogInfo = this.dialogInfo,
-        formInfo = this.formInfo
+        formInfo = this.formInfo,
+        modDataFormInfo = this.modDataFormInfo
       switch (event) {
+      case 'addModData':
+        dialogInfo.type = event
+        dialogInfo.visible = true
+        // 设置参数
+        modDataFormInfo.data.mod_id = treeInfo.leftClickData.id
+        break
+      case 'updateModData':
+        dialogInfo.type = event
+        dialogInfo.visible = true
+        // 显示信息
+        for (let key in data) {
+          // 存在则赋值
+          if (key in modDataFormInfo.data) {
+            modDataFormInfo.data[key] = data[key]
+          }
+        }
+        break
+      case 'deleteModData':
+        this.handleAPI('delete', modDataDeltetApi, data.id).then(res => {
+          if (res.success) {
+            tableInfo.refresh = !tableInfo.refresh
+          }
+        })
+        break
       // 弹窗点击关闭
       case 'close':
         dialogInfo.visible = false
         break
       // 弹窗点击保存
       case 'save':
-        formInfo.ref.validate(valid => {
+        let api, params, type = dialogInfo.type, ref
+        if (type === 'create' || type === 'update') {
+          params = formInfo.data
+          ref = formInfo.ref
+        } else if (type === 'addModData' || type === 'updateModData') {
+          params = modDataFormInfo.data
+          ref = modDataFormInfo.ref
+        } else {
+          return
+        }
+        ref.validate(valid => {
           if (valid) {
-            let api, params = formInfo.data,
-              type = dialogInfo.type
             if (type === 'create') {
               api = createApi
             } else if (type === 'update') {
               api = updateApi
+            } else if (type === 'addModData') {
+              api = modDataCreateApi
+              type = 'create'
+            } else if (type === 'updateModData') {
+              api = modDataUpdateApi
+              type = 'update'
             } else {
               return
             }
@@ -332,11 +445,11 @@ export default {
                 // 刷新树
                 treeInfo.refresh = !treeInfo.refresh
                 // 设置默认项
-                if (type === 'create') {
+                if (type === 'create' || type === 'addModData') {
                   treeInfo.defaultClickedAsyc = params.pid
                   treeInfo.defaultHighLightAsyc = params.pid
                   treeInfo.defaultExpandedAsyc = [params.pid]
-                } else if (type === 'update') {
+                } else if (type === 'update'|| type === 'updateModData') {
                   treeInfo.defaultClickedAsyc = params.id
                   treeInfo.defaultHighLightAsyc = params.id
                   treeInfo.defaultExpandedAsyc = [params.pid]
@@ -353,12 +466,24 @@ export default {
     },
     // 触发事件
     handleEvent (event, data) {
-      const cardInfo = this.cardInfo
-      // treeInfo = this.treeInfo
-      // formInfo = this.formInfo
+      const cardInfo = this.cardInfo,
+        treeInfo = this.treeInfo,
+        tableInfo = this.tableInfo
       switch (event) {
       // 对表格获取到的数据做处理
       case 'list':
+        if (!data) return
+        data.forEach(item => {
+          item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
+          item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
+        })
+        break
+      case 'tabClick':
+        // 懒加载，第一次点击，刷新列表
+        if (this.tabActive === 'modData' && !tableInfo.initTable) {
+          tableInfo.initTable = true
+          tableInfo.refresh = !tableInfo.refresh
+        }
         break
       // 左键点击的处理
       case 'leftClick':
@@ -372,6 +497,9 @@ export default {
         obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
         obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
         cardInfo.data = obj
+        treeInfo.leftClickData = obj
+        // 刷新表格
+        tableInfo.refresh = !tableInfo.refresh
         break
       // 根据右键点击创建节点对应菜单
       case 'rightClick':
@@ -457,11 +585,32 @@ export default {
         // update_user: '', // 修改人
         // update_time: '' // 修改时间
       }
+      this.modDataFormInfo.data = {
+        id: '', // *唯一ID
+        mod_id: '', // *模块ID
+        code: '', // *编码
+        type: '', // *类型
+        name: '', // *名称
+        api: '', // *对应请求API
+        method: '' // *请求方式
+        // create_user: '', // 创建人
+        // create_time: '', // 创建时间
+        // update_user: '', // 修改人
+        // update_time: '' // 修改时间
+      }
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.app-container{
+  .right{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .card, .table{
+    }
+  }
+}
 </style>
