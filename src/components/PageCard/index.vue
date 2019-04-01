@@ -51,14 +51,13 @@ export default {
 @import '@/common/style/base.scss';
 @import '@/common/style/mixin.scss';
   .page-card{
-    // max-width: 600px;
     .title{
       font-size: 16px;
       color: $g_theme;
     }
     .info{
       .item{
-        padding: 10px;
+        padding: 7px;
         .label, .value{
           display: inline-block;
         }

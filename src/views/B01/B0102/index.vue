@@ -110,7 +110,7 @@ export default {
           {label: '可创建专栏数', value: 'columns'},
           {label: '可创建用户数', value: 'users'},
           {label: '描述', value: 'desc'},
-          {label: '状态', value: 'status'},
+          {label: '状态', value: 'status', list: 'statusList'},
           {label: '创建人', value: 'create_user'},
           {label: '创建时间', value: 'create_time'},
           {label: '更新人', value: 'update_user'},

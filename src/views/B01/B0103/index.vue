@@ -55,6 +55,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { createApi, updateApi, deleteApi, getAllApi } from '@/api/mod'
+import { createApi as modDataCreateApi, updateApi as modDataUpdateApi, deleteApi as modDataDeltetApi, getAllApi as modDataGetAllApi} from '@/api/modData'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageCard from '@/components/PageCard'
@@ -75,6 +76,10 @@ export default {
       updateApi,
       deleteApi,
       getAllApi,
+      modDataCreateApi,
+      modDataUpdateApi,
+      modDataDeltetApi,
+      modDataGetAllApi,
       // 相关列表
       listTypeInfo: {
         statusList: [
@@ -132,6 +137,32 @@ export default {
           {label: '更新时间', value: 'update_time'}
         ]
       },
+      // // 表格相关
+      // tableInfo: {
+      //   refresh: false,
+      //   initCurpage: false,
+      //   data: [],
+      //   fieldList: [
+      //     {label: '账号', value: 'account'},
+      //     {label: '用户名', value: 'name'},
+      //     {label: '性别', value: 'sex', width: 80, list: 'sexList'},
+      //     {label: '账号类型', value: 'type', width: 100, list: 'accountTypeList'},
+      //     {label: '状态', value: 'status', width: 90, list: 'statusList'},
+      //     {label: '创建人', value: 'create_user'},
+      //     {label: '创建时间', value: 'create_time', minWidth: 180},
+      //     {label: '更新人', value: 'update_user'},
+      //     {label: '更新时间', value: 'update_time', minWidth: 180}
+      //   ],
+      //   handle: {
+      //     fixed: 'right',
+      //     label: '操作',
+      //     width: '180',
+      //     btList: [
+      //       {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: true},
+      //       {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: true}
+      //     ]
+      //   }
+      // },
       // 表单相关
       formInfo: {
         data: {
@@ -160,6 +191,31 @@ export default {
           {label: '排序', value: 'sort', type: 'input', required: true},
           {label: '描述', value: 'desc', type: 'textarea'},
           {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
+        ],
+        rules: {},
+        labelWidth: '120px'
+      },
+      modDataFormInfo: {
+        data: {
+          id: '', // *唯一ID
+          mod_id: '', // *模块ID
+          code: '', // *编码
+          type: '', // *类型
+          name: '', // *名称
+          api: '', // *对应请求API
+          method: '' // *请求方式
+          // create_user: '', // 创建人
+          // create_time: '', // 创建时间
+          // update_user: '', // 修改人
+          // update_time: '' // 修改时间
+        },
+        fieldList: [
+          {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
+          {label: '类型', value: 'type', type: 'tag', list: 'modTypeList', required: true},
+          {label: '编码', value: 'code', type: 'input', required: true},
+          {label: '名称', value: 'name', type: 'input', required: true},
+          {label: 'api', value: 'api', type: 'input'},
+          {label: '请求方式', value: 'method', type: 'input'}
         ],
         rules: {},
         labelWidth: '120px'
