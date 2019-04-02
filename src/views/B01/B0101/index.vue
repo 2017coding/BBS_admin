@@ -118,8 +118,9 @@ export default {
         handle: {
           fixed: 'right',
           label: '操作',
-          width: '180',
+          width: '280',
           btList: [
+            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: true},
             {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: true},
             {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: true}
           ]
@@ -247,6 +248,20 @@ export default {
             formInfo.data[key] = data[key]
           }
         }
+        break
+      case 'status':
+        let params = JSON.parse(JSON.stringify(data))
+        params.status = params.status - 1 >= 0 ? 0 : 1
+        data.statusLoading = true
+        delete params.statusLoading
+        this._handleAPI('update', updateApi, params).then(res => {
+          data.statusLoading = false
+          if (res.success) {
+            data.status = params.status
+          }
+        }).catch(() => {
+          data.statusLoading = false
+        })
         break
       // 删除
       case 'delete':

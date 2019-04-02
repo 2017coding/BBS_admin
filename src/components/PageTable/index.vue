@@ -7,12 +7,20 @@
         :data="data"
         border
         style="width:100%"
-        v-loading="listInfo.loading">
-        <!-- <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="index">
+        v-loading="listInfo.loading"
+        @select-all="handleSelectionChange"
+        @selection-change="handleSelectionChange">
+        <el-table-column
+          v-if="checkBox"
+          :key="'selection'"
+          type="selection"
+          width="55">
+        </el-table-column>
+        <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="index" :key="'index'">
           <template slot-scope="scope">
             <span>{{scope.$index + 1 + (listInfo.query.curPage - 1) * listInfo.query.pageSize}}</span>
           </template>
-        </el-table-column> -->
+        </el-table-column>
         <el-table-column
           v-for="(item, index) in fieldList"
           :key="index"
@@ -108,7 +116,12 @@ export default {
     // 是否显示序号
     index: {
       type: Boolean,
-      default: true
+      default: false
+    },
+    // 是否有选择框
+    checkBox: {
+      type: Boolean,
+      default: false
     },
     // 类型列表
     listTypeInfo: {
@@ -241,7 +254,9 @@ export default {
       })
     },
     handleSizeChange (val) {
-      this.listInfo.query.pageSize = val // 每页条数
+      const query = this.listInfo.query
+      query.pageSize = val // 每页条数
+      query.curPage = 1 // 每页条数切换，重置当前页
       this.getList(this.api)
     },
     handleCurrentChange (val) {
@@ -251,6 +266,9 @@ export default {
     // 派发按钮点击事件
     handleClickBt (event, data) {
       this.$emit('handleClickBt', event, data)
+    },
+    // 选中数据
+    handleSelectionChange (rows) {
     },
     // 根据页面的头部, 功能框, 分页组件等高度，计算出table的高度
     getTableHeight () {

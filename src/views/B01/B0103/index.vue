@@ -391,8 +391,6 @@ export default {
         item.value = item.id
         return item
       })
-      // 插入数据
-      this.listTypeInfo.treeList.unshift({key: 'admin', value: 0})
     },
     // 获取列表
     getList () {

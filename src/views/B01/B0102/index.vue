@@ -18,6 +18,7 @@
     <div class="right">
       <!-- 卡片 -->
       <page-card
+        class="page-card"
         :title="cardInfo.title"
         :data.sync="cardInfo.data"
         :fieldList="cardInfo.fieldList"
@@ -28,20 +29,23 @@
     <page-dialog
       :title="dialogInfo.title[dialogInfo.type]"
       :visible.sync="dialogInfo.visible"
-      :width="dialogInfo.width"
+      :width="dialogInfo.type === 'permissions' ? '80%' : dialogInfo.width"
       :btLoading="dialogInfo.btLoading"
       :btList="dialogInfo.btList"
       @handleClickBt="handleClickBt"
       @handleEvent="handleEvent">
       <!-- form -->
       <page-form
-      :refObj.sync="formInfo.ref"
-      :data="formInfo.data"
-      :fieldList="formInfo.fieldList"
-      :rules="formInfo.rules"
-      :labelWidth="formInfo.labelWidth"
-      :listTypeInfo="listTypeInfo">
+        v-if="dialogInfo.type === 'create' || dialogInfo.type === 'update'"
+        :refObj.sync="formInfo.ref"
+        :data="formInfo.data"
+        :fieldList="formInfo.fieldList"
+        :rules="formInfo.rules"
+        :labelWidth="formInfo.labelWidth"
+        :listTypeInfo="listTypeInfo">
       </page-form>
+      <!-- 权限分配组件 -->
+      <permissions v-if="dialogInfo.type === 'permissions'"></permissions>
     </page-dialog>
   </div>
 </template>
@@ -55,6 +59,7 @@ import PageTree from '@/components/PageTree'
 import PageCard from '@/components/PageCard'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
+import Permissions from './components/Permissions'
 
 export default {
   mixins: [Validate, HandleApi],
@@ -62,7 +67,8 @@ export default {
     PageTree,
     PageCard,
     PageDialog,
-    PageForm
+    PageForm,
+    Permissions
   },
   data () {
     return {
@@ -148,7 +154,9 @@ export default {
       dialogInfo: {
         title: {
           create: '添加',
-          update: '编辑'
+          update: '编辑',
+          bindUser: '绑定用户',
+          permissions: '分配权限'
         },
         visible: false,
         type: '',
@@ -303,8 +311,8 @@ export default {
           ]
         } else {
           arr = [
-            {name: '绑定用户', type: 'user', data: data.data, node: data.node, vm: data.vm},
-            {name: '分配权限', type: 'role', data: data.data, node: data.node, vm: data.vm},
+            {name: '绑定用户', type: 'bindUser', data: data.data, node: data.node, vm: data.vm},
+            {name: '分配权限', type: 'permissions', data: data.data, node: data.node, vm: data.vm},
             {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm},
             {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm},
             {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm},
@@ -358,6 +366,14 @@ export default {
           }
         })
         break
+      case 'bindUser':
+        dialogInfo.type = type
+        dialogInfo.visible = true
+        break
+      case 'permissions':
+        dialogInfo.type = type
+        dialogInfo.visible = true
+        break
       }
     },
     // 初始化表单
@@ -381,5 +397,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

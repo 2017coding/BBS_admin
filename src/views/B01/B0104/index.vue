@@ -142,6 +142,7 @@ export default {
         let params = JSON.parse(JSON.stringify(data))
         params.status = params.status - 1 >= 0 ? 0 : 1
         data.statusLoading = true
+        delete params.statusLoading
         this._handleAPI('update', updateApi, params).then(res => {
           data.statusLoading = false
           if (res.success) {
