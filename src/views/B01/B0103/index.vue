@@ -9,6 +9,7 @@
         </el-select>
       </div>
       <page-tree
+        :expandAll="true"
         :defaultClicked="treeInfo.defaultClicked"
         :defaultHighLight="treeInfo.defaultHighLight"
         :defaultExpanded="treeInfo.defaultExpanded"
@@ -19,7 +20,8 @@
         :treeRefresh="treeInfo.refresh"
         :refreshLevel="treeInfo.refreshLevel"
         @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent"></page-tree>
+        @handleEvent="handleEvent">
+      </page-tree>
     </div>
     <div class="right">
       <el-tabs v-model="tabActive" @tab-click="handleEvent('tabClick')">
@@ -33,7 +35,8 @@
             :listTypeInfo="listTypeInfo">
           </page-card>
         </el-tab-pane>
-        <el-tab-pane label="数据权限" name="modData">
+        <!-- 点击页面组件时显示 -->
+        <el-tab-pane label="数据权限" name="modData" v-if="treeInfo.leftClickData.components === 1">
           <template>
             <div class="">
               <el-button
@@ -57,7 +60,7 @@
               :refresh="tableInfo.refresh"
               :pager="tableInfo.pager"
               :data.sync="tableInfo.data"
-              :api="modDataGetAllApi"
+              :api="dataControlGetAllApi"
               :query="{modId: treeInfo.leftClickData.id}"
               :fieldList="tableInfo.fieldList"
               :listTypeInfo="listTypeInfo"
@@ -90,11 +93,11 @@
       </page-form>
       <page-form
         v-if="dialogInfo.type === 'addModData' || dialogInfo.type === 'updateModData'"
-        :refObj.sync="modDataFormInfo.ref"
-        :data="modDataFormInfo.data"
-        :fieldList="modDataFormInfo.fieldList"
-        :rules="modDataFormInfo.rules"
-        :labelWidth="modDataFormInfo.labelWidth"
+        :refObj.sync="dataControlFormInfo.ref"
+        :data="dataControlFormInfo.data"
+        :fieldList="dataControlFormInfo.fieldList"
+        :rules="dataControlFormInfo.rules"
+        :labelWidth="dataControlFormInfo.labelWidth"
         :listTypeInfo="listTypeInfo">
       </page-form>
     </page-dialog>
@@ -104,8 +107,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import { createApi, updateApi, deleteApi, getAllApi } from '@/api/mod'
-import { createApi as modDataCreateApi, updateApi as modDataUpdateApi, deleteApi as modDataDeltetApi, getAllApi as modDataGetAllApi } from '@/api/modData'
-import Base from '@/common/mixin/base'
+import { createApi as dataControlCreateApi, updateApi as dataControlUpdateApi, deleteApi as dataControlDeleteApi, getAllApi as dataControlGetAllApi } from '@/api/dataControl'
+import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageCard from '@/components/PageCard'
@@ -114,7 +117,7 @@ import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 
 export default {
-  mixins: [Base, HandleApi],
+  mixins: [Validate, HandleApi],
   components: {
     PageTree,
     PageCard,
@@ -128,10 +131,10 @@ export default {
       updateApi,
       deleteApi,
       getAllApi,
-      modDataCreateApi,
-      modDataUpdateApi,
-      modDataDeltetApi,
-      modDataGetAllApi,
+      dataControlCreateApi,
+      dataControlUpdateApi,
+      dataControlDeleteApi,
+      dataControlGetAllApi,
       // 选项卡默认点击
       tabActive: 'mod',
       // 相关列表
@@ -145,7 +148,12 @@ export default {
           {key: '论坛端', value: 2},
           {key: '移动端', value: 3}
         ],
-        modDataTypeList: [
+        componentsList: [
+          {key: '根目录', value: -1},
+          {key: '页面组件', value: 1},
+          {key: '默认布局组件', value: 2}
+        ],
+        dataControlTypeList: [
           {key: '按钮点击', value: 1},
           {key: '右键菜单', value: 2},
           {key: '链接访问', value: 3}
@@ -193,6 +201,7 @@ export default {
           {label: '模块类型', value: 'type', list: 'modTypeList'},
           {label: '模块编码', value: 'code'},
           {label: '模块名称', value: 'name'},
+          {label: '模块组件', value: 'components', list: 'componentsList'},
           {label: '模块图标', value: 'icon'},
           {label: '重定向路径', value: 'redirect'},
           {label: '排序', value: 'sort'},
@@ -213,11 +222,11 @@ export default {
         data: [],
         fieldList: [
           {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
-          {label: '类型', value: 'type', list: 'modDataTypeList', required: true},
+          {label: '类型', value: 'type', list: 'dataControlTypeList', required: true},
           {label: '编码', value: 'code', required: true},
           {label: '名称', value: 'name', required: true},
-          {label: 'api', value: 'api', list: 'reqTypeList', required: true},
-          {label: '请求方式', value: 'method', required: true},
+          {label: 'api', value: 'api', required: true},
+          {label: '请求方式', value: 'method', list: 'reqTypeList', required: true},
           {label: '创建人', value: 'create_user'},
           {label: '创建时间', value: 'create_time', minWidth: 180},
           {label: '更新人', value: 'update_user'},
@@ -241,6 +250,7 @@ export default {
           type: 1, // *模块类型
           code: '', // *模块编码
           name: '', // *模块名称
+          components: '', // *模块组件
           icon: '', // 模块图标
           redirect: '', // 重定向路径
           sort: '', // *排序
@@ -256,6 +266,7 @@ export default {
           {label: '模块类型', value: 'type', type: 'tag', list: 'modTypeList', required: true},
           {label: '模块编码', value: 'code', type: 'input', required: true},
           {label: '模块名称', value: 'name', type: 'input', required: true},
+          {label: '模块组件', value: 'components', type: 'select', list: 'componentsList', required: true},
           {label: '模块图标', value: 'icon', type: 'input'},
           {label: '重定向路径', value: 'redirect', type: 'input'},
           {label: '排序', value: 'sort', type: 'input', required: true},
@@ -265,7 +276,7 @@ export default {
         rules: {},
         labelWidth: '120px'
       },
-      modDataFormInfo: {
+      dataControlFormInfo: {
         data: {
           id: '', // *唯一ID
           mod_id: '', // *模块ID
@@ -281,11 +292,11 @@ export default {
         },
         fieldList: [
           {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
-          {label: '类型', value: 'type', type: 'select', list: 'modTypeList', required: true},
+          {label: '类型', value: 'type', type: 'select', list: 'dataControlTypeList', required: true},
           {label: '编码', value: 'code', type: 'input', required: true},
           {label: '名称', value: 'name', type: 'input', required: true},
           {label: 'api', value: 'api', type: 'input'},
-          {label: '请求方式', value: 'method', type: 'input'}
+          {label: '请求方式', value: 'method', type: 'select', list: 'reqTypeList', required: true}
         ],
         rules: {},
         labelWidth: '120px'
@@ -331,6 +342,8 @@ export default {
       this.cardInfo.data = {}
       // 修改树组件参数
       treeInfo.loadInfo.params.data[0].value = val
+      // 设置树重新初始化
+      treeInfo.initTree = false
       // 刷新树
       treeInfo.refresh = !treeInfo.refresh
     },
@@ -343,7 +356,7 @@ export default {
     this.getList()
     // mixin中的方法, 初始化字段验证规则
     this._initRules(this.formInfo)
-    this._initRules(this.modDataFormInfo)
+    this._initRules(this.dataControlFormInfo)
   },
   methods: {
     initTree (val) {
@@ -363,6 +376,8 @@ export default {
       // 初始化树
       if (!treeInfo.initTree) {
         treeInfo.initTree = true
+        // 容错处理
+        val[0] = val[0] ? val[0] : {}
         // 设置默认
         treeInfo.defaultClicked = {id: val[0].id}
         treeInfo.defaultHighLight = val[0].id
@@ -386,13 +401,13 @@ export default {
         tableInfo = this.tableInfo,
         dialogInfo = this.dialogInfo,
         formInfo = this.formInfo,
-        modDataFormInfo = this.modDataFormInfo
+        dataControlFormInfo = this.dataControlFormInfo
       switch (event) {
       case 'addModData':
         dialogInfo.type = event
         dialogInfo.visible = true
         // 设置参数
-        modDataFormInfo.data.mod_id = treeInfo.leftClickData.id
+        dataControlFormInfo.data.mod_id = treeInfo.leftClickData.id
         break
       case 'updateModData':
         dialogInfo.type = event
@@ -400,13 +415,13 @@ export default {
         // 显示信息
         for (let key in data) {
           // 存在则赋值
-          if (key in modDataFormInfo.data) {
-            modDataFormInfo.data[key] = data[key]
+          if (key in dataControlFormInfo.data) {
+            dataControlFormInfo.data[key] = data[key]
           }
         }
         break
       case 'deleteModData':
-        this._handleAPI('delete', modDataDeltetApi, data.id).then(res => {
+        this._handleAPI('delete', dataControlDeleteApi, data.id).then(res => {
           if (res.success) {
             tableInfo.refresh = !tableInfo.refresh
           }
@@ -423,8 +438,8 @@ export default {
           params = formInfo.data
           ref = formInfo.ref
         } else if (type === 'addModData' || type === 'updateModData') {
-          params = modDataFormInfo.data
-          ref = modDataFormInfo.ref
+          params = dataControlFormInfo.data
+          ref = dataControlFormInfo.ref
         } else {
           return
         }
@@ -435,29 +450,31 @@ export default {
             } else if (type === 'update') {
               api = updateApi
             } else if (type === 'addModData') {
-              api = modDataCreateApi
-              type = 'create'
+              api = dataControlCreateApi
             } else if (type === 'updateModData') {
-              api = modDataUpdateApi
-              type = 'update'
+              api = dataControlUpdateApi
             } else {
               return
             }
             dialogInfo.btLoading = true
-            this._handleAPI(type, api, params).then(res => {
+            this._handleAPI(this.getApiType(type), api, params).then(res => {
               if (res.success) {
                 dialogInfo.visible = false
-                // 刷新树
-                treeInfo.refresh = !treeInfo.refresh
                 // 设置默认项
-                if (type === 'create' || type === 'addModData') {
+                if (type === 'create') {
                   treeInfo.defaultClickedAsyc = params.pid
                   treeInfo.defaultHighLightAsyc = params.pid
                   treeInfo.defaultExpandedAsyc = [params.pid]
-                } else if (type === 'update' || type === 'updateModData') {
+                  // 刷新树
+                  treeInfo.refresh = !treeInfo.refresh
+                } else if (type === 'update') {
                   treeInfo.defaultClickedAsyc = params.id
                   treeInfo.defaultHighLightAsyc = params.id
                   treeInfo.defaultExpandedAsyc = [params.pid]
+                  // 刷新树
+                  treeInfo.refresh = !treeInfo.refresh
+                } else if (type === 'addModData' || type === 'updateModData') {
+                  tableInfo.refresh = !tableInfo.refresh
                 }
               }
               dialogInfo.btLoading = false
@@ -467,6 +484,16 @@ export default {
           }
         })
         break
+      }
+    },
+    // 返回对应的api类型
+    getApiType (type) {
+      if (type === 'create' || type === 'update') {
+        return type
+      } else if (type === 'addModData') {
+        return 'create'
+      } else if (type === 'updateModData') {
+        return 'update'
       }
     },
     // 触发事件
@@ -503,8 +530,14 @@ export default {
         obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
         cardInfo.data = obj
         treeInfo.leftClickData = obj
-        // 刷新表格
-        tableInfo.refresh = !tableInfo.refresh
+        // tab为数据权限页面，点击刷新表格
+        if (this.tabActive === 'modData') {
+          tableInfo.refresh = !tableInfo.refresh
+        }
+        // 点击不为页面组件，tab显示为菜单详情
+        if (obj.components !== 1) {
+          this.tabActive = 'mod'
+        }
         break
       // 根据右键点击创建节点对应菜单
       case 'rightClick':
@@ -580,6 +613,7 @@ export default {
         type: 1, // *模块类型
         code: '', // *模块编码
         name: '', // *模块名称
+        components: '', // *模块组件
         icon: '', // 模块图标
         redirect: '', // 重定向路径
         sort: '', // *排序
@@ -590,7 +624,7 @@ export default {
         // update_user: '', // 修改人
         // update_time: '' // 修改时间
       }
-      this.modDataFormInfo.data = {
+      this.dataControlFormInfo.data = {
         id: '', // *唯一ID
         mod_id: '', // *模块ID
         code: '', // *编码
@@ -609,13 +643,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.app-container{
-  .right{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    .card, .table{
-    }
-  }
-}
 </style>

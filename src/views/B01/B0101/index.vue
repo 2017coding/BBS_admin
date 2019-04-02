@@ -46,7 +46,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getListApi, createApi, updateApi, deleteApi } from '@/api/user'
-import Base from '@/common/mixin/base'
+import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
@@ -54,7 +54,7 @@ import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 
 export default {
-  mixins: [Base, HandleApi],
+  mixins: [Validate, HandleApi],
   components: {
     PageFilter,
     PageTable,

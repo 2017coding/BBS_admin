@@ -49,7 +49,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { createApi, updateApi, deleteApi, getAllApi } from '@/api/role'
-import Base from '@/common/mixin/base'
+import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageCard from '@/components/PageCard'
@@ -57,7 +57,7 @@ import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 
 export default {
-  mixins: [Base, HandleApi],
+  mixins: [Validate, HandleApi],
   components: {
     PageTree,
     PageCard,

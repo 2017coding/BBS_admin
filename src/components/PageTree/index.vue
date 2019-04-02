@@ -10,6 +10,7 @@
       :lazy="lazy"
       :draggable="draggable"
       :allow-drop="handleDrop"
+      :default-expand-all="expandAll"
       :expand-on-click-node="false"
       :check-strictly="checkStrictly"
       :filter-node-method="filterNode"
