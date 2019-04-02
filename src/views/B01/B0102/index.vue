@@ -3,6 +3,7 @@
     <!-- 左侧树 -->
     <div class="left">
       <page-tree
+        :expandAll="true"
         :defaultClicked="treeInfo.defaultClicked"
         :defaultHighLight="treeInfo.defaultHighLight"
         :defaultExpanded="treeInfo.defaultExpanded"
@@ -362,6 +363,11 @@ export default {
       case 'delete':
         this._handleAPI(type, deleteApi, nodeData.id).then(res => {
           if (res.success) {
+            // 删除后，树组件默认指针指向删除元素的父级
+            treeInfo.defaultClickedAsyc = nodeData.pid
+            treeInfo.defaultHighLightAsyc = nodeData.pid
+            treeInfo.defaultExpandedAsyc = [nodeData.pid]
+            // 刷新树
             treeInfo.refresh = !treeInfo.refresh
           }
         })
