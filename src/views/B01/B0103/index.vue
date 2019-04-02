@@ -105,6 +105,7 @@
 import { mapGetters } from 'vuex'
 import { createApi, updateApi, deleteApi, getAllApi } from '@/api/mod'
 import { createApi as modDataCreateApi, updateApi as modDataUpdateApi, deleteApi as modDataDeltetApi, getAllApi as modDataGetAllApi } from '@/api/modData'
+import Base from '@/common/mixin/base'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageCard from '@/components/PageCard'
@@ -113,7 +114,7 @@ import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 
 export default {
-  mixins: [HandleApi],
+  mixins: [Base, HandleApi],
   components: {
     PageTree,
     PageCard,
@@ -340,6 +341,9 @@ export default {
   },
   mounted () {
     this.getList()
+    // mixin中的方法, 初始化字段验证规则
+    this._initRules(this.formInfo)
+    this._initRules(this.modDataFormInfo)
   },
   methods: {
     initTree (val) {
@@ -370,6 +374,7 @@ export default {
         item.value = item.id
         return item
       })
+      // 插入数据
       this.listTypeInfo.treeList.unshift({key: 'admin', value: 0})
     },
     // 获取列表
@@ -401,7 +406,7 @@ export default {
         }
         break
       case 'deleteModData':
-        this.handleAPI('delete', modDataDeltetApi, data.id).then(res => {
+        this._handleAPI('delete', modDataDeltetApi, data.id).then(res => {
           if (res.success) {
             tableInfo.refresh = !tableInfo.refresh
           }
@@ -439,7 +444,7 @@ export default {
               return
             }
             dialogInfo.btLoading = true
-            this.handleAPI(type, api, params).then(res => {
+            this._handleAPI(type, api, params).then(res => {
               if (res.success) {
                 dialogInfo.visible = false
                 // 刷新树
@@ -449,7 +454,7 @@ export default {
                   treeInfo.defaultClickedAsyc = params.pid
                   treeInfo.defaultHighLightAsyc = params.pid
                   treeInfo.defaultExpandedAsyc = [params.pid]
-                } else if (type === 'update'|| type === 'updateModData') {
+                } else if (type === 'update' || type === 'updateModData') {
                   treeInfo.defaultClickedAsyc = params.id
                   treeInfo.defaultHighLightAsyc = params.id
                   treeInfo.defaultExpandedAsyc = [params.pid]
@@ -559,7 +564,7 @@ export default {
         }
         break
       case 'delete':
-        this.handleAPI(type, deleteApi, nodeData.id).then(res => {
+        this._handleAPI(type, deleteApi, nodeData.id).then(res => {
           if (res.success) {
             treeInfo.refresh = !treeInfo.refresh
           }

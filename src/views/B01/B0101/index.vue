@@ -46,6 +46,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getListApi, createApi, updateApi, deleteApi } from '@/api/user'
+import Base from '@/common/mixin/base'
 import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
@@ -53,7 +54,7 @@ import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 
 export default {
-  mixins: [HandleApi],
+  mixins: [Base, HandleApi],
   components: {
     PageFilter,
     PageTable,
@@ -194,12 +195,10 @@ export default {
       }
     }
   },
-  created () {
-    this.initParams()
-    // 初始化字段验证规则
-    this.initRules()
-  },
   mounted () {
+    this.initParams()
+    // mixin中的方法, 初始化字段验证规则
+    this._initRules(this.formInfo)
     this.getList()
   },
   methods: {
@@ -209,32 +208,6 @@ export default {
     // 获取列表
     getList () {
       this.tableInfo.refresh = !this.tableInfo.refresh
-    },
-    // 初始化验证数据
-    initRules () {
-      const obj = {},
-        fieldList = this.formInfo.fieldList
-      // 循环字段列表
-      for (let item of fieldList) {
-        let type = item.type === 'select' ? '选择' : '输入'
-
-        if (item.required) {
-          if (item.rules) {
-            obj[item.value] = {
-              required: item.required,
-              validator: item.rules,
-              trigger: 'blur'
-            }
-          } else {
-            obj[item.value] = {
-              required: item.required,
-              message: '请' + type + item.label,
-              trigger: 'blur'
-            }
-          }
-        }
-      }
-      this.formInfo.rules = obj
     },
     // 得到placeholder的显示
     getPlaceholder (row) {
@@ -277,7 +250,7 @@ export default {
         break
       // 删除
       case 'delete':
-        this.handleAPI(event, deleteApi, data.id).then(res => {
+        this._handleAPI(event, deleteApi, data.id).then(res => {
           if (res.success) {
             tableInfo.refresh = !tableInfo.refresh
           }
@@ -301,7 +274,7 @@ export default {
               return
             }
             dialogInfo.btLoading = true
-            this.handleAPI(type, api, params).then(res => {
+            this._handleAPI(type, api, params).then(res => {
               if (res.success) {
                 dialogInfo.visible = false
                 tableInfo.refresh = !tableInfo.refresh

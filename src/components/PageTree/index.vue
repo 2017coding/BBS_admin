@@ -27,7 +27,7 @@
     </el-tree>
     <!-- 右键菜单 -->
     <ul class='contextmenu' v-show="rightMenu.show" :style="{left: rightMenu.left +'px',top: rightMenu.top +'px'}">
-      <li v-for="(item, index) in rightMenu.list" :key="index" @click="handleRightEvent(item.type, item.data, item.node, item.vm)">{{item.name}}</li>
+      <li v-for="(item, index) in rightMenu.list.filter(item => !item.hidden)" :key="index" @click="handleRightEvent(item.type, item.data, item.node, item.vm)">{{item.name}}</li>
     </ul>
   </div>
 </template>

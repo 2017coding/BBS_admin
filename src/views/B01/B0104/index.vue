@@ -142,7 +142,7 @@ export default {
         let params = JSON.parse(JSON.stringify(data))
         params.status = params.status - 1 >= 0 ? 0 : 1
         data.statusLoading = true
-        this.handleAPI('update', updateApi, params).then(res => {
+        this._handleAPI('update', updateApi, params).then(res => {
           data.statusLoading = false
           if (res.success) {
             data.status = params.status

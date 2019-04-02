@@ -49,6 +49,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { createApi, updateApi, deleteApi, getAllApi } from '@/api/role'
+import Base from '@/common/mixin/base'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageCard from '@/components/PageCard'
@@ -56,7 +57,7 @@ import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 
 export default {
-  mixins: [HandleApi],
+  mixins: [Base, HandleApi],
   components: {
     PageTree,
     PageCard,
@@ -183,6 +184,8 @@ export default {
   },
   mounted () {
     this.getList()
+    // mixin中的方法, 初始化字段验证规则
+    this._initRules(this.formInfo)
   },
   methods: {
     initTree (val) {
@@ -242,7 +245,7 @@ export default {
               return
             }
             dialogInfo.btLoading = true
-            this.handleAPI(type, api, params).then(res => {
+            this._handleAPI(type, api, params).then(res => {
               if (res.success) {
                 dialogInfo.visible = false
                 // 刷新树
@@ -349,7 +352,7 @@ export default {
         }
         break
       case 'delete':
-        this.handleAPI(type, deleteApi, nodeData.id).then(res => {
+        this._handleAPI(type, deleteApi, nodeData.id).then(res => {
           if (res.success) {
             treeInfo.refresh = !treeInfo.refresh
           }

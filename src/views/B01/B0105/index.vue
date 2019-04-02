@@ -324,7 +324,7 @@ export default {
         break
       // 删除
       case 'delete':
-        this.handleAPI(event, deleteApi, data.id).then(res => {
+        this._handleAPI(event, deleteApi, data.id).then(res => {
           if (res.success) {
             tableInfo.refresh = !tableInfo.refresh
           }
@@ -348,7 +348,7 @@ export default {
               return
             }
             dialogInfo.btLoading = true
-            this.handleAPI(type, api, params).then(res => {
+            this._handleAPI(type, api, params).then(res => {
               if (res.success) {
                 dialogInfo.visible = false
                 tableInfo.refresh = !tableInfo.refresh

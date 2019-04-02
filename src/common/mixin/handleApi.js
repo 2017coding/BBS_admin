@@ -1,6 +1,6 @@
 export default {
   methods: {
-    handleAPI (type, api, data) {
+    _handleAPI (type, api, data) {
       switch (type) {
       case 'create':
       case 'update':
