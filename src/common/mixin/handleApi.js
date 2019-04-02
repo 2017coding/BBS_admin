@@ -41,6 +41,7 @@ export default {
           })
         })
       default:
+        console.log('未设置的API操作类型')
         return new Promise((resolve, reject) => {
           reject('找不到的类型设置')
         })

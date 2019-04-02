@@ -75,83 +75,85 @@ $treeWidth: 240px;
   .right{
     margin-left: 250px
   }
-  // 自定义过滤相关
-  .page-filter {
-    padding-bottom: 5px;
-    .filter-item {
-      display: inline-flex;
-      align-items: center;
-      margin-bottom: 7px;
-      margin-left: 10px;
-    }
-    .filter-item:first-child{
-      margin-left: 0px;
-    }
-    .filter-label{
-      padding-right: 5px;
-      font-size: 14px;
-      color: #606266;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .filter-input, .filter-time, .filter-date, .filter-select{
-      width: 180px;
-    }
+}
+
+// 自定义过滤相关
+.page-filter {
+  padding-bottom: 5px;
+  .filter-item {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 7px;
+    margin-left: 10px;
   }
-  // 自定义表格相关
-  .page-table{
-    .pagination-container{
-      padding: 15px 0;
-    }
+  .filter-item:first-child{
+    margin-left: 0px;
   }
-  // 自定义form相关
-  .page-form{
-    .el-form-item{
-      display: inline-block;
-      // float: left;
-      width: 48%;
-      .el-form-item__content{
-        .el-input, .el-select, .el-textarea{
-          width: 240px;
-        }
-        .el-input-number{
-          .el-input{
-            width: inherit;
-          }
-        }
+  .filter-label{
+    padding-right: 5px;
+    font-size: 14px;
+    color: #606266;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .filter-input, .filter-time, .filter-date, .filter-select{
+    width: 180px;
+  }
+}
+// 自定义表格相关
+.page-table{
+  .pagination-container{
+    padding: 15px 0;
+  }
+}
+
+// 自定义form相关
+.page-form{
+  .el-form-item{
+    display: inline-block;
+    // float: left;
+    width: 48%;
+    .el-form-item__content{
+      .el-input, .el-select, .el-textarea{
+        width: 240px;
       }
-    }
-    .el-form-block{
-      display: block;
-      width: 100%;
-      .el-form-item__content{
-        .el-textarea{
-          width: 100%;
-        }
-      }
-    }
-  }
-  .page-form-block{
-    .el-form-item{
-      display: block;
-      .el-form-item__content{
-        .el-input, .el-select, .el-textarea{
+      .el-input-number{
+        .el-input{
           width: inherit;
         }
-        .el-input-number{
-          .el-input{
-            width: inherit;
-          }
+      }
+    }
+  }
+  .el-form-block{
+    display: block;
+    width: 100%;
+    .el-form-item__content{
+      .el-textarea{
+        width: 100%;
+      }
+    }
+  }
+}
+.page-form-block{
+  .el-form-item{
+    display: block;
+    .el-form-item__content{
+      .el-input, .el-select, .el-textarea{
+        width: inherit;
+      }
+      .el-input-number{
+        .el-input{
+          width: inherit;
         }
       }
     }
-    .el-form-block{
-      display: block;
-      width: 100%;
-      .el-form-item__content{
-        .el-textarea{
-          width: 100%;
-        }
+  }
+  .el-form-block{
+    display: block;
+    width: 100%;
+    .el-form-item__content{
+      .el-textarea{
+        width: 100%;
       }
     }
   }

@@ -1,13 +1,13 @@
 <template>
   <div class="navbar-container">
     <div class="left">
-      <i :class="sidebar.opened ? 'el-icon-more toggle open' : 'el-icon-more toggle close'" @click="_handleToggle"></i>
+      <i :class="sidebar.opened ? 'el-icon-more toggle open' : 'el-icon-more toggle close'" @click="handleToggle"></i>
       <breadcrumb class="breadcrumb-container"/>
     </div>
     <div class="right">
       <!-- 天气信息的容器 -->
       <div id="tp-weather-widget" style="padding: 10px"></div>
-      <el-dropdown @command="_handleCommand">
+      <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           {{userInfo.name}}
           <span class="avatar" :style="`background-image: url(${userInfo.avatar || 'https://www.lyh.red/image/b2.jpg'})`"></span>
@@ -18,12 +18,36 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+    <!-- 弹窗 -->
+    <page-dialog
+      :title="dialogInfo.title[dialogInfo.type]"
+      :visible.sync="dialogInfo.visible"
+      :width="dialogInfo.width"
+      :btLoading="dialogInfo.btLoading"
+      :btList="dialogInfo.btList"
+      @handleClickBt="handleClickBt"
+      @handleEvent="handleEvent">
+      <!-- form -->
+      <page-form
+        :refObj.sync="formInfo.ref"
+        :data="formInfo.data"
+        :fieldList="formInfo.fieldList"
+        :rules="formInfo.rules"
+        :labelWidth="formInfo.labelWidth"
+        :listTypeInfo="listTypeInfo">
+      </page-form>
+    </page-dialog>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { updateApi } from '@/api/user'
 import Breadcrumb from './Breadcrumb' // 导航
+import Validate from '@/common/mixin/validate'
+import HandleApi from '@/common/mixin/handleApi'
+import PageDialog from '@/components/PageDialog'
+import PageForm from '@/components/PageForm'
 
 // 显示天气的方法， 要在这个位置初始化
 (function (T, h, i, n, k, P, a, g, e) {
@@ -46,17 +70,86 @@ import Breadcrumb from './Breadcrumb' // 导航
 }(window, document, 'script', 'tpwidget', '//widget.seniverse.com/widget/chameleon.js'))
 
 export default {
+  mixins: [Validate, HandleApi],
   components: {
-    Breadcrumb
+    Breadcrumb,
+    PageDialog,
+    PageForm
   },
   data () {
     return {
       dropdownList: [
         {key: 'GitHub地址', command: 'GitHub'},
-        {key: '个人中心', command: 'userInfo'},
+        {key: '个人信息', command: 'userInfo'},
         {key: '修改密码', command: 'updatePassword'},
         {key: '退出登录', command: 'loginOut'}
-      ]
+      ],
+      // 相关列表
+      listTypeInfo: {
+        sexList: [
+          {key: '女', value: 1},
+          {key: '男', value: 0}
+        ],
+        accountTypeList: [
+          {key: '手机用户', value: 0},
+          {key: '论坛用户', value: 1},
+          {key: '平台用户', value: 2}
+        ],
+        statusList: [
+          {key: '启用', value: 1},
+          {key: '停用', value: 0}
+        ]
+      },
+      // 表单相关
+      formInfo: {
+        ref: null,
+        data: {
+          id: '', // *唯一ID
+          account: '', // *用户账号
+          password: '', // *用户密码
+          name: '', // *用户昵称
+          type: 2, // *用户类型: 0: 手机注册 1: 论坛注册 2: 管理平台添加
+          sex: 0, // *性别: 0:男 1:女
+          avatar: '', // 头像
+          phone: '', // 手机号码
+          wechat: '', // 微信
+          qq: '', // qq
+          email: '', // 邮箱
+          status: 1 // *状态: 0：停用，1：启用(默认为1)',
+          // create_user: '', // 创建人
+          // create_time: '', // 创建时间
+          // update_user: '', // 修改人
+          // update_time: '' // 修改时间
+        },
+        fieldList: [
+          {label: '账号', value: 'account', type: 'tag', required: true},
+          // {label: '密码', value: 'password', type: 'tag', required: true},
+          {label: '昵称', value: 'name', type: 'input', required: true},
+          {label: '性别', value: 'sex', type: 'select', list: 'sexList', required: true},
+          {label: '头像', value: 'avatar', type: 'input'},
+          {label: '手机号码', value: 'phone', type: 'input'},
+          {label: '微信', value: 'wechat', type: 'input'},
+          {label: 'QQ', value: 'qq', type: 'input'},
+          {label: '邮箱', value: 'email', type: 'input'},
+          {label: '状态', value: 'status', type: 'tag', list: 'statusList', required: true}
+        ],
+        rules: {},
+        labelWidth: '120px'
+      },
+      // 弹窗相关
+      dialogInfo: {
+        title: {
+          userInfo: '个人信息',
+          updatePassword: '修改密码'
+        },
+        visible: false,
+        type: '',
+        btLoading: false,
+        btList: [
+          {label: '取消', type: '', icon: '', event: 'close', show: true},
+          {label: '修改', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true}
+        ]
+      }
     }
   },
   computed: {
@@ -66,11 +159,13 @@ export default {
     ])
   },
   mounted () {
-    this._initWeather()
+    this.initWeather()
+    // mixin中的方法, 初始化字段验证规则
+    this._initRules(this.formInfo)
   },
   methods: {
     // 使用天气
-    _initWeather () {
+    initWeather () {
       // 方法存在开始加载
       if (typeof tpwidget === 'function') {
         tpwidget('init', {
@@ -91,15 +186,26 @@ export default {
       }
     },
     // 切换菜单
-    _handleToggle () {
+    handleToggle () {
       this.$store.dispatch('app/toggleSideBar')
     },
-    _handleCommand (command) {
+    handleCommand (command) {
+      const dialogInfo = this.dialogInfo,
+        formInfo = this.formInfo
       switch (command) {
       case 'GitHub':
         this.$fn.openWindow('https://github.com/2017coding/BBS_admin')
         break
       case 'userInfo':
+        dialogInfo.type = command
+        dialogInfo.visible = true
+        // 显示信息
+        for (let key in this.userInfo) {
+          // 存在则赋值
+          if (key in formInfo.data) {
+            formInfo.data[key] = this.userInfo[key]
+          }
+        }
         break
       case 'updatePassword':
         break
@@ -108,6 +214,40 @@ export default {
           location.reload() // 为了重新实例化vue-router对象 避免bug
         })
         break
+      }
+    },
+    // 按钮点击
+    handleClickBt (event, data) {
+      const dialogInfo = this.dialogInfo
+      switch (event) {
+      // 弹窗点击关闭
+      case 'close':
+        dialogInfo.visible = false
+        break
+      case 'save':
+        this.formInfo.ref.validate(valid => {
+          if (valid) {
+            let api = updateApi, params = this.formInfo.data
+            params.password = '123456'
+            dialogInfo.btLoading = true
+            this._handleAPI('update', api, params).then(res => {
+              if (res.success) {
+                dialogInfo.visible = false
+                // 设置userInfo
+                this.$store.commit('user/SET_USERINFO', JSON.parse(JSON.stringify(params)))
+              }
+              dialogInfo.btLoading = false
+            }).catch(e => {
+              dialogInfo.btLoading = false
+            })
+          }
+        })
+        break
+      }
+    },
+    // 触发事件
+    handleEvent (event, data) {
+      switch (event) {
       }
     }
   }

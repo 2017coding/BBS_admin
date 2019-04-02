@@ -244,6 +244,7 @@ export default {
       },
       // 表单相关
       formInfo: {
+        ref: null,
         data: {
           id: '', // *唯一ID
           pid: '', // *父ID
@@ -277,6 +278,7 @@ export default {
         labelWidth: '120px'
       },
       dataControlFormInfo: {
+        ref: null,
         data: {
           id: '', // *唯一ID
           mod_id: '', // *模块ID

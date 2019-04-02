@@ -4,6 +4,7 @@
       :visible.sync="visible"
       :width="width"
       :before-close="handleClose"
+      :append-to-body="true"
       class="page-dialog"
       :class="className">
       <slot></slot>
