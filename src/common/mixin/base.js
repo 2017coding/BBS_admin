@@ -22,6 +22,11 @@ export default {
               trigger: 'blur'
             }
           }
+        } else if (item.rules) {
+          obj[item.value] = {
+            validator: item.rules,
+            trigger: 'blur'
+          }
         }
       }
       formInfo.rules = obj
