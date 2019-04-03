@@ -153,6 +153,10 @@ export default {
           {key: '页面组件', value: 1},
           {key: '默认布局组件', value: 2}
         ],
+        componentsList1: [
+          {key: '页面组件', value: 1},
+          {key: '默认布局组件', value: 2}
+        ],
         dataControlTypeList: [
           {key: '按钮点击', value: 1},
           {key: '右键菜单', value: 2},
@@ -267,7 +271,7 @@ export default {
           {label: '模块类型', value: 'type', type: 'tag', list: 'modTypeList', required: true},
           {label: '模块编码', value: 'code', type: 'input', required: true},
           {label: '模块名称', value: 'name', type: 'input', required: true},
-          {label: '模块组件', value: 'components', type: 'select', list: 'componentsList', required: true},
+          {label: '模块组件', value: 'components', type: 'select', list: 'componentsList1', required: true},
           {label: '模块图标', value: 'icon', type: 'input'},
           {label: '重定向路径', value: 'redirect', type: 'input'},
           {label: '排序', value: 'sort', type: 'input', required: true},
@@ -328,10 +332,15 @@ export default {
   },
   watch: {
     'dialogInfo.visible' (val) {
+      const formInfo = this.formInfo,
+        dataControlFormInfo = this.dataControlFormInfo
       if (!val) {
         // 表单验证初始化
-        if (this.$refs.form) {
-          this.$refs.form.resetFields()
+        if (formInfo.ref) {
+          formInfo.ref.resetFields()
+        }
+        if (dataControlFormInfo.ref) {
+          dataControlFormInfo.ref.resetFields()
         }
         this.resetForm()
         // 重置弹窗按钮loading

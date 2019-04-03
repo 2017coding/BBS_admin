@@ -46,7 +46,7 @@
         :listTypeInfo="listTypeInfo">
       </page-form>
       <!-- 权限分配组件 -->
-      <permissions v-if="dialogInfo.type === 'permissions'"></permissions>
+      <permissions v-if="dialogInfo.type === 'permissions' && dialogInfo.visible"></permissions>
     </page-dialog>
   </div>
 </template>
@@ -176,10 +176,11 @@ export default {
   },
   watch: {
     'dialogInfo.visible' (val) {
+      const formInfo = this.formInfo
       if (!val) {
         // 表单验证初始化
-        if (this.$refs.form) {
-          this.$refs.form.resetFields()
+        if (formInfo.ref) {
+          formInfo.ref.resetFields()
         }
         this.resetForm()
         // 重置弹窗按钮loading

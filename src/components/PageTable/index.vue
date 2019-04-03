@@ -236,6 +236,16 @@ export default {
               this.listInfo.query.curPage = res.content.curPage - 0
               this.listInfo.query.pageSize = res.content.pageSize - 0
             }
+            // 设置当前选中项
+            // this.selectedList.forEach(selected => {
+            //   let row = this.data.find(item => {
+            //     return item.id === selected
+            //   })
+            //   this.$nextTick(() => {
+            //     if (!row) return
+            //     this.$refs.table.toggleRowSelection(row, true)
+            //   })
+            // })
             resolve(res)
             this.$emit('handleEvent', 'list', Array.isArray(res.content) ? res.content : res.content.result)
           } else {

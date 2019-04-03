@@ -185,14 +185,21 @@ export default {
   },
   watch: {
     'dialogInfo.visible' (val) {
+      const formInfo = this.formInfo
       if (!val) {
         // 表单验证初始化
-        if (this.$refs.form) {
-          this.$refs.form.resetFields()
+        if (formInfo.ref) {
+          formInfo.ref.resetFields()
         }
         this.resetForm()
         // 重置弹窗按钮loading
         this.dialogInfo.btLoading = false
+      } else {
+        if (this.dialogInfo.type === 'create') {
+          formInfo.fieldList[0].type = 'input'
+        } else if (this.dialogInfo.type === 'update') {
+          formInfo.fieldList[0].type = 'tag'
+        }
       }
     }
   },

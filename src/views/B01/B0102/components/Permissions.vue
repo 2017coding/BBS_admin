@@ -52,6 +52,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getAllApi } from '@/api/mod'
+import { getPermissionsApi } from '@/api/roleRelation'
 import { getAllApi as dataControlGetAllApi } from '@/api/dataControl'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
@@ -161,6 +162,8 @@ export default {
     }
   },
   mounted () {
+    getPermissionsApi().then(res => {
+    })
   },
   methods: {
     initTree (val) {
