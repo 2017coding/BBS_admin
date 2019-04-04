@@ -60,7 +60,7 @@ export default {
       },
       // 树相关信息
       treeInfo: {
-        refresh: false,
+        refresh: 1,
         refreshLevel: 0,
         nodeKey: 'key',
         lazy: true,
@@ -93,7 +93,7 @@ export default {
       },
       // 表格相关
       tableInfo: {
-        refresh: false,
+        refresh: 1,
         initCurpage: false,
         data: [],
         fieldList: [
@@ -133,7 +133,7 @@ export default {
     },
     // 获取列表
     getList () {
-      this.tableInfo.refresh = !this.tableInfo.refresh
+      this.tableInfo.refresh = Math.random()
     },
     // 按钮点击
     handleClickBt (event, data) {
@@ -170,7 +170,7 @@ export default {
         this.treeInfo.type = data.data.type + 1
         this.filterInfo.query.pid = data.data.id
         this.tableInfo.initCurpage = !this.tableInfo.initCurpage
-        this.tableInfo.refresh = !this.tableInfo.refresh
+        this.tableInfo.refresh = Math.random()
         break
       // 根据右键点击创建节点对应菜单
       case 'rightClick':
@@ -191,12 +191,12 @@ export default {
         // 表格初始化
         this.filterInfo.query.pid = 1
         this.tableInfo.initCurpage = !this.tableInfo.initCurpage
-        this.tableInfo.refresh = !this.tableInfo.refresh
+        this.tableInfo.refresh = Math.random()
         // falls through 告诉ESlint不检查这一行
       case 'refresh':
         // 树刷新
         this.treeInfo.refreshLevel = !data.node ? 0 : data.node.level
-        this.treeInfo.refresh = !this.treeInfo.refresh
+        this.treeInfo.refresh = Math.random()
         break
       }
     },

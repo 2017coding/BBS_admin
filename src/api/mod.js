@@ -44,6 +44,15 @@ export function getListApi (params) {
 }
 
 // 获取所有
+export function getUserModApi (params) {
+  return request({
+    url: `/api/mod/getUserMod`,
+    method: 'get',
+    params
+  })
+}
+
+// 获取所有
 export function getAllApi (params) {
   return request({
     url: `/api/mod/getAll`,

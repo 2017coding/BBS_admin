@@ -51,7 +51,7 @@
                 icon="el-icon-search"
                 type="primary"
                 style="margin-bottom: 10px;"
-                @click="tableInfo.refresh = !tableInfo.refresh">刷新
+                @click="tableInfo.refresh = Math.random()">刷新
               </el-button>
             </div>
             <!-- 表格 -->
@@ -173,7 +173,7 @@ export default {
       // 树相关信息
       treeInfo: {
         initTree: false, // 初始化加载
-        refresh: false, // 刷新
+        refresh: 1, // 刷新
         nodeKey: 'key', // 节点绑定字段
         defaultClicked: {}, // 默认点击 (设置为对象，保证数据能被监听到)
         defaultHighLight: '', // 默认高亮
@@ -187,7 +187,6 @@ export default {
         loadInfo: {
           key: 'id', // 节点id
           pKey: 'pid', // 节点父级id
-          rootPValue: 0, // 根节点的值
           label: 'name', // 节点名称字段
           api: getAllApi, // 获取数据的接口
           params: {data: [{key: 'type', value: 1}], type: 'query'}
@@ -219,17 +218,17 @@ export default {
       },
       // 表格相关
       tableInfo: {
-        refresh: false,
+        refresh: 1,
         initTable: false,
         initCurpage: false,
         pager: false,
         data: [],
         fieldList: [
           {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
-          {label: '类型', value: 'type', list: 'dataControlTypeList', required: true},
-          {label: '编码', value: 'code', required: true},
-          {label: '名称', value: 'name', required: true},
-          {label: 'api', value: 'api', required: true},
+          {label: '功能类型', value: 'type', list: 'dataControlTypeList', required: true},
+          {label: '功能编码', value: 'code', required: true},
+          {label: '功能名称', value: 'name', required: true},
+          {label: '功能api', value: 'api', required: true},
           {label: '请求方式', value: 'method', list: 'reqTypeList', required: true},
           {label: '创建人', value: 'create_user'},
           {label: '创建时间', value: 'create_time', minWidth: 180},
@@ -298,10 +297,10 @@ export default {
         },
         fieldList: [
           {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
-          {label: '类型', value: 'type', type: 'select', list: 'dataControlTypeList', required: true},
-          {label: '编码', value: 'code', type: 'input', required: true},
-          {label: '名称', value: 'name', type: 'input', required: true},
-          {label: 'api', value: 'api', type: 'input'},
+          {label: '功能类型', value: 'type', type: 'select', list: 'dataControlTypeList', required: true},
+          {label: '功能编码', value: 'code', type: 'input', required: true},
+          {label: '功能名称', value: 'name', type: 'input', required: true},
+          {label: '功能api', value: 'api', type: 'input'},
           {label: '请求方式', value: 'method', type: 'select', list: 'reqTypeList', required: true}
         ],
         rules: {},
@@ -356,11 +355,18 @@ export default {
       // 设置树重新初始化
       treeInfo.initTree = false
       // 刷新树
-      treeInfo.refresh = !treeInfo.refresh
+      treeInfo.refresh = Math.random()
     },
     // 得到树组件数据，处理相关事件
     'treeInfo.baseData' (val) {
       this.initTree(val)
+    },
+    // 从菜单详情切换到数据权限，获取数据权限列表
+    tabActive (val) {
+      if (val !== 'modData') return
+      const tableInfo = this.tableInfo
+      tableInfo.data = []
+      tableInfo.refresh = Math.random()
     }
   },
   mounted () {
@@ -432,7 +438,7 @@ export default {
       case 'deleteModData':
         this._handleAPI('delete', dataControlDeleteApi, data.id).then(res => {
           if (res.success) {
-            tableInfo.refresh = !tableInfo.refresh
+            tableInfo.refresh = Math.random()
           }
         })
         break
@@ -475,15 +481,15 @@ export default {
                   treeInfo.defaultHighLightAsyc = params.pid
                   treeInfo.defaultExpandedAsyc = [params.pid]
                   // 刷新树
-                  treeInfo.refresh = !treeInfo.refresh
+                  treeInfo.refresh = Math.random()
                 } else if (type === 'update') {
                   treeInfo.defaultClickedAsyc = params.id
                   treeInfo.defaultHighLightAsyc = params.id
                   treeInfo.defaultExpandedAsyc = [params.pid]
                   // 刷新树
-                  treeInfo.refresh = !treeInfo.refresh
+                  treeInfo.refresh = Math.random()
                 } else if (type === 'addModData' || type === 'updateModData') {
-                  tableInfo.refresh = !tableInfo.refresh
+                  tableInfo.refresh = Math.random()
                 }
               }
               dialogInfo.btLoading = false
@@ -541,7 +547,8 @@ export default {
         treeInfo.leftClickData = obj
         // tab为数据权限页面，点击刷新表格
         if (this.tabActive === 'modData') {
-          tableInfo.refresh = !tableInfo.refresh
+          tableInfo.data = []
+          tableInfo.refresh = Math.random()
         }
         // 点击不为页面组件，tab显示为菜单详情
         if (obj.components !== 1) {
@@ -586,7 +593,7 @@ export default {
         // 树刷新
         treeInfo.initTree = false
         treeInfo.refreshLevel = !data.node ? 0 : data.node.level
-        treeInfo.refresh = !this.treeInfo.refresh
+        treeInfo.refresh = Math.random()
         break
       case 'create':
         dialogInfo.type = type
@@ -613,7 +620,7 @@ export default {
             treeInfo.defaultHighLightAsyc = nodeData.pid
             treeInfo.defaultExpandedAsyc = [nodeData.pid]
             // 刷新树
-            treeInfo.refresh = !treeInfo.refresh
+            treeInfo.refresh = Math.random()
           }
         })
         break

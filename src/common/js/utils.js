@@ -148,7 +148,6 @@ export default {
    * @param {Object} obj {key, pKey, data}
    *  @param obj.key  字段名称 比如id
    *  @param obj.pKey 父字段名称 比如 pid
-   *  @param obj.rootPValue 根节点的父字段的值
    *  @param obj.data 需要处理的数据
    * @return {Array} arr
    */
@@ -157,19 +156,23 @@ export default {
       console.log('getTreeArr=>请传入数组')
       return []
     }
-    let arr = obj.data,
-      arr1 = []
-    // 数据处理
+    let arr = obj.data, arr1 = []
+    // 将数据处理成数状结构
     arr.forEach(item => {
+      let index = 0
       item.children = []
       arr.forEach(item1 => {
+        // 得到树结构关系
         if (item[obj.key] === item1[obj.pKey]) {
           item.children.push(item1)
         }
+        // 判断根节点
+        if (item1.id !== item.pid) {
+          index++
+        }
       })
-      // 没有传入根节点的父ID时，默认设为0
-      obj.rootPValue = obj.rootPValue || 0
-      if (item[obj.pKey] === obj.rootPValue) {
+      // 得到根节点
+      if (index === arr.length) {
         arr1.push(item)
       }
     })

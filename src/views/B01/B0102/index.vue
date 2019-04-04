@@ -88,7 +88,7 @@ export default {
       // 树相关信息
       treeInfo: {
         initTree: false, // 初始化加载
-        refresh: false, // 刷新
+        refresh: 1, // 刷新
         nodeKey: 'key', // 节点绑定字段
         defaultClicked: {}, // 默认点击 (设置为对象，保证数据能被监听到)
         defaultHighLight: '', // 默认高亮
@@ -102,7 +102,6 @@ export default {
         loadInfo: {
           key: 'id', // 节点id
           pKey: 'pid', // 节点父级id
-          rootPValue: 0, // 根节点的值
           label: 'name', // 节点名称字段
           api: getAllApi // 获取数据的接口
         },
@@ -259,7 +258,7 @@ export default {
               if (res.success) {
                 dialogInfo.visible = false
                 // 刷新树
-                treeInfo.refresh = !treeInfo.refresh
+                treeInfo.refresh = Math.random()
                 // 设置默认项
                 if (type === 'create') {
                   treeInfo.defaultClickedAsyc = params.pid
@@ -342,7 +341,7 @@ export default {
         // 树刷新
         treeInfo.initTree = false
         treeInfo.refreshLevel = !data.node ? 0 : data.node.level
-        treeInfo.refresh = !this.treeInfo.refresh
+        treeInfo.refresh = Math.random()
         break
       case 'create':
         dialogInfo.type = type
@@ -369,7 +368,7 @@ export default {
             treeInfo.defaultHighLightAsyc = nodeData.pid
             treeInfo.defaultExpandedAsyc = [nodeData.pid]
             // 刷新树
-            treeInfo.refresh = !treeInfo.refresh
+            treeInfo.refresh = Math.random()
           }
         })
         break

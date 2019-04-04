@@ -101,7 +101,7 @@ export default {
       },
       // 表格相关
       tableInfo: {
-        refresh: false,
+        refresh: 1,
         initCurpage: false,
         data: [],
         fieldList: [
@@ -215,7 +215,7 @@ export default {
     },
     // 获取列表
     getList () {
-      this.tableInfo.refresh = !this.tableInfo.refresh
+      this.tableInfo.refresh = Math.random()
     },
     // 得到placeholder的显示
     getPlaceholder (row) {
@@ -237,7 +237,7 @@ export default {
       switch (event) {
       // 搜索
       case 'search':
-        tableInfo.refresh = !tableInfo.refresh
+        tableInfo.refresh = Math.random()
         break
       // 创建
       case 'create':
@@ -274,7 +274,7 @@ export default {
       case 'delete':
         this._handleAPI(event, deleteApi, data.id).then(res => {
           if (res.success) {
-            tableInfo.refresh = !tableInfo.refresh
+            tableInfo.refresh = Math.random()
           }
         })
         break
@@ -299,7 +299,7 @@ export default {
             this._handleAPI(type, api, params).then(res => {
               if (res.success) {
                 dialogInfo.visible = false
-                tableInfo.refresh = !tableInfo.refresh
+                tableInfo.refresh = Math.random()
               }
               dialogInfo.btLoading = false
             }).catch(e => {

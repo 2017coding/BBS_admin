@@ -67,14 +67,14 @@ export default {
       },
       // 表格相关
       tableInfo: {
-        refresh: false,
+        refresh: 1,
         data: [],
         fieldList: [
           {label: '日志来源', value: 'origin', list: 'originList'},
           {label: '日志类型', value: 'type', list: 'typeList'},
           {label: '日志标题', value: 'title', list: 'sexList'},
           {label: '日志描述', value: 'desc', list: 'accountTypeList'},
-          {label: '访问IP', value: 'ip'},
+          {label: '访问IP', value: 'ip', minWidth: 160},
           {label: '用户', value: 'create_user'},
           {label: '时间', value: 'create_time', minWidth: 180}
         ]
@@ -97,7 +97,7 @@ export default {
     },
     // 获取列表
     getList () {
-      this.tableInfo.refresh = !this.tableInfo.refresh
+      this.tableInfo.refresh = Math.random()
     },
     // 按钮点击
     handleClickBt (event, data) {
@@ -105,7 +105,7 @@ export default {
       switch (event) {
       // 搜索
       case 'search':
-        tableInfo.refresh = !tableInfo.refresh
+        tableInfo.refresh = Math.random()
         break
       }
     },

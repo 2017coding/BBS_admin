@@ -43,6 +43,15 @@ export function getListApi (params) {
   })
 }
 
+// 获取用户拥有
+export function getUserDataControlApi (params) {
+  return request({
+    url: `/api/dataControl/getUserDataControl`,
+    method: 'get',
+    params
+  })
+}
+
 // 获取所有
 export function getAllApi (params) {
   return request({

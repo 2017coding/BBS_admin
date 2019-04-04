@@ -107,7 +107,7 @@ export default {
     },
     // 刷新
     refresh: {
-      type: Boolean
+      type: Number
     },
     // 获取数据的接口
     api: {
@@ -122,6 +122,13 @@ export default {
     checkBox: {
       type: Boolean,
       default: false
+    },
+    // 选中列表
+    checkedList: {
+      type: Array,
+      default: () => {
+        return []
+      }
     },
     // 类型列表
     listTypeInfo: {
@@ -230,24 +237,25 @@ export default {
           this.listInfo.loading = false
           if (res.success) {
             // 使外面可以访问到表格数据
-            this.$emit('update:data', Array.isArray(res.content) ? res.content : res.content.result)
+            const arr = Array.isArray(res.content) ? res.content : res.content.result
+            this.$emit('update:data', arr)
             if (this.pager) {
               this.listInfo.total = res.content.totals
               this.listInfo.query.curPage = res.content.curPage - 0
               this.listInfo.query.pageSize = res.content.pageSize - 0
             }
             // 设置当前选中项
-            // this.selectedList.forEach(selected => {
-            //   let row = this.data.find(item => {
-            //     return item.id === selected
-            //   })
-            //   this.$nextTick(() => {
-            //     if (!row) return
-            //     this.$refs.table.toggleRowSelection(row, true)
-            //   })
-            // })
+            this.checkedList.forEach(selected => {
+              let row = arr.find(item => {
+                return item.id === selected
+              })
+              this.$nextTick(() => {
+                if (!row) return
+                this.$refs.table.toggleRowSelection(row, true)
+              })
+            })
             resolve(res)
-            this.$emit('handleEvent', 'list', Array.isArray(res.content) ? res.content : res.content.result)
+            this.$emit('handleEvent', 'list', arr)
           } else {
             this.$message({
               showClose: true,
@@ -279,6 +287,7 @@ export default {
     },
     // 选中数据
     handleSelectionChange (rows) {
+      this.$emit('handleEvent', 'tableCheck', rows)
     },
     // 根据页面的头部, 功能框, 分页组件等高度，计算出table的高度
     getTableHeight () {

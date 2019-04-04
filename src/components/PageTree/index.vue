@@ -11,10 +11,9 @@
       :draggable="draggable"
       :allow-drop="handleDrop"
       :default-expand-all="expandAll"
-      :expand-on-click-node="false"
+      :expand-on-click-node="clickNode"
       :check-strictly="checkStrictly"
       :filter-node-method="filterNode"
-      :default-checked-keys="defaultChecked"
       :default-expanded-keys="defaultExpanded"
       @node-click="handleClickLeft"
       @node-contextmenu="handleClickRight"
@@ -159,7 +158,7 @@ export default {
     },
     // 传入一个随机数，让树组件更新
     treeRefresh: {
-      type: Boolean
+      type: Number
     },
     // 要刷新的层级
     refreshLevel: {
@@ -217,6 +216,15 @@ export default {
       if (!val.id) return
       const data = this.lazy ? this.lazyInfo : this.loadInfo
       this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(data.key, this.baseData, val.id)})
+    },
+    // 设置选中的节点，直接使用这个属性会导致父节点勾中，子节点全部选中的问题
+    defaultChecked (val) {
+      // 将节点选中的状态初始化
+      this.$refs.TreeComponent.setCheckedNodes([])
+      for (let i = 0; i < val.length; i++) {
+        // 得到选中的节点,这个方法ojbk
+        this.$refs.TreeComponent.setChecked(val[i], true)
+      }
     }
   },
   created () {
@@ -315,7 +323,7 @@ export default {
       checkeds = this.$refs.TreeComponent.getCheckedNodes()
       checkedKeys = this.$refs.TreeComponent.getCheckedKeys()
       // 将当前选择的数据派发到父级处理
-      this.$emit('handleEvent', 'check', {haleKeys: haleKeys.concat(checkedKeys), halfs: halfs.concat(checkeds)})
+      this.$emit('handleEvent', 'treeCheck', {haleKeys: haleKeys.concat(checkedKeys), halfs: halfs.concat(checkeds)})
     },
     // 是否可以放置, 设置为只能同一层级拖拽
     handleDrop (draggingNode, dropNode, type) {
@@ -364,9 +372,7 @@ export default {
               this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(loadInfo.key, this.baseData, this.defaultClicked.id)})
             }
           }
-          this.treeData = this.$fn.getTreeArr({
-            key: loadInfo.key, pKey: loadInfo.pKey, rootPValue: loadInfo.rootPValue, data: arr
-          })
+          this.treeData = this.$fn.getTreeArr({key: loadInfo.key, pKey: loadInfo.pKey, data: arr})
         }
         // 加载loading
         this.treeLoading = false
