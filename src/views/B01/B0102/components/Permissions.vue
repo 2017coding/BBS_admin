@@ -38,7 +38,7 @@
               :refresh="tableInfo.refresh"
               :pager="tableInfo.pager"
               :data.sync="tableInfo.data"
-              :checkedList="tableInfo.checkedList"
+              :checkedList="roleRelation.permissions"
               :api="getUserDataControlApi"
               :query="{modId: treeInfo.leftClickData.id}"
               :fieldList="tableInfo.fieldList"
@@ -65,6 +65,14 @@ import PageTable from '@/components/PageTable'
 
 export default {
   mixins: [HandleApi],
+  props: {
+    roleId: {
+      type: Number
+    },
+    params: {
+      type: Object
+    }
+  },
   components: {
     PageTree,
     PageTable
@@ -135,7 +143,6 @@ export default {
         initCurpage: false,
         pager: false,
         data: [],
-        checkedList: [], // 选中列表
         fieldList: [
           {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
           {label: '触发类型', value: 'type', list: 'dataControlTypeList', required: true},
@@ -170,10 +177,15 @@ export default {
     // 得到树组件数据，处理相关事件
     'treeInfo.baseData' (val) {
       this.initTree(val)
+    },
+    roleId: {
+      handler: function (val) {
+        if (!val) return
+        this.getPermissions()
+        this.$emit('update:params', {...this.params, ...{roleId: val}})
+      },
+      immediate: true
     }
-  },
-  mounted () {
-    this.getPermissions()
   },
   methods: {
     initTree (val) {
@@ -203,11 +215,11 @@ export default {
     },
     // 获取权限
     getPermissions () {
-      getPermissionsApi().then(res => {
+      getPermissionsApi({roleId: this.roleId}).then(res => {
         if (res.success) {
           const data = res.content
           this.treeInfo.defaultChecked = data.mod
-          this.tableInfo.checkedList = data.permissions
+          this.roleRelation.permissions = data.permissions
         } else {
         }
       })
@@ -222,7 +234,8 @@ export default {
     // 触发事件
     handleEvent (event, data) {
       const treeInfo = this.treeInfo,
-        tableInfo = this.tableInfo
+        tableInfo = this.tableInfo,
+        roleRelation = this.roleRelation
       switch (event) {
       // 左键点击的处理
       case 'leftClick':
@@ -232,11 +245,47 @@ export default {
         break
       // 树选中事件
       case 'treeCheck':
-        this.roleRelation.mod = data.haleKeys
+        roleRelation.mod = data.haleKeys
+        this.$emit('update:params', {...this.params, ...roleRelation})
         break
-      // 表格的选中事件
+      // 表格的选中事件 (实现分页保存选中功能)
       case 'tableCheck':
-        console.log(data)
+        let selectIds = [],
+          unSelectedIds = [],
+          selectedList = JSON.parse(JSON.stringify(roleRelation.permissions))
+        // 拿到当前列表中未选中的数据
+        if (data.length === 0) {
+          unSelectedIds = this.tableInfo.data.map(item => {
+            return item.id
+          })
+        } else {
+          this.tableInfo.data.forEach(item => {
+            let index = 0
+            data.forEach((item1, index1) => {
+              if (item1 && item1.id) {
+                // 得到当前选中的ID
+                selectIds.push(item1.id)
+                // 当列表中的数据在选择的数据中不存在
+                if (item.id !== item1.id) {
+                  index++
+                }
+              }
+            })
+            // 得到当前未选中的id
+            if (index === data.length) {
+              unSelectedIds.push(item.id)
+            }
+          })
+        }
+        // 从当期列表中将未选中的元素删除
+        unSelectedIds.forEach(item1 => {
+          // 判断要删除的数据是否在选择的数据中
+          if (selectedList.indexOf(item1) === -1) return
+          selectedList.splice(selectedList.indexOf(item1), 1)
+        })
+        // 合并选中并去重
+        roleRelation.permissions = [...new Set(selectIds.concat(selectedList))]
+        this.$emit('update:params', {...this.params, ...roleRelation})
         break
       }
     }

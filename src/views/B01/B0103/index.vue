@@ -240,8 +240,8 @@ export default {
           label: '操作',
           width: '180',
           btList: [
-            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'updateModData', show: true},
-            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'deleteModData', show: true}
+            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'updateModData', show: false},
+            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'deleteModData', show: false}
           ]
         }
       },
@@ -561,15 +561,15 @@ export default {
         // 根节点
         if (data.node.level === 1) {
           arr = [
-            {name: '添加下级模块', type: 'create', data: data.data, node: data.node, vm: data.vm},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
+            {name: '添加下级模块', type: 'create', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {
           arr = [
-            {name: '添加下级模块', type: 'create', data: data.data, node: data.node, vm: data.vm},
-            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm},
-            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
+            {name: '添加下级模块', type: 'create', data: data.data, node: data.node, vm: data.vm, show: false},
+            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: false},
+            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: false},
+            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         }
         this.treeInfo.rightMenuList = arr

@@ -10,10 +10,11 @@ export function setPermissionsApi (data) {
 }
 
 // 获取角色权限
-export function getPermissionsApi () {
+export function getPermissionsApi (params) {
   return request({
     url: '/api/roleRelation/getPermissions',
-    method: 'get'
+    method: 'get',
+    params
   })
 }
 

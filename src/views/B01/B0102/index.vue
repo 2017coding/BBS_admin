@@ -46,7 +46,7 @@
         :listTypeInfo="listTypeInfo">
       </page-form>
       <!-- 权限分配组件 -->
-      <permissions v-if="dialogInfo.type === 'permissions' && dialogInfo.visible"></permissions>
+      <permissions v-if="dialogInfo.type === 'permissions' && dialogInfo.visible" :roleId="treeInfo.rightClickData.id" :params.sync="roleParams"></permissions>
     </page-dialog>
   </div>
 </template>
@@ -54,6 +54,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { createApi, updateApi, deleteApi, getAllApi } from '@/api/role'
+import { setPermissionsApi } from '@/api/roleRelation'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
@@ -85,6 +86,7 @@ export default {
         ],
         treeList: []
       },
+      roleParams: {},
       // 树相关信息
       treeInfo: {
         initTree: false, // 初始化加载
@@ -105,6 +107,8 @@ export default {
           label: 'name', // 节点名称字段
           api: getAllApi // 获取数据的接口
         },
+        leftClickData: {},
+        rightClickData: {},
         rightMenuList: []
       },
       // 卡片相关
@@ -242,6 +246,25 @@ export default {
         break
       // 弹窗点击保存
       case 'save':
+        // TODO: 暂时这样处理，后面需要将两个保存区分开来
+        if (!formInfo.ref) {
+          dialogInfo.btLoading = true
+          setPermissionsApi(this.roleParams).then(res => {
+            if (res.success) {
+              dialogInfo.visible = false
+            }
+            this.$message({
+              showClose: true,
+              message: res.message,
+              type: res.success ? 'success' : 'error',
+              duration: 2000
+            })
+            dialogInfo.btLoading = false
+          }).catch(() => {
+            dialogInfo.btLoading = false
+          })
+          return
+        }
         formInfo.ref.validate(valid => {
           if (valid) {
             let api, params = formInfo.data,
@@ -281,8 +304,8 @@ export default {
     },
     // 触发事件
     handleEvent (event, data) {
-      const cardInfo = this.cardInfo
-      // treeInfo = this.treeInfo
+      const cardInfo = this.cardInfo,
+        treeInfo = this.treeInfo
       // formInfo = this.formInfo
       switch (event) {
       // 对表格获取到的数据做处理
@@ -307,20 +330,21 @@ export default {
         // 根节点
         if (data.node.level === 1) {
           arr = [
-            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
+            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {
           arr = [
-            {name: '绑定用户', type: 'bindUser', data: data.data, node: data.node, vm: data.vm},
-            {name: '分配权限', type: 'permissions', data: data.data, node: data.node, vm: data.vm},
-            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm},
-            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm},
-            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
+            {name: '绑定用户', type: 'bindUser', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '分配权限', type: 'permissions', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         }
-        this.treeInfo.rightMenuList = arr
+        treeInfo.rightMenuList = arr
+        treeInfo.rightClickData = JSON.parse(JSON.stringify(data.data))
         break
       // 右键菜单对应的事件处理
       case 'rightEvent':
