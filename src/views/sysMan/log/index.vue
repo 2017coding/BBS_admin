@@ -25,7 +25,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getListApi } from '@/api/log'
+import { getListApi } from '@/api/sysMan/log'
 import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'

@@ -48,43 +48,43 @@ export const baseRouter = [
   },
   // 运维中心
   {
-    path: '/B04',
+    path: '/opsCenter',
     component: Layout,
-    redirect: '/B04/B0401',
+    redirect: '/opsCenter/question',
     meta: {title: '运维中心', icon: 'el-icon-addressbook'},
     children: [
       {
-        path: '/B0401',
-        component: () => import('@/views/B04/B0401/index'),
-        name: 'B0401',
+        path: '/questionMan',
+        component: () => import('@/views/opsCenter/questionMan/index'),
+        name: 'questionMan',
         meta: {title: '问答管理', icon: ''},
         children: []
       },
       {
-        path: '/B0402',
-        component: () => import('@/views/B04/B0402/index'),
-        name: 'B0402',
+        path: '/blogMan',
+        component: () => import('@/views/opsCenter/blogMan/index'),
+        name: 'blogMan',
         meta: {title: '专栏管理', icon: ''},
         children: []
       },
       {
-        path: '/B0403',
-        component: () => import('@/views/B04/B0403/index'),
-        name: 'B0403',
+        path: '/articleMan',
+        component: () => import('@/views/opsCenter/articleMan/index'),
+        name: 'articleMan',
         meta: {title: '文章管理', icon: ''},
         children: []
       },
       {
-        path: '/B0404',
-        component: () => import('@/views/B04/B0404/index'),
-        name: 'B0404',
+        path: '/liveMan',
+        component: () => import('@/views/opsCenter/liveMan/index'),
+        name: 'liveMan',
         meta: {title: '讲堂管理', icon: ''},
         children: []
       },
       {
-        path: '/B0405',
-        component: () => import('@/views/B04/B0405/index'),
-        name: 'B0405',
+        path: '/activityMan',
+        component: () => import('@/views/opsCenter/activityMan/index'),
+        name: 'activityMan',
         meta: {title: '活动管理', icon: ''},
         children: []
       }
@@ -92,22 +92,22 @@ export const baseRouter = [
   },
   // 文件库
   {
-    path: '/B03',
+    path: '/library',
     component: Layout,
-    redirect: '/B03/B0301',
+    redirect: '/library/imgMan',
     meta: {title: '文件库', icon: 'el-icon-workbench'},
     children: [
       {
-        path: '/B0301',
-        component: () => import('@/views/B03/B0301/index'),
-        name: 'B0301',
+        path: '/imgMan',
+        component: () => import('@/views/library/imgMan/index'),
+        name: 'imgMan',
         meta: {title: '图片管理', icon: ''},
         children: []
       },
       {
-        path: '/B0302',
-        component: () => import('@/views/B03/B0302/index'),
-        name: 'B0302',
+        path: '/fileMan',
+        component: () => import('@/views/library/fileMan/index'),
+        name: 'fileMan',
         meta: {title: '文件管理', icon: ''},
         children: []
       }
@@ -115,64 +115,64 @@ export const baseRouter = [
   },
   // 论坛配置
   {
-    path: '/B02',
+    path: '/bbsConfig',
     component: Layout,
-    redirect: '/B02/B0201',
+    redirect: '/bbsConfig/carousel',
     meta: {title: '论坛配置', icon: 'el-icon-label'},
     children: [
       {
-        path: '/B0201',
-        component: () => import('@/views/B02/B0201/index'),
-        name: 'B0201',
+        path: '/carousel',
+        component: () => import('@/views/bbsConfig/carousel/index'),
+        name: 'carousel',
         meta: {title: '首页轮播', icon: ''},
         children: []
       },
       {
-        path: '/B0202',
-        component: () => import('@/views/B02/B0202/index'),
-        name: 'B0202',
+        path: '/techSquare',
+        component: () => import('@/views/bbsConfig/techSquare/index'),
+        name: 'techSquare',
         meta: {title: '技术频道', icon: ''},
         children: []
       },
       {
-        path: '/B0203',
-        component: () => import('@/views/B02/B0203/index'),
-        name: 'B0203',
-        meta: {title: '提示语', icon: ''},
+        path: '/notices',
+        component: () => import('@/views/bbsConfig/notices/index'),
+        name: 'notices',
+        meta: {title: '通知', icon: ''},
         children: []
       },
       {
-        path: '/B0204',
-        component: () => import('@/views/B02/B0204/index'),
-        name: 'B0204',
+        path: '/advertising',
+        component: () => import('@/views/bbsConfig/advertising/index'),
+        name: 'advertising',
         meta: {title: '广告位', icon: ''},
         children: []
       },
       {
-        path: '/B0205',
-        component: () => import('@/views/B02/B0205/index'),
-        name: 'B0205',
+        path: '/liveRecommend',
+        component: () => import('@/views/bbsConfig/liveRecommend/index'),
+        name: 'liveRecommend',
         meta: {title: '讲座推荐', icon: ''},
         children: []
       },
       {
-        path: '/B0206',
-        component: () => import('@/views/B02/B0206/index'),
-        name: 'B0206',
+        path: '/activityRecommend',
+        component: () => import('@/views/bbsConfig/activityRecommend/index'),
+        name: 'activityRecommend',
         meta: {title: '活动推荐', icon: ''},
         children: []
       },
       {
-        path: '/B0207',
-        component: () => import('@/views/B02/B0207/index'),
-        name: 'B0207',
+        path: '/tagTypeMan',
+        component: () => import('@/views/bbsConfig/tagTypeMan/index'),
+        name: 'tagTypeMan',
         meta: {title: '标签类型管理', icon: ''},
         children: []
       },
       {
-        path: '/B0208',
-        component: () => import('@/views/B02/B0208/index'),
-        name: 'B0208',
+        path: '/tagMan',
+        component: () => import('@/views/bbsConfig/tagMan/index'),
+        name: 'tagMan',
         meta: {title: '标签管理', icon: ''},
         children: []
       }
@@ -180,50 +180,50 @@ export const baseRouter = [
   },
   // 系统管理
   {
-    path: '/B01',
+    path: '/sysMan',
     component: Layout,
-    redirect: '/B01/B0101',
+    redirect: '/sysMan/userMan',
     meta: {title: '系统管理', icon: 'el-icon-setup'},
     children: [
       {
-        path: '/B0101',
-        component: () => import('@/views/B01/B0101/index'),
-        name: 'B0101',
+        path: '/userMan',
+        component: () => import('@/views/sysMan/userMan/index'),
+        name: 'userMan',
         meta: {title: '用户管理', icon: ''},
         children: []
       },
       {
-        path: '/B0102',
-        component: () => import('@/views/B01/B0102/index'),
-        name: 'B0102',
+        path: '/roleMan',
+        component: () => import('@/views/sysMan/roleMan/index'),
+        name: 'roleMan',
         meta: {title: '角色管理', icon: ''},
         children: []
       },
       {
-        path: '/B0103',
-        component: () => import('@/views/B01/B0103/index'),
-        name: 'B0103',
+        path: '/menuMan',
+        component: () => import('@/views/sysMan/menuMan/index'),
+        name: 'menuMan',
         meta: {title: '菜单管理', icon: ''},
         children: []
       },
       {
-        path: '/B0104',
-        component: () => import('@/views/B01/B0104/index'),
-        name: 'B0104',
+        path: '/areaMan',
+        component: () => import('@/views/sysMan/areaMan/index'),
+        name: 'areaMan',
         meta: {title: '区域管理', icon: ''},
         children: []
       },
       {
-        path: '/B0105',
-        component: () => import('@/views/B01/B0105/index'),
-        name: 'B0105',
+        path: '/dictMan',
+        component: () => import('@/views/sysMan/dictMan/index'),
+        name: 'dictMan',
         meta: {title: '字典管理', icon: ''},
         children: []
       },
       {
-        path: '/B0106',
-        component: () => import('@/views/B01/B0106/index'),
-        name: 'B0106',
+        path: '/log',
+        component: () => import('@/views/sysMan/log/index'),
+        name: 'log',
         meta: {title: '系统日志', icon: ''},
         children: []
       }

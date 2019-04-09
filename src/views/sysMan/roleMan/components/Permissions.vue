@@ -1,14 +1,14 @@
 <template>
   <div class="permissions">
-    <el-tabs v-model="modType" @tab-click="handleEvent('tabClick')">
+    <el-tabs v-model="menuType" @tab-click="handleEvent('tabClick')">
       <el-tab-pane
         class="tab"
         :label="item.key"
-        v-for="(item, index) in listTypeInfo.modTypeList"
+        v-for="(item, index) in listTypeInfo.menuTypeList"
         :name="item.value + ''"
         :key="index">
         <!-- 点击加载 -->
-        <template v-if="modType === item.value + ''">
+        <template v-if="menuType === item.value + ''">
           <!-- 左侧树 -->
           <div class="left">
             <page-tree
@@ -39,8 +39,8 @@
               :pager="tableInfo.pager"
               :data.sync="tableInfo.data"
               :checkedList="roleRelation.permissions"
-              :api="getUserDataControlApi"
-              :query="{modId: treeInfo.leftClickData.id}"
+              :api="getUserDataPermsApi"
+              :query="{menuId: treeInfo.leftClickData.id}"
               :fieldList="tableInfo.fieldList"
               :listTypeInfo="listTypeInfo"
               :handle="tableInfo.handle"
@@ -56,9 +56,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getUserModApi } from '@/api/mod'
-import { getPermissionsApi } from '@/api/roleRelation'
-import { getUserDataControlApi } from '@/api/dataControl'
+import { getPermissionsApi } from '@/api/sysMan/roleMan'
+import { getUserMenuApi, getUserDataPermsApi } from '@/api/sysMan/menuMan'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageTable from '@/components/PageTable'
@@ -79,17 +78,16 @@ export default {
   },
   data () {
     return {
-      getUserModApi,
-      getUserDataControlApi,
-      // 模块类型
-      modType: '1',
+      getUserDataPermsApi,
+      // 菜单类型
+      menuType: '1',
       // 相关列表
       listTypeInfo: {
         statusList: [
           {key: '启用', value: 1},
           {key: '停用', value: 0}
         ],
-        modTypeList: [
+        menuTypeList: [
           {key: '平台端', value: 1, status: false},
           {key: '论坛端', value: 2, status: false},
           {key: '移动端', value: 3, status: false}
@@ -131,7 +129,7 @@ export default {
           key: 'id', // 节点id
           pKey: 'pid', // 节点父级id
           label: 'name', // 节点名称字段
-          api: getUserModApi, // 获取数据的接口
+          api: getUserMenuApi, // 获取数据的接口
           params: {data: [{key: 'type', value: 1}], type: 'query'}
         },
         leftClickData: {}
@@ -144,7 +142,7 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
+          {label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true},
           {label: '触发类型', value: 'type', list: 'dataControlTypeList', required: true},
           // {label: '功能编码', value: 'code', required: true},
           {label: '功能名称', value: 'name', required: true}
@@ -154,7 +152,7 @@ export default {
       },
       // 角色依赖的相关数据
       roleRelation: {
-        mod: [],
+        menu: [],
         permissions: []
       }
     }
@@ -165,7 +163,7 @@ export default {
     ])
   },
   watch: {
-    'modType' (val) {
+    'menuType' (val) {
       const treeInfo = this.treeInfo
       // 修改树组件参数
       treeInfo.loadInfo.params.data[0].value = val
@@ -218,9 +216,15 @@ export default {
       getPermissionsApi({roleId: this.roleId}).then(res => {
         if (res.success) {
           const data = res.content
-          this.treeInfo.defaultChecked = data.mod
+          this.treeInfo.defaultChecked = data.menu
           this.roleRelation.permissions = data.permissions
         } else {
+          this.$message({
+            showClose: true,
+            message: res.message,
+            type: res.success ? 'success' : 'error',
+            duration: 2000
+          })
         }
       })
     },
@@ -245,7 +249,7 @@ export default {
         break
       // 树选中事件
       case 'treeCheck':
-        roleRelation.mod = data.haleKeys
+        roleRelation.menu = data.haleKeys
         this.$emit('update:params', {...this.params, ...roleRelation})
         break
       // 表格的选中事件 (实现分页保存选中功能)

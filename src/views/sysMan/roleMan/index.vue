@@ -47,14 +47,15 @@
       </page-form>
       <!-- 权限分配组件 -->
       <permissions v-if="dialogInfo.type === 'permissions' && dialogInfo.visible" :roleId="treeInfo.rightClickData.id" :params.sync="roleParams"></permissions>
+      <!-- 绑定用户组件 -->
+      <bind-user v-if="dialogInfo.type === 'bindUser' && dialogInfo.visible" :roleId="treeInfo.rightClickData.id" :params.sync="bindUserParams"></bind-user>
     </page-dialog>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { createApi, updateApi, deleteApi, getAllApi } from '@/api/role'
-import { setPermissionsApi } from '@/api/roleRelation'
+import { createApi, updateApi, deleteApi, getAllApi, setPermissionsApi } from '@/api/sysMan/roleMan'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
@@ -62,6 +63,7 @@ import PageCard from '@/components/PageCard'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 import Permissions from './components/Permissions'
+import BindUser from './components/BindUser'
 
 export default {
   mixins: [Validate, HandleApi],
@@ -70,7 +72,8 @@ export default {
     PageCard,
     PageDialog,
     PageForm,
-    Permissions
+    Permissions,
+    BindUser
   },
   data () {
     return {
@@ -86,7 +89,10 @@ export default {
         ],
         treeList: []
       },
+      // 分配权限相关参数
       roleParams: {},
+      // 绑定用户相关参数
+      bindUserParams: {},
       // 树相关信息
       treeInfo: {
         initTree: false, // 初始化加载
@@ -118,7 +124,7 @@ export default {
         fieldList: [
           {label: '所属角色', value: 'pid', list: 'treeList'},
           {label: '角色名称', value: 'name'},
-          {label: '可创建专栏数', value: 'columns'},
+          {label: '可创建专栏数', value: 'blogs'},
           {label: '可创建用户数', value: 'users'},
           {label: '描述', value: 'desc'},
           {label: '状态', value: 'status', list: 'statusList'},
@@ -134,7 +140,7 @@ export default {
           id: '', // *唯一ID
           pid: '', // *父ID
           name: '', // *角色名称
-          columns: 1, // 专栏数量, 0为无限
+          blogs: 1, // 专栏数量, 0为无限
           users: 10, // 可创建多少个用户, 0为无限
           desc: '', // 描述
           status: 1 // *状态: 0：停用，1：启用(默认为1)',
@@ -146,7 +152,7 @@ export default {
         fieldList: [
           {label: '所属角色', value: 'pid', type: 'tag', list: 'treeList', required: true},
           {label: '名称', value: 'name', type: 'input', required: true},
-          {label: '可创建专栏数', value: 'columns', type: 'inputNumber', min: 1, max: 1, required: true},
+          {label: '可创建专栏数', value: 'blogs', type: 'inputNumber', min: 1, max: 1, required: true},
           {label: '可创建用户数', value: 'users', type: 'inputNumber', min: 1, max: 10, required: true},
           {label: '描述', value: 'desc', type: 'textarea'},
           {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
@@ -246,8 +252,8 @@ export default {
         break
       // 弹窗点击保存
       case 'save':
-        // TODO: 暂时这样处理，后面需要将两个保存区分开来
-        if (!formInfo.ref) {
+        // TODO: 暂时这样处理，后面需要将多个个保存区分开来
+        if (dialogInfo.type === 'permissions') {
           dialogInfo.btLoading = true
           setPermissionsApi(this.roleParams).then(res => {
             if (res.success) {
@@ -263,6 +269,9 @@ export default {
           }).catch(() => {
             dialogInfo.btLoading = false
           })
+          return
+        }
+        if (dialogInfo.type === 'bindUser') {
           return
         }
         formInfo.ref.validate(valid => {
@@ -314,8 +323,8 @@ export default {
       // 左键点击的处理
       case 'leftClick':
         let obj = JSON.parse(JSON.stringify(data.data))
-        if (obj.columns === -1) {
-          obj.columns = '无限'
+        if (obj.blogs === -1) {
+          obj.blogs = '无限'
         }
         if (obj.users === -1) {
           obj.users = '无限'
@@ -412,7 +421,7 @@ export default {
         id: '', // *唯一ID
         pid: '', // *父ID
         name: '', // *角色昵称
-        columns: 1, // 专栏数量, 0为无限
+        blogs: 1, // 专栏数量, 0为无限
         users: 10, // 可创建多少个用户, 0为无限
         desc: '', // 描述
         status: 1 // *状态: 0：停用，1：启用(默认为1)',

@@ -25,7 +25,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getListApi } from '@/api/log'
+import { getListApi } from '@/api/sysMan/log'
 import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
@@ -74,7 +74,7 @@ export default {
           {label: '日志类型', value: 'type', list: 'typeList'},
           {label: '日志标题', value: 'title', list: 'sexList'},
           {label: '日志描述', value: 'desc', list: 'accountTypeList'},
-          {label: '访问IP', value: 'ip'},
+          {label: '访问IP', value: 'ip', minWidth: 160},
           {label: '用户', value: 'create_user'},
           {label: '时间', value: 'create_time', minWidth: 180}
         ]

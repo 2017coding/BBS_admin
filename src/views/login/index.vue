@@ -61,7 +61,7 @@ export default {
   },
   watch: {
     'formInfo.remember' (val) {
-      console.log(val)
+      // console.log(val)
     }
   },
   created () {

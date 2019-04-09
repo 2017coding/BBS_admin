@@ -148,6 +148,7 @@ export default {
    * @param {Object} obj {key, pKey, data}
    *  @param obj.key  字段名称 比如id
    *  @param obj.pKey 父字段名称 比如 pid
+   *  @param obj.rootPValue 根节点的父字段的值
    *  @param obj.data 需要处理的数据
    * @return {Array} arr
    */
@@ -170,9 +171,13 @@ export default {
         if (item1.id !== item.pid) {
           index++
         }
+        // 传入根节点，根据传入的根节点组成树结构
+        if ('rootPValue' in obj && item[obj.pKey] === obj.rootPValue) {
+          arr1.push(item)
+        }
       })
-      // 得到根节点
-      if (index === arr.length) {
+      // 没传入根节点，根据当前数据结构得到根节点
+      if (!('rootPValue' in obj) && index === arr.length) {
         arr1.push(item)
       }
     })

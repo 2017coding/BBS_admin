@@ -33,7 +33,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getListApi, updateApi, getAllApi } from '@/api/area'
+import { getListApi, updateApi, getAllApi } from '@/api/sysMan/areaMan'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageFilter from '@/components/PageFilter'

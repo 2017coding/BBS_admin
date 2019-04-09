@@ -3,7 +3,7 @@ import request from '@/common/js/request'
 // 创建
 export function createApi (data) {
   return request({
-    url: '/api/dataControl/create',
+    url: '/api/user/create',
     method: 'post',
     data
   })
@@ -12,7 +12,7 @@ export function createApi (data) {
 // 编辑
 export function updateApi (data) {
   return request({
-    url: '/api/dataControl/update',
+    url: '/api/user/update',
     method: 'put',
     data
   })
@@ -21,7 +21,7 @@ export function updateApi (data) {
 // 删除
 export function deleteApi (id) {
   return request({
-    url: `/api/dataControl/delete/${id}`,
+    url: `/api/user/delete/${id}`,
     method: 'delete'
   })
 }
@@ -29,7 +29,7 @@ export function deleteApi (id) {
 // 得到单条数据
 export function getRowApi (id) {
   return request({
-    url: `/api/dataControl/getRow/${id}`,
+    url: `/api/user/getRow/${id}`,
     method: 'get'
   })
 }
@@ -37,25 +37,16 @@ export function getRowApi (id) {
 // 获取列表
 export function getListApi (params) {
   return request({
-    url: '/api/dataControl/getList',
+    url: '/api/user/getList',
     method: 'get',
     params
   })
 }
 
-// 获取用户拥有
-export function getUserDataControlApi (params) {
-  return request({
-    url: `/api/dataControl/getUserDataControl`,
-    method: 'get',
-    params
-  })
-}
-
-// 获取所有
+// 获取列表
 export function getAllApi (params) {
   return request({
-    url: `/api/dataControl/getAll`,
+    url: '/api/user/getAll',
     method: 'get',
     params
   })

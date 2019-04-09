@@ -3,8 +3,8 @@
     <!-- 左侧树 -->
     <div class="left">
       <div class="" style="padding-bottom: 10px;">
-        <el-select v-model="formInfo.data.type" placeholder="请选择模块类型" style="width: 240px">
-          <el-option v-for="(item, index) in listTypeInfo.modTypeList" :key="index" :label="item.key" :value="item.value">
+        <el-select v-model="formInfo.data.type" placeholder="请选择菜单类型" style="width: 240px">
+          <el-option v-for="(item, index) in listTypeInfo.menuTypeList" :key="index" :label="item.key" :value="item.value">
           </el-option>
         </el-select>
       </div>
@@ -25,7 +25,7 @@
     </div>
     <div class="right">
       <el-tabs v-model="tabActive" @tab-click="handleEvent('tabClick')">
-        <el-tab-pane label="菜单详情" name="mod">
+        <el-tab-pane label="菜单详情" name="menu">
           <!-- 卡片 -->
           <page-card
             :class="'card'"
@@ -36,7 +36,7 @@
           </page-card>
         </el-tab-pane>
         <!-- 点击页面组件时显示 -->
-        <el-tab-pane label="数据权限" name="modData" v-if="treeInfo.leftClickData.components === 1">
+        <el-tab-pane label="数据权限" name="menuData" v-if="treeInfo.leftClickData.component === 1">
           <template>
             <div class="">
               <el-button
@@ -44,7 +44,7 @@
                 icon="el-icon-plus"
                 type="primary"
                 style="margin-bottom: 10px;"
-                @click="handleClickBt('addModData')">添加
+                @click="handleClickBt('addMenuData')">添加
               </el-button>
               <el-button
                 v-waves
@@ -60,8 +60,8 @@
               :refresh="tableInfo.refresh"
               :pager="tableInfo.pager"
               :data.sync="tableInfo.data"
-              :api="dataControlGetAllApi"
-              :query="{modId: treeInfo.leftClickData.id}"
+              :api="dataPermsGetAllApi"
+              :query="{menuId: treeInfo.leftClickData.id}"
               :fieldList="tableInfo.fieldList"
               :listTypeInfo="listTypeInfo"
               :handle="tableInfo.handle"
@@ -92,7 +92,7 @@
         :listTypeInfo="listTypeInfo">
       </page-form>
       <page-form
-        v-if="dialogInfo.type === 'addModData' || dialogInfo.type === 'updateModData'"
+        v-if="dialogInfo.type === 'addMenuData' || dialogInfo.type === 'updateMenuData'"
         :refObj.sync="dataControlFormInfo.ref"
         :data="dataControlFormInfo.data"
         :fieldList="dataControlFormInfo.fieldList"
@@ -106,8 +106,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { createApi, updateApi, deleteApi, getAllApi } from '@/api/mod'
-import { createApi as dataControlCreateApi, updateApi as dataControlUpdateApi, deleteApi as dataControlDeleteApi, getAllApi as dataControlGetAllApi } from '@/api/dataControl'
+import { createApi, updateApi, deleteApi, getAllApi, dataPermsCreateApi, dataPermsUpdateApi, dataPermsDeleteApi, dataPermsGetAllApi } from '@/api/sysMan/menuMan'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
@@ -131,29 +130,29 @@ export default {
       updateApi,
       deleteApi,
       getAllApi,
-      dataControlCreateApi,
-      dataControlUpdateApi,
-      dataControlDeleteApi,
-      dataControlGetAllApi,
+      dataPermsCreateApi,
+      dataPermsUpdateApi,
+      dataPermsDeleteApi,
+      dataPermsGetAllApi,
       // 选项卡默认点击
-      tabActive: 'mod',
+      tabActive: 'menu',
       // 相关列表
       listTypeInfo: {
         statusList: [
           {key: '启用', value: 1},
           {key: '停用', value: 0}
         ],
-        modTypeList: [
+        menuTypeList: [
           {key: '平台端', value: 1},
           {key: '论坛端', value: 2},
           {key: '移动端', value: 3}
         ],
-        componentsList: [
+        componentList: [
           {key: '根目录', value: -1},
           {key: '页面组件', value: 1},
           {key: '默认布局组件', value: 2}
         ],
-        componentsList1: [
+        componentList1: [
           {key: '页面组件', value: 1},
           {key: '默认布局组件', value: 2}
         ],
@@ -200,12 +199,12 @@ export default {
         title: '菜单详情',
         data: {},
         fieldList: [
-          {label: '所属模块', value: 'pid', list: 'treeList'},
-          {label: '模块类型', value: 'type', list: 'modTypeList'},
-          {label: '模块编码', value: 'code'},
-          {label: '模块名称', value: 'name'},
-          {label: '模块组件', value: 'components', list: 'componentsList'},
-          {label: '模块图标', value: 'icon'},
+          {label: '所属菜单', value: 'pid', list: 'treeList'},
+          {label: '菜单类型', value: 'type', list: 'menuTypeList'},
+          {label: '菜单编码', value: 'code'},
+          {label: '菜单名称', value: 'name'},
+          {label: '菜单组件', value: 'component', list: 'componentList'},
+          {label: '菜单图标', value: 'icon'},
           {label: '重定向路径', value: 'redirect'},
           {label: '排序', value: 'sort'},
           {label: '描述', value: 'desc'},
@@ -224,7 +223,7 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
+          {label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true},
           {label: '功能类型', value: 'type', list: 'dataControlTypeList', required: true},
           {label: '功能编码', value: 'code', required: true},
           {label: '功能名称', value: 'name', required: true},
@@ -240,8 +239,8 @@ export default {
           label: '操作',
           width: '180',
           btList: [
-            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'updateModData', show: false},
-            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'deleteModData', show: false}
+            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'updateMenuData', show: false},
+            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'deleteMenuData', show: false}
           ]
         }
       },
@@ -251,11 +250,11 @@ export default {
         data: {
           id: '', // *唯一ID
           pid: '', // *父ID
-          type: 1, // *模块类型
-          code: '', // *模块编码
-          name: '', // *模块名称
-          components: '', // *模块组件
-          icon: '', // 模块图标
+          type: 1, // *菜单类型
+          code: '', // *菜单编码
+          name: '', // *菜单名称
+          component: '', // *菜单组件
+          icon: '', // 菜单图标
           redirect: '', // 重定向路径
           sort: '', // *排序
           desc: '', // 描述
@@ -266,12 +265,12 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '所属模块', value: 'pid', type: 'tag', list: 'treeList', required: true},
-          {label: '模块类型', value: 'type', type: 'tag', list: 'modTypeList', required: true},
-          {label: '模块编码', value: 'code', type: 'input', required: true},
-          {label: '模块名称', value: 'name', type: 'input', required: true},
-          {label: '模块组件', value: 'components', type: 'select', list: 'componentsList1', required: true},
-          {label: '模块图标', value: 'icon', type: 'input'},
+          {label: '所属菜单', value: 'pid', type: 'tag', list: 'treeList', required: true},
+          {label: '菜单类型', value: 'type', type: 'tag', list: 'menuTypeList', required: true},
+          {label: '菜单编码', value: 'code', type: 'input', required: true},
+          {label: '菜单名称', value: 'name', type: 'input', required: true},
+          {label: '菜单组件', value: 'component', type: 'select', list: 'componentList1', required: true},
+          {label: '菜单图标', value: 'icon', type: 'input'},
           {label: '重定向路径', value: 'redirect', type: 'input'},
           {label: '排序', value: 'sort', type: 'input', required: true},
           {label: '描述', value: 'desc', type: 'textarea'},
@@ -284,7 +283,7 @@ export default {
         ref: null,
         data: {
           id: '', // *唯一ID
-          mod_id: '', // *模块ID
+          menu_id: '', // *菜单ID
           code: '', // *编码
           type: '', // *类型
           name: '', // *名称
@@ -296,7 +295,7 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '所属模块', value: 'mod_id', type: 'tag', list: 'treeList', required: true},
+          {label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true},
           {label: '功能类型', value: 'type', type: 'select', list: 'dataControlTypeList', required: true},
           {label: '功能编码', value: 'code', type: 'input', required: true},
           {label: '功能名称', value: 'name', type: 'input', required: true},
@@ -311,8 +310,8 @@ export default {
         title: {
           create: '添加菜单',
           update: '编辑菜单',
-          addModData: '添加菜单权限',
-          updateModData: '编辑菜单权限'
+          addMenuData: '添加菜单权限',
+          updateMenuData: '编辑菜单权限'
         },
         visible: false,
         type: '',
@@ -363,7 +362,7 @@ export default {
     },
     // 从菜单详情切换到数据权限，获取数据权限列表
     tabActive (val) {
-      if (val !== 'modData') return
+      if (val !== 'menuData') return
       const tableInfo = this.tableInfo
       tableInfo.data = []
       tableInfo.refresh = Math.random()
@@ -418,13 +417,13 @@ export default {
         formInfo = this.formInfo,
         dataControlFormInfo = this.dataControlFormInfo
       switch (event) {
-      case 'addModData':
+      case 'addMenuData':
         dialogInfo.type = event
         dialogInfo.visible = true
         // 设置参数
-        dataControlFormInfo.data.mod_id = treeInfo.leftClickData.id
+        dataControlFormInfo.data.menu_id = treeInfo.leftClickData.id
         break
-      case 'updateModData':
+      case 'updateMenuData':
         dialogInfo.type = event
         dialogInfo.visible = true
         // 显示信息
@@ -435,8 +434,8 @@ export default {
           }
         }
         break
-      case 'deleteModData':
-        this._handleAPI('delete', dataControlDeleteApi, data.id).then(res => {
+      case 'deleteMenuData':
+        this._handleAPI('delete', dataPermsDeleteApi, data.id).then(res => {
           if (res.success) {
             tableInfo.refresh = Math.random()
           }
@@ -452,7 +451,7 @@ export default {
         if (type === 'create' || type === 'update') {
           params = formInfo.data
           ref = formInfo.ref
-        } else if (type === 'addModData' || type === 'updateModData') {
+        } else if (type === 'addMenuData' || type === 'updateMenuData') {
           params = dataControlFormInfo.data
           ref = dataControlFormInfo.ref
         } else {
@@ -464,10 +463,10 @@ export default {
               api = createApi
             } else if (type === 'update') {
               api = updateApi
-            } else if (type === 'addModData') {
-              api = dataControlCreateApi
-            } else if (type === 'updateModData') {
-              api = dataControlUpdateApi
+            } else if (type === 'addMenuData') {
+              api = dataPermsCreateApi
+            } else if (type === 'updateMenuData') {
+              api = dataPermsUpdateApi
             } else {
               return
             }
@@ -488,7 +487,7 @@ export default {
                   treeInfo.defaultExpandedAsyc = [params.pid]
                   // 刷新树
                   treeInfo.refresh = Math.random()
-                } else if (type === 'addModData' || type === 'updateModData') {
+                } else if (type === 'addMenuData' || type === 'updateMenuData') {
                   tableInfo.refresh = Math.random()
                 }
               }
@@ -505,9 +504,9 @@ export default {
     getApiType (type) {
       if (type === 'create' || type === 'update') {
         return type
-      } else if (type === 'addModData') {
+      } else if (type === 'addMenuData') {
         return 'create'
-      } else if (type === 'updateModData') {
+      } else if (type === 'updateMenuData') {
         return 'update'
       }
     },
@@ -527,7 +526,7 @@ export default {
         break
       case 'tabClick':
         // 懒加载，第一次点击，刷新列表
-        if (this.tabActive === 'modData' && !tableInfo.initTable) {
+        if (this.tabActive === 'menuData' && !tableInfo.initTable) {
           tableInfo.initTable = true
           tableInfo.refresh = !tableInfo.refresh
         }
@@ -546,13 +545,13 @@ export default {
         cardInfo.data = obj
         treeInfo.leftClickData = obj
         // tab为数据权限页面，点击刷新表格
-        if (this.tabActive === 'modData') {
+        if (this.tabActive === 'menuData') {
           tableInfo.data = []
           tableInfo.refresh = Math.random()
         }
         // 点击不为页面组件，tab显示为菜单详情
-        if (obj.components !== 1) {
-          this.tabActive = 'mod'
+        if (obj.component !== 1) {
+          this.tabActive = 'menu'
         }
         break
       // 根据右键点击创建节点对应菜单
@@ -561,12 +560,12 @@ export default {
         // 根节点
         if (data.node.level === 1) {
           arr = [
-            {name: '添加下级模块', type: 'create', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: false},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {
           arr = [
-            {name: '添加下级模块', type: 'create', data: data.data, node: data.node, vm: data.vm, show: false},
+            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: false},
             {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: false},
             {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: false},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
@@ -631,11 +630,11 @@ export default {
       this.formInfo.data = {
         id: '', // *唯一ID
         pid: '', // *父ID
-        type: 1, // *模块类型
-        code: '', // *模块编码
-        name: '', // *模块名称
-        components: '', // *模块组件
-        icon: '', // 模块图标
+        type: 1, // *菜单类型
+        code: '', // *菜单编码
+        name: '', // *菜单名称
+        component: '', // *菜单组件
+        icon: '', // 菜单图标
         redirect: '', // 重定向路径
         sort: '', // *排序
         desc: '', // 描述
@@ -647,7 +646,7 @@ export default {
       }
       this.dataControlFormInfo.data = {
         id: '', // *唯一ID
-        mod_id: '', // *模块ID
+        menu_id: '', // *菜单ID
         code: '', // *编码
         type: '', // *类型
         name: '', // *名称

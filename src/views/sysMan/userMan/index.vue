@@ -45,7 +45,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getListApi, createApi, updateApi, deleteApi } from '@/api/user'
+import { getListApi, createApi, updateApi, deleteApi } from '@/api/sysMan/userMan'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'

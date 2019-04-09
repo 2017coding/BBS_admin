@@ -42,7 +42,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { updateApi } from '@/api/user'
+import { updateApi } from '@/api/sysMan/userMan'
 import Breadcrumb from './Breadcrumb' // 导航
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
