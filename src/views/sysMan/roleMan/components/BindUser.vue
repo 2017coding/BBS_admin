@@ -51,7 +51,7 @@ export default {
   },
   watch: {
     bindUserList (val) {
-      this.$emit('update:params', {roleId: this.roleId, bindUser: val})
+      this.$emit('update:params', {roleId: this.roleId, user: val})
     }
   },
   created () {

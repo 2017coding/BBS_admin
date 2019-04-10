@@ -72,6 +72,15 @@ export function getPermissionsApi (params) {
   })
 }
 
+// 设置角色绑定的用户
+export function setBindUserApi (data) {
+  return request({
+    url: `/api/roleRelation/setBindUser`,
+    method: 'post',
+    data
+  })
+}
+
 // 获取角色绑定的用户
 export function getBindUserApi (params) {
   return request({

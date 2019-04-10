@@ -55,7 +55,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { createApi, updateApi, deleteApi, getAllApi, setPermissionsApi } from '@/api/sysMan/roleMan'
+import { createApi, updateApi, deleteApi, getAllApi, setPermissionsApi, setBindUserApi } from '@/api/sysMan/roleMan'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
@@ -272,6 +272,21 @@ export default {
           return
         }
         if (dialogInfo.type === 'bindUser') {
+          dialogInfo.btLoading = true
+          setBindUserApi(this.bindUserParams).then(res => {
+            if (res.success) {
+              dialogInfo.visible = false
+            }
+            this.$message({
+              showClose: true,
+              message: res.message,
+              type: res.success ? 'success' : 'error',
+              duration: 2000
+            })
+            dialogInfo.btLoading = false
+          }).catch(() => {
+            dialogInfo.btLoading = false
+          })
           return
         }
         formInfo.ref.validate(valid => {
@@ -407,10 +422,12 @@ export default {
         break
       case 'bindUser':
         dialogInfo.type = type
+        dialogInfo.title[type] = `绑定用户(${treeInfo.rightClickData.name})`
         dialogInfo.visible = true
         break
       case 'permissions':
         dialogInfo.type = type
+        dialogInfo.title[type] = `分配权限(${treeInfo.rightClickData.name})`
         dialogInfo.visible = true
         break
       }
