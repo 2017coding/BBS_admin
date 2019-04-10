@@ -180,7 +180,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'userInfo'
+      'userInfo',
+      'dataPerms'
     ])
   },
   watch: {
@@ -354,16 +355,16 @@ export default {
         // 根节点
         if (data.node.level === 1) {
           arr = [
-            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:create')},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {
           arr = [
-            {name: '绑定用户', type: 'bindUser', data: data.data, node: data.node, vm: data.vm, show: true},
-            {name: '分配权限', type: 'permissions', data: data.data, node: data.node, vm: data.vm, show: true},
-            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: true},
-            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: true},
-            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: true},
+            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:create')},
+            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:update')},
+            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:delete')},
+            {name: '绑定用户', type: 'bindUser', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:bindUser')},
+            {name: '分配权限', type: 'permissions', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:permissions')},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         }

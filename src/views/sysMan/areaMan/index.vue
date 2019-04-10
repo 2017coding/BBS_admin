@@ -106,7 +106,7 @@ export default {
           label: '操作',
           width: '100',
           btList: [
-            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: true}
+            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false}
           ]
         }
       }
@@ -114,7 +114,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'userInfo'
+      'userInfo',
+      'dataPerms'
     ])
   },
   watch: {
@@ -127,8 +128,14 @@ export default {
   },
   mounted () {
     this.getList()
+    this.initDataPerms()
   },
   methods: {
+    // 初始化数据权限
+    initDataPerms () {
+      const btList = this.tableInfo.handle.btList
+      btList[0].show = this.dataPerms.includes('userMan:status')
+    },
     initParams () {
     },
     // 获取列表

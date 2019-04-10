@@ -32,7 +32,7 @@
             <!-- 点击页面组件时显示 -->
             <!-- 表格 -->
             <page-table
-              v-show="treeInfo.leftClickData.components === 1"
+              v-show="treeInfo.leftClickData.component === 1"
               :checkBox="true"
               :class="'table'"
               :refresh="tableInfo.refresh"

@@ -44,6 +44,7 @@
                 icon="el-icon-plus"
                 type="primary"
                 style="margin-bottom: 10px;"
+                v-if="dataPerms.includes('menuMan:persCreate')"
                 @click="handleClickBt('addMenuData')">添加
               </el-button>
               <el-button
@@ -114,6 +115,7 @@ import PageCard from '@/components/PageCard'
 import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
+import { iconList } from './icon.js'
 
 export default {
   mixins: [Validate, HandleApi],
@@ -138,6 +140,11 @@ export default {
       tabActive: 'menu',
       // 相关列表
       listTypeInfo: {
+        iconList: iconList.map(item => {
+          item.key = item.class
+          item.value = item.class
+          return item
+        }),
         statusList: [
           {key: '启用', value: 1},
           {key: '停用', value: 0}
@@ -225,7 +232,7 @@ export default {
         fieldList: [
           {label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true},
           {label: '功能类型', value: 'type', list: 'dataControlTypeList', required: true},
-          {label: '功能编码', value: 'code', required: true},
+          {label: '功能编码', value: 'code', required: true, minWidth: 160},
           {label: '功能名称', value: 'name', required: true},
           {label: '功能api', value: 'api', required: true},
           {label: '请求方式', value: 'method', list: 'reqTypeList', required: true},
@@ -270,7 +277,7 @@ export default {
           {label: '菜单编码', value: 'code', type: 'input', required: true},
           {label: '菜单名称', value: 'name', type: 'input', required: true},
           {label: '菜单组件', value: 'component', type: 'select', list: 'componentList1', required: true},
-          {label: '菜单图标', value: 'icon', type: 'input'},
+          {label: '菜单图标', value: 'icon', type: 'select', list: 'iconList'},
           {label: '重定向路径', value: 'redirect', type: 'input'},
           {label: '排序', value: 'sort', type: 'input', required: true},
           {label: '描述', value: 'desc', type: 'textarea'},
@@ -325,7 +332,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'userInfo'
+      'userInfo',
+      'dataPerms'
     ])
   },
   watch: {
@@ -370,11 +378,18 @@ export default {
   },
   mounted () {
     this.getList()
+    this.initDataPerms()
     // mixin中的方法, 初始化字段验证规则
     this._initRules(this.formInfo)
     this._initRules(this.dataControlFormInfo)
   },
   methods: {
+    // 初始化数据权限
+    initDataPerms () {
+      const btList = this.tableInfo.handle.btList
+      btList[0].show = this.dataPerms.includes('menuMan:persUpdate')
+      btList[1].show = this.dataPerms.includes('menuMan:persDelete')
+    },
     initTree (val) {
       const treeInfo = this.treeInfo
       // 操作完后，树刷新，重新设置默认项
@@ -565,9 +580,9 @@ export default {
           ]
         } else {
           arr = [
-            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: false},
-            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: false},
-            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: false},
+            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:create')},
+            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:update')},
+            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:delete')},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         }

@@ -18,18 +18,20 @@ router.beforeEach((to, from, next) => {
       next({path: '/'})
       NProgress.done()
     } else {
-      if (!store.getters.userInfo) { // 判断当前用户是否已拉取完菜单信息
-        store.dispatch('user/setUserInfo').then(() => { // 拉取用户有的目录
-          // store.dispatch('permission/generateRoutes', store.getters.menus).then(() => { // 根据权限生成可访问的路由表
-          //   router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
-          //   next({...to, replace: true}) // hack方法 确保addRoutes已完成 ,设置replace: true，以便导航不会留下历史记录
-          // })
-          next({...to, replace: true})
+      if (store.getters.menu.length === 0) { // 判断当前用户是否已拉取完菜单信息
+        store.dispatch('user/setUserInfo').then(() => { // 拉取用户信息
+          store.dispatch('permission/getPermissions').then(routers => { // 获取用户权限数据
+            router.addRoutes(routers) // 动态添加可访问路由表
+            // console.log(routers, store.getters.dataPerms)
+            next({...to, replace: true}) // hack方法 确保addRoutes已完成 ,设置replace: true，以便导航不会留下历史记录
+          }).catch((err) => {
+            Message.error(err || '验证失败，请重新登录')
+          })
         }).catch((err) => {
           store.dispatch('user/loginOut').then(() => {
             Message.error(err || '验证失败，请重新登录')
             next({path: '/'})
-          }).catch(() => {
+          }).catch((err) => {
             Message.error(err || '验证失败，请重新登录')
             next({path: '/'})
           })

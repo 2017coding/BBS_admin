@@ -69,24 +69,30 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-    if (response.status === 401 || res.status === 40101) {
-      Message({
-        showClose: true,
-        message: res.message,
-        type: 'error',
-        duration: 3 * 1000
-      })
-      // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        MessageBox.alert('你已被登出，请重新登录', {
-          confirmButtonText: '重新登录',
-          type: 'info'
-        }).then(() => {
-          store.dispatch('loginOut').then(() => {
-            location.reload() // 为了重新实例化vue-router对象 避免bug
-          })
-        })
+    let tips = '用户信息错误', btMsg = '重新登录'
+    if (res.code === 20101 || res.code === 20201) {
+      switch (res.code) {
+      case 20101:
+        tips = '当前账号在其他地方登陆, 如不是本人操作，请及时修改密码'
+        btMsg = '确定'
+        break
+      case 20201:
+        tips = '用户信息错误, 请重新登录'
+        btMsg = '重新登录'
+        break
+      // case 20203:
+      //   tips = '用户未绑定角色，无法登陆'
+      //   btMsg = '确定'
+      //   break
       }
+      MessageBox.alert(tips, {
+        confirmButtonText: btMsg,
+        type: 'info'
+      }).then(() => {
+        store.dispatch('loginOut').then(() => {
+          location.reload() // 为了重新实例化vue-router对象 避免bug
+        })
+      })
       // return Promise.reject('error')
     } else {
       let data = response.data

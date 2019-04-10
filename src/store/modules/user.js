@@ -8,8 +8,7 @@ const user = {
   namespaced: true,
   state: {
     token: _getSessionStore('token'),
-    userInfo: '',
-    menu: ''
+    userInfo: ''
   },
   mutations: {
     // 设置Token

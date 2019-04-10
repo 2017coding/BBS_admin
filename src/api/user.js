@@ -34,3 +34,11 @@ export function getUserInfoApi (params) {
     params
   })
 }
+
+// 得到用户相关权限数据
+export function getPermissionsApi () {
+  return request({
+    url: '/api/user/getPermissions?type=1',
+    method: 'get'
+  })
+}

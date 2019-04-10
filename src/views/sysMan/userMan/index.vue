@@ -96,7 +96,7 @@ export default {
           // {type: 'select', label: '创建人', value: 'create_user'},
           // {type: 'date', label: '创建时间', value: 'create_time'},
           {type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true},
-          {type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'create', show: true}
+          {type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'create', show: false}
         ]
       },
       // 表格相关
@@ -120,9 +120,9 @@ export default {
           label: '操作',
           width: '280',
           btList: [
-            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: true},
-            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: true},
-            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: true}
+            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false},
+            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false},
+            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false}
           ]
         }
       },
@@ -180,7 +180,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'userInfo'
+      'userInfo',
+      'dataPerms'
     ])
   },
   watch: {
@@ -205,11 +206,20 @@ export default {
   },
   mounted () {
     this.initParams()
+    this.initDataPerms()
     // mixin中的方法, 初始化字段验证规则
     this._initRules(this.formInfo)
     this.getList()
   },
   methods: {
+    // 初始化数据权限
+    initDataPerms () {
+      const btList = this.tableInfo.handle.btList
+      this.filterInfo.list[3].show = this.dataPerms.includes('userMan:create')
+      btList[0].show = this.dataPerms.includes('userMan:status')
+      btList[1].show = this.dataPerms.includes('userMan:update')
+      btList[2].show = this.dataPerms.includes('userMan:delete')
+    },
     initParams () {
       // this.filterInfo.query.create_user = this.userInfo.id
     },
