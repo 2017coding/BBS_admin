@@ -5,7 +5,8 @@ import Layout from '@/views/layout/index'
 
 // 添加默认页面
 function addPage (arr) {
-  let home, HOWTOUSE
+  let home
+  // , HOWTOUSE
   // 首页
   home = {
     id: 0,
@@ -24,25 +25,25 @@ function addPage (arr) {
       }
     ]
   }
-  HOWTOUSE = {
-    id: 0,
-    pid: 1,
-    path: '/HOWTOUSE',
-    component: Layout,
-    redirect: '/HOWTOUSE/PAGE',
-    meta: {title: '使用说明', icon: ''},
-    children: [
-      {
-        path: 'PAGE',
-        component: () => import('@/views/HOWTOUSE/index'),
-        name: 'PAGE',
-        meta: {title: '使用说明', icon: 'el-icon-feedback'},
-        children: []
-      }
-    ]
-  }
+  // HOWTOUSE = {
+  //   id: 0,
+  //   pid: 1,
+  //   path: '/HOWTOUSE',
+  //   component: Layout,
+  //   redirect: '/HOWTOUSE/PAGE',
+  //   meta: {title: '使用说明', icon: ''},
+  //   children: [
+  //     {
+  //       path: 'PAGE',
+  //       component: () => import('@/views/HOWTOUSE/index'),
+  //       name: 'PAGE',
+  //       meta: {title: '使用说明', icon: 'el-icon-feedback'},
+  //       children: []
+  //     }
+  //   ]
+  // }
   arr.unshift(home)
-  arr.push(HOWTOUSE)
+  // arr.push(HOWTOUSE)
   return arr
 }
 // 得到页面路径
@@ -114,16 +115,24 @@ const permission = {
                 path: item.path,
                 component: item.component,
                 name: item.name,
-                meta: item.meta
+                meta: item.meta,
+                sort: item.sort
               }
             })
+            // 数据排序
+            baseMenu = baseMenu.sort((a, b) => a.sort - b.sort)
+            // 得到树状数组
             treeMenu = globalFn.getTreeArr({key: 'id', pKey: 'pid', data: baseMenu})
+            // 得到静态目录
             treeMenu = addPage(treeMenu)
             // 添加不需要权限也能访问的页面
             commit('SET_MENU', treeMenu, baseMenu)
             commit('SET_DATAPERMS', dataPerms)
             resolve(treeMenu)
           } else {
+            // 得到静态目录
+            let treeMenu = addPage([])
+            commit('SET_MENU', treeMenu, treeMenu)
             reject()
           }
         })

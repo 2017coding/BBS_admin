@@ -44,9 +44,9 @@ export function getListApi (params) {
 }
 
 // 获取所有
-export function getUserMenuApi (params) {
+export function getRoleMenuApi (params) {
   return request({
-    url: `/api/menu/getUserMenu`,
+    url: `/api/menu/getRoleMenu`,
     method: 'get',
     params
   })
@@ -108,9 +108,9 @@ export function dataPermsGetListApi (params) {
 }
 
 // 获取用户拥有
-export function getUserDataPermsApi (params) {
+export function getRoleDataPermsApi (params) {
   return request({
-    url: `/api/dataPerms/getUserDataPerms`,
+    url: `/api/dataPerms/getRoleDataPerms`,
     method: 'get',
     params
   })

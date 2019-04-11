@@ -40,12 +40,18 @@ const user = {
           } else {
             reject()
           }
+        }).catch(e => {
+          reject(e)
         })
       })
     },
     // 退出登录,将用户数据清除
     loginOut ({commit, dispatch}) {
       return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          sessionStorage.clear()
+          resolve()
+        }, 500)
         loginOutApi().then(res => {
           if (res.success) {
             sessionStorage.clear()

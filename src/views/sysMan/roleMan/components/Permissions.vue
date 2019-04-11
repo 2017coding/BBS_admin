@@ -39,7 +39,7 @@
               :pager="tableInfo.pager"
               :data.sync="tableInfo.data"
               :checkedList="roleRelation.permissions"
-              :api="getUserDataPermsApi"
+              :api="getRoleDataPermsApi"
               :query="{menuId: treeInfo.leftClickData.id}"
               :fieldList="tableInfo.fieldList"
               :listTypeInfo="listTypeInfo"
@@ -57,7 +57,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getPermissionsApi } from '@/api/sysMan/roleMan'
-import { getUserMenuApi, getUserDataPermsApi } from '@/api/sysMan/menuMan'
+import { getRoleMenuApi, getRoleDataPermsApi } from '@/api/sysMan/menuMan'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageTable from '@/components/PageTable'
@@ -66,6 +66,9 @@ export default {
   mixins: [HandleApi],
   props: {
     roleId: {
+      type: Number
+    },
+    rolePId: {
       type: Number
     },
     params: {
@@ -78,7 +81,7 @@ export default {
   },
   data () {
     return {
-      getUserDataPermsApi,
+      getRoleDataPermsApi,
       // 菜单类型
       menuType: '1',
       // 相关列表
@@ -129,8 +132,8 @@ export default {
           key: 'id', // 节点id
           pKey: 'pid', // 节点父级id
           label: 'name', // 节点名称字段
-          api: getUserMenuApi, // 获取数据的接口
-          params: {data: [{key: 'type', value: 1}], type: 'query'}
+          api: getRoleMenuApi, // 获取数据的接口
+          params: {data: [{key: 'type', value: 1}, {key: 'roleId', value: this.rolePId}], type: 'query'}
         },
         leftClickData: {}
       },

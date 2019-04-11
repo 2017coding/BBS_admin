@@ -171,16 +171,20 @@ export default {
         if (item1.id !== item.pid) {
           index++
         }
-        // 传入根节点，根据传入的根节点组成树结构
-        if ('rootPValue' in obj && item[obj.pKey] === obj.rootPValue) {
-          arr1.push(item)
-        }
       })
       // 没传入根节点，根据当前数据结构得到根节点
       if (!('rootPValue' in obj) && index === arr.length) {
         arr1.push(item)
       }
     })
+    // 传入根节点，根据传入的根节点组成树结构
+    if ('rootPValue' in obj) {
+      arr.forEach(item => {
+        if (item[obj.pKey] === obj.rootPValue) {
+          arr1.push(item)
+        }
+      })
+    }
     return arr1
   },
   // 为tree数据结构添加name，好获取子节点至根节点的全部路径 S0812A

@@ -131,7 +131,10 @@ export default {
 <style lang="scss" scoped>
   .bind-user{
     .el-select{
-      width: 100%
+      width: 100%;
+      .el-tag{
+        background: white;
+      }
     }
   }
 </style>

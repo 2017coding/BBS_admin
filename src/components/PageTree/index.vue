@@ -217,14 +217,19 @@ export default {
       const data = this.lazy ? this.lazyInfo : this.loadInfo
       this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(data.key, this.baseData, val.id)})
     },
-    // 设置选中的节点，直接使用这个属性会导致父节点勾中，子节点全部选中的问题
+    // 设置选中的节点，直接使用这个属性可能会导致父节点勾中，子节点全部选中的问题
     defaultChecked (val) {
-      // 将节点选中的状态初始化
-      this.$refs.TreeComponent.setCheckedNodes([])
-      for (let i = 0; i < val.length; i++) {
-        // 得到选中的节点,这个方法ojbk
-        this.$refs.TreeComponent.setChecked(val[i], true)
-      }
+      // TODO: elementui-tree组件内部问题，有时无法成功选中，先用延时器的方法保证效果
+      setTimeout(() => {
+        this.$nextTick(() => {
+          // 将节点选中的状态初始化
+          this.$refs.TreeComponent.setCheckedNodes([])
+          for (let i = 0; i < val.length; i++) {
+            // 得到选中的节点,这个方法ojbk
+            this.$refs.TreeComponent.setChecked(val[i], true)
+          }
+        })
+      }, 100)
     }
   },
   created () {
@@ -373,6 +378,13 @@ export default {
             }
           }
           this.treeData = this.$fn.getTreeArr({key: loadInfo.key, pKey: loadInfo.pKey, data: arr})
+        } else {
+          this.$message({
+            showClose: true,
+            message: res.message,
+            type: res.success ? 'success' : 'error',
+            duration: 2000
+          })
         }
         // 加载loading
         this.treeLoading = false
@@ -439,6 +451,13 @@ export default {
               this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(levelInfo.key, this.baseData, this.defaultClicked.id)})
             }
           }
+        } else {
+          this.$message({
+            showClose: true,
+            message: res.message,
+            type: res.success ? 'success' : 'error',
+            duration: 2000
+          })
         }
         // 延迟加载，保证加载动画
         setTimeout(() => {

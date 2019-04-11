@@ -46,7 +46,11 @@
         :listTypeInfo="listTypeInfo">
       </page-form>
       <!-- 权限分配组件 -->
-      <permissions v-if="dialogInfo.type === 'permissions' && dialogInfo.visible" :roleId="treeInfo.rightClickData.id" :params.sync="roleParams"></permissions>
+      <permissions
+        v-if="dialogInfo.type === 'permissions' && dialogInfo.visible"
+        :roleId="treeInfo.rightClickData.id"
+        :rolePId="treeInfo.rightClickData.pid"
+        :params.sync="roleParams"></permissions>
       <!-- 绑定用户组件 -->
       <bind-user v-if="dialogInfo.type === 'bindUser' && dialogInfo.visible" :roleId="treeInfo.rightClickData.id" :params.sync="bindUserParams"></bind-user>
     </page-dialog>
@@ -122,15 +126,15 @@ export default {
         title: '角色详情',
         data: {},
         fieldList: [
-          {label: '所属角色', value: 'pid', list: 'treeList'},
+          {label: '所属角色', value: 'pName'},
           {label: '角色名称', value: 'name'},
           {label: '可创建专栏数', value: 'blogs'},
           {label: '可创建用户数', value: 'users'},
           {label: '描述', value: 'desc'},
           {label: '状态', value: 'status', list: 'statusList'},
-          {label: '创建人', value: 'create_user'},
+          {label: '创建人', value: 'create_user_name'},
           {label: '创建时间', value: 'create_time'},
-          {label: '更新人', value: 'update_user'},
+          {label: '更新人', value: 'update_user_name'},
           {label: '更新时间', value: 'update_time'}
         ]
       },

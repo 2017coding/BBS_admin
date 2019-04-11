@@ -216,9 +216,9 @@ export default {
           {label: '排序', value: 'sort'},
           {label: '描述', value: 'desc'},
           {label: '状态', value: 'status', list: 'statusList'},
-          {label: '创建人', value: 'create_user'},
+          {label: '创建人', value: 'create_user_name'},
           {label: '创建时间', value: 'create_time'},
-          {label: '更新人', value: 'update_user'},
+          {label: '更新人', value: 'update_user_name'},
           {label: '更新时间', value: 'update_time'}
         ]
       },
@@ -235,11 +235,11 @@ export default {
           {label: '功能编码', value: 'code', required: true, minWidth: 160},
           {label: '功能名称', value: 'name', required: true},
           {label: '功能api', value: 'api', required: true},
-          {label: '请求方式', value: 'method', list: 'reqTypeList', required: true},
-          {label: '创建人', value: 'create_user'},
-          {label: '创建时间', value: 'create_time', minWidth: 180},
-          {label: '更新人', value: 'update_user'},
-          {label: '更新时间', value: 'update_time', minWidth: 180}
+          {label: '请求方式', value: 'method', list: 'reqTypeList', required: true}
+          // {label: '创建人', value: 'create_user'},
+          // {label: '创建时间', value: 'create_time', minWidth: 180},
+          // {label: '更新人', value: 'update_user'},
+          // {label: '更新时间', value: 'update_time', minWidth: 180}
         ],
         handle: {
           fixed: 'right',

@@ -24,14 +24,10 @@ router.beforeEach((to, from, next) => {
             router.addRoutes(routers) // 动态添加可访问路由表
             // console.log(routers, store.getters.dataPerms)
             next({...to, replace: true}) // hack方法 确保addRoutes已完成 ,设置replace: true，以便导航不会留下历史记录
-          }).catch((err) => {
-            Message.error(err || '验证失败，请重新登录')
           })
         }).catch((err) => {
           store.dispatch('user/loginOut').then(() => {
-            Message.error(err || '验证失败，请重新登录')
-            next({path: '/'})
-          }).catch((err) => {
+            sessionStorage.clear()
             Message.error(err || '验证失败，请重新登录')
             next({path: '/'})
           })

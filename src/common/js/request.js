@@ -89,7 +89,7 @@ service.interceptors.response.use(
         confirmButtonText: btMsg,
         type: 'info'
       }).then(() => {
-        store.dispatch('loginOut').then(() => {
+        store.dispatch('user/loginOut').then(() => {
           location.reload() // 为了重新实例化vue-router对象 避免bug
         })
       })
