@@ -215,10 +215,10 @@ export const baseRouter = [
   //       children: []
   //     },
   //     {
-  //       path: '/dictMan',
-  //       component: () => import('@/views/sysMan/dictMan/index'),
-  //       name: 'dictMan',
-  //       meta: {title: '字典管理', icon: ''},
+  //       path: '/chartConfig',
+  //       component: () => import('@/views/sysMan/chartConfig/index'),
+  //       name: 'chartConfig',
+  //       meta: {title: '图表配置', icon: ''},
   //       children: []
   //     },
   //     {

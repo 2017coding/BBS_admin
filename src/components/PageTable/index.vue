@@ -52,7 +52,7 @@
             </span>
             <!-- 其他 -->
             <span v-else>
-              {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: scope.row[item.value]})}}
+              {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: scope.row[item.value]}) || '-'}}
             </span>
           </template>
         </el-table-column>

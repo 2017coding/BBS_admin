@@ -108,6 +108,7 @@ export default {
         fieldList: [
           {label: '账号', value: 'account'},
           {label: '用户名', value: 'name'},
+          {label: '所属角色', value: 'role_name', minWidth: 120},
           {label: '性别', value: 'sex', width: 80, list: 'sexList'},
           {label: '账号类型', value: 'type', width: 100, list: 'accountTypeList'},
           {label: '状态', value: 'status', width: 90, list: 'statusList'},
@@ -142,6 +143,7 @@ export default {
           wechat: '', // 微信
           qq: '', // qq
           email: '', // 邮箱
+          desc: '', // 描述
           status: 1 // *状态: 0：停用，1：启用(默认为1)',
           // create_user: '', // 创建人
           // create_time: '', // 创建时间
@@ -158,6 +160,7 @@ export default {
           {label: '微信', value: 'wechat', type: 'input'},
           {label: 'QQ', value: 'qq', type: 'input'},
           {label: '邮箱', value: 'email', type: 'input'},
+          {label: '描述', value: 'desc', type: 'textarea'},
           {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
         ],
         rules: {},
@@ -375,6 +378,7 @@ export default {
         wechat: '', // 微信
         qq: '', // qq
         email: '', // 邮箱
+        desc: '', // 描述
         status: 1 // *状态: 0：停用，1：启用(默认为1)',
         // create_user: '', // 创建人
         // create_time: '', // 创建时间

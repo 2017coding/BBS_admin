@@ -75,7 +75,7 @@ export default {
           {label: '日志标题', value: 'title', list: 'sexList'},
           {label: '日志描述', value: 'desc', list: 'accountTypeList'},
           {label: '访问IP', value: 'ip', minWidth: 160},
-          {label: '用户', value: 'create_user'},
+          {label: '用户', value: 'create_user_name'},
           {label: '时间', value: 'create_time', minWidth: 180}
         ]
       }
