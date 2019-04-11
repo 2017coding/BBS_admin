@@ -45,7 +45,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getListApi, createApi, updateApi, deleteApi } from '@/api/sysMan/userMan'
+import { getAllApi, getListApi, createApi, updateApi, deleteApi } from '@/api/sysMan/userMan'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
@@ -81,7 +81,8 @@ export default {
         statusList: [
           {key: '启用', value: 1},
           {key: '停用', value: 0}
-        ]
+        ],
+        userList: []
       },
       // 过滤相关配置
       filterInfo: {
@@ -93,7 +94,7 @@ export default {
         list: [
           {type: 'input', label: '账户', value: 'account'},
           {type: 'input', label: '用户名', value: 'name'},
-          // {type: 'select', label: '创建人', value: 'create_user'},
+          {type: 'select', label: '创建人', value: 'create_user', list: 'userList'},
           // {type: 'date', label: '创建时间', value: 'create_time'},
           {type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true},
           {type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'create', show: false}
@@ -206,6 +207,7 @@ export default {
   },
   mounted () {
     this.initParams()
+    this.initList()
     this.initDataPerms()
     // mixin中的方法, 初始化字段验证规则
     this._initRules(this.formInfo)
@@ -222,6 +224,26 @@ export default {
     },
     initParams () {
       // this.filterInfo.query.create_user = this.userInfo.id
+    },
+    initList () {
+      const listTypeInfo = this.listTypeInfo
+      getAllApi().then(res => {
+        if (res.success) {
+          listTypeInfo.userList = res.content.map(item => {
+            return {
+              key: item.name,
+              value: item.id
+            }
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            message: res.message,
+            type: res.success ? 'success' : 'error',
+            duration: 2000
+          })
+        }
+      })
     },
     // 获取列表
     getList () {
