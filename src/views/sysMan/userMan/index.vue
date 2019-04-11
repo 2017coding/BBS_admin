@@ -289,10 +289,16 @@ export default {
         }
         break
       case 'status':
-        let params = JSON.parse(JSON.stringify(data))
+        const params = {}
+        // 设置参数
+        for (let key in data) {
+          // 存在则赋值
+          if (key in formInfo.data) {
+            params[key] = data[key]
+          }
+        }
         params.status = params.status - 1 >= 0 ? 0 : 1
         data.statusLoading = true
-        delete params.statusLoading
         this._handleAPI('update', updateApi, params).then(res => {
           data.statusLoading = false
           if (res.success) {
