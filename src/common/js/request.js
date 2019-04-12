@@ -92,6 +92,7 @@ service.interceptors.response.use(
         store.dispatch('user/loginOut').then(() => {
           location.reload() // 为了重新实例化vue-router对象 避免bug
         })
+      }).catch(() => {
       })
       // return Promise.reject('error')
     } else {

@@ -32,20 +32,34 @@
       @handleEvent="handleEvent">
       <!-- form -->
       <page-form
-      :refObj.sync="formInfo.ref"
-      :data="formInfo.data"
-      :fieldList="formInfo.fieldList"
-      :rules="formInfo.rules"
-      :labelWidth="formInfo.labelWidth"
-      :listTypeInfo="listTypeInfo">
+        v-if="dialogInfo.type !== 'userTransfer'"
+        :refObj.sync="formInfo.ref"
+        :data="formInfo.data"
+        :fieldList="formInfo.fieldList"
+        :rules="formInfo.rules"
+        :labelWidth="formInfo.labelWidth"
+        :listTypeInfo="listTypeInfo">
       </page-form>
+      <!-- 用户转移 -->
+      <div class="" v-else>
+        是否将
+        <span style="color: red">{{userTransferInfo.userName}}</span>
+        创建的用户转移给
+        <el-select class="filter-item" v-model="userTransferInfo.toUser" placeholder="请选择一个用户" filterable clearable>
+          <el-option v-for="item in listTypeInfo.userList.filter(item => !userTransferInfo.createUserList.includes(item.value) && item.value !== userTransferInfo.user)"
+            :key="item.id"
+            :label="item.key"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </div>
     </page-dialog>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { getAllApi, getListApi, createApi, updateApi, deleteApi } from '@/api/sysMan/userMan'
+import { getAllApi, getListApi, getCreateUserApi, userTransferApi, createApi, updateApi, deleteApi } from '@/api/sysMan/userMan'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
@@ -170,7 +184,8 @@ export default {
       dialogInfo: {
         title: {
           create: '添加',
-          update: '编辑'
+          update: '编辑',
+          userTransfer: '用户转移'
         },
         visible: false,
         type: '',
@@ -179,6 +194,13 @@ export default {
           {label: '关闭', type: '', icon: '', event: 'close', show: true},
           {label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true}
         ]
+      },
+      // 用户转移相关信息
+      userTransferInfo: {
+        user: '',
+        toUser: '',
+        createUserList: [],
+        userName: ''
       }
     }
   },
@@ -199,6 +221,13 @@ export default {
         this.resetForm()
         // 重置弹窗按钮loading
         this.dialogInfo.btLoading = false
+        // 重置转移相关信息
+        this.userTransferInfo = {
+          user: '',
+          toUser: '',
+          createUserList: [],
+          userName: ''
+        }
       } else {
         if (this.dialogInfo.type === 'create') {
           formInfo.fieldList[0].type = 'input'
@@ -268,7 +297,8 @@ export default {
     handleClickBt (event, data) {
       const tableInfo = this.tableInfo,
         dialogInfo = this.dialogInfo,
-        formInfo = this.formInfo
+        formInfo = this.formInfo,
+        userTransferInfo = this.userTransferInfo
       switch (event) {
       // 搜索
       case 'search':
@@ -313,9 +343,28 @@ export default {
         break
       // 删除
       case 'delete':
-        this._handleAPI(event, deleteApi, data.id).then(res => {
+        // 先判断当前用户下是否有子用户，有则需要先进行权限转移后才可删除当前用户
+        getCreateUserApi(data.id).then(res => {
           if (res.success) {
-            tableInfo.refresh = Math.random()
+            this._handleAPI(event, deleteApi, data.id).then(res => {
+              if (res.success) {
+                tableInfo.refresh = Math.random()
+              }
+            })
+          } else {
+            this.$confirm('该用户有创建用户，是否将创建用户转移后删除?', '提示', {
+              confirmButtonText: '下一步',
+              cancelButtonText: '取消',
+              type: 'info'
+            }).then(() => {
+              dialogInfo.type = 'userTransfer'
+              dialogInfo.visible = true
+              // 设置当前选中数据
+              userTransferInfo.user = data.id
+              userTransferInfo.userName = data.name
+              userTransferInfo.createUserList = res.result
+            }).catch(() => {
+            })
           }
         })
         break
@@ -325,6 +374,29 @@ export default {
         break
       // 弹窗点击保存
       case 'save':
+        // 用户转移
+        if (dialogInfo.type === 'userTransfer') {
+          dialogInfo.btLoading = true
+          userTransferApi({user: userTransferInfo.user, toUser: userTransferInfo.toUser}).then(res => {
+            if (res.success) {
+              this._handleAPI('delete', deleteApi, userTransferInfo.user).then(res => {
+                if (res.success) {
+                  tableInfo.refresh = Math.random()
+                }
+              })
+              dialogInfo.visible = false
+            }
+            this.$message({
+              showClose: true,
+              message: res.message,
+              type: res.success ? 'success' : 'error',
+              duration: 2000
+            })
+          }).catch(() => {
+            dialogInfo.visible = false
+          })
+          return
+        }
         this.formInfo.ref.validate(valid => {
           if (valid) {
             let api, params = this.formInfo.data,

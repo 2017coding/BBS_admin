@@ -51,3 +51,20 @@ export function getAllApi (params) {
     params
   })
 }
+
+// 得到用户创建的用户列表
+export function getCreateUserApi (id) {
+  return request({
+    url: `/api/user/getCreateUser/${id}`,
+    method: 'get'
+  })
+}
+
+// 用户转移
+export function userTransferApi (data) {
+  return request({
+    url: `/api/user/userTransfer`,
+    method: 'post',
+    data
+  })
+}

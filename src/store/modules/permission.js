@@ -94,7 +94,7 @@ const permission = {
               item.name = item.name + index
               // 设置对应的页面路径
               item.path = '/' + item.code
-              // 设置页面对应的组件
+              // 设置页面对应的组件 对应组件: -1. 根节点 1. 页面组件 2.默认布局 3456...扩展布局
               switch (item.component) {
               case -1:
                 console.log('根节点，已经过滤掉了')
