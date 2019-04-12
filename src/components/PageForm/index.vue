@@ -11,7 +11,7 @@
       :key="index"
       :prop="item.value"
       :label="item.label"
-      :class="item.type === 'textarea' ? item.className + ' el-form-block' : item.className">
+      :class="item.className">
       <!-- 普通输入框 -->
       <el-input
         v-if="item.type === 'input' || item.type === 'password'"

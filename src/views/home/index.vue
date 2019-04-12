@@ -47,18 +47,18 @@ export default {
           arr.forEach((item, index) => {
             for (let i = 0, len = 24; i < len; i++) {
               let max = 10, min = 1
-              arr[index].push(Math.floor(Math.random() * (max - min + 1) + min))
+              arr[index].push(Math.round(Math.random() * (max - min + 1) + min))
             }
           })
           return arr
         }
       this.chartList = [
         {
-          title: '近七天用户在线分析',
+          title: '近七天用户登录统计',
           height: '300px',
           chartType: 'line',
           chartData: {
-            nameList: ['3/1', '3/2', '3/3', '3/4', '3/5', '3/6', '3/7'],
+            nameList: ['4/5', '4/6', '4/7', '4/8', '4/9', '4/10', '4/11'],
             xList: arr(),
             dataList: data()
           }

@@ -49,7 +49,7 @@
               </el-button>
               <el-button
                 v-waves
-                icon="el-icon-search"
+                icon="el-icon-refresh"
                 type="primary"
                 style="margin-bottom: 10px;"
                 @click="tableInfo.refresh = Math.random()">刷新

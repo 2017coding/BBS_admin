@@ -27,7 +27,7 @@ export default {
         {title: '问题数', type: 'a', total: 126, icon: 'el-icon-message_fill'},
         {title: '文章数', type: 'b', total: 876, icon: 'el-icon-createtask_fill'},
         {title: '专栏数', type: 'c', total: 113, icon: 'el-icon-order_fill'},
-        {title: '在线用户', type: 'd', total: 63, icon: 'el-icon-group_fill'}
+        {title: '用户数', type: 'd', total: 63, icon: 'el-icon-group_fill'}
       ]
     }
   },

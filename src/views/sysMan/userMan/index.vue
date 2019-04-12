@@ -174,7 +174,7 @@ export default {
           {label: '微信', value: 'wechat', type: 'input'},
           {label: 'QQ', value: 'qq', type: 'input'},
           {label: '邮箱', value: 'email', type: 'input'},
-          {label: '描述', value: 'desc', type: 'textarea'},
+          {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
           {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
         ],
         rules: {},
