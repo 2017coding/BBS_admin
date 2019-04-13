@@ -79,6 +79,10 @@ export default {
       left: 0;
       width: 220px;
       // transition: width 10s;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
     .main-container{
       transition: all .3s linear;
