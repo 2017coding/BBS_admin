@@ -128,7 +128,7 @@ export default {
         fieldList: [
           {label: '所属角色', value: 'pName'},
           {label: '角色名称', value: 'name'},
-          {label: '可创建专栏数', value: 'blogs'},
+          {label: '可创建专栏数', value: 'columns'},
           {label: '可创建用户数', value: 'users'},
           {label: '描述', value: 'desc'},
           {label: '状态', value: 'status', list: 'statusList'},
@@ -144,7 +144,7 @@ export default {
           id: '', // *唯一ID
           pid: '', // *父ID
           name: '', // *角色名称
-          blogs: 1, // 专栏数量, 0为无限
+          columns: 1, // 专栏数量, 0为无限
           users: 10, // 可创建多少个用户, 0为无限
           desc: '', // 描述
           status: 1 // *状态: 0：停用，1：启用(默认为1)',
@@ -156,9 +156,9 @@ export default {
         fieldList: [
           {label: '所属角色', value: 'pid', type: 'tag', list: 'treeList', required: true},
           {label: '名称', value: 'name', type: 'input', required: true},
-          {label: '可创建专栏数', value: 'blogs', type: 'inputNumber', min: 1, max: 1, required: true},
+          {label: '可创建专栏数', value: 'columns', type: 'inputNumber', min: 1, max: 1, required: true},
           {label: '可创建用户数', value: 'users', type: 'inputNumber', min: 1, max: 10, required: true},
-          {label: '描述', value: 'desc', type: 'textarea'},
+          {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
           {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
         ],
         rules: {},
@@ -343,8 +343,8 @@ export default {
       // 左键点击的处理
       case 'leftClick':
         let obj = JSON.parse(JSON.stringify(data.data))
-        if (obj.blogs === -1) {
-          obj.blogs = '无限'
+        if (obj.columns === -1) {
+          obj.columns = '无限'
         }
         if (obj.users === -1) {
           obj.users = '无限'
@@ -443,7 +443,7 @@ export default {
         id: '', // *唯一ID
         pid: '', // *父ID
         name: '', // *角色昵称
-        blogs: 1, // 专栏数量, 0为无限
+        columns: 1, // 专栏数量, 0为无限
         users: 10, // 可创建多少个用户, 0为无限
         desc: '', // 描述
         status: 1 // *状态: 0：停用，1：启用(默认为1)',

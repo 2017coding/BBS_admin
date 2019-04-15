@@ -249,7 +249,7 @@ export default {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      this.filterInfo.list[3].show = this.dataPerms.includes('userMan:create')
+      this.filterInfo.list[4].show = this.dataPerms.includes('userMan:create')
       btList[0].show = this.dataPerms.includes('userMan:status')
       btList[1].show = this.dataPerms.includes('userMan:update')
       btList[2].show = this.dataPerms.includes('userMan:delete')
@@ -349,6 +349,8 @@ export default {
             this._handleAPI(event, deleteApi, data.id).then(res => {
               if (res.success) {
                 tableInfo.refresh = Math.random()
+                // 刷新用户列表
+                this.initList()
               }
             })
           } else {
@@ -376,12 +378,23 @@ export default {
       case 'save':
         // 用户转移
         if (dialogInfo.type === 'userTransfer') {
+          if (!userTransferInfo.toUser) {
+            this.$message({
+              showClose: true,
+              message: '接收用户不能为空',
+              type: 'error',
+              duration: 2000
+            })
+            return
+          }
           dialogInfo.btLoading = true
           userTransferApi({user: userTransferInfo.user, toUser: userTransferInfo.toUser}).then(res => {
             if (res.success) {
               this._handleAPI('delete', deleteApi, userTransferInfo.user).then(res => {
                 if (res.success) {
                   tableInfo.refresh = Math.random()
+                  // 刷新用户列表
+                  this.initList()
                 }
               })
               dialogInfo.visible = false

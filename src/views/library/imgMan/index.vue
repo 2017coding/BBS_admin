@@ -18,21 +18,24 @@
       </page-tree>
     </div>
     <div class="right">
+      <Upload :uploadNums="10" :listType="'picture-card'"></Upload>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { createApi, updateApi, deleteApi, getAllApi} from '@/api/library/folder'
+import {createApi, updateApi, deleteApi, getAllApi} from '@/api/library/folder'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
+import Upload from '@/components/Upload'
 
 export default {
   mixins: [Validate, HandleApi],
   components: {
-    PageTree
+    PageTree,
+    Upload
   },
   data () {
     return {
@@ -68,7 +71,7 @@ export default {
           pKey: 'pid', // 节点父级id
           label: 'name', // 节点名称字段
           api: getAllApi, // 获取数据的接口
-          params: {data: [{key: 'type', value: 1}], type: 'query'}
+          params: {data: [{key: 'type', value: 2}], type: 'query'}
         },
         leftClickData: {},
         rightClickData: {},
@@ -284,11 +287,11 @@ export default {
         }
         break
       case 'deleteMenuData':
-        this._handleAPI('delete', dataPermsDeleteApi, data.id).then(res => {
-          if (res.success) {
-            tableInfo.refresh = Math.random()
-          }
-        })
+        // this._handleAPI('delete', dataPermsDeleteApi, data.id).then(res => {
+        //   if (res.success) {
+        //     tableInfo.refresh = Math.random()
+        //   }
+        // })
         break
       // 弹窗点击关闭
       case 'close':
@@ -313,9 +316,9 @@ export default {
             } else if (type === 'update') {
               api = updateApi
             } else if (type === 'addMenuData') {
-              api = dataPermsCreateApi
+              // api = dataPermsCreateApi
             } else if (type === 'updateMenuData') {
-              api = dataPermsUpdateApi
+              // api = dataPermsUpdateApi
             } else {
               return
             }
@@ -361,8 +364,7 @@ export default {
     },
     // 触发事件
     handleEvent (event, data) {
-      const cardInfo = this.cardInfo,
-        treeInfo = this.treeInfo,
+      const treeInfo = this.treeInfo,
         tableInfo = this.tableInfo
       switch (event) {
       // 对表格获取到的数据做处理
@@ -391,7 +393,6 @@ export default {
         }
         obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
         obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
-        cardInfo.data = obj
         treeInfo.leftClickData = obj
         // tab为数据权限页面，点击刷新表格
         if (this.tabActive === 'menuData') {
@@ -409,14 +410,14 @@ export default {
         // 根节点
         if (data.node.level === 1) {
           arr = [
-            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: false},
+            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:create')},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {
           arr = [
-            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:create')},
-            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:update')},
-            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:delete')},
+            {name: '上传图片', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:upload')},
+            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:update')},
+            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:delete')},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         }

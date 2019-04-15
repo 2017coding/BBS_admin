@@ -2,12 +2,6 @@
   <div class="app-container">
     <!-- 左侧树 -->
     <div class="left">
-      <div class="" style="padding-bottom: 10px;">
-        <el-select v-model="formInfo.data.type" placeholder="请选择菜单类型" style="width: 240px">
-          <el-option v-for="(item, index) in listTypeInfo.menuTypeList" :key="index" :label="item.key" :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
       <page-tree
         :expandAll="true"
         :defaultClicked="treeInfo.defaultClicked"
@@ -24,106 +18,21 @@
       </page-tree>
     </div>
     <div class="right">
-      <el-tabs v-model="tabActive" @tab-click="handleEvent('tabClick')">
-        <el-tab-pane label="菜单详情" name="menu">
-          <!-- 卡片 -->
-          <page-card
-            :class="'card'"
-            :title="cardInfo.title"
-            :data.sync="cardInfo.data"
-            :fieldList="cardInfo.fieldList"
-            :listTypeInfo="listTypeInfo">
-          </page-card>
-        </el-tab-pane>
-        <!-- 点击页面组件时显示 -->
-        <el-tab-pane label="数据权限" name="menuData" v-if="treeInfo.leftClickData.component === 1">
-          <template>
-            <div class="">
-              <el-button
-                v-waves
-                icon="el-icon-plus"
-                type="primary"
-                style="margin-bottom: 10px;"
-                v-if="dataPerms.includes('menuMan:persCreate')"
-                @click="handleClickBt('addMenuData')">添加
-              </el-button>
-              <el-button
-                v-waves
-                icon="el-icon-refresh"
-                type="primary"
-                style="margin-bottom: 10px;"
-                @click="tableInfo.refresh = Math.random()">刷新
-              </el-button>
-            </div>
-            <!-- 表格 -->
-            <page-table
-              :class="'table'"
-              :refresh="tableInfo.refresh"
-              :pager="tableInfo.pager"
-              :data.sync="tableInfo.data"
-              :api="dataPermsGetAllApi"
-              :query="{menuId: treeInfo.leftClickData.id}"
-              :fieldList="tableInfo.fieldList"
-              :listTypeInfo="listTypeInfo"
-              :handle="tableInfo.handle"
-              @handleClickBt="handleClickBt"
-              @handleEvent="handleEvent">
-            </page-table>
-          </template>
-        </el-tab-pane>
-      </el-tabs>
     </div>
-    <!-- 弹窗 -->
-    <page-dialog
-      :title="dialogInfo.title[dialogInfo.type]"
-      :visible.sync="dialogInfo.visible"
-      :width="dialogInfo.width"
-      :btLoading="dialogInfo.btLoading"
-      :btList="dialogInfo.btList"
-      @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
-      <!-- form -->
-      <page-form
-        v-if="dialogInfo.type === 'create' || dialogInfo.type === 'update'"
-        :refObj.sync="formInfo.ref"
-        :data="formInfo.data"
-        :fieldList="formInfo.fieldList"
-        :rules="formInfo.rules"
-        :labelWidth="formInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
-      </page-form>
-      <page-form
-        v-if="dialogInfo.type === 'addMenuData' || dialogInfo.type === 'updateMenuData'"
-        :refObj.sync="dataControlFormInfo.ref"
-        :data="dataControlFormInfo.data"
-        :fieldList="dataControlFormInfo.fieldList"
-        :rules="dataControlFormInfo.rules"
-        :labelWidth="dataControlFormInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
-      </page-form>
-    </page-dialog>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { createApi, updateApi, deleteApi, getAllApi, dataPermsCreateApi, dataPermsUpdateApi, dataPermsDeleteApi, dataPermsGetAllApi } from '@/api/sysMan/menuMan'
+import {createApi, updateApi, deleteApi, getAllApi} from '@/api/library/folder'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
-import PageCard from '@/components/PageCard'
-import PageTable from '@/components/PageTable'
-import PageDialog from '@/components/PageDialog'
-import PageForm from '@/components/PageForm'
 
 export default {
   mixins: [Validate, HandleApi],
   components: {
-    PageTree,
-    PageCard,
-    PageTable,
-    PageDialog,
-    PageForm
+    PageTree
   },
   data () {
     return {
@@ -131,43 +40,12 @@ export default {
       updateApi,
       deleteApi,
       getAllApi,
-      dataPermsCreateApi,
-      dataPermsUpdateApi,
-      dataPermsDeleteApi,
-      dataPermsGetAllApi,
-      // 选项卡默认点击
-      tabActive: 'menu',
       // 相关列表
       listTypeInfo: {
         iconList: [],
         statusList: [
           {key: '启用', value: 1},
           {key: '停用', value: 0}
-        ],
-        menuTypeList: [
-          {key: '平台端', value: 1},
-          {key: '论坛端', value: 2},
-          {key: '移动端', value: 3}
-        ],
-        componentList: [
-          {key: '根目录', value: -1},
-          {key: '页面组件', value: 1},
-          {key: '默认布局组件', value: 2}
-        ],
-        componentList1: [
-          {key: '页面组件', value: 1},
-          {key: '默认布局组件', value: 2}
-        ],
-        dataControlTypeList: [
-          {key: '按钮点击', value: 1},
-          {key: '右键菜单', value: 2},
-          {key: '链接访问', value: 3}
-        ],
-        reqTypeList: [
-          {key: 'GET', value: 1},
-          {key: 'POST', value: 2},
-          {key: 'PUT', value: 3},
-          {key: 'DELETE', value: 4}
         ],
         treeList: []
       },
@@ -195,27 +73,6 @@ export default {
         leftClickData: {},
         rightClickData: {},
         rightMenuList: []
-      },
-      // 卡片相关
-      cardInfo: {
-        title: '菜单详情',
-        data: {},
-        fieldList: [
-          {label: '所属菜单', value: 'pid', list: 'treeList'},
-          {label: '菜单类型', value: 'type', list: 'menuTypeList'},
-          {label: '菜单编码', value: 'code'},
-          {label: '菜单名称', value: 'name'},
-          {label: '菜单组件', value: 'component', list: 'componentList'},
-          {label: '菜单图标', value: 'icon'},
-          {label: '重定向路径', value: 'redirect'},
-          {label: '排序', value: 'sort'},
-          {label: '描述', value: 'desc'},
-          {label: '状态', value: 'status', list: 'statusList'},
-          {label: '创建人', value: 'create_user_name'},
-          {label: '创建时间', value: 'create_time'},
-          {label: '更新人', value: 'update_user_name'},
-          {label: '更新时间', value: 'update_time'}
-        ]
       },
       // 表格相关
       tableInfo: {
@@ -348,27 +205,9 @@ export default {
         this.dialogInfo.btLoading = false
       }
     },
-    'formInfo.data.type' (val) {
-      const treeInfo = this.treeInfo
-      // 初始化卡片显示
-      this.cardInfo.data = {}
-      // 修改树组件参数
-      treeInfo.loadInfo.params.data[0].value = val
-      // 设置树重新初始化
-      treeInfo.initTree = false
-      // 刷新树
-      treeInfo.refresh = Math.random()
-    },
     // 得到树组件数据，处理相关事件
     'treeInfo.baseData' (val) {
       this.initTree(val)
-    },
-    // 从菜单详情切换到数据权限，获取数据权限列表
-    tabActive (val) {
-      if (val !== 'menuData') return
-      const tableInfo = this.tableInfo
-      tableInfo.data = []
-      tableInfo.refresh = Math.random()
     }
   },
   mounted () {
@@ -445,11 +284,11 @@ export default {
         }
         break
       case 'deleteMenuData':
-        this._handleAPI('delete', dataPermsDeleteApi, data.id).then(res => {
-          if (res.success) {
-            tableInfo.refresh = Math.random()
-          }
-        })
+        // this._handleAPI('delete', dataPermsDeleteApi, data.id).then(res => {
+        //   if (res.success) {
+        //     tableInfo.refresh = Math.random()
+        //   }
+        // })
         break
       // 弹窗点击关闭
       case 'close':
@@ -474,9 +313,9 @@ export default {
             } else if (type === 'update') {
               api = updateApi
             } else if (type === 'addMenuData') {
-              api = dataPermsCreateApi
+              // api = dataPermsCreateApi
             } else if (type === 'updateMenuData') {
-              api = dataPermsUpdateApi
+              // api = dataPermsUpdateApi
             } else {
               return
             }
@@ -522,8 +361,7 @@ export default {
     },
     // 触发事件
     handleEvent (event, data) {
-      const cardInfo = this.cardInfo,
-        treeInfo = this.treeInfo,
+      const treeInfo = this.treeInfo,
         tableInfo = this.tableInfo
       switch (event) {
       // 对表格获取到的数据做处理
@@ -552,7 +390,6 @@ export default {
         }
         obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
         obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
-        cardInfo.data = obj
         treeInfo.leftClickData = obj
         // tab为数据权限页面，点击刷新表格
         if (this.tabActive === 'menuData') {

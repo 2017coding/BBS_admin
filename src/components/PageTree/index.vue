@@ -239,25 +239,17 @@ export default {
     // 自定义渲染内容
     renderContent (h, { node, data, store }) {
       let dom
-      if (this.lazy) {
-        if (data.leaf) {
-          dom = (
-            <p class="custom-tree-node">
-              <img src={require('@/assets/image/doc.png')}></img>
-              <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
-            </p>
-          )
-        } else {
-          dom = (
-            <p class="custom-tree-node">
-              <img src={node.expanded ? require('@/assets/image/file-open.png') : require('@/assets/image/file-close.png')}></img>
-              <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
-            </p>
-          )
-        }
+      if (data.leaf) {
+        dom = (
+          <p class="custom-tree-node">
+            <img src={require('@/assets/image/doc.png')}></img>
+            <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
+          </p>
+        )
       } else {
         dom = (
           <p class="custom-tree-node">
+            <img src={node.expanded ? require('@/assets/image/file-open.png') : require('@/assets/image/file-close.png')}></img>
             <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
           </p>
         )

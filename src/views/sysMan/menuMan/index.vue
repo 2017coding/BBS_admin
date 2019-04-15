@@ -280,7 +280,7 @@ export default {
           {label: '菜单图标', value: 'icon', type: 'select', list: 'iconList'},
           {label: '重定向路径', value: 'redirect', type: 'input'},
           {label: '排序', value: 'sort', type: 'input', required: true},
-          {label: '描述', value: 'desc', type: 'textarea'},
+          {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
           {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
         ],
         rules: {},

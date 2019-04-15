@@ -1,14 +1,5 @@
 import request from '@/common/js/request'
 
-// 创建
-export function createApi (data) {
-  return request({
-    url: '/api/file/create',
-    method: 'post',
-    data
-  })
-}
-
 // 编辑
 export function updateApi (data) {
   return request({
