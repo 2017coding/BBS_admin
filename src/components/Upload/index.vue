@@ -41,7 +41,7 @@ export default {
     uploadData: {
       type: Object,
       default: () => {
-        return {fid: 1}
+        return {fid: 1, type: 2}
       }
     },
     // 上传的文件类型
@@ -90,9 +90,6 @@ export default {
     init () {
       // 设置token
       this.headersData = {Authorization: _getSessionStore('token')}
-      // 设置数据
-      this.uploadData = {fid: 1}
-
       if (this.listType === 'picture') {
         // 设置上传的类型
         if (this.uploadType === 'image') {
