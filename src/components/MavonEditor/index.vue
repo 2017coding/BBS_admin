@@ -1,7 +1,7 @@
 <template>
   <div class="mavon-editor">
     <div class="header"></div>
-    <mavon-editor class="editor" v-model="editorValue" :toolbars="toolbars" :subfield="true"/>
+    <mavon-editor class="editor" v-model="editorValue" :fontSize="'13px'" :placeholder="placeholder" :toolbars="toolbars" :subfield="true"/>
   </div>
 </template>
 
@@ -10,6 +10,11 @@ export default {
   data () {
     return {
       editorValue: '',
+      placeholder: '那些值得记录或者分享的...',
+      errPlaceholder: `1. 描述你的问题
+                    2. 贴上相关代码 (请勿用图片代替代码)
+                    3. 贴上报错信息
+                    4 已经尝试过哪些方法仍然没解决 (附上相关链接)`,
       toolbars: {}
     }
   },

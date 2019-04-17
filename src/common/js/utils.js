@@ -130,10 +130,9 @@ export default {
    * 复制dom的内容
    * @param {String} id dom的ID
    */
-  copyData (id) {
-    let data = document.getElementById(id).innerText,
-      inputDom = document.createElement('input')
-    inputDom.value = data
+  copyData (value) {
+    let inputDom = document.createElement('input')
+    inputDom.value = value
     document.body.appendChild(inputDom)
     inputDom.select() // 选择对象
     document.execCommand('Copy') // 执行浏览器复制命令

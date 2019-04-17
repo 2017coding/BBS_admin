@@ -50,6 +50,11 @@
                 :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
               </i>
             </span>
+            <!-- 图片 -->
+            <img
+              v-else-if="item.type === 'image'"
+              height="50px"
+              :src="scope.row[item.value]"/>
             <!-- 其他 -->
             <span v-else>
               {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: scope.row[item.value]}) || '-'}}

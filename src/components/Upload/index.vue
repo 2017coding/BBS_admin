@@ -41,7 +41,7 @@ export default {
     uploadData: {
       type: Object,
       default: () => {
-        return {fid: 1, type: 2}
+        return {fid: 3, type: 2}
       }
     },
     // 上传的文件类型

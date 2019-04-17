@@ -18,7 +18,27 @@
       </page-tree>
     </div>
     <div class="right">
-      <Upload :uploadNums="10" :listType="'picture-card'"></Upload>
+      <!-- 条件栏 -->
+      <page-filter
+        :query.sync="filterInfo.query"
+        :filterList="filterInfo.list"
+        :listTypeInfo="listTypeInfo"
+        @handleClickBt="handleClickBt"
+        @handleEvent="handleEvent">
+      </page-filter>
+      <!-- 表格 -->
+      <page-table
+        :refresh="tableInfo.refresh"
+        :initCurpage="tableInfo.initCurpage"
+        :data.sync="tableInfo.data"
+        :api="getListApi"
+        :query="filterInfo.query"
+        :fieldList="tableInfo.fieldList"
+        :listTypeInfo="listTypeInfo"
+        :handle="tableInfo.handle"
+        @handleClickBt="handleClickBt"
+        @handleEvent="handleEvent">
+      </page-table>
     </div>
   </div>
 </template>
@@ -26,15 +46,20 @@
 <script>
 import { mapGetters } from 'vuex'
 import {createApi, updateApi, deleteApi, getAllApi} from '@/api/library/folder'
+import {updateApi as updateFileApi, deleteApi as deleteFileApi, getListApi} from '@/api/library/file'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
+import PageFilter from '@/components/PageFilter'
+import PageTable from '@/components/PageTable'
 import Upload from '@/components/Upload'
 
 export default {
   mixins: [Validate, HandleApi],
   components: {
     PageTree,
+    PageFilter,
+    PageTable,
     Upload
   },
   data () {
@@ -43,6 +68,7 @@ export default {
       updateApi,
       deleteApi,
       getAllApi,
+      getListApi,
       // 相关列表
       listTypeInfo: {
         iconList: [],
@@ -77,6 +103,21 @@ export default {
         rightClickData: {},
         rightMenuList: []
       },
+      // 过滤相关配置
+      filterInfo: {
+        query: {
+          name: '',
+          suffix: '',
+          f_id: ''
+        },
+        list: [
+          {type: 'input', label: '图片名称', value: 'name'},
+          {type: 'input', label: '图片类型', value: 'suffix'},
+          {type: 'select', label: '所在目录', value: 'f_id', list: 'treeList', clearable: false},
+          // {type: 'date', label: '创建时间', value: 'create_time'},
+          {type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true}
+        ]
+      },
       // 表格相关
       tableInfo: {
         refresh: 1,
@@ -85,12 +126,12 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true},
-          {label: '功能类型', value: 'type', list: 'dataControlTypeList', required: true},
-          {label: '功能编码', value: 'code', required: true, minWidth: 160},
-          {label: '功能名称', value: 'name', required: true},
-          {label: '功能api', value: 'api', required: true},
-          {label: '请求方式', value: 'method', list: 'reqTypeList', required: true}
+          {label: '所属目录', value: 'f_id', type: 'tag', list: 'treeList'},
+          {label: '图片', value: 'completePath', type: 'image'},
+          {label: '图片名称', value: 'name', type: 'tag'},
+          // {label: '文件路径', value: 'completePath', type: 'tag'},
+          {label: '图片类型', value: 'suffix', type: 'tag'},
+          {label: '图片大小', value: 'size', type: 'tag'}
           // {label: '创建人', value: 'create_user'},
           // {label: '创建时间', value: 'create_time', minWidth: 180},
           // {label: '更新人', value: 'update_user'},
@@ -99,10 +140,11 @@ export default {
         handle: {
           fixed: 'right',
           label: '操作',
-          width: '180',
+          width: '300',
           btList: [
-            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'updateMenuData', show: false},
-            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'deleteMenuData', show: false}
+            {label: '复制地址', type: 'primary', icon: 'el-icon-ship', event: 'copyFile', show: true},
+            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'updateFile', show: false},
+            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'deleteFile', show: false}
           ]
         }
       },
@@ -111,32 +153,29 @@ export default {
         ref: null,
         data: {
           id: '', // *唯一ID
-          pid: '', // *父ID
-          type: 1, // *菜单类型
-          code: '', // *菜单编码
-          name: '', // *菜单名称
-          component: '', // *菜单组件
-          icon: '', // 菜单图标
-          redirect: '', // 重定向路径
-          sort: '', // *排序
-          desc: '', // 描述
-          status: 1 // *状态: 0：停用，1：启用(默认为1)',
+          f_id: '', // *文件夹ID
+          name: '', // *文件名称
+          type: 2, // *文件类型: 1.文件 2.图片 3.音乐 4.视频
+          // path: '', // *文件路径
+          // suffix: '', // *文件后缀
+          // size: '', // *文件大小
+          desc: '' // 文件描述
+          // sort: '', // 排序
+          // status: 1 // *状态: 0：停用，1：启用(默认为1)',
           // create_user: '', // 创建人
           // create_time: '', // 创建时间
           // update_user: '', // 修改人
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '所属菜单', value: 'pid', type: 'tag', list: 'treeList', required: true},
-          {label: '菜单类型', value: 'type', type: 'tag', list: 'menuTypeList', required: true},
-          {label: '菜单编码', value: 'code', type: 'input', required: true},
-          {label: '菜单名称', value: 'name', type: 'input', required: true},
-          {label: '菜单组件', value: 'component', type: 'select', list: 'componentList1', required: true},
-          {label: '菜单图标', value: 'icon', type: 'select', list: 'iconList'},
-          {label: '重定向路径', value: 'redirect', type: 'input'},
-          {label: '排序', value: 'sort', type: 'input', required: true},
-          {label: '描述', value: 'desc', type: 'textarea'},
-          {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
+          {label: '所属目录', value: 'f_id', type: 'tag', list: 'treeList', required: true},
+          {label: '图片名称', value: 'name', type: 'tag', required: true},
+          {label: '图片路径', value: 'completePath', type: 'tag', required: true},
+          {label: '图片类型', value: 'suffix', type: 'tag', required: true},
+          {label: '图片大小', value: 'size', type: 'tag', list: 'iconList'},
+          // {label: '排序', value: 'sort', type: 'input', required: true},
+          {label: '描述', value: 'desc', type: 'textarea'}
+          // {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
         ],
         rules: {},
         labelWidth: '120px'
@@ -224,13 +263,13 @@ export default {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      btList[0].show = this.dataPerms.includes('menuMan:persUpdate')
-      btList[1].show = this.dataPerms.includes('menuMan:persDelete')
+      btList[1].show = this.dataPerms.includes('menuMan:persUpdate')
+      btList[2].show = this.dataPerms.includes('menuMan:persDelete')
     },
     initTree (val) {
       const treeInfo = this.treeInfo
       // 操作完后，树刷新，重新设置默认项
-      if (treeInfo.initTree) {
+      if (!treeInfo.initTree) {
         if (treeInfo.defaultClickedAsyc || treeInfo.defaultClickedAsyc === 0) {
           treeInfo.defaultClicked = {id: treeInfo.defaultClickedAsyc}
         }
@@ -241,16 +280,16 @@ export default {
           treeInfo.defaultExpanded = treeInfo.defaultExpandedAsyc
         }
       }
-      // 初始化树
-      if (!treeInfo.initTree) {
-        treeInfo.initTree = true
-        // 容错处理
-        val[0] = val[0] ? val[0] : {}
-        // 设置默认
-        treeInfo.defaultClicked = {id: val[0].id}
-        treeInfo.defaultHighLight = val[0].id
-        treeInfo.defaultExpanded = [val[0].id]
-      }
+      // // 初始化树
+      // if (!treeInfo.initTree) {
+      //   treeInfo.initTree = true
+      //   // 容错处理
+      //   val[0] = val[0] ? val[0] : {}
+      //   // 设置默认
+      //   treeInfo.defaultClicked = {id: val[0].id}
+      //   treeInfo.defaultHighLight = val[0].id
+      //   treeInfo.defaultExpanded = [val[0].id]
+      // }
       // 设置列表
       this.listTypeInfo.treeList = val.map(item => {
         item.key = item.name
@@ -260,6 +299,7 @@ export default {
     },
     // 获取列表
     getList () {
+      this.tableInfo.refresh = Math.random()
     },
     // 按钮点击
     handleClickBt (event, data) {
@@ -269,6 +309,13 @@ export default {
         formInfo = this.formInfo,
         dataControlFormInfo = this.dataControlFormInfo
       switch (event) {
+      // 搜索
+      case 'search':
+        tableInfo.refresh = Math.random()
+        // 搜索完之后要将数据对应
+        treeInfo.defaultClicked = {id: this.filterInfo.query.f_id}
+        treeInfo.defaultHighLight = this.filterInfo.query.f_id
+        break
       case 'addMenuData':
         dialogInfo.type = event
         dialogInfo.visible = true
@@ -350,6 +397,9 @@ export default {
           }
         })
         break
+      case 'copyFile':
+        this.$fn.copyData(data.completePath)
+        break
       }
     },
     // 返回对应的api类型
@@ -394,15 +444,8 @@ export default {
         obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
         obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
         treeInfo.leftClickData = obj
-        // tab为数据权限页面，点击刷新表格
-        if (this.tabActive === 'menuData') {
-          tableInfo.data = []
-          tableInfo.refresh = Math.random()
-        }
-        // 点击不为页面组件，tab显示为菜单详情
-        if (obj.component !== 1) {
-          this.tabActive = 'menu'
-        }
+        // 定义当前数据搜索范围
+        this.filterInfo.query.f_id = obj.id
         break
       // 根据右键点击创建节点对应菜单
       case 'rightClick':

@@ -8,7 +8,7 @@
         v-if="item.type === 'input'"
         :type="item.type"
         :disabled="item.disabled"
-        :clearable="item.clearable || true"
+        :clearable="item.clearable === false ? item.clearable : true"
         :placeholder="getPlaceholder(item)"
         @focus="handleEvent(item.event)"
         v-model="searchQuery[item.value]">
@@ -20,8 +20,8 @@
         v-model="searchQuery[item.value]"
         :disabled="item.disabled"
         @change="handleEvent(item.even)"
-        :clearable="item.clearable || true"
-        :filterable="item.filterable || true"
+        :clearable="item.clearable === false ? item.clearable : true"
+        :filterable="item.filterable === false ? item.filterable : true"
         :placeholder="getPlaceholder(item)">
         <el-option v-for="(item ,index) in  listTypeInfo[item.list]" :key="index" :label="item.key" :value="item.value"></el-option>
       </el-select>
@@ -31,7 +31,7 @@
         v-if="item.type === 'time'"
         v-model="searchQuery[item.value]"
         :picker-options="item.TimePickerOptions"
-        :clearable="item.clearable || true"
+        :clearable="item.clearable === false ? item.clearable : true"
         :disabled="item.disabled"
         :placeholder="getPlaceholder(item)">
       </el-time-select>
@@ -42,7 +42,7 @@
         v-model="searchQuery[item.value]"
         :picker-options="item.datePickerOptions || datePickerOptions"
         :type="item.dateType"
-        :clearable="item.clearable || true"
+        :clearable="item.clearable === false ? item.clearable : true"
         :disabled="item.disabled"
         @focus="handleEvent(item.event)"
         :placeholder="getPlaceholder(item)">
@@ -92,16 +92,26 @@ export default {
           return time.getTime() > +new Date() + 1000 * 600 * 1
         }
       },
+      flag: 'inner', // 内 inner  外outside
       searchQuery: {}
     }
   },
   watch: {
     searchQuery: {
       handler: function (val) {
+        // 传入参数修改，不派发
+        if (this.flag === 'outside') {
+          this.flag === 'inner'
+          return
+        }
         // 修改传入进来的参数
         this.$emit('update:query', {...this.query, ...val})
       },
       deep: true // 深度监听
+    },
+    query (val) {
+      this.flag = 'outside' // 标识为传入参数修改
+      this.searchQuery = val
     }
   },
   mounted () {
