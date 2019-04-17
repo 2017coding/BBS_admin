@@ -40,6 +40,37 @@
         @handleEvent="handleEvent">
       </page-table>
     </div>
+    <!-- 弹窗 -->
+    <page-dialog
+      :title="dialogInfo.title[dialogInfo.type]"
+      :visible.sync="dialogInfo.visible"
+      :width="dialogInfo.width"
+      :btLoading="dialogInfo.btLoading"
+      :btList="dialogInfo.type === 'uploadFile' ? undefined : dialogInfo.btList"
+      @handleClickBt="handleClickBt"
+      @handleEvent="handleEvent">
+      <page-form
+        v-if="dialogInfo.type === 'create' || dialogInfo.type === 'update'"
+        :refObj.sync="formInfo.ref"
+        :data="formInfo.data"
+        :fieldList="formInfo.fieldList"
+        :rules="formInfo.rules"
+        :labelWidth="formInfo.labelWidth"
+        :listTypeInfo="listTypeInfo">
+      </page-form>
+      <page-form
+        v-else-if="dialogInfo.type === 'updateFile'"
+        :refObj.sync="fileFormInfo.ref"
+        :data="fileFormInfo.data"
+        :fieldList="fileFormInfo.fieldList"
+        :rules="fileFormInfo.rules"
+        :labelWidth="fileFormInfo.labelWidth"
+        :listTypeInfo="listTypeInfo">
+      </page-form>
+      <Upload
+        v-else-if="dialogInfo.type === 'uploadFile'">
+      </Upload>
+    </page-dialog>
   </div>
 </template>
 
@@ -52,6 +83,8 @@ import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
+import PageDialog from '@/components/PageDialog'
+import PageForm from '@/components/PageForm'
 import Upload from '@/components/Upload'
 
 export default {
@@ -60,6 +93,8 @@ export default {
     PageTree,
     PageFilter,
     PageTable,
+    PageDialog,
+    PageForm,
     Upload
   },
   data () {
@@ -153,6 +188,32 @@ export default {
         ref: null,
         data: {
           id: '', // *唯一ID
+          pid: '', // *父ID
+          name: '', // *目录名称
+          type: 2, // *目录类型: 1.文件 2.图片 3.音乐 4.视频
+          // path: '', // *目录路径
+          sort: '', // 排序
+          desc: '' // 文件描述
+          // status: 1 // *状态: 0：停用，1：启用(默认为1)',
+          // create_user: '', // 创建人
+          // create_time: '', // 创建时间
+          // update_user: '', // 修改人
+          // update_time: '' // 修改时间
+        },
+        fieldList: [
+          {label: '所属目录', value: 'pid', type: 'tag', list: 'treeList', required: true},
+          {label: '目录名称', value: 'name', type: 'input', required: true},
+          {label: '排序', value: 'sort', type: 'input', required: true},
+          {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'}
+          // {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
+        ],
+        rules: {},
+        labelWidth: '120px'
+      },
+      fileFormInfo: {
+        ref: null,
+        data: {
+          id: '', // *唯一ID
           f_id: '', // *文件夹ID
           name: '', // *文件名称
           type: 2, // *文件类型: 1.文件 2.图片 3.音乐 4.视频
@@ -169,39 +230,13 @@ export default {
         },
         fieldList: [
           {label: '所属目录', value: 'f_id', type: 'tag', list: 'treeList', required: true},
-          {label: '图片名称', value: 'name', type: 'tag', required: true},
-          {label: '图片路径', value: 'completePath', type: 'tag', required: true},
-          {label: '图片类型', value: 'suffix', type: 'tag', required: true},
-          {label: '图片大小', value: 'size', type: 'tag', list: 'iconList'},
+          {label: '图片名称', value: 'name', type: 'input', required: true}
+          // {label: '图片路径', value: 'completePath', type: 'tag', required: true},
+          // {label: '图片类型', value: 'suffix', type: 'tag', required: true},
+          // {label: '图片大小', value: 'size', type: 'tag'},
           // {label: '排序', value: 'sort', type: 'input', required: true},
-          {label: '描述', value: 'desc', type: 'textarea'}
+          // {label: '描述', value: 'desc', type: 'textarea'}
           // {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
-        ],
-        rules: {},
-        labelWidth: '120px'
-      },
-      dataControlFormInfo: {
-        ref: null,
-        data: {
-          id: '', // *唯一ID
-          menu_id: '', // *菜单ID
-          code: '', // *编码
-          type: '', // *类型
-          name: '', // *名称
-          api: '', // *对应请求API
-          method: '' // *请求方式
-          // create_user: '', // 创建人
-          // create_time: '', // 创建时间
-          // update_user: '', // 修改人
-          // update_time: '' // 修改时间
-        },
-        fieldList: [
-          {label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true},
-          {label: '功能类型', value: 'type', type: 'select', list: 'dataControlTypeList', required: true},
-          {label: '功能编码', value: 'code', type: 'input', required: true},
-          {label: '功能名称', value: 'name', type: 'input', required: true},
-          {label: '功能api', value: 'api', type: 'input'},
-          {label: '请求方式', value: 'method', type: 'select', list: 'reqTypeList', required: true}
         ],
         rules: {},
         labelWidth: '120px'
@@ -209,10 +244,10 @@ export default {
       // 弹窗相关
       dialogInfo: {
         title: {
-          create: '添加菜单',
-          update: '编辑菜单',
-          addMenuData: '添加菜单权限',
-          updateMenuData: '编辑菜单权限'
+          create: '添加目录',
+          update: '编辑目录',
+          uploadFile: '上传图片',
+          updateFile: '编辑图片'
         },
         visible: false,
         type: '',
@@ -233,14 +268,14 @@ export default {
   watch: {
     'dialogInfo.visible' (val) {
       const formInfo = this.formInfo,
-        dataControlFormInfo = this.dataControlFormInfo
+        fileFormInfo = this.fileFormInfo
       if (!val) {
         // 表单验证初始化
         if (formInfo.ref) {
           formInfo.ref.resetFields()
         }
-        if (dataControlFormInfo.ref) {
-          dataControlFormInfo.ref.resetFields()
+        if (fileFormInfo.ref) {
+          fileFormInfo.ref.resetFields()
         }
         this.resetForm()
         // 重置弹窗按钮loading
@@ -257,7 +292,7 @@ export default {
     this.initDataPerms()
     // mixin中的方法, 初始化字段验证规则
     this._initRules(this.formInfo)
-    this._initRules(this.dataControlFormInfo)
+    this._initRules(this.fileFormInfo)
   },
   methods: {
     // 初始化数据权限
@@ -307,7 +342,7 @@ export default {
         tableInfo = this.tableInfo,
         dialogInfo = this.dialogInfo,
         formInfo = this.formInfo,
-        dataControlFormInfo = this.dataControlFormInfo
+        fileFormInfo = this.fileFormInfo
       switch (event) {
       // 搜索
       case 'search':
@@ -316,29 +351,23 @@ export default {
         treeInfo.defaultClicked = {id: this.filterInfo.query.f_id}
         treeInfo.defaultHighLight = this.filterInfo.query.f_id
         break
-      case 'addMenuData':
-        dialogInfo.type = event
-        dialogInfo.visible = true
-        // 设置参数
-        dataControlFormInfo.data.menu_id = treeInfo.leftClickData.id
-        break
-      case 'updateMenuData':
+      case 'updateFile':
         dialogInfo.type = event
         dialogInfo.visible = true
         // 显示信息
         for (let key in data) {
           // 存在则赋值
-          if (key in dataControlFormInfo.data) {
-            dataControlFormInfo.data[key] = data[key]
+          if (key in fileFormInfo.data) {
+            fileFormInfo.data[key] = data[key]
           }
         }
         break
-      case 'deleteMenuData':
-        // this._handleAPI('delete', dataPermsDeleteApi, data.id).then(res => {
-        //   if (res.success) {
-        //     tableInfo.refresh = Math.random()
-        //   }
-        // })
+      case 'deleteFile':
+        this._handleAPI('delete', deleteFileApi, data.id).then(res => {
+          if (res.success) {
+            tableInfo.refresh = Math.random()
+          }
+        })
         break
       // 弹窗点击关闭
       case 'close':
@@ -350,9 +379,9 @@ export default {
         if (type === 'create' || type === 'update') {
           params = formInfo.data
           ref = formInfo.ref
-        } else if (type === 'addMenuData' || type === 'updateMenuData') {
-          params = dataControlFormInfo.data
-          ref = dataControlFormInfo.ref
+        } else if (type === 'uploadFile' || type === 'updateFile') {
+          params = fileFormInfo.data
+          ref = fileFormInfo.ref
         } else {
           return
         }
@@ -362,10 +391,10 @@ export default {
               api = createApi
             } else if (type === 'update') {
               api = updateApi
-            } else if (type === 'addMenuData') {
+            } else if (type === 'uploadFile') {
               // api = dataPermsCreateApi
-            } else if (type === 'updateMenuData') {
-              // api = dataPermsUpdateApi
+            } else if (type === 'updateFile') {
+              api = updateFileApi
             } else {
               return
             }
@@ -386,7 +415,7 @@ export default {
                   treeInfo.defaultExpandedAsyc = [params.pid]
                   // 刷新树
                   treeInfo.refresh = Math.random()
-                } else if (type === 'addMenuData' || type === 'updateMenuData') {
+                } else if (type === 'uploadFile' || type === 'updateFile') {
                   tableInfo.refresh = Math.random()
                 }
               }
@@ -406,9 +435,9 @@ export default {
     getApiType (type) {
       if (type === 'create' || type === 'update') {
         return type
-      } else if (type === 'addMenuData') {
+      } else if (type === 'uploadFile') {
         return 'create'
-      } else if (type === 'updateMenuData') {
+      } else if (type === 'updateFile') {
         return 'update'
       }
     },
@@ -458,7 +487,7 @@ export default {
           ]
         } else {
           arr = [
-            {name: '上传图片', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:upload')},
+            {name: '上传图片', type: 'uploadFile', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:upload')},
             {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:update')},
             {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:delete')},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
@@ -477,7 +506,8 @@ export default {
       const nodeData = data.data,
         dialogInfo = this.dialogInfo,
         formInfo = this.formInfo,
-        treeInfo = this.treeInfo
+        treeInfo = this.treeInfo,
+        fileFormInfo = this.fileFormInfo
       switch (type) {
       case 'refreshTree':
         // falls through 告诉ESlint不检查这一行
@@ -486,6 +516,12 @@ export default {
         treeInfo.initTree = false
         treeInfo.refreshLevel = !data.node ? 0 : data.node.level
         treeInfo.refresh = Math.random()
+        break
+      case 'uploadFile':
+        dialogInfo.type = type
+        dialogInfo.visible = true
+        fileFormInfo.data.f_id = nodeData.id
+        // 设置参数
         break
       case 'create':
         dialogInfo.type = type
@@ -537,7 +573,7 @@ export default {
         // update_user: '', // 修改人
         // update_time: '' // 修改时间
       }
-      this.dataControlFormInfo.data = {
+      this.fileFormInfo.data = {
         id: '', // *唯一ID
         menu_id: '', // *菜单ID
         code: '', // *编码

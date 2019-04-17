@@ -101,7 +101,7 @@ export default {
       handler: function (val) {
         // 传入参数修改，不派发
         if (this.flag === 'outside') {
-          this.flag === 'inner'
+          this.flag = 'inner'
           return
         }
         // 修改传入进来的参数

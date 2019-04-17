@@ -35,7 +35,7 @@ export default {
     // 是否自动上传
     autoUpload: {
       type: Boolean,
-      default: true
+      default: false
     },
     // 上传参数
     uploadData: {
