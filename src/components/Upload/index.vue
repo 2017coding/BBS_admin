@@ -14,8 +14,8 @@
     :file-list="fileList"
     :list-type="listType">
     <el-button slot="trigger" size="small" type="primary">{{autoUpload ? '点击上传' : '读取文件'}}</el-button>
-    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload" v-if="!autoUpload">上传文件</el-button>
-    <div slot="tip" class="el-form-item__error" style="margin-top:-5px; padding: 10px 0; color:#ff4949">{{uploadMessage}} <i v-if="uploadMessage == '正在上传'" class="el-icon-loading"></i></div>
+    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload" v-if="!autoUpload">开始上传</el-button>
+    <div slot="tip" style="margin-top:-5px; padding: 10px 0; color:#ff4949">{{uploadMessage}} <i v-if="uploadMessage == '正在上传'" class="el-icon-loading"></i></div>
   </el-upload>
 </template>
 
@@ -39,10 +39,7 @@ export default {
     },
     // 上传参数
     uploadData: {
-      type: Object,
-      default: () => {
-        return {fid: 3, type: 2}
-      }
+      type: Object
     },
     // 上传的文件类型
     uploadType: {
@@ -52,7 +49,7 @@ export default {
     // 上传的文件个数
     uploadNums: {
       type: Number,
-      default: 1
+      default: -1
     },
     // 列表类型
     listType: {
@@ -158,9 +155,9 @@ export default {
       }
     },
     // 文件上传成功
-    uploadSuccess (response, file, fileList) {
+    uploadSuccess (res, file, fileList) {
       // 上传结果处理
-      if (response.success) {
+      if (res.success) {
         this.uploadMessage = ''
         // this.fileList = fileList
         // 根据设置的文件个数做处理 -1为无限大
@@ -182,6 +179,14 @@ export default {
         })
         this.uploadMessage = '上传失败'
       }
+      this.$message({
+        showClose: true,
+        message: res.success ? '上传成功' : '上传失败',
+        type: res.success ? 'success' : 'error',
+        duration: 2000
+      })
+
+      this.$emit('handleEvent', 'upload', res.success)
     },
     // 文件上传失败
     uploadError (error, file, fileList) {
@@ -195,6 +200,12 @@ export default {
         }
       })
       this.uploadMessage = '上传失败'
+      this.$message({
+        showClose: true,
+        message: '上传失败',
+        type: 'error',
+        duration: 2000
+      })
     },
     // 文件移除时
     uploadRemove (file, fileList) {

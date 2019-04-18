@@ -315,5 +315,18 @@ export default {
    */
   getHost () {
     return process.env.NODE_ENV === 'development' ? process.env.excelURL : window.location.origin
+  },
+  /**
+   * 传入搜索框字符串，将问号后面字符得到并转换为对象
+   * @param {String} str
+   * @return {Object}
+   */
+  getLocationSearch (str) {
+    let arr = str.substr(1).split('&'), obj = {}
+    for (let item of arr) {
+      let data = item.split('=')
+      obj[data[0]] = data[1]
+    }
+    return obj
   }
 }

@@ -68,7 +68,9 @@
         :listTypeInfo="listTypeInfo">
       </page-form>
       <Upload
-        v-else-if="dialogInfo.type === 'uploadFile'">
+        v-else-if="dialogInfo.type === 'uploadFile' && dialogInfo.visible"
+        :uploadData="{fid: treeInfo.rightClickData.id, type: treeInfo.rightClickData.type}"
+        @handleEvent="handleEvent">
       </Upload>
     </page-dialog>
   </div>
@@ -143,7 +145,8 @@ export default {
         query: {
           name: '',
           suffix: '',
-          f_id: ''
+          f_id: '',
+          type: 2
         },
         list: [
           {type: 'input', label: '图片名称', value: 'name'},
@@ -298,8 +301,8 @@ export default {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      btList[1].show = this.dataPerms.includes('menuMan:persUpdate')
-      btList[2].show = this.dataPerms.includes('menuMan:persDelete')
+      btList[1].show = this.dataPerms.includes('imgMan:updateFile')
+      btList[2].show = this.dataPerms.includes('imgMan:deleteFile')
     },
     initTree (val) {
       const treeInfo = this.treeInfo
@@ -444,7 +447,8 @@ export default {
     // 触发事件
     handleEvent (event, data) {
       const treeInfo = this.treeInfo,
-        tableInfo = this.tableInfo
+        tableInfo = this.tableInfo,
+        filterInfo = this.filterInfo
       switch (event) {
       // 对表格获取到的数据做处理
       case 'list':
@@ -474,7 +478,7 @@ export default {
         obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
         treeInfo.leftClickData = obj
         // 定义当前数据搜索范围
-        this.filterInfo.query.f_id = obj.id
+        filterInfo.query.f_id = obj.id
         break
       // 根据右键点击创建节点对应菜单
       case 'rightClick':
@@ -482,7 +486,7 @@ export default {
         // 根节点
         if (data.node.level === 1) {
           arr = [
-            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:create')},
+            {name: '添加下级目录', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('imgMan:create')},
             {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {
@@ -494,10 +498,24 @@ export default {
           ]
         }
         this.treeInfo.rightMenuList = arr
+        treeInfo.rightClickData = JSON.parse(JSON.stringify(data.data))
         break
       // 右键菜单对应的事件处理
       case 'rightEvent':
         this.handleRightEvent(data.type, data)
+        break
+      // 组件上传之后的回调
+      case 'upload':
+        if (data) {
+          // 数据指针对应
+          filterInfo.query.f_id = treeInfo.rightClickData.id
+          treeInfo.defaultClicked = {id: filterInfo.query.f_id}
+          treeInfo.defaultHighLight = filterInfo.query.f_id
+          // 刷新列表
+          tableInfo.refresh = Math.random()
+          // 关闭弹窗
+          this.handleClickBt('close')
+        }
         break
       }
     },
@@ -507,7 +525,9 @@ export default {
         dialogInfo = this.dialogInfo,
         formInfo = this.formInfo,
         treeInfo = this.treeInfo,
-        fileFormInfo = this.fileFormInfo
+        tableInfo = this.tableInfo,
+        fileFormInfo = this.fileFormInfo,
+        filterInfo = this.filterInfo
       switch (type) {
       case 'refreshTree':
         // falls through 告诉ESlint不检查这一行
@@ -516,6 +536,12 @@ export default {
         treeInfo.initTree = false
         treeInfo.refreshLevel = !data.node ? 0 : data.node.level
         treeInfo.refresh = Math.random()
+        // 初始化
+        treeInfo.defaultClicked = {}
+        treeInfo.defaultHighLight = ''
+        filterInfo.query.f_id = ''
+        // 刷新表格
+        tableInfo.refresh = Math.random()
         break
       case 'uploadFile':
         dialogInfo.type = type
@@ -559,15 +585,12 @@ export default {
       this.formInfo.data = {
         id: '', // *唯一ID
         pid: '', // *父ID
-        type: 1, // *菜单类型
-        code: '', // *菜单编码
-        name: '', // *菜单名称
-        component: '', // *菜单组件
-        icon: '', // 菜单图标
-        redirect: '', // 重定向路径
-        sort: '', // *排序
-        desc: '', // 描述
-        status: 1 // *状态: 0：停用，1：启用(默认为1)',
+        name: '', // *目录名称
+        type: 2, // *目录类型: 1.文件 2.图片 3.音乐 4.视频
+        // path: '', // *目录路径
+        sort: '', // 排序
+        desc: '' // 文件描述
+        // status: 1 // *状态: 0：停用，1：启用(默认为1)',
         // create_user: '', // 创建人
         // create_time: '', // 创建时间
         // update_user: '', // 修改人
@@ -575,12 +598,15 @@ export default {
       }
       this.fileFormInfo.data = {
         id: '', // *唯一ID
-        menu_id: '', // *菜单ID
-        code: '', // *编码
-        type: '', // *类型
-        name: '', // *名称
-        api: '', // *对应请求API
-        method: '' // *请求方式
+        f_id: '', // *文件夹ID
+        name: '', // *文件名称
+        type: 2, // *文件类型: 1.文件 2.图片 3.音乐 4.视频
+        // path: '', // *文件路径
+        // suffix: '', // *文件后缀
+        // size: '', // *文件大小
+        desc: '' // 文件描述
+        // sort: '', // 排序
+        // status: 1 // *状态: 0：停用，1：启用(默认为1)',
         // create_user: '', // 创建人
         // create_time: '', // 创建时间
         // update_user: '', // 修改人
