@@ -40,6 +40,7 @@
 
 <script>
 import { loginApi } from '@/api/user'
+import config from '../../../package.json'
 export default {
   data () {
     return {
@@ -64,6 +65,10 @@ export default {
     'formInfo.remember' (val) {
       // console.log(val)
     }
+  },
+  beforeCreate () {
+    // 设置系统名称
+    document.title = config.name
   },
   created () {
     this.initRemember()
@@ -151,11 +156,12 @@ export default {
       flex-direction: column;
       position: relative;
       padding: 30px 100px;
+      padding-top: 50px;
       width: 40%;
       min-width: 500px;
       background: rgba(255, 255, 255, .5);
       overflow: hidden;
-      border-radius: 8px;
+      border-radius: 15px;
       &::after{
         content: '';
         background: url('./image/bg.jpg') no-repeat fixed;
