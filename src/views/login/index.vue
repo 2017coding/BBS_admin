@@ -29,6 +29,7 @@
       </el-form-item>
       <div class="remember">
         <el-checkbox v-model="formInfo.remember" style="color: rgb(100, 100, 100)">记住密码</el-checkbox>
+        <router-link class="forget" tag="a" target="_blank" to="/retrieve">忘记密码?</router-link>
       </div>
       <el-form-item>
         <el-button :loading="buttonInfo.btLoading" type="primary" class="login-bt" @click="handleLogin()">登录</el-button>
@@ -196,7 +197,13 @@ export default {
         }
       }
       .remember{
+        display: flex;
         margin-bottom: 20px;
+        .forget{
+          flex: 1;
+          text-align: right;
+          color: $g_theme;
+        }
       }
       .login-bt{
         width: 100%;

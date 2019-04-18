@@ -266,7 +266,7 @@ export default {
       if (!this.rightClick) return
       // 初始菜单
       this.rightMenu.list = [
-        {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
+        {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
       ]
       // 显示菜单，并且根据点击的位置生成菜单显示的坐标
       this.rightMenu.show = true

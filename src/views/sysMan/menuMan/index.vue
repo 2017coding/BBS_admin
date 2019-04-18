@@ -226,7 +226,7 @@ export default {
       tableInfo: {
         refresh: 1,
         initTable: false,
-        initCurpage: false,
+        initCurpage: 1,
         pager: false,
         data: [],
         fieldList: [
@@ -576,14 +576,14 @@ export default {
         if (data.node.level === 1) {
           arr = [
             {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: false},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
+            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {
           arr = [
             {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:create')},
             {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:update')},
             {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:delete')},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
+            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         }
         this.treeInfo.rightMenuList = arr

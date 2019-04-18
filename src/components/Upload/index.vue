@@ -26,7 +26,7 @@ export default {
     // 上传的地址
     url: {
       type: String,
-      default: `${process.env.BASE_API}/api/file/upload`
+      default: `http://www.lyh.red/api/file/upload`
     },
     // 显示上传的内容
     fileData: {

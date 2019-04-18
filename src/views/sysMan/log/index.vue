@@ -11,6 +11,7 @@
     <!-- 表格 -->
     <page-table
       :refresh="tableInfo.refresh"
+      :initCurpage="tableInfo.initCurpage"
       :data.sync="tableInfo.data"
       :api="getListApi"
       :query="filterInfo.query"
@@ -68,6 +69,7 @@ export default {
       // 表格相关
       tableInfo: {
         refresh: 1,
+        initCurpage: 1,
         data: [],
         fieldList: [
           {label: '日志来源', value: 'origin', list: 'originList'},
@@ -105,6 +107,8 @@ export default {
       switch (event) {
       // 搜索
       case 'search':
+        // 重置分页
+        tableInfo.initCurpage = Math.random()
         tableInfo.refresh = Math.random()
         break
       }

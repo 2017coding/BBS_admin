@@ -30,6 +30,13 @@ export const baseRouter = [
     hidden: true,
     meta: {title: '登录', icon: ''}
   },
+  {
+    path: '/retrieve',
+    component: () => import('@/views/retrieve/index'),
+    name: '找回密码',
+    hidden: true,
+    meta: {title: '找回密码', icon: ''}
+  },
   // {
   //   id: 0,
   //   pid: -1,

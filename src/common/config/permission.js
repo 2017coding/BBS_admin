@@ -8,7 +8,7 @@ import { _getSessionStore } from '@/common/js/storage'
 NProgress.configure({showSpinner: false}) // 不显示加载圆圈
 
 // 免登陆可进入的页面
-const whiteList = ['/login', '/401', '/404']
+const whiteList = ['/login', '/401', '/404', '/retrieve']
 
 // 路由前置
 router.beforeEach((to, from, next) => {

@@ -115,6 +115,7 @@ export default {
           wechat: '', // 微信
           qq: '', // qq
           email: '', // 邮箱
+          desc: '', // 描述
           status: 1 // *状态: 0：停用，1：启用(默认为1)',
           // create_user: '', // 创建人
           // create_time: '', // 创建时间

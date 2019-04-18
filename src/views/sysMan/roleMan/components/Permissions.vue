@@ -141,7 +141,7 @@ export default {
       tableInfo: {
         refresh: 1,
         initTable: false,
-        initCurpage: false,
+        initCurpage: 1,
         pager: false,
         data: [],
         fieldList: [

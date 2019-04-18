@@ -94,7 +94,7 @@ export default {
       // 表格相关
       tableInfo: {
         refresh: 1,
-        initCurpage: false,
+        initCurpage: 1,
         data: [],
         fieldList: [
           {label: '名称', value: 'name'},
@@ -163,6 +163,9 @@ export default {
     },
     // 触发事件
     handleEvent (event, data) {
+      const tableInfo = this.tableInfo,
+        treeInfo = this.treeInfo,
+        filterInfo = this.filterInfo
       switch (event) {
       // 对表格获取到的数据做处理
       case 'list':
@@ -174,15 +177,16 @@ export default {
         break
       // 左键点击的处理
       case 'leftClick':
-        this.treeInfo.type = data.data.type + 1
-        this.filterInfo.query.pid = data.data.id
-        this.tableInfo.initCurpage = !this.tableInfo.initCurpage
-        this.tableInfo.refresh = Math.random()
+        treeInfo.type = data.data.type + 1
+        filterInfo.query.pid = data.data.id
+        // 重置分页
+        tableInfo.initCurpage = Math.random()
+        tableInfo.refresh = Math.random()
         break
       // 根据右键点击创建节点对应菜单
       case 'rightClick':
-        this.treeInfo.rightMenuList = [
-          {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null}
+        treeInfo.rightMenuList = [
+          {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null}
         ]
         break
       // 右键菜单对应的事件处理
@@ -193,17 +197,20 @@ export default {
     },
     // 具体的右键事务处理
     handleRightEvent (type, data) {
+      const tableInfo = this.tableInfo,
+        treeInfo = this.treeInfo,
+        filterInfo = this.filterInfo
       switch (type) {
       case 'refreshTree':
         // 表格初始化
-        this.filterInfo.query.pid = 1
-        this.tableInfo.initCurpage = !this.tableInfo.initCurpage
-        this.tableInfo.refresh = Math.random()
+        filterInfo.query.pid = 1
+        tableInfo.initCurpage = Math.random()
+        tableInfo.refresh = Math.random()
         // falls through 告诉ESlint不检查这一行
       case 'refresh':
         // 树刷新
-        this.treeInfo.refreshLevel = !data.node ? 0 : data.node.level
-        this.treeInfo.refresh = Math.random()
+        treeInfo.refreshLevel = !data.node ? 0 : data.node.level
+        treeInfo.refresh = Math.random()
         break
       }
     },

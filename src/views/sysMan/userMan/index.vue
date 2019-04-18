@@ -117,7 +117,7 @@ export default {
       // 表格相关
       tableInfo: {
         refresh: 1,
-        initCurpage: false,
+        initCurpage: 1,
         data: [],
         fieldList: [
           {label: '账号', value: 'account'},
@@ -302,6 +302,8 @@ export default {
       switch (event) {
       // 搜索
       case 'search':
+        // 重置分页
+        tableInfo.initCurpage = Math.random()
         tableInfo.refresh = Math.random()
         break
       // 创建

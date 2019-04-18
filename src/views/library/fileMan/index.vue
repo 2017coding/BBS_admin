@@ -152,7 +152,7 @@ export default {
         list: [
           {type: 'input', label: '文件名称', value: 'name'},
           {type: 'input', label: '文件类型', value: 'suffix'},
-          {type: 'select', label: '所在目录', value: 'f_id', list: 'treeList', clearable: false},
+          {type: 'select', label: '所在目录', value: 'f_id', list: 'treeList'},
           // {type: 'date', label: '创建时间', value: 'create_time'},
           {type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true}
         ]
@@ -161,7 +161,7 @@ export default {
       tableInfo: {
         refresh: 1,
         initTable: false,
-        initCurpage: false,
+        initCurpage: 1,
         pager: false,
         data: [],
         fieldList: [
@@ -233,7 +233,7 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '所属目录', value: 'f_id', type: 'tag', list: 'treeList', required: true},
+          {label: '所属目录', value: 'f_id', type: 'select', list: 'treeList', required: true},
           {label: '文件名称', value: 'name', type: 'input', required: true}
           // {label: '文件路径', value: 'completePath', type: 'tag', required: true},
           // {label: '文件类型', value: 'suffix', type: 'tag', required: true},
@@ -346,14 +346,17 @@ export default {
         tableInfo = this.tableInfo,
         dialogInfo = this.dialogInfo,
         formInfo = this.formInfo,
-        fileFormInfo = this.fileFormInfo
+        fileFormInfo = this.fileFormInfo,
+        filterInfo = this.filterInfo
       switch (event) {
       // 搜索
       case 'search':
+        // 重置分页
+        tableInfo.initCurpage = Math.random()
         tableInfo.refresh = Math.random()
         // 搜索完之后要将数据对应
-        treeInfo.defaultClicked = {id: this.filterInfo.query.f_id}
-        treeInfo.defaultHighLight = this.filterInfo.query.f_id
+        treeInfo.defaultClicked = {id: filterInfo.query.f_id}
+        treeInfo.defaultHighLight = filterInfo.query.f_id || null
         break
       case 'updateFile':
         dialogInfo.type = event
@@ -455,6 +458,7 @@ export default {
       case 'list':
         if (!data) return
         data.forEach(item => {
+          item.size = this.$fn.bytesToSize(item.size)
           item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
           item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
         })
@@ -478,6 +482,10 @@ export default {
         obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
         obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
         treeInfo.leftClickData = obj
+        // 重置分页
+        tableInfo.initCurpage = Math.random()
+        // 刷新列表
+        tableInfo.refresh = Math.random()
         // 定义当前数据搜索范围
         filterInfo.query.f_id = obj.id
         break
@@ -488,14 +496,14 @@ export default {
         if (data.node.level === 1) {
           arr = [
             {name: '添加下级目录', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('fileMan:create')},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
+            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {
           arr = [
             {name: '上传文件', type: 'uploadFile', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('fileMan:upload')},
             {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('fileMan:update')},
             {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('fileMan:delete')},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
+            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         }
         this.treeInfo.rightMenuList = arr
@@ -526,9 +534,7 @@ export default {
         dialogInfo = this.dialogInfo,
         formInfo = this.formInfo,
         treeInfo = this.treeInfo,
-        tableInfo = this.tableInfo,
-        fileFormInfo = this.fileFormInfo,
-        filterInfo = this.filterInfo
+        fileFormInfo = this.fileFormInfo
       switch (type) {
       case 'refreshTree':
         // falls through 告诉ESlint不检查这一行
@@ -537,12 +543,6 @@ export default {
         treeInfo.initTree = false
         treeInfo.refreshLevel = !data.node ? 0 : data.node.level
         treeInfo.refresh = Math.random()
-        // 初始化
-        treeInfo.defaultClicked = {}
-        treeInfo.defaultHighLight = ''
-        filterInfo.query.f_id = ''
-        // 刷新表格
-        tableInfo.refresh = Math.random()
         break
       case 'uploadFile':
         dialogInfo.type = type

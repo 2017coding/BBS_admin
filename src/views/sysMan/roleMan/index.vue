@@ -360,7 +360,7 @@ export default {
         if (data.node.level === 1) {
           arr = [
             {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:create')},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
+            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {
           arr = [
@@ -369,7 +369,7 @@ export default {
             {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:delete')},
             {name: '绑定用户', type: 'bindUser', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:bindUser')},
             {name: '分配权限', type: 'permissions', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:permissions')},
-            {name: '刷新树', type: 'refreshTree', data: null, node: null, vm: null, show: true}
+            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         }
         treeInfo.rightMenuList = arr

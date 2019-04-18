@@ -75,7 +75,7 @@ export default {
     _addViewTags () {
       const route = this._generateRoute()
       // route || route.path === '/index' || route.path === '/home/index'
-      if (!route) {
+      if (!route || route.path === '/retrieve') {
         return false
       }
       this.$store.dispatch('tagsView/addVisitedViews', route)

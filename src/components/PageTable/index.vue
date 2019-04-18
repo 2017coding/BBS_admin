@@ -157,7 +157,7 @@ export default {
     },
     // 重置当前页
     initCurpage: {
-      type: Boolean
+      type: Number
     },
     // 查询条件
     query: {
