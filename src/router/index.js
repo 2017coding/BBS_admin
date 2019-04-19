@@ -95,7 +95,14 @@ export const baseRouter = [
   //       name: 'activityMan',
   //       meta: {title: '活动管理', icon: ''},
   //       children: []
-  //     }
+  //     },
+  //     {
+  //       path: '/advertisingMan',
+  //       component: () => import('@/views/opsCenter/advertisingMan/index'),
+  //       name: 'advertisingMan',
+  //       meta: {title: '广告位管理', icon: ''},
+  //       children: []
+  //     },
   //   ]
   // },
   // // 文件库
@@ -147,27 +154,6 @@ export const baseRouter = [
   //       component: () => import('@/views/bbsConfig/notices/index'),
   //       name: 'notices',
   //       meta: {title: '通知', icon: ''},
-  //       children: []
-  //     },
-  //     {
-  //       path: '/advertising',
-  //       component: () => import('@/views/bbsConfig/advertising/index'),
-  //       name: 'advertising',
-  //       meta: {title: '广告位', icon: ''},
-  //       children: []
-  //     },
-  //     {
-  //       path: '/liveRecommend',
-  //       component: () => import('@/views/bbsConfig/liveRecommend/index'),
-  //       name: 'liveRecommend',
-  //       meta: {title: '讲座推荐', icon: ''},
-  //       children: []
-  //     },
-  //     {
-  //       path: '/activityRecommend',
-  //       component: () => import('@/views/bbsConfig/activityRecommend/index'),
-  //       name: 'activityRecommend',
-  //       meta: {title: '活动推荐', icon: ''},
   //       children: []
   //     },
   //     {

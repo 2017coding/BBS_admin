@@ -1,7 +1,7 @@
 {
-  "name": "管理系统",
+  "name": "BBS",
   "version": "1.0.0",
-  "description": "后台管理系统",
+  "description": "管理系统",
   "author": "farad",
   "private": true,
   "scripts": {

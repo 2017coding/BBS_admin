@@ -35,8 +35,29 @@
         :rules="formInfo.rules"
         :labelWidth="formInfo.labelWidth"
         :listTypeInfo="listTypeInfo">
+        <!-- 自定义插槽的使用 -->
+        <template v-slot:avatar>
+          <div class="slot-avatar">
+            <img :src="formInfo.data.avatar" style="height: 30px;">
+            <el-button
+              type="primary"
+              icon="el-icon-picture"
+              size="mini"
+              v-waves
+              @click="handleClickBt('selectAvatar')">
+              {{formInfo.data.avatar ? '更换头像' : '选择头像'}}
+            </el-button>
+          </div>
+        </template>
       </page-form>
     </page-dialog>
+    <!-- 选择文件组件 -->
+    <select-file
+      v-model="formInfo.data.avatar"
+      v-if="selectFileInfo.visible"
+      :type="selectFileInfo.type"
+      :visible.sync="selectFileInfo.visible">
+    </select-file>
   </div>
 </template>
 
@@ -48,6 +69,7 @@ import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
+import SelectFile from '@/components/SelectFile'
 
 // 显示天气的方法， 要在这个位置初始化
 (function (T, h, i, n, k, P, a, g, e) {
@@ -74,7 +96,8 @@ export default {
   components: {
     Breadcrumb,
     PageDialog,
-    PageForm
+    PageForm,
+    SelectFile
   },
   data () {
     return {
@@ -127,7 +150,7 @@ export default {
           // {label: '密码', value: 'password', type: 'tag', required: true},
           {label: '昵称', value: 'name', type: 'input', required: true},
           {label: '性别', value: 'sex', type: 'select', list: 'sexList', required: true},
-          {label: '头像', value: 'avatar', type: 'input'},
+          {label: '头像', value: 'avatar', type: 'slot', className: 'el-form-block'},
           {label: '手机号码', value: 'phone', type: 'input'},
           {label: '微信', value: 'wechat', type: 'input'},
           {label: 'QQ', value: 'qq', type: 'input'},
@@ -151,6 +174,12 @@ export default {
           {label: '取消', type: '', icon: '', event: 'close', show: true},
           {label: '修改', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true}
         ]
+      },
+      // 选择文件组件相关参数
+      selectFileInfo: {
+        type: 2,
+        visible: false,
+        value: ''
       }
     }
   },
@@ -245,6 +274,9 @@ export default {
           }
         })
         break
+      case 'selectAvatar':
+        this.selectFileInfo.visible = true
+        break
       }
     },
     // 触发事件
@@ -255,6 +287,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.slot-avatar{
+  height: 40px;
+  display: flex;
+  align-items: center;
+  img{
+    padding-right: 10px;
+  }
+}
+</style>
 
 <style scoped lang="scss">
 @import '@/common/style/base.scss';

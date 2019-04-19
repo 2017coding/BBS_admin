@@ -68,7 +68,7 @@ export default {
   },
   beforeCreate () {
     // 设置系统名称
-    document.title = config.name
+    document.title = config.description
   },
   created () {
     this.initRemember()

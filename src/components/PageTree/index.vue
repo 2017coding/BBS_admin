@@ -219,7 +219,17 @@ export default {
     },
     // 设置选中的节点，直接使用这个属性可能会导致父节点勾中，子节点全部选中的问题
     defaultChecked (val) {
-      // TODO: elementui-tree组件内部问题，有时无法成功选中，先用延时器的方法保证效果
+      this.initDefaultChecked(val)
+    }
+  },
+  mounted () {
+    this.initData()
+    this.initDefaultChecked(this.defaultChecked)
+  },
+  methods: {
+    // TODO: elementui-tree组件内部问题，有时无法成功选中，先用延时器的方法保证效果
+    initDefaultChecked (val = []) {
+      if (val.length === 0) return
       setTimeout(() => {
         this.$nextTick(() => {
           // 将节点选中的状态初始化
@@ -230,12 +240,7 @@ export default {
           }
         })
       }, 100)
-    }
-  },
-  created () {
-    this.initData()
-  },
-  methods: {
+    },
     // 自定义渲染内容
     renderContent (h, { node, data, store }) {
       let dom

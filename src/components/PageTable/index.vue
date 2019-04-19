@@ -22,7 +22,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          v-for="(item, index) in fieldList"
+          v-for="(item, index) in fieldList.filter(item => !item.hidden)"
           :key="index"
           :prop="item.value"
           :label="item.label"
@@ -169,6 +169,11 @@ export default {
     // 列表数据
     data: {
       type: Array
+    },
+    // 监听高度
+    listenHeight: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -196,13 +201,15 @@ export default {
     }
   },
   mounted () {
-    // 得到表格的高度
-    this.listInfo.tableHeight = this.getTableHeight()
-    // 监听页面大小改变
-    window.addEventListener('resize', () => {
+    if (this.listenHeight) {
       // 得到表格的高度
       this.listInfo.tableHeight = this.getTableHeight()
-    })
+      // 监听页面大小改变
+      window.addEventListener('resize', () => {
+        // 得到表格的高度
+        this.listInfo.tableHeight = this.getTableHeight()
+      })
+    }
   },
   methods: {
     // 处理参数

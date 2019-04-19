@@ -272,7 +272,7 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '所属菜单', value: 'pid', type: 'tag', list: 'treeList', required: true},
+          {label: '所属菜单', value: 'pid', type: 'select', list: 'treeList', required: true},
           {label: '菜单类型', value: 'type', type: 'tag', list: 'menuTypeList', required: true},
           {label: '菜单编码', value: 'code', type: 'input', required: true},
           {label: '菜单名称', value: 'name', type: 'input', required: true},

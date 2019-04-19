@@ -1,6 +1,6 @@
 <template>
   <div class="permissions">
-    <el-tabs v-model="menuType" @tab-click="handleEvent('tabClick')">
+    <el-tabs v-model="menuType">
       <el-tab-pane
         class="tab"
         :label="item.key"
@@ -33,6 +33,7 @@
             <!-- 表格 -->
             <page-table
               v-show="treeInfo.leftClickData.component === 1"
+              :listenHeight="false"
               :checkBox="true"
               :class="'table'"
               :refresh="tableInfo.refresh"
@@ -47,6 +48,10 @@
               @handleClickBt="handleClickBt"
               @handleEvent="handleEvent">
             </page-table>
+            <!-- 提示 -->
+            <p v-show="treeInfo.leftClickData.component !== 1" class="tips">
+              选择功能页面可查看相关数据权限
+            </p>
           </div>
         </template>
       </el-tab-pane>
@@ -301,23 +306,30 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  $treeWidth: 240px;
   .permissions{
     .tab{
       display: flex;
       padding-bottom: 10px;
       width: 100%;
+    }
+    .left, .right{
       height: 400px;
       overflow: auto;
     }
     .left{
-      // position: absolute;
-      width: $treeWidth;
-      // border: 1px solid rgb(200, 200, 200);
+      width: 220px;
     }
     .right{
+      position: relative;
       margin-left: 10px;
       flex: 1;
+    }
+    .tips{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
     }
   }
 </style>

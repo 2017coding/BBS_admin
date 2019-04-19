@@ -12,6 +12,10 @@
       :prop="item.value"
       :label="item.label"
       :class="item.className">
+      <!-- solt -->
+      <template v-if="item.type === 'slot'">
+        <slot :name="item.value"></slot>
+      </template>
       <!-- 普通输入框 -->
       <el-input
         v-if="item.type === 'input' || item.type === 'password'"

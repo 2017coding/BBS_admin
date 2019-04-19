@@ -233,7 +233,7 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '所属目录', value: 'f_id', type: 'select', list: 'treeList', required: true},
+          {label: '所属目录', value: 'f_id', type: 'tag', list: 'treeList', required: true},
           {label: '文件名称', value: 'name', type: 'input', required: true}
           // {label: '文件路径', value: 'completePath', type: 'tag', required: true},
           // {label: '文件类型', value: 'suffix', type: 'tag', required: true},
@@ -463,24 +463,9 @@ export default {
           item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
         })
         break
-      case 'tabClick':
-        // 懒加载，第一次点击，刷新列表
-        if (this.tabActive === 'menuData' && !tableInfo.initTable) {
-          tableInfo.initTable = true
-          tableInfo.refresh = !tableInfo.refresh
-        }
-        break
       // 左键点击的处理
       case 'leftClick':
         let obj = JSON.parse(JSON.stringify(data.data))
-        if (obj.columns === -1) {
-          obj.columns = '无限'
-        }
-        if (obj.users === -1) {
-          obj.users = '无限'
-        }
-        obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
-        obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
         treeInfo.leftClickData = obj
         // 重置分页
         tableInfo.initCurpage = Math.random()
