@@ -176,9 +176,9 @@ export default {
   },
   mounted () {
     // hack, 在table创建出来之后再去调用
-    setTimeout(() => {
+    this.$nextTick(() => {
       this.getList()
-    }, 100)
+    })
   },
   methods: {
     initType,
