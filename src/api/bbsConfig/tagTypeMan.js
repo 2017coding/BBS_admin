@@ -3,7 +3,7 @@ import request from '@/common/js/request'
 // 创建
 export function createApi (data) {
   return request({
-    url: '/api/folder/create',
+    url: '/api/tagType/create',
     method: 'post',
     data
   })
@@ -12,7 +12,7 @@ export function createApi (data) {
 // 编辑
 export function updateApi (data) {
   return request({
-    url: '/api/folder/update',
+    url: '/api/tagType/update',
     method: 'put',
     data
   })
@@ -21,7 +21,7 @@ export function updateApi (data) {
 // 删除
 export function deleteApi (id) {
   return request({
-    url: `/api/folder/delete/${id}`,
+    url: `/api/tagType/delete/${id}`,
     method: 'delete'
   })
 }
@@ -29,7 +29,7 @@ export function deleteApi (id) {
 // 得到单条数据
 export function getRowApi (id) {
   return request({
-    url: `/api/folder/getRow/${id}`,
+    url: `/api/tagType/getRow/${id}`,
     method: 'get'
   })
 }
@@ -37,7 +37,7 @@ export function getRowApi (id) {
 // 获取列表
 export function getListApi (params) {
   return request({
-    url: '/api/folder/getList',
+    url: '/api/tagType/getList',
     method: 'get',
     params
   })
@@ -46,7 +46,7 @@ export function getListApi (params) {
 // 获取全部
 export function getAllApi (params) {
   return request({
-    url: '/api/folder/getAll',
+    url: '/api/tagType/getAll',
     method: 'get',
     params
   })

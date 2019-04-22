@@ -9,7 +9,9 @@ const app = {
     // 菜单状态
     sidebar: {
       opened: _getSessionStore('sidebarStatus') ? !!+_getSessionStore('sidebarStatus') : true
-    }
+    },
+    // 全屏状态
+    fullScreen: false
   },
   mutations: {
     // 切换侧边菜单显示状态
@@ -20,6 +22,9 @@ const app = {
       } else {
         _setSessionStore('sidebarStatus', 0)
       }
+    },
+    TOGGLE_FULLSCREEN: (state, val) => {
+      state.fullScreen = val
     }
   },
   actions: {

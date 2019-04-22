@@ -103,6 +103,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'PageTable',
   props: {
@@ -186,10 +187,15 @@ export default {
         pageSizes: [5, 10, 20, 50, 100], // 分页数量列表
         query: { // 查询条件
           curPage: 1, // 当前页
-          pageSize: 10 // 每页条数
+          pageSize: 20 // 每页条数
         }
       }
     }
+  },
+  computed: {
+    ...mapGetters([
+      'fullScreen'
+    ])
   },
   watch: {
     initCurpage () {
@@ -198,6 +204,12 @@ export default {
     refresh () {
       if (!this.api) return
       this.getList(this.api)
+    },
+    fullScreen () {
+      if (this.listenHeight) {
+        // 得到表格的高度
+        this.listInfo.tableHeight = this.getTableHeight()
+      }
     }
   },
   mounted () {

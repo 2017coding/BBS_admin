@@ -48,7 +48,7 @@
               icon="el-icon-picture"
               size="mini"
               v-waves
-              @click="handleClickBt('selectAvatar')">
+              @click="handleClickBt('selectFile')">
               {{formInfo.data.avatar ? '更换头像' : '选择头像'}}
             </el-button>
           </div>
@@ -465,7 +465,7 @@ export default {
           }
         })
         break
-      case 'selectAvatar':
+      case 'selectFile':
         this.selectFileInfo.visible = true
         break
       }

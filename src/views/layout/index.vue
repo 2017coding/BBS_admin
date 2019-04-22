@@ -29,7 +29,6 @@ export default {
   },
   data () {
     return {
-      fullScreen: false, // 是否全屏
       tip: null // 弹窗
     }
   },
@@ -41,7 +40,8 @@ export default {
       }
     },
     ...mapGetters([
-      'sidebar'
+      'sidebar',
+      'fullScreen'
     ])
   },
   mounted () {
@@ -54,7 +54,8 @@ export default {
       let e = event || window.event
       // 按下 shift + F11 组合 全屏显示
       if (e.keyCode === 122 && e.shiftKey) {
-        this.fullScreen = !this.fullScreen
+        // this.fullScreen = !this.fullScreen
+        this.$store.commit('app/TOGGLE_FULLSCREEN', !this.fullScreen)
         if (this.fullScreen) {
           this.tip = this.$message({
             message: '按 shift + F11组合键 退出全屏模式',

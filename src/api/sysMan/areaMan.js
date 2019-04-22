@@ -18,7 +18,7 @@ export function getListApi (params) {
   })
 }
 
-// 获取所有
+// 获取全部
 export function getAllApi (id) {
   return request({
     url: `/api/area/getAll/${id}`,

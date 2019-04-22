@@ -4,6 +4,7 @@ const getters = {
   userInfo: state => state.user.userInfo,
   // app模块
   sidebar: state => state.app.sidebar,
+  fullScreen: state => state.app.fullScreen,
   // tags模块
   visitedViews: state => state.tagsView.visitedViews,
   cachedViews: state => state.tagsView.cachedViews,

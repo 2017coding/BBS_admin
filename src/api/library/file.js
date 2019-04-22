@@ -34,7 +34,7 @@ export function getListApi (params) {
   })
 }
 
-// 获取列表
+// 获取全部
 export function getAllApi (params) {
   return request({
     url: '/api/file/getAll',

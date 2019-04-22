@@ -1,21 +1,58 @@
 <template>
   <div class="mavon-editor">
     <div class="header"></div>
-    <mavon-editor class="editor" v-model="editorValue" :fontSize="'13px'" :placeholder="placeholder" :toolbars="toolbars" :subfield="true"/>
+    <mavon-editor
+      class="editor"
+      :style="`max-height: ${maxHeight}`"
+      v-model="editorValue"
+      :fontSize="'13px'"
+      :placeholder="placeholder"
+      :toolbars="toolbars"
+      :subfield="true"/>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    value: {
+      type: String
+    },
+    placeholder: {
+      type: String,
+      default: '那些值得记录或者分享的...'
+    },
+    maxHeight: {
+      type: String,
+      default: '500px'
+    }
+  },
   data () {
     return {
+      flag: 'inner', // 内 inner  外outside
       editorValue: '',
-      placeholder: '那些值得记录或者分享的...',
       errPlaceholder: `1. 描述你的问题
                     2. 贴上相关代码 (请勿用图片代替代码)
                     3. 贴上报错信息
                     4 已经尝试过哪些方法仍然没解决 (附上相关链接)`,
       toolbars: {}
+    }
+  },
+  watch: {
+    editorValue (val) {
+      // 传入参数修改，不派发
+      if (this.flag === 'outside') {
+        this.flag = 'inner'
+        return
+      }
+      this.$emit('update:value', val)
+    },
+    value: {
+      handler: function (val) {
+        this.flag = 'outside' // 标识为传入参数修改
+        this.editorValue = val
+      },
+      immediate: true
     }
   },
   mounted () {
