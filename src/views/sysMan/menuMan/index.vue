@@ -678,4 +678,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .right{
+    height: 100%;
+    overflow: auto;
+  }
 </style>

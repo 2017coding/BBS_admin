@@ -180,14 +180,10 @@ export default {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      // this.filterInfo.list[4].show = this.dataPerms.includes('userMan:create')
-      // btList[0].show = this.dataPerms.includes('userMan:status')
-      // btList[1].show = this.dataPerms.includes('userMan:update')
-      // btList[2].show = this.dataPerms.includes('userMan:delete')
-      this.filterInfo.list[2].show = true
-      btList[0].show = true
-      btList[1].show = true
-      btList[2].show = true
+      this.filterInfo.list[2].show = this.dataPerms.includes('tagTypeMan:create')
+      btList[0].show = this.dataPerms.includes('tagTypeMan:status')
+      btList[1].show = this.dataPerms.includes('tagTypeMan:update')
+      btList[2].show = this.dataPerms.includes('tagTypeMan:delete')
     },
     initParams () {
       // this.filterInfo.query.create_user = this.userInfo.id

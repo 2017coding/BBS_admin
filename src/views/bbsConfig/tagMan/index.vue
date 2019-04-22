@@ -54,7 +54,6 @@
         </template>
         <template v-slot:wikipedia>
           <div class="slot-wikipedia">
-            {{formInfo.data.wikipedia}}
             <mavon-editor
               :value.sync="formInfo.data.wikipedia"
               placeholder="请编写标签百科...">
@@ -129,8 +128,9 @@ export default {
         initCurpage: 1,
         data: [],
         fieldList: [
-          {label: '类型名称', value: 'type_name', minWidth: 90},
+          {label: '所属类型名称', value: 'type_name', minWidth: 90},
           {label: '标签名称', value: 'name', minWidth: 90},
+          {label: '图标', value: 'icon', width: 100},
           {label: '描述', value: 'desc', minWidth: 160},
           {label: '状态', value: 'status', width: 90, list: 'statusList'}
           // {label: '创建人', value: 'create_user_name'},
@@ -158,7 +158,7 @@ export default {
           name: '', // *标签名称
           icon: '', // 图标
           sort: '', // 排序
-          wikipedia: '', // *标签百科
+          wikipedia: '', // 标签百科
           status: 1 // *状态: 0：停用，1：启用(默认为1)',
           // create_user: '', // 创建人
           // create_time: '', // 创建时间
@@ -231,14 +231,10 @@ export default {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      // this.filterInfo.list[4].show = this.dataPerms.includes('userMan:create')
-      // btList[0].show = this.dataPerms.includes('userMan:status')
-      // btList[1].show = this.dataPerms.includes('userMan:update')
-      // btList[2].show = this.dataPerms.includes('userMan:delete')
-      this.filterInfo.list[2].show = true
-      btList[0].show = true
-      btList[1].show = true
-      btList[2].show = true
+      this.filterInfo.list[3].show = this.dataPerms.includes('tagMan:create')
+      btList[0].show = this.dataPerms.includes('tagMan:status')
+      btList[1].show = this.dataPerms.includes('tagMan:update')
+      btList[2].show = this.dataPerms.includes('tagMan:delete')
     },
     initParams () {
       // this.filterInfo.query.create_user = this.userInfo.id
@@ -394,7 +390,7 @@ export default {
         name: '', // *标签名称
         icon: '', // 图标
         sort: '', // 排序
-        wikipedia: '', // *标签百科
+        wikipedia: '', // 标签百科
         status: 1 // *状态: 0：停用，1：启用(默认为1)',
         // create_user: '', // 创建人
         // create_time: '', // 创建时间

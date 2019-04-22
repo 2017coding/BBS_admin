@@ -100,6 +100,12 @@ export default {
 }
 </script>
 
+<style lang="scss">
+  .v-note-help-wrapper{
+    z-index: 9999!important;
+  }
+</style>
+
 <style scoped lang="scss">
   .mavon-editor{
     height: 100%;
