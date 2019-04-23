@@ -128,11 +128,10 @@ export default {
         initCurpage: 1,
         data: [],
         fieldList: [
-          {label: '所属类型名称', value: 'type_name', minWidth: 90},
-          {label: '标签名称', value: 'name', minWidth: 90},
-          {label: '图标', value: 'icon', width: 100},
+          {label: '标签名称', value: 'name', type: 'tag', minWidth: 120},
+          {label: '图标', value: 'icon', type: 'image', width: 100},
           {label: '描述', value: 'desc', minWidth: 160},
-          {label: '状态', value: 'status', width: 90, list: 'statusList'}
+          {label: '状态', value: 'status', width: 90, type: 'status', list: 'statusList'}
           // {label: '创建人', value: 'create_user_name'},
           // {label: '创建时间', value: 'create_time', minWidth: 180},
           // {label: '更新人', value: 'update_user_name'},
@@ -154,7 +153,6 @@ export default {
         ref: null,
         data: {
           id: '', // *唯一ID
-          type_id: '', // *类型ID
           name: '', // *标签名称
           icon: '', // 图标
           sort: '', // 排序
@@ -166,7 +164,6 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '标签类型', value: 'type_id', type: 'select', list: 'tagTypeList', filterable: true, required: true},
           {label: '标签名称', value: 'name', type: 'input', required: true},
           {label: '标签图标', value: 'icon', type: 'slot', className: 'el-form-block'},
           {label: '排序', value: 'sort', type: 'input'},
@@ -230,11 +227,18 @@ export default {
   methods: {
     // 初始化数据权限
     initDataPerms () {
-      const btList = this.tableInfo.handle.btList
-      this.filterInfo.list[3].show = this.dataPerms.includes('tagMan:create')
-      btList[0].show = this.dataPerms.includes('tagMan:status')
-      btList[1].show = this.dataPerms.includes('tagMan:update')
-      btList[2].show = this.dataPerms.includes('tagMan:delete')
+      const btList = this.tableInfo.handle.btList,
+        btList1 = this.filterInfo.list
+      for (let item of btList1) {
+        if (this.dataPerms.includes('tagMan:' + item.event)) {
+          item.show = true
+        }
+      }
+      for (let item of btList) {
+        if (this.dataPerms.includes('tagMan:' + item.event)) {
+          item.show = true
+        }
+      }
     },
     initParams () {
       // this.filterInfo.query.create_user = this.userInfo.id
@@ -386,7 +390,6 @@ export default {
     resetForm () {
       this.formInfo.data = {
         id: '', // *唯一ID
-        type_id: '', // *类型ID
         name: '', // *标签名称
         icon: '', // 图标
         sort: '', // 排序
@@ -403,7 +406,7 @@ export default {
 </script>
 
 <style lang="scss">
-.slot-avatar{
+.slot-icon{
   height: 40px;
   display: flex;
   align-items: center;

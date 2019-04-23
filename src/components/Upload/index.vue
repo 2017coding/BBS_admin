@@ -117,6 +117,8 @@ export default {
           result = false
         }
         break
+      case 'file':
+        break
       default:
         this.uploadMessage = '请选择正确的文件格式'
         result = false

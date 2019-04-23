@@ -164,12 +164,12 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属目录', value: 'f_id', type: 'tag', list: 'treeList'},
+          {label: '所属目录', value: 'f_id', list: 'treeList'},
           {label: '图片', value: 'completePath', type: 'image'},
-          {label: '图片名称', value: 'name', type: 'tag'},
-          // {label: '文件路径', value: 'completePath', type: 'tag'},
+          {label: '图片名称', value: 'name'},
+          // {label: '文件路径', value: 'completePath'},
           {label: '图片类型', value: 'suffix', type: 'tag'},
-          {label: '图片大小', value: 'size', type: 'tag'}
+          {label: '图片大小', value: 'size'}
           // {label: '创建人', value: 'create_user'},
           // {label: '创建时间', value: 'create_time', minWidth: 180},
           // {label: '更新人', value: 'update_user'},
@@ -301,8 +301,11 @@ export default {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      btList[1].show = this.dataPerms.includes('imgMan:updateFile')
-      btList[2].show = this.dataPerms.includes('imgMan:deleteFile')
+      for (let item of btList) {
+        if (this.dataPerms.includes('imgMan:' + item.event)) {
+          item.show = true
+        }
+      }
     },
     initTree (val) {
       const treeInfo = this.treeInfo

@@ -101,9 +101,24 @@ export default {
 </script>
 
 <style lang="scss">
-  .v-note-help-wrapper{
-    z-index: 9999!important;
+.v-note-wrapper{
+  .v-note-op{
+    // height: 30px!important;
+    // min-height: 30px!important;
+    .v-left-item, .v-right-item{
+      // height: 30px!important;
+      // min-height: 30px!important;
+      .op-icon{
+        // width: 20px!important;
+        // height: 20px!important;
+        color: rgb(150, 150, 150)!important;
+      }
+    }
   }
+}
+.v-note-help-wrapper{
+  z-index: 9999!important;
+}
 </style>
 
 <style scoped lang="scss">

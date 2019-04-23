@@ -44,12 +44,14 @@
               </el-table-column>
             </template>
             <!-- 状态 -->
-            <span v-else-if="item.value === 'status'">
+            <span v-else-if="item.type === 'status'">
               <i
                 :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
                 :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
               </i>
             </span>
+            <!-- 标签 -->
+            <el-tag v-else-if="item.type === 'tag'">{{scope.row[item.value]}}</el-tag>
             <!-- 图片 -->
             <img
               v-else-if="item.type === 'image'"

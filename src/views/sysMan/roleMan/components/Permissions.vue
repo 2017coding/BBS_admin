@@ -150,7 +150,7 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true},
+          {label: '所属菜单', value: 'menu_id', list: 'treeList', required: true},
           {label: '触发类型', value: 'type', list: 'dataControlTypeList', required: true},
           // {label: '功能编码', value: 'code', required: true},
           {label: '功能名称', value: 'name', required: true}

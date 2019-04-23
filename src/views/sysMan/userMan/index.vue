@@ -148,7 +148,7 @@ export default {
           {label: '所属角色', value: 'role_name', minWidth: 120},
           {label: '性别', value: 'sex', width: 80, list: 'sexList'},
           {label: '账号类型', value: 'type', width: 100, list: 'accountTypeList'},
-          {label: '状态', value: 'status', width: 90, list: 'statusList'},
+          {label: '状态', value: 'status', width: 90, type: 'status', list: 'statusList'},
           {label: '创建人', value: 'create_user_name'},
           {label: '创建时间', value: 'create_time', minWidth: 180},
           {label: '更新人', value: 'update_user_name'},
@@ -258,11 +258,11 @@ export default {
           userName: ''
         }
       } else {
-        if (this.dialogInfo.type === 'create') {
-          formInfo.fieldList[0].type = 'input'
-        } else if (this.dialogInfo.type === 'update') {
-          formInfo.fieldList[0].type = 'tag'
-        }
+        // if (this.dialogInfo.type === 'create') {
+        //   formInfo.fieldList[0].type = 'input'
+        // } else if (this.dialogInfo.type === 'update') {
+        //   formInfo.fieldList[0].type = 'tag'
+        // }
       }
     }
   },
@@ -277,11 +277,18 @@ export default {
   methods: {
     // 初始化数据权限
     initDataPerms () {
-      const btList = this.tableInfo.handle.btList
-      this.filterInfo.list[4].show = this.dataPerms.includes('userMan:create')
-      btList[0].show = this.dataPerms.includes('userMan:status')
-      btList[1].show = this.dataPerms.includes('userMan:update')
-      btList[2].show = this.dataPerms.includes('userMan:delete')
+      const btList = this.tableInfo.handle.btList,
+        btList1 = this.filterInfo.list
+      for (let item of btList1) {
+        if (this.dataPerms.includes('userMan:' + item.event)) {
+          item.show = true
+        }
+      }
+      for (let item of btList) {
+        if (this.dataPerms.includes('userMan:' + item.event)) {
+          item.show = true
+        }
+      }
     },
     initParams () {
       // this.filterInfo.query.create_user = this.userInfo.id

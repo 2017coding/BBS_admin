@@ -152,7 +152,7 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属目录', value: 'f_id', type: 'tag', list: 'treeList'},
+          {label: '所属目录', value: 'f_id', list: 'treeList'},
           {label: '图片', value: 'completePath', type: 'image', hidden: this.type !== 2},
           {label: initType(this.type) + '名称', value: 'name'},
           {label: initType(this.type) + '类型', value: 'suffix'}

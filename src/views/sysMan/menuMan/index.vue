@@ -45,7 +45,7 @@
                 type="primary"
                 style="margin-bottom: 10px;"
                 v-if="dataPerms.includes('menuMan:persCreate')"
-                @click="handleClickBt('addMenuData')">添加
+                @click="handleClickBt('persCreate')">添加
               </el-button>
               <el-button
                 v-waves
@@ -93,7 +93,7 @@
         :listTypeInfo="listTypeInfo">
       </page-form>
       <page-form
-        v-if="dialogInfo.type === 'addMenuData' || dialogInfo.type === 'updateMenuData'"
+        v-if="dialogInfo.type === 'persCreate' || dialogInfo.type === 'persUpdate'"
         :refObj.sync="dataControlFormInfo.ref"
         :data="dataControlFormInfo.data"
         :fieldList="dataControlFormInfo.fieldList"
@@ -230,7 +230,7 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true},
+          {label: '所属菜单', value: 'menu_id', list: 'treeList', required: true},
           {label: '功能类型', value: 'type', list: 'dataControlTypeList', required: true},
           {label: '功能编码', value: 'code', required: true, minWidth: 160},
           {label: '功能名称', value: 'name', required: true},
@@ -246,8 +246,8 @@ export default {
           label: '操作',
           width: '180',
           btList: [
-            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'updateMenuData', show: false},
-            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'deleteMenuData', show: false}
+            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'persUpdate', show: false},
+            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'persDelete', show: false}
           ]
         }
       },
@@ -317,8 +317,8 @@ export default {
         title: {
           create: '添加菜单',
           update: '编辑菜单',
-          addMenuData: '添加菜单权限',
-          updateMenuData: '编辑菜单权限'
+          persCreate: '添加菜单权限',
+          persUpdate: '编辑菜单权限'
         },
         visible: false,
         type: '',
@@ -387,8 +387,11 @@ export default {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      btList[0].show = this.dataPerms.includes('menuMan:persUpdate')
-      btList[1].show = this.dataPerms.includes('menuMan:persDelete')
+      for (let item of btList) {
+        if (this.dataPerms.includes('menuMan:' + item.event)) {
+          item.show = true
+        }
+      }
     },
     initTree (val) {
       const treeInfo = this.treeInfo
@@ -432,13 +435,13 @@ export default {
         formInfo = this.formInfo,
         dataControlFormInfo = this.dataControlFormInfo
       switch (event) {
-      case 'addMenuData':
+      case 'persCreate':
         dialogInfo.type = event
         dialogInfo.visible = true
         // 设置参数
         dataControlFormInfo.data.menu_id = treeInfo.leftClickData.id
         break
-      case 'updateMenuData':
+      case 'persUpdate':
         dialogInfo.type = event
         dialogInfo.visible = true
         // 显示信息
@@ -449,7 +452,7 @@ export default {
           }
         }
         break
-      case 'deleteMenuData':
+      case 'persDelete':
         this._handleAPI('delete', dataPermsDeleteApi, data.id).then(res => {
           if (res.success) {
             tableInfo.refresh = Math.random()
@@ -466,7 +469,7 @@ export default {
         if (type === 'create' || type === 'update') {
           params = formInfo.data
           ref = formInfo.ref
-        } else if (type === 'addMenuData' || type === 'updateMenuData') {
+        } else if (type === 'persCreate' || type === 'persUpdate') {
           params = dataControlFormInfo.data
           ref = dataControlFormInfo.ref
         } else {
@@ -478,9 +481,9 @@ export default {
               api = createApi
             } else if (type === 'update') {
               api = updateApi
-            } else if (type === 'addMenuData') {
+            } else if (type === 'persCreate') {
               api = dataPermsCreateApi
-            } else if (type === 'updateMenuData') {
+            } else if (type === 'persUpdate') {
               api = dataPermsUpdateApi
             } else {
               return
@@ -502,7 +505,7 @@ export default {
                   treeInfo.defaultExpandedAsyc = [params.pid]
                   // 刷新树
                   treeInfo.refresh = Math.random()
-                } else if (type === 'addMenuData' || type === 'updateMenuData') {
+                } else if (type === 'persCreate' || type === 'persUpdate') {
                   tableInfo.refresh = Math.random()
                 }
               }
@@ -519,9 +522,9 @@ export default {
     getApiType (type) {
       if (type === 'create' || type === 'update') {
         return type
-      } else if (type === 'addMenuData') {
+      } else if (type === 'persCreate') {
         return 'create'
-      } else if (type === 'updateMenuData') {
+      } else if (type === 'persUpdate') {
         return 'update'
       }
     },

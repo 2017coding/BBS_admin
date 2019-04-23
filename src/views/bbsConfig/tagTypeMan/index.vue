@@ -38,8 +38,29 @@
         :rules="formInfo.rules"
         :labelWidth="formInfo.labelWidth"
         :listTypeInfo="listTypeInfo">
+          <!-- 自定义插槽的使用 -->
+          <template v-slot:icon>
+          <div class="slot-icon">
+            <img :src="formInfo.data.icon" style="height: 30px;">
+            <el-button
+              type="primary"
+              icon="el-icon-picture"
+              size="mini"
+              v-waves
+              @click="handleClickBt('selectFile')">
+              {{formInfo.data.icon ? '更换图标' : '选择图标'}}
+            </el-button>
+          </div>
+        </template>
       </page-form>
     </page-dialog>
+    <!-- 选择文件组件 -->
+    <select-file
+      v-model="formInfo.data.icon"
+      v-if="selectFileInfo.visible"
+      :type="selectFileInfo.type"
+      :visible.sync="selectFileInfo.visible">
+    </select-file>
   </div>
 </template>
 
@@ -52,6 +73,7 @@ import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
+import SelectFile from '@/components/SelectFile'
 
 export default {
   mixins: [Validate, HandleApi],
@@ -59,7 +81,8 @@ export default {
     PageFilter,
     PageTable,
     PageDialog,
-    PageForm
+    PageForm,
+    SelectFile
   },
   data () {
     return {
@@ -92,8 +115,9 @@ export default {
         data: [],
         fieldList: [
           {label: '类型名称', value: 'name', minWidth: 90},
+          {label: '图标', value: 'icon', type: 'image', width: 100},
           {label: '描述', value: 'desc', minWidth: 160},
-          {label: '状态', value: 'status', width: 90, list: 'statusList'}
+          {label: '状态', value: 'status', width: 90, type: 'status', list: 'statusList'}
           // {label: '创建人', value: 'create_user_name'},
           // {label: '创建时间', value: 'create_time', minWidth: 180},
           // {label: '更新人', value: 'update_user_name'},
@@ -116,6 +140,7 @@ export default {
         data: {
           id: '', // *唯一ID
           name: '', // *名称
+          icon: '', // 图标
           sort: '', // *排序
           desc: '', // 描述
           status: 1 // *状态: 0：停用，1：启用(默认为1)',
@@ -126,6 +151,7 @@ export default {
         },
         fieldList: [
           {label: '类型名称', value: 'name', type: 'input', required: true},
+          {label: '类型图标', value: 'icon', type: 'slot', className: 'el-form-block'},
           {label: '排序', value: 'sort', type: 'input'},
           {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
           {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
@@ -146,6 +172,12 @@ export default {
           {label: '关闭', type: '', icon: '', event: 'close', show: true},
           {label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true}
         ]
+      },
+      // 选择文件组件相关参数
+      selectFileInfo: {
+        type: 2,
+        visible: false,
+        value: ''
       }
     }
   },
@@ -179,11 +211,18 @@ export default {
   methods: {
     // 初始化数据权限
     initDataPerms () {
-      const btList = this.tableInfo.handle.btList
-      this.filterInfo.list[2].show = this.dataPerms.includes('tagTypeMan:create')
-      btList[0].show = this.dataPerms.includes('tagTypeMan:status')
-      btList[1].show = this.dataPerms.includes('tagTypeMan:update')
-      btList[2].show = this.dataPerms.includes('tagTypeMan:delete')
+      const btList = this.tableInfo.handle.btList,
+        btList1 = this.filterInfo.list
+      for (let item of btList1) {
+        if (this.dataPerms.includes('tagTypeMan:' + item.event)) {
+          item.show = true
+        }
+      }
+      for (let item of btList) {
+        if (this.dataPerms.includes('tagTypeMan:' + item.event)) {
+          item.show = true
+        }
+      }
     },
     initParams () {
       // this.filterInfo.query.create_user = this.userInfo.id
@@ -290,6 +329,9 @@ export default {
             })
           }
         })
+        break
+      case 'selectFile':
+        this.selectFileInfo.visible = true
         break
       }
     },

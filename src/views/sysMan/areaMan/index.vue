@@ -99,7 +99,7 @@ export default {
         fieldList: [
           {label: '名称', value: 'name'},
           {label: '级别', value: 'level'},
-          {label: '状态', value: 'status', width: 80}
+          {label: '状态', value: 'status', type: 'status', width: 80}
         ],
         handle: {
           fixed: 'right',
@@ -134,7 +134,11 @@ export default {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      btList[0].show = this.dataPerms.includes('userMan:status')
+      for (let item of btList) {
+        if (this.dataPerms.includes('areaMan:' + item.event)) {
+          item.show = true
+        }
+      }
     },
     initParams () {
     },
