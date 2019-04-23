@@ -54,7 +54,7 @@
             <el-tag v-else-if="item.type === 'tag'">{{scope.row[item.value]}}</el-tag>
             <!-- 图片 -->
             <img
-              v-else-if="item.type === 'image'"
+              v-else-if="item.type === 'image' && scope.row[item.value]"
               height="50px"
               :src="scope.row[item.value]"/>
             <!-- 其他 -->

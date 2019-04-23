@@ -106,7 +106,7 @@ export default {
           label: '操作',
           width: '100',
           btList: [
-            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false}
+            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false}
           ]
         }
       }

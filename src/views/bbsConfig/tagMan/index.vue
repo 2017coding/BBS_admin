@@ -27,7 +27,7 @@
       :visible.sync="dialogInfo.visible"
       :width="dialogInfo.width"
       :btLoading="dialogInfo.btLoading"
-      :btList="dialogInfo.btList"
+      :btList="dialogInfo.type === 'view' ? undefined : dialogInfo.btList"
       @handleClickBt="handleClickBt"
       @handleEvent="handleEvent">
       <!-- form -->
@@ -43,6 +43,7 @@
           <div class="slot-icon">
             <img :src="formInfo.data.icon" style="height: 30px;">
             <el-button
+              v-if="dialogInfo.type !== 'view'"
               type="primary"
               icon="el-icon-picture"
               size="mini"
@@ -55,9 +56,11 @@
         <template v-slot:wikipedia>
           <div class="slot-wikipedia">
             <mavon-editor
+              v-if="dialogInfo.type !== 'view'"
               :value.sync="formInfo.data.wikipedia"
               placeholder="请编写标签百科...">
             </mavon-editor>
+            <div v-else v-html="_markedGetHtml(formInfo.data.wikipedia)"></div>
           </div>
         </template>
       </page-form>
@@ -78,6 +81,7 @@ import { getAllApi } from '@/api/bbsConfig/tagTypeMan'
 import { getListApi, createApi, updateApi, deleteApi } from '@/api/bbsConfig/tagMan'
 import Validate from '@/common/mixin/validate'
 import HandleApi from '@/common/mixin/handleApi'
+import Marked from '@/common/mixin/marked'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
@@ -86,7 +90,7 @@ import MavonEditor from '@/components/MavonEditor'
 import SelectFile from '@/components/SelectFile'
 
 export default {
-  mixins: [Validate, HandleApi],
+  mixins: [Validate, HandleApi, Marked],
   components: {
     PageFilter,
     PageTable,
@@ -130,7 +134,7 @@ export default {
         fieldList: [
           {label: '标签名称', value: 'name', type: 'tag', minWidth: 120},
           {label: '图标', value: 'icon', type: 'image', width: 100},
-          {label: '描述', value: 'desc', minWidth: 160},
+          // {label: '描述', value: 'wikipedia', minWidth: 160},
           {label: '状态', value: 'status', width: 90, type: 'status', list: 'statusList'}
           // {label: '创建人', value: 'create_user_name'},
           // {label: '创建时间', value: 'create_time', minWidth: 180},
@@ -140,9 +144,10 @@ export default {
         handle: {
           fixed: 'right',
           label: '操作',
-          width: '280',
+          width: '380',
           btList: [
-            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false},
+            {label: '查看', type: 'primary', icon: 'el-icon-browse', event: 'view', show: true},
+            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false},
             {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false},
             {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false}
           ]
@@ -178,7 +183,8 @@ export default {
         width: '80%',
         title: {
           create: '添加',
-          update: '编辑'
+          update: '编辑',
+          view: '详细信息'
         },
         visible: false,
         type: '',
@@ -221,7 +227,7 @@ export default {
     this.initList()
     this.initDataPerms()
     // mixin中的方法, 初始化字段验证规则
-    this._initRules(this.formInfo)
+    this._initValidate(this.formInfo)
     this.getList()
   },
   methods: {
@@ -296,6 +302,8 @@ export default {
         dialogInfo.type = event
         dialogInfo.visible = true
         break
+      // 查看
+      case 'view':
       // 编辑
       case 'update':
         dialogInfo.type = event

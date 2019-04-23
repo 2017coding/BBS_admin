@@ -295,8 +295,8 @@ export default {
     this.getList()
     this.initDataPerms()
     // mixin中的方法, 初始化字段验证规则
-    this._initRules(this.formInfo)
-    this._initRules(this.fileFormInfo)
+    this._initValidate(this.formInfo)
+    this._initValidate(this.fileFormInfo)
   },
   methods: {
     // 初始化数据权限

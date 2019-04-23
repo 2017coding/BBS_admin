@@ -209,7 +209,7 @@ export default {
   mounted () {
     this.getList()
     // mixin中的方法, 初始化字段验证规则
-    this._initRules(this.formInfo)
+    this._initValidate(this.formInfo)
   },
   methods: {
     initTree (val) {

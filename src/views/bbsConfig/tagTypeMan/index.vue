@@ -128,7 +128,7 @@ export default {
           label: '操作',
           width: '280',
           btList: [
-            {key: '', label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false},
+            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false},
             {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false},
             {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false}
           ]
@@ -205,7 +205,7 @@ export default {
     this.initParams()
     this.initDataPerms()
     // mixin中的方法, 初始化字段验证规则
-    this._initRules(this.formInfo)
+    this._initValidate(this.formInfo)
     this.getList()
   },
   methods: {

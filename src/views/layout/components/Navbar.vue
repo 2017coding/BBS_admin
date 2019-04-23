@@ -192,7 +192,7 @@ export default {
   mounted () {
     this.initWeather()
     // mixin中的方法, 初始化字段验证规则
-    this._initRules(this.formInfo)
+    this._initValidate(this.formInfo)
   },
   methods: {
     // 使用天气

@@ -2,7 +2,7 @@
 export default {
   methods: {
     // 初始化验证数据
-    _initRules (formInfo) {
+    _initValidate (formInfo) {
       const obj = {},
         fieldList = formInfo.fieldList
       // 循环字段列表
