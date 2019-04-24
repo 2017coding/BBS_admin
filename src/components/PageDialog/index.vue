@@ -9,17 +9,19 @@
       :class="className">
       <slot></slot>
       <div slot="footer" class="dialog-footer" v-if="btList">
-        <el-button
-          v-for="(item, index) in getConfigList()"
-          :key="index"
-          :type="item.type"
-          :icon="item.icon"
-          v-waves
-          @click="handleClickBt(item.event)"
-          :disabled="item.disabled"
-          :loading="btLoading">
-          {{item.label}}
-        </el-button>
+        <template v-for="(item, index) in getConfigList()">
+          <el-button
+            v-if="item.show"
+            :key="index"
+            :type="item.type"
+            :icon="item.icon"
+            v-waves
+            @click="handleClickBt(item.event)"
+            :disabled="item.disabled"
+            :loading="btLoading">
+            {{item.label}}
+          </el-button>
+        </template>
       </div>
     </el-dialog>
 </template>

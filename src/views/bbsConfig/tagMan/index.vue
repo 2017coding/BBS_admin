@@ -42,6 +42,7 @@
         <template v-slot:icon>
           <div class="slot-icon">
             <img :src="formInfo.data.icon" style="height: 30px;">
+            <span v-if="dialogInfo.type === 'view' && !formInfo.data.icon">暂未设置图标</span>
             <el-button
               v-if="dialogInfo.type !== 'view'"
               type="primary"
@@ -60,7 +61,7 @@
               :value.sync="formInfo.data.wikipedia"
               placeholder="请编写标签百科...">
             </mavon-editor>
-            <div v-else v-html="_markedGetHtml(formInfo.data.wikipedia)"></div>
+            <div v-else v-html="_markedGetHtml(formInfo.data.wikipedia || '目前还没有关于这个标签的解释')"></div>
           </div>
         </template>
       </page-form>
@@ -302,9 +303,9 @@ export default {
         dialogInfo.type = event
         dialogInfo.visible = true
         break
-      // 查看
+      // 查看和编辑
       case 'view':
-      // 编辑
+      // falls through 告诉ESlint不检查这一行
       case 'update':
         dialogInfo.type = event
         dialogInfo.visible = true

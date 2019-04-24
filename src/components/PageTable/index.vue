@@ -16,7 +16,7 @@
           type="selection"
           width="55">
         </el-table-column>
-        <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="index" :key="'index'">
+        <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="tabIndex" :key="'index'">
           <template slot-scope="scope">
             <span>{{scope.$index + 1 + (listInfo.query.curPage - 1) * listInfo.query.pageSize}}</span>
           </template>
@@ -73,7 +73,7 @@
           <template slot-scope="scope">
             <template v-for="(item, index) in handle.btList">
               <el-button
-                v-if="item.show"
+                v-if="item.show && (!item.ifRender || item.ifRender(scope.row))"
                 :key="index"
                 size="mini"
                 :type="handBtShow('type', item, scope.row)"
@@ -122,7 +122,7 @@ export default {
       type: Function
     },
     // 是否显示序号
-    index: {
+    tabIndex: {
       type: Boolean,
       default: false
     },

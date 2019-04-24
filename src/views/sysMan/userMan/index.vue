@@ -159,7 +159,7 @@ export default {
           label: '操作',
           width: '280',
           btList: [
-            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false},
+            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false, ifRender (data) { return true }},
             {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false},
             {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false}
           ]
@@ -257,12 +257,25 @@ export default {
           createUserList: [],
           userName: ''
         }
-      } else {
-        if (this.dialogInfo.type === 'create') {
-          formInfo.fieldList[0].type = 'input'
-        } else if (this.dialogInfo.type === 'update') {
-          formInfo.fieldList[0].type = 'tag'
+      }
+    },
+    'dialogInfo.type' (val) {
+      const formInfo = this.formInfo
+      switch (val) {
+      case 'create':
+        for (let item of formInfo.fieldList) {
+          if (item.value === 'account') {
+            item.type = 'input'
+          }
         }
+        break
+      case 'update':
+        for (let item of formInfo.fieldList) {
+          if (item.value === 'account') {
+            item.type = 'tag'
+          }
+        }
+        break
       }
     }
   },
