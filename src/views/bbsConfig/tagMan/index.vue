@@ -20,6 +20,13 @@
       :handle="tableInfo.handle"
       @handleClickBt="handleClickBt"
       @handleEvent="handleEvent">
+      <!-- 自定义插槽显示状态 -->
+      <template v-slot:status="data">
+        <i
+          :class="data.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
+          :style="{color: data.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
+        </i>
+      </template>
     </page-table>
     <!-- 弹窗 -->
     <page-dialog
@@ -136,7 +143,7 @@ export default {
           {label: '标签名称', value: 'name', type: 'tag', minWidth: 120},
           {label: '图标', value: 'icon', type: 'image', width: 100},
           // {label: '描述', value: 'wikipedia', minWidth: 160},
-          {label: '状态', value: 'status', width: 90, type: 'status', list: 'statusList'}
+          {label: '状态', value: 'status', width: 90, type: 'slot'}
           // {label: '创建人', value: 'create_user_name'},
           // {label: '创建时间', value: 'create_time', minWidth: 180},
           // {label: '更新人', value: 'update_user_name'},

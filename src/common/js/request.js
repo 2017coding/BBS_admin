@@ -94,7 +94,7 @@ service.interceptors.response.use(
         })
       }).catch(() => {
       })
-      // return Promise.reject('error')
+      return Promise.reject('error')
     } else {
       let data = response.data
       return data
@@ -109,7 +109,7 @@ service.interceptors.response.use(
       type: 'error',
       duration: 3 * 1000
     })
-    // return Promise.reject(error)
+    return Promise.reject(error)
   }
 )
 

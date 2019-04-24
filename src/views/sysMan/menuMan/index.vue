@@ -277,7 +277,7 @@ export default {
           {label: '菜单编码', value: 'code', type: 'input', required: true},
           {label: '菜单名称', value: 'name', type: 'input', required: true},
           {label: '菜单组件', value: 'component', type: 'select', list: 'componentList1', required: true},
-          {label: '菜单图标', value: 'icon', type: 'select', list: 'iconList'},
+          {label: '菜单图标', value: 'icon', type: 'select', list: 'iconList', filterable: true},
           {label: '重定向路径', value: 'redirect', type: 'input'},
           {label: '排序', value: 'sort', type: 'input', required: true},
           {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
@@ -578,7 +578,7 @@ export default {
         // 根节点
         if (data.node.level === 1) {
           arr = [
-            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: false},
+            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:create')},
             {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
           ]
         } else {

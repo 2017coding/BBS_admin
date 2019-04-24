@@ -103,6 +103,7 @@ export const iconList = [
   {class: 'el-icon-playon'},
   {class: 'el-icon-praise_fill'},
   {class: 'el-icon-praise'},
+  {class: 'el-icon-process'},
   {class: 'el-icon-prompt_fill'},
   {class: 'el-icon-prompt'},
   {class: 'el-icon-qrcode_fill'},

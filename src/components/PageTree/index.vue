@@ -224,22 +224,19 @@ export default {
   },
   mounted () {
     this.initData()
-    this.initDefaultChecked(this.defaultChecked)
   },
   methods: {
     // TODO: elementui-tree组件内部问题，有时无法成功选中，先用延时器的方法保证效果
     initDefaultChecked (val = []) {
       if (val.length === 0) return
-      setTimeout(() => {
-        this.$nextTick(() => {
-          // 将节点选中的状态初始化
-          this.$refs.TreeComponent.setCheckedNodes([])
-          for (let i = 0; i < val.length; i++) {
-            // 得到选中的节点,这个方法ojbk
-            this.$refs.TreeComponent.setChecked(val[i], true)
-          }
-        })
-      }, 100)
+      this.$nextTick(() => {
+        // 将节点选中的状态初始化
+        this.$refs.TreeComponent.setCheckedNodes([])
+        for (let i = 0; i < val.length; i++) {
+          // 得到选中的节点,这个方法ojbk
+          this.$refs.TreeComponent.setChecked(val[i], true)
+        }
+      })
     },
     // 自定义渲染内容
     renderContent (h, { node, data, store }) {

@@ -17,7 +17,7 @@
           width="55">
         </el-table-column>
         <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="tabIndex" :key="'index'">
-          <template slot-scope="scope">
+          <template v-slot="scope">
             <span>{{scope.$index + 1 + (listInfo.query.curPage - 1) * listInfo.query.pageSize}}</span>
           </template>
         </el-table-column>
@@ -30,9 +30,13 @@
           align="center"
           :width="item.width"
           :min-width="item.minWidth || '100px'">
-          <template slot-scope="scope">
+          <template v-slot="scope">
+            <!-- solt -->
+            <template v-if="item.type === 'slot'">
+              <slot :name="item.value" :row="scope.row"></slot>
+            </template>
             <!-- 嵌套表格 -->
-            <template v-if="item.children">
+            <template v-else-if="item.children">
               <el-table-column
                 v-for="(childItem, childIndex) in item.children"
                 :key="childIndex"
@@ -43,13 +47,6 @@
                 :min-width="item.minWidth || '85px'">
               </el-table-column>
             </template>
-            <!-- 状态 -->
-            <span v-else-if="item.type === 'status'">
-              <i
-                :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
-                :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
-              </i>
-            </span>
             <!-- 标签 -->
             <el-tag v-else-if="item.type === 'tag'">{{scope.row[item.value]}}</el-tag>
             <!-- 图片 -->
@@ -70,7 +67,7 @@
           :label="handle.label"
           :width="handle.width"
           :key="'handle'">
-          <template slot-scope="scope">
+          <template v-slot="scope">
             <template v-for="(item, index) in handle.btList">
               <el-button
                 v-if="item.show && (!item.ifRender || item.ifRender(scope.row))"

@@ -8,7 +8,7 @@
         :name="item.value + ''"
         :key="index">
         <!-- 点击加载 -->
-        <template v-if="menuType === item.value + ''">
+        <template v-if="item.status">
           <!-- 左侧树 -->
           <div class="left">
             <page-tree
@@ -88,7 +88,7 @@ export default {
     return {
       getRoleDataPermsApi,
       // 菜单类型
-      menuType: '1',
+      menuType: '',
       // 相关列表
       listTypeInfo: {
         statusList: [
@@ -172,13 +172,19 @@ export default {
   },
   watch: {
     'menuType' (val) {
+      // tab懒加载
+      this.listTypeInfo.menuTypeList.forEach(item => {
+        if (+item.value === +val && !item.status) {
+          item.status = true
+        }
+      })
       const treeInfo = this.treeInfo
       // 修改树组件参数
       treeInfo.loadInfo.params.data[0].value = val
       // 设置树重新初始化
       treeInfo.initTree = false
       // 刷新树
-      treeInfo.refresh = Math.random()
+      // treeInfo.refresh = Math.random()
     },
     // 得到树组件数据，处理相关事件
     'treeInfo.baseData' (val) {
@@ -192,6 +198,9 @@ export default {
       },
       immediate: true
     }
+  },
+  created () {
+    this.menuType = '1'
   },
   methods: {
     initTree (val) {

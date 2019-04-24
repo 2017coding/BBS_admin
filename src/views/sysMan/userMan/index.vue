@@ -20,6 +20,13 @@
       :handle="tableInfo.handle"
       @handleClickBt="handleClickBt"
       @handleEvent="handleEvent">
+      <!-- 自定义插槽显示状态 -->
+      <template v-slot:status="data">
+        <i
+          :class="data.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
+          :style="{color: data.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
+        </i>
+      </template>
     </page-table>
     <!-- 弹窗 -->
     <page-dialog
@@ -39,7 +46,7 @@
         :rules="formInfo.rules"
         :labelWidth="formInfo.labelWidth"
         :listTypeInfo="listTypeInfo">
-        <!-- 自定义插槽的使用 -->
+        <!-- 自定义插槽-选择头像 -->
         <template v-slot:avatar>
           <div class="slot-avatar">
             <img :src="formInfo.data.avatar" style="height: 30px;">
@@ -148,7 +155,7 @@ export default {
           {label: '所属角色', value: 'role_name', minWidth: 120},
           {label: '性别', value: 'sex', width: 80, list: 'sexList'},
           {label: '账号类型', value: 'type', width: 100, list: 'accountTypeList'},
-          {label: '状态', value: 'status', width: 90, type: 'status', list: 'statusList'},
+          {label: '状态', value: 'status', width: 90, type: 'slot', list: 'statusList'},
           {label: '创建人', value: 'create_user_name'},
           {label: '创建时间', value: 'create_time', minWidth: 180},
           {label: '更新人', value: 'update_user_name'},

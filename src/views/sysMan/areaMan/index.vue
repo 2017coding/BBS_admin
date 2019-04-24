@@ -26,6 +26,13 @@
         :handle="tableInfo.handle"
         @handleClickBt="handleClickBt"
         @handleEvent="handleEvent">
+        <!-- 自定义插槽显示状态 -->
+        <template v-slot:status="data">
+          <i
+            :class="data.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
+            :style="{color: data.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
+          </i>
+        </template>
       </page-table>
     </div>
   </div>
@@ -99,7 +106,7 @@ export default {
         fieldList: [
           {label: '名称', value: 'name'},
           {label: '级别', value: 'level'},
-          {label: '状态', value: 'status', type: 'status', width: 80}
+          {label: '状态', value: 'status', type: 'slot', width: 80}
         ],
         handle: {
           fixed: 'right',
