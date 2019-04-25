@@ -2,28 +2,30 @@
   <div class="app-container">
     <panel-group></panel-group>
     <div class="charts" v-for="(item, index) in chartList" :key="index">
-      <line-or-bar
+      <component
+        :is="'chart-' + item.chartType"
         :chartData="item.chartData || {nameList: [], xList: [], dataList: []}"
-        :chartType="item.chartType"
         :markPoint="item.markPoint"
         :title="item.title"
         :xUnit="item.xUnit"
         :yUnit="item.yUnit"
         :height="item.height"
         :toolboxShow="item.toolboxShow || false">
-      </line-or-bar>
+      </component>
     </div>
   </div>
 </template>
 
 <script>
 import PanelGroup from './components/PanelGroup'
-import LineOrBar from '@/components/Chart/LineOrBar'
+import Line from '@/components/Chart/Line'
+import Bar from '@/components/Chart/Bar'
 
 export default {
   components: {
     PanelGroup,
-    LineOrBar
+    'chart-line': Line,
+    'chart-bar': Bar
   },
   data () {
     return {

@@ -6,7 +6,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'chart',
+  name: 'Line',
   props: {
     height: {
       type: String,
@@ -15,10 +15,6 @@ export default {
     width: {
       type: String,
       default: '100%'
-    },
-    chartType: {
-      type: String,
-      default: 'line'
     },
     chartData: {
       type: Object
@@ -147,7 +143,7 @@ export default {
         item = {
           name: obj.nameList[index],
           data: item,
-          type: this.chartType,
+          type: 'line',
           symbolSize: 5,
           symbol: 'circle',
           // areaStyle: {}, // 设置是否按区域显示
@@ -164,7 +160,7 @@ export default {
               },
               color: 'rgb(' + color.join(',') + ')',
               borderColor: 'rgba(' + color.join(',') + ', .5)',
-              borderWidth: this.chartType === 'line' ? 6 : 0
+              borderWidth: 6
             }
           }
         }
@@ -237,7 +233,7 @@ export default {
         xAxis: {
           name: this.xUnit,
           type: 'category',
-          boundaryGap: this.chartType !== 'line', // 两边是否留白
+          boundaryGap: false, // 两边是否留白
           data: chartData.xList,
           axisTick: { show: false }, // 坐标刻度显示
           nameTextStyle: {
