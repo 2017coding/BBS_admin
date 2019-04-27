@@ -20,13 +20,27 @@
       :handle="tableInfo.handle"
       @handleClickBt="handleClickBt"
       @handleEvent="handleEvent">
-      <!-- 自定义插槽显示状态 -->
-      <template v-slot:status="data">
-        <i
-          :class="data.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
-          :style="{color: data.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
-        </i>
-      </template>
+        <!-- 自定义插槽显示状态 -->
+        <template v-slot:status="scope">
+          <i
+            :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
+            :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
+          </i>
+        </template>
+        <!-- 自定义插槽状态按钮 -->
+        <template v-slot:bt_status="scope">
+          <el-button
+            v-if="scope.data.item.show && (!scope.data.item.ifRender || scope.data.item.ifRender(scope.data.row))"
+            size="mini"
+            :type="scope.data.row.status - 1 >= 0 ? 'danger' : 'success'"
+            :icon="scope.data.item.icon"
+            v-waves
+            @click="handleClickBt(scope.data.item.event, scope.data.row)"
+            :disabled="scope.data.item.disabled"
+            :loading="scope.data.row[scope.data.item.loading]">
+            {{scope.data.row.status - 1 >= 0 ? '停用' : '启用'}}
+          </el-button>
+        </template>
     </page-table>
     <!-- 弹窗 -->
     <page-dialog
@@ -155,7 +169,7 @@ export default {
           width: '380',
           btList: [
             {label: '查看', type: 'primary', icon: 'el-icon-browse', event: 'view', show: true},
-            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false},
+            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false, slot: true},
             {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false},
             {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false}
           ]

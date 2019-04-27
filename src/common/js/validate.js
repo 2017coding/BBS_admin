@@ -21,6 +21,7 @@ function validate (obj) {
         number: '{0}必须是数字',
         string: '{0}必须是字母或者数字',
         moblie: '{0}必须是手机或者电话号码格式',
+        phone: '{0}格式不正确',
         noChinese: '{0}不能为中文',
         lon: '{0}范围为-180.0～+180.0（必须输入1到10位小数）',
         lat: '{0}范围为-90.0～+90.0（必须输入1到10位小数）',
@@ -60,6 +61,11 @@ function validate (obj) {
         moblie: obj => {
           if (!obj.value) return true
           reg = /^(1[3,5,8,7]{1}[\d]{9})|(((400)-(\d{3})-(\d{4}))|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{3,7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/
+          return reg.test(obj.value)
+        },
+        phone: obj => {
+          if (!obj.value) return true
+          reg = /^1[3,5,8,7]{1}[\d]{9}$/
           return reg.test(obj.value)
         },
         noChinese: obj => {
@@ -111,6 +117,11 @@ function validate (obj) {
         validatorMessage = this.validator.messages
       // 循环验证
       for (let i = 0, len = obj.rules.length; i < len; i++) {
+        // 当验证的规则不存在，默认跳过这个验证
+        if (!validatorMethods[obj.rules[i]]) {
+          console.log(obj.rules[i] + '规则不存在')
+          break
+        }
         // 得到当前验证失败信息
         if (!validatorMethods[obj.rules[i]](obj)) {
           checkType = obj.rules[i]

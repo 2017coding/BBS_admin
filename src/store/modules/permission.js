@@ -20,7 +20,7 @@ function addPage (arr) {
         path: '/',
         component: () => import('@/views/home/index'),
         name: 'home',
-        meta: {title: '首页', icon: 'el-icon-homepage'},
+        meta: {title: '首页', icon: 'el-icon-albb-homepage'},
         children: []
       }
     ]

@@ -6,7 +6,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Line',
+  name: 'chart-line',
   props: {
     height: {
       type: String,

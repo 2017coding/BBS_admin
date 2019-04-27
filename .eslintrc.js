@@ -32,7 +32,8 @@ module.exports = {
     "indent": ["error", 2],
     "no-useless-escape": "off", // 对不必要的转义字符不验证
     "prefer-promise-reject-errors": "off", // promise的reject不为错误
-    "one-var": ["error", {var: "consecutive", let: "consecutive", const: "consecutive"}], // 设置val, let, const可以连续声明多个并且可以赋值或者不赋值
+    // "one-var": ["error", {var: "consecutive", let: "consecutive", const: "consecutive"}], // 设置val, let, const可以连续声明多个并且可以赋值或者不赋值
+    "one-var": "off",
     // 取消意想不到的制表符提示
     "no-tabs": "off"
   }

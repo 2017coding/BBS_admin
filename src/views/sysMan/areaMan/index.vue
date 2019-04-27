@@ -27,11 +27,25 @@
         @handleClickBt="handleClickBt"
         @handleEvent="handleEvent">
         <!-- 自定义插槽显示状态 -->
-        <template v-slot:status="data">
+        <template v-slot:status="scope">
           <i
-            :class="data.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
-            :style="{color: data.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
+            :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
+            :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
           </i>
+        </template>
+        <!-- 自定义插槽状态按钮 -->
+        <template v-slot:bt_status="scope">
+          <el-button
+            v-if="scope.data.item.show && (!scope.data.item.ifRender || scope.data.item.ifRender(scope.data.row))"
+            size="mini"
+            :type="scope.data.row.status - 1 >= 0 ? 'danger' : 'success'"
+            :icon="scope.data.item.icon"
+            v-waves
+            @click="handleClickBt(scope.data.item.event, scope.data.row)"
+            :disabled="scope.data.item.disabled"
+            :loading="scope.data.row[scope.data.item.loading]">
+            {{scope.data.row.status - 1 >= 0 ? '停用' : '启用'}}
+          </el-button>
         </template>
       </page-table>
     </div>
@@ -113,7 +127,7 @@ export default {
           label: '操作',
           width: '100',
           btList: [
-            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false}
+            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false, slot: true}
           ]
         }
       }

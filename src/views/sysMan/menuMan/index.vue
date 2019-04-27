@@ -91,6 +91,19 @@
         :rules="formInfo.rules"
         :labelWidth="formInfo.labelWidth"
         :listTypeInfo="listTypeInfo">
+        <!-- 自定义插槽--选择图标 -->
+        <template v-slot:icon>
+          <el-select v-model="formInfo.data.icon" placeholder="请选择图标" filterable clearable>
+            <template slot="prefix">
+              <i :class="'header-icon ' + formInfo.data.icon" style="vertical-align: middle; font-size: 20px; color: black" v-if="formInfo.data.icon"></i>
+            </template>
+            <el-option v-for="(item, index) in  listTypeInfo.iconList" :key="index" :label="item.key" :value="item.value">
+              <slot>
+                <i :class="item.value" style="display: inline-block; vertical-align: middle; width: 30px; font-size: 20px"></i>{{item.class}}
+              </slot>
+            </el-option>
+          </el-select>
+        </template>
       </page-form>
       <page-form
         v-if="dialogInfo.type === 'persCreate' || dialogInfo.type === 'persUpdate'"
@@ -277,7 +290,7 @@ export default {
           {label: '菜单编码', value: 'code', type: 'input', required: true},
           {label: '菜单名称', value: 'name', type: 'input', required: true},
           {label: '菜单组件', value: 'component', type: 'select', list: 'componentList1', required: true},
-          {label: '菜单图标', value: 'icon', type: 'select', list: 'iconList', filterable: true},
+          {label: '菜单图标', value: 'icon', type: 'slot', filterable: true},
           {label: '重定向路径', value: 'redirect', type: 'input'},
           {label: '排序', value: 'sort', type: 'input', required: true},
           {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},

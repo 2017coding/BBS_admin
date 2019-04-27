@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'echartsBar',
+  name: 'chart-pie',
   props: {
     chartData: Object
   },

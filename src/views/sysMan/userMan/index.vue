@@ -21,11 +21,25 @@
       @handleClickBt="handleClickBt"
       @handleEvent="handleEvent">
       <!-- 自定义插槽显示状态 -->
-      <template v-slot:status="data">
+      <template v-slot:status="scope">
         <i
-          :class="data.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
-          :style="{color: data.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
+          :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
+          :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
         </i>
+      </template>
+      <!-- 自定义插槽状态按钮 -->
+      <template v-slot:bt_status="scope">
+        <el-button
+          v-if="scope.data.item.show && (!scope.data.item.ifRender || scope.data.item.ifRender(scope.data.row))"
+          size="mini"
+          :type="scope.data.row.status - 1 >= 0 ? 'danger' : 'success'"
+          :icon="scope.data.item.icon"
+          v-waves
+          @click="handleClickBt(scope.data.item.event, scope.data.row)"
+          :disabled="scope.data.item.disabled"
+          :loading="scope.data.row[scope.data.item.loading]">
+          {{scope.data.row.status - 1 >= 0 ? '停用' : '启用'}}
+        </el-button>
       </template>
     </page-table>
     <!-- 弹窗 -->
@@ -106,6 +120,59 @@ export default {
     SelectFile
   },
   data () {
+    // 检测用户账号
+    const checkAccount = (rule, value, callback) => {
+      let check = this.$validate({label: '账号', value, rules: ['notnull', 'noChinese', 'max'], conditions: [12]})
+      if (!check.result) {
+        callback(new Error(check.message))
+      } else {
+        callback()
+      }
+    }
+    // 验证密码
+    const checkPwd = (rule, value, callback) => {
+      let check = this.$validate({label: '密码', value, rules: ['notnull', 'length'], conditions: [6, 15]})
+      if (!check.result) {
+        callback(new Error(check.message))
+      } else {
+        callback()
+      }
+    }
+    // 检测号码
+    const checkPhone = (rule, value, callback) => {
+      let check = this.$validate({label: '手机号码', value, rules: ['phone']})
+      if (!check.result) {
+        callback(new Error(check.message))
+      } else {
+        callback()
+      }
+    }
+    // 检测非中文
+    const checkWechat = (rule, value, callback) => {
+      let check = this.$validate({label: '微信', value, rules: ['noChinese', 'max'], conditions: [12]})
+      if (!check.result) {
+        callback(new Error(check.message))
+      } else {
+        callback()
+      }
+    }
+    const checkQQ = (rule, value, callback) => {
+      let check = this.$validate({label: 'QQ', value, rules: ['noChinese', 'max'], conditions: [12]})
+      if (!check.result) {
+        callback(new Error(check.message))
+      } else {
+        callback()
+      }
+    }
+    // 检测邮箱
+    const checkEmail = (rule, value, callback) => {
+      let check = this.$validate({label: '邮箱', value, rules: ['email', 'max'], conditions: [24]})
+      if (!check.result) {
+        callback(new Error(check.message))
+      } else {
+        callback()
+      }
+    }
     return {
       getListApi,
       createApi,
@@ -166,7 +233,7 @@ export default {
           label: '操作',
           width: '280',
           btList: [
-            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false, ifRender (data) { return true }},
+            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false, slot: true},
             {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false},
             {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false}
           ]
@@ -195,15 +262,15 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '账号', value: 'account', type: 'input', required: true},
-          {label: '密码', value: 'password', type: 'password', required: true},
+          {label: '账号', value: 'account', type: 'input', required: true, validator: checkAccount},
+          {label: '密码', value: 'password', type: 'password', required: true, validator: checkPwd},
           {label: '昵称', value: 'name', type: 'input', required: true},
           {label: '性别', value: 'sex', type: 'select', list: 'sexList', required: true},
           {label: '头像', value: 'avatar', type: 'slot', className: 'el-form-block'},
-          {label: '手机号码', value: 'phone', type: 'input'},
-          {label: '微信', value: 'wechat', type: 'input'},
-          {label: 'QQ', value: 'qq', type: 'input'},
-          {label: '邮箱', value: 'email', type: 'input'},
+          {label: '手机号码', value: 'phone', type: 'input', validator: checkPhone},
+          {label: '微信', value: 'wechat', type: 'input', validator: checkWechat},
+          {label: 'QQ', value: 'qq', type: 'input', validator: checkQQ},
+          {label: '邮箱', value: 'email', type: 'input', validator: checkEmail},
           {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
           {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
         ],
@@ -380,6 +447,7 @@ export default {
         }
         break
       case 'status':
+        data.statusLoading = true
         const params = {}
         // 设置参数
         for (let key in data) {
@@ -389,7 +457,6 @@ export default {
           }
         }
         params.status = params.status - 1 >= 0 ? 0 : 1
-        data.statusLoading = true
         this._handleAPI('update', updateApi, params).then(res => {
           data.statusLoading = false
           if (res.success) {
@@ -504,6 +571,7 @@ export default {
       case 'list':
         if (!data) return
         data.forEach(item => {
+          item.statusLoading = false
           item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
           item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
         })

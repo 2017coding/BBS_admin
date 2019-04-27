@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { platformDataCountApi } from '@/api/count'
 import CountTo from 'vue-count-to'
 
 export default {
@@ -24,16 +25,33 @@ export default {
   data () {
     return {
       list: [
-        {title: '问题数', type: 'a', total: 126, icon: 'el-icon-message_fill'},
-        {title: '文章数', type: 'b', total: 876, icon: 'el-icon-createtask_fill'},
-        {title: '专栏数', type: 'c', total: 113, icon: 'el-icon-order_fill'},
-        {title: '用户数', type: 'd', total: 63, icon: 'el-icon-group_fill'}
+        {title: '问题数', type: 'questions', total: 0, icon: 'el-icon-albb-message_fill'},
+        {title: '文章数', type: 'articles', total: 0, icon: 'el-icon-albb-createtask_fill'},
+        {title: '专栏数', type: 'columns', total: 0, icon: 'el-icon-albb-order_fill'},
+        {title: '用户数', type: 'users', total: 0, icon: 'el-icon-albb-group_fill'}
       ]
     }
+  },
+  mounted () {
+    this.getPlatformDataCount()
   },
   methods: {
     handleSetLineChartData (type) {
       this.$emit('handleSetLineChartData', type)
+    },
+    getPlatformDataCount () {
+      platformDataCountApi().then(res => {
+        if (res.success) {
+          const data = res.content
+          for (let item of this.list) {
+            if (data[item.type]) {
+              item.total = data[item.type]
+            }
+          }
+        } else {
+
+        }
+      })
     }
   }
 }
@@ -62,29 +80,29 @@ export default {
       .card-panel-icon-wrapper {
         color: #fff;
       }
-      .icon-a {
+      .icon-questions {
          background: rgb(3, 150, 255);
       }
-      .icon-b {
+      .icon-articles {
         background: rgb(234, 84, 85);
       }
-      .icon-c {
+      .icon-columns {
         background: rgb(115, 103, 240);
       }
-      .icon-d {
+      .icon-users {
         background: rgb(50, 204, 188)
       }
     }
-    .icon-a {
+    .icon-questions {
       color: rgb(3, 150, 255);
     }
-    .icon-b {
+    .icon-articles {
       color: rgb(234, 84, 85);
     }
-    .icon-c {
+    .icon-columns {
       color: rgb(115, 103, 240);
     }
-    .icon-d {
+    .icon-users {
       color: rgb(50, 204, 188)
     }
     .card-panel-icon-wrapper {

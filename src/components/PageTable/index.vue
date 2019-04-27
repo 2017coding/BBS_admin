@@ -31,7 +31,7 @@
           :width="item.width"
           :min-width="item.minWidth || '100px'">
           <template v-slot="scope">
-            <!-- solt -->
+            <!-- solt 自定义列-->
             <template v-if="item.type === 'slot'">
               <slot :name="item.value" :row="scope.row"></slot>
             </template>
@@ -69,17 +69,20 @@
           :key="'handle'">
           <template v-slot="scope">
             <template v-for="(item, index) in handle.btList">
+              <!-- 自定义操作类型 -->
+              <slot :name="'bt_' + item.event" :data="{item, row: scope.row}" v-if="item.slot"></slot>
+              <!-- 操作按钮 -->
               <el-button
-                v-if="item.show && (!item.ifRender || item.ifRender(scope.row))"
+                v-if="!item.slot && item.show && (!item.ifRender || item.ifRender(scope.row))"
                 :key="index"
                 size="mini"
-                :type="handBtShow('type', item, scope.row)"
+                :type="item.type"
                 :icon="item.icon"
                 v-waves
                 @click="handleClickBt(item.event, scope.row)"
                 :disabled="item.disabled"
                 :loading="scope.row[item.loading]">
-                {{handBtShow('label', item, scope.row)}}
+                {{item.label}}
               </el-button>
             </template>
           </template>
@@ -233,23 +236,6 @@ export default {
       }
       // 如果不需要分页，则无分页相关参数
       return this.pager ? {...this.listInfo.query, ...obj} : obj
-    },
-    // 处理按钮显示
-    handBtShow (type, bt, row) {
-      switch (type) {
-      case 'type':
-        if (bt.event === 'status') {
-          return row.status - 1 >= 0 ? 'danger' : 'success'
-        } else {
-          return bt[type]
-        }
-      case 'label':
-        if (bt.event === 'status') {
-          return row.status - 1 >= 0 ? '停用' : '启用'
-        } else {
-          return bt[type]
-        }
-      }
     },
     // 得到数据
     getList (api) {

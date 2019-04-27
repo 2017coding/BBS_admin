@@ -6,7 +6,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Bar',
+  name: 'chart-bar',
   props: {
     height: {
       type: String,

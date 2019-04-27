@@ -12,7 +12,7 @@
       <el-form-item prop="account">
         <el-input
           type="text"
-          prefix-icon="el-icon-people_fill"
+          prefix-icon="el-icon-albb-people_fill"
           v-model.trim="formInfo.data.account"
           @keyup.enter.native="handleLogin()"
           placeholder="请输入账号">
@@ -21,7 +21,7 @@
       <el-form-item prop="password">
         <el-input
           type="password"
-          prefix-icon="el-icon-lock_fill"
+          prefix-icon="el-icon-albb-lock_fill"
           v-model.trim="formInfo.data.password"
           @keyup.enter.native="handleLogin()"
           placeholder="请输入密码">
