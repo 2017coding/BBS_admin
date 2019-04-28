@@ -1,6 +1,5 @@
 <template>
-  <div class="HOWTOUSE">
-  </div>
+  <div class="HOWTOUSE" />
 </template>
 
 <script>

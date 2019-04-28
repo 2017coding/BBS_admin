@@ -1,38 +1,64 @@
 <template>
   <div class="login-container">
-    <div class="ground-glass"></div>
-    <el-form ref="form" :model="formInfo.data" :rules="formInfo.rules" class="login-form">
+    <div class="ground-glass" />
+    <el-form
+      ref="form"
+      :model="formInfo.data"
+      :rules="formInfo.rules"
+      class="login-form"
+    >
       <div class="title">
         <!-- <p class="logo">
           <span class="LLL">LLL</span>
           <span class="yh">yh</span>
         </p> -->
-        <p class="name">{{$config.SYSTEMNAME}}</p>
+        <p class="name">
+          {{ $config.SYSTEMNAME }}
+        </p>
       </div>
       <el-form-item prop="account">
         <el-input
+          v-model.trim="formInfo.data.account"
           type="text"
           prefix-icon="el-icon-albb-people_fill"
-          v-model.trim="formInfo.data.account"
+          placeholder="请输入账号"
           @keyup.enter.native="handleLogin()"
-          placeholder="请输入账号">
-        </el-input>
+        />
       </el-form-item>
       <el-form-item prop="password">
         <el-input
+          v-model.trim="formInfo.data.password"
           type="password"
           prefix-icon="el-icon-albb-lock_fill"
-          v-model.trim="formInfo.data.password"
+          placeholder="请输入密码"
           @keyup.enter.native="handleLogin()"
-          placeholder="请输入密码">
-        </el-input>
+        />
       </el-form-item>
       <div class="remember">
-        <el-checkbox v-model="formInfo.remember" style="color: rgb(100, 100, 100)">记住密码</el-checkbox>
-        <router-link class="forget" tag="a" target="_blank" to="/retrieve">忘记密码?</router-link>
+        <el-checkbox
+          v-model="formInfo.remember"
+          style="color: rgb(100, 100, 100)"
+        >
+          记住密码
+        </el-checkbox>
+        <router-link
+          class="forget"
+          tag="a"
+          target="_blank"
+          to="/retrieve"
+        >
+          忘记密码?
+        </router-link>
       </div>
       <el-form-item>
-        <el-button :loading="buttonInfo.btLoading" type="primary" class="login-bt" @click="handleLogin()">登录</el-button>
+        <el-button
+          :loading="buttonInfo.btLoading"
+          type="primary"
+          class="login-bt"
+          @click="handleLogin()"
+        >
+          登录
+        </el-button>
       </el-form-item>
     </el-form>
   </div>

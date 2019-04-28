@@ -1,13 +1,33 @@
 <template>
-  <el-row :gutter="40" class="panel-group">
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col" v-for="(item, index) in list" :key="index">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
+  <el-row
+    :gutter="40"
+    class="panel-group"
+  >
+    <el-col
+      v-for="(item, index) in list"
+      :key="index"
+      :xs="12"
+      :sm="12"
+      :lg="6"
+      class="card-panel-col"
+    >
+      <div
+        class="card-panel"
+        @click="handleSetLineChartData('newVisitis')"
+      >
         <div :class="'card-panel-icon-wrapper icon-' + item.type">
-          <i :class="'el-icon ' + item.icon"></i>
+          <i :class="'el-icon ' + item.icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">{{item.title}}</div>
-          <count-to :start-val="0" :end-val="item.total" :duration="2600" class="card-panel-num"/>
+          <div class="card-panel-text">
+            {{ item.title }}
+          </div>
+          <count-to
+            :start-val="0"
+            :end-val="item.total"
+            :duration="2600"
+            class="card-panel-num"
+          />
         </div>
       </div>
     </el-col>

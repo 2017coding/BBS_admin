@@ -1,8 +1,12 @@
 <template>
-  <div class="page-tree" v-loading="treeLoading" @contextmenu.prevent="handleTreeClick">
+  <div
+    v-loading="treeLoading"
+    class="page-tree"
+    @contextmenu.prevent="handleTreeClick"
+  >
     <el-tree
-      class="tree-component disabled-select"
       ref="TreeComponent"
+      class="tree-component disabled-select"
       :show-checkbox="checkBox"
       :node-key="nodeKey"
       :data="treeData"
@@ -15,19 +19,29 @@
       :check-strictly="checkStrictly"
       :filter-node-method="filterNode"
       :default-expanded-keys="defaultExpanded"
+      highlight-current
+      :render-content="renderContent"
+      :props="treeProps"
       @node-click="handleClickLeft"
       @node-contextmenu="handleClickRight"
       @check="handleCheck"
       @check-change="handleCheck"
       @current-change="handleCheck"
       @node-expand="handleCheck"
-      highlight-current
-      :render-content="renderContent"
-      :props="treeProps">
-    </el-tree>
+    />
     <!-- 右键菜单 -->
-    <ul class='contextmenu' v-show="rightMenu.show" :style="{left: rightMenu.left +'px',top: rightMenu.top +'px'}">
-      <li v-for="(item, index) in rightMenu.list.filter(item => item.show)" :key="index" @click="handleRightEvent(item.type, item.data, item.node, item.vm)">{{item.name}}</li>
+    <ul
+      v-show="rightMenu.show"
+      class="contextmenu"
+      :style="{left: rightMenu.left +'px',top: rightMenu.top +'px'}"
+    >
+      <li
+        v-for="(item, index) in rightMenu.list.filter(item => item.show)"
+        :key="index"
+        @click="handleRightEvent(item.type, item.data, item.node, item.vm)"
+      >
+        {{ item.name }}
+      </li>
     </ul>
   </div>
 </template>

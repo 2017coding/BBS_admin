@@ -1,20 +1,35 @@
 <template>
   <div class="navbar-container">
     <div class="left">
-      <i :class="sidebar.opened ? 'el-icon-more toggle open' : 'el-icon-more toggle close'" @click="handleToggle"></i>
-      <breadcrumb class="breadcrumb-container"/>
+      <i
+        :class="sidebar.opened ? 'el-icon-more toggle open' : 'el-icon-more toggle close'"
+        @click="handleToggle"
+      />
+      <breadcrumb class="breadcrumb-container" />
     </div>
     <div class="right">
       <!-- 天气信息的容器 -->
-      <div id="tp-weather-widget" style="padding: 10px"></div>
+      <div
+        id="tp-weather-widget"
+        style="padding: 10px"
+      />
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
-          {{userInfo.name}}
-          <span class="avatar" :style="`background-image: url(${userInfo.avatar || 'https://www.lyh.red/image/b2.jpg'})`"></span>
+          {{ userInfo.name }}
+          <span
+            class="avatar"
+            :style="`background-image: url(${userInfo.avatar || 'https://www.lyh.red/image/b2.jpg'})`"
+          />
           <!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-for="(item, index) in dropdownList" :key="index" :command="item.command">{{item.key}}</el-dropdown-item>
+          <el-dropdown-item
+            v-for="(item, index) in dropdownList"
+            :key="index"
+            :command="item.command"
+          >
+            {{ item.key }}
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -23,29 +38,35 @@
       :title="dialogInfo.title[dialogInfo.type]"
       :visible.sync="dialogInfo.visible"
       :width="dialogInfo.width"
-      :btLoading="dialogInfo.btLoading"
-      :btList="dialogInfo.btList"
+      :bt-loading="dialogInfo.btLoading"
+      :bt-list="dialogInfo.btList"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
+      @handleEvent="handleEvent"
+    >
       <!-- form -->
       <page-form
-        :refObj.sync="formInfo.ref"
+        :ref-obj.sync="formInfo.ref"
         :data="formInfo.data"
-        :fieldList="formInfo.fieldList"
+        :field-list="formInfo.fieldList"
         :rules="formInfo.rules"
-        :labelWidth="formInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
+        :label-width="formInfo.labelWidth"
+        :list-type-info="listTypeInfo"
+      >
         <!-- 自定义插槽的使用 -->
         <template v-slot:avatar>
           <div class="slot-avatar">
-            <img :src="formInfo.data.avatar" style="height: 30px;">
+            <img
+              :src="formInfo.data.avatar"
+              style="height: 30px;"
+            >
             <el-button
+              v-waves
               type="primary"
               icon="el-icon-picture"
               size="mini"
-              v-waves
-              @click="handleClickBt('selectAvatar')">
-              {{formInfo.data.avatar ? '更换头像' : '选择头像'}}
+              @click="handleClickBt('selectAvatar')"
+            >
+              {{ formInfo.data.avatar ? '更换头像' : '选择头像' }}
             </el-button>
           </div>
         </template>
@@ -53,11 +74,11 @@
     </page-dialog>
     <!-- 选择文件组件 -->
     <select-file
-      v-model="formInfo.data.avatar"
       v-if="selectFileInfo.visible"
+      v-model="formInfo.data.avatar"
       :type="selectFileInfo.type"
-      :visible.sync="selectFileInfo.visible">
-    </select-file>
+      :visible.sync="selectFileInfo.visible"
+    />
   </div>
 </template>
 
@@ -92,13 +113,13 @@ import SelectFile from '@/components/SelectFile'
 }(window, document, 'script', 'tpwidget', '//widget.seniverse.com/widget/chameleon.js'))
 
 export default {
-  mixins: [Validate, HandleApi],
   components: {
     Breadcrumb,
     PageDialog,
     PageForm,
     SelectFile
   },
+  mixins: [Validate, HandleApi],
   data () {
     return {
       dropdownList: [

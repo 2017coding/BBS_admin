@@ -1,6 +1,14 @@
 <template>
-  <el-tooltip effect="dark" content="使用引导" placement="bottom">
-    <i class='el-icon-question' @click.prevent.stop="guide()" :style="'font-size:' + fontSize"></i>
+  <el-tooltip
+    effect="dark"
+    content="使用引导"
+    placement="bottom"
+  >
+    <i
+      class="el-icon-question"
+      :style="'font-size:' + fontSize"
+      @click.prevent.stop="guide()"
+    />
   </el-tooltip>
 </template>
 
@@ -10,7 +18,7 @@ import 'driver.js/dist/driver.min.css' // import driver.js css
 import steps from './defineSteps'
 
 export default {
-  name: 'guide',
+  name: 'Guide',
   props: {
     fontSize: {
       type: String,

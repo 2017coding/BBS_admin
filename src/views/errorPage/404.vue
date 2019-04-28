@@ -3,20 +3,55 @@
     <div class="wscn-http404-container">
       <div class="wscn-http404">
         <div class="pic-404">
-          <img class="pic-404__parent" :src="img404" alt="404">
-          <img class="pic-404__child left" :src="img404Cloud" alt="404">
-          <img class="pic-404__child mid" :src="img404Cloud" alt="404">
-          <img class="pic-404__child right" :src="img404Cloud" alt="404">
+          <img
+            class="pic-404__parent"
+            :src="img404"
+            alt="404"
+          >
+          <img
+            class="pic-404__child left"
+            :src="img404Cloud"
+            alt="404"
+          >
+          <img
+            class="pic-404__child mid"
+            :src="img404Cloud"
+            alt="404"
+          >
+          <img
+            class="pic-404__child right"
+            :src="img404Cloud"
+            alt="404"
+          >
         </div>
         <div class="bullshit">
-          <div class="bullshit__oops">OOPS!</div>
-          <div class="bullshit__info">随便逛逛
-            <a class='link-type' href='https://www.taobao.com/' target='_blank'>淘宝网</a>
+          <div class="bullshit__oops">
+            OOPS!
           </div>
-          <div class="bullshit__headline">{{ message }}</div>
-          <div class="bullshit__info">请检查您输入的网址是否正确，请点击以下按钮返回主页</div>
-          <a @click="back" icon='arrow-left' class="bullshit__return-home">返回</a>
-          <a href="" class="bullshit__return-home" style="margin-left: 20px;">返回首页</a>
+          <div class="bullshit__info">
+            随便逛逛
+            <a
+              class="link-type"
+              href="https://www.taobao.com/"
+              target="_blank"
+            >淘宝网</a>
+          </div>
+          <div class="bullshit__headline">
+            {{ message }}
+          </div>
+          <div class="bullshit__info">
+            请检查您输入的网址是否正确，请点击以下按钮返回主页
+          </div>
+          <a
+            icon="arrow-left"
+            class="bullshit__return-home"
+            @click="back"
+          >返回</a>
+          <a
+            href=""
+            class="bullshit__return-home"
+            style="margin-left: 20px;"
+          >返回首页</a>
         </div>
       </div>
     </div>
@@ -28,7 +63,7 @@ import img404 from '@/views/errorPage/img/404.png'
 import img404Cloud from '@/views/errorPage/img/404_cloud.png'
 
 export default {
-  name: 'page404',
+  name: 'Page404',
   data () {
     return {
       img404,

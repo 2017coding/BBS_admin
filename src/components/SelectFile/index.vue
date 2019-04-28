@@ -5,50 +5,51 @@
     :visible.sync="visible"
     width="width"
     :before-close="handleClose"
-    :append-to-body="true">
+    :append-to-body="true"
+  >
     <div class="content">
       <!-- 左侧树 -->
       <div class="left">
         <page-tree
-          :expandAll="true"
-          :defaultClicked="treeInfo.defaultClicked"
-          :defaultHighLight="treeInfo.defaultHighLight"
-          :defaultExpanded="treeInfo.defaultExpanded"
-          :baseData.sync="treeInfo.baseData"
-          :nodeKey="treeInfo.nodeKey"
-          :loadInfo.sync="treeInfo.loadInfo"
-          :rightMenuList="treeInfo.rightMenuList"
-          :treeRefresh="treeInfo.refresh"
-          :refreshLevel="treeInfo.refreshLevel"
+          :expand-all="true"
+          :default-clicked="treeInfo.defaultClicked"
+          :default-high-light="treeInfo.defaultHighLight"
+          :default-expanded="treeInfo.defaultExpanded"
+          :base-data.sync="treeInfo.baseData"
+          :node-key="treeInfo.nodeKey"
+          :load-info.sync="treeInfo.loadInfo"
+          :right-menu-list="treeInfo.rightMenuList"
+          :tree-refresh="treeInfo.refresh"
+          :refresh-level="treeInfo.refreshLevel"
           @handleClickBt="handleClickBt"
-          @handleEvent="handleEvent">
-        </page-tree>
+          @handleEvent="handleEvent"
+        />
       </div>
       <div class="right">
         <!-- 条件栏 -->
         <page-filter
           class="filter"
           :query.sync="filterInfo.query"
-          :filterList="filterInfo.list"
-          :listTypeInfo="listTypeInfo"
+          :filter-list="filterInfo.list"
+          :list-type-info="listTypeInfo"
           @handleClickBt="handleClickBt"
-          @handleEvent="handleEvent">
-        </page-filter>
+          @handleEvent="handleEvent"
+        />
         <!-- 表格 -->
         <page-table
-          :listenHeight="false"
+          :listen-height="false"
           :refresh="tableInfo.refresh"
-          :initCurpage="tableInfo.initCurpage"
+          :init-curpage="tableInfo.initCurpage"
           :data.sync="tableInfo.data"
           :api="getFileAllApi"
           :pager="false"
           :query="filterInfo.query"
-          :fieldList="tableInfo.fieldList"
-          :listTypeInfo="listTypeInfo"
+          :field-list="tableInfo.fieldList"
+          :list-type-info="listTypeInfo"
           :handle="tableInfo.handle"
           @handleClickBt="handleClickBt"
-          @handleEvent="handleEvent">
-        </page-table>
+          @handleEvent="handleEvent"
+        />
       </div>
     </div>
   </el-dialog>

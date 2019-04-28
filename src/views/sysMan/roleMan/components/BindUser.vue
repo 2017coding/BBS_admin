@@ -8,13 +8,14 @@
       reserve-keyword
       placeholder="请输入用户名"
       :remote-method="handleSearchUser"
-      :loading="loading">
+      :loading="loading"
+    >
       <el-option
         v-for="item in userList"
         :key="item.id"
         :label="item.name"
-        :value="item.id">
-      </el-option>
+        :value="item.id"
+      />
     </el-select>
   </div>
 </template>

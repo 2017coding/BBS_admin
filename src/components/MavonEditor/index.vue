@@ -1,14 +1,15 @@
 <template>
   <div class="mavon-editor">
-    <div class="header"></div>
+    <div class="header" />
     <mavon-editor
+      v-model="editorValue"
       class="editor"
       :style="`max-height: ${maxHeight}`"
-      v-model="editorValue"
-      :fontSize="'13px'"
+      :font-size="'13px'"
       :placeholder="placeholder"
       :toolbars="toolbars"
-      :subfield="true"/>
+      :subfield="true"
+    />
   </div>
 </template>
 

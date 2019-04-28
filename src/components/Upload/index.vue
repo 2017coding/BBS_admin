@@ -12,10 +12,33 @@
     :on-success="uploadSuccess"
     :on-error="uploadError"
     :file-list="fileList"
-    :list-type="listType">
-    <el-button slot="trigger" size="small" type="primary">{{autoUpload ? '点击上传' : '读取文件'}}</el-button>
-    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload" v-if="!autoUpload">开始上传</el-button>
-    <div slot="tip" style="margin-top:-5px; padding: 10px 0; color:#ff4949">{{uploadMessage}} <i v-if="uploadMessage == '正在上传'" class="el-icon-loading"></i></div>
+    :list-type="listType"
+  >
+    <el-button
+      slot="trigger"
+      size="small"
+      type="primary"
+    >
+      {{ autoUpload ? '点击上传' : '读取文件' }}
+    </el-button>
+    <el-button
+      v-if="!autoUpload"
+      style="margin-left: 10px;"
+      size="small"
+      type="success"
+      @click="submitUpload"
+    >
+      开始上传
+    </el-button>
+    <div
+      slot="tip"
+      style="margin-top:-5px; padding: 10px 0; color:#ff4949"
+    >
+      {{ uploadMessage }} <i
+        v-if="uploadMessage == '正在上传'"
+        class="el-icon-loading"
+      />
+    </div>
   </el-upload>
 </template>
 

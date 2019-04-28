@@ -1,17 +1,21 @@
 <template>
   <div class="app-container">
-    <panel-group></panel-group>
-    <div class="charts" v-for="(item, index) in chartList" :key="index">
+    <panel-group />
+    <div
+      v-for="(item, index) in chartList"
+      :key="index"
+      class="charts"
+    >
       <component
         :is="'chart-' + item.chartType"
-        :chartData="item.chartData || {nameList: [], xList: [], dataList: []}"
-        :markPoint="item.markPoint"
+        :chart-data="item.chartData || {nameList: [], xList: [], dataList: []}"
+        :mark-point="item.markPoint"
         :title="item.title"
-        :xUnit="item.xUnit"
-        :yUnit="item.yUnit"
+        :x-unit="item.xUnit"
+        :y-unit="item.yUnit"
         :height="item.height"
-        :toolboxShow="item.toolboxShow || false">
-      </component>
+        :toolbox-show="item.toolboxShow || false"
+      />
     </div>
   </div>
 </template>

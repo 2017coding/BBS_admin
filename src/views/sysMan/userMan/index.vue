@@ -3,42 +3,44 @@
     <!-- 条件栏 -->
     <page-filter
       :query.sync="filterInfo.query"
-      :filterList="filterInfo.list"
-      :listTypeInfo="listTypeInfo"
+      :filter-list="filterInfo.list"
+      :list-type-info="listTypeInfo"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
-    </page-filter>
+      @handleEvent="handleEvent"
+    />
     <!-- 表格 -->
     <page-table
       :refresh="tableInfo.refresh"
-      :initCurpage="tableInfo.initCurpage"
+      :init-curpage="tableInfo.initCurpage"
       :data.sync="tableInfo.data"
       :api="getListApi"
       :query="filterInfo.query"
-      :fieldList="tableInfo.fieldList"
-      :listTypeInfo="listTypeInfo"
+      :field-list="tableInfo.fieldList"
+      :list-type-info="listTypeInfo"
       :handle="tableInfo.handle"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
+      @handleEvent="handleEvent"
+    >
       <!-- 自定义插槽显示状态 -->
       <template v-slot:status="scope">
         <i
           :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
-          :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
-        </i>
+          :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}"
+        />
       </template>
       <!-- 自定义插槽状态按钮 -->
       <template v-slot:bt_status="scope">
         <el-button
           v-if="scope.data.item.show && (!scope.data.item.ifRender || scope.data.item.ifRender(scope.data.row))"
+          v-waves
           size="mini"
           :type="scope.data.row.status - 1 >= 0 ? 'danger' : 'success'"
           :icon="scope.data.item.icon"
-          v-waves
-          @click="handleClickBt(scope.data.item.event, scope.data.row)"
           :disabled="scope.data.item.disabled"
-          :loading="scope.data.row[scope.data.item.loading]">
-          {{scope.data.row.status - 1 >= 0 ? '停用' : '启用'}}
+          :loading="scope.data.row[scope.data.item.loading]"
+          @click="handleClickBt(scope.data.item.event, scope.data.row)"
+        >
+          {{ scope.data.row.status - 1 >= 0 ? '停用' : '启用' }}
         </el-button>
       </template>
     </page-table>
@@ -47,55 +49,71 @@
       :title="dialogInfo.title[dialogInfo.type]"
       :visible.sync="dialogInfo.visible"
       :width="dialogInfo.width"
-      :btLoading="dialogInfo.btLoading"
-      :btList="dialogInfo.btList"
+      :bt-loading="dialogInfo.btLoading"
+      :bt-list="dialogInfo.btList"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
+      @handleEvent="handleEvent"
+    >
       <!-- form -->
       <page-form
         v-if="dialogInfo.type !== 'userTransfer'"
-        :refObj.sync="formInfo.ref"
+        :ref-obj.sync="formInfo.ref"
         :data="formInfo.data"
-        :fieldList="formInfo.fieldList"
+        :field-list="formInfo.fieldList"
         :rules="formInfo.rules"
-        :labelWidth="formInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
+        :label-width="formInfo.labelWidth"
+        :list-type-info="listTypeInfo"
+      >
         <!-- 自定义插槽-选择头像 -->
         <template v-slot:avatar>
           <div class="slot-avatar">
-            <img :src="formInfo.data.avatar" style="height: 30px;">
+            <img
+              :src="formInfo.data.avatar"
+              style="height: 30px;"
+            >
             <el-button
+              v-waves
               type="primary"
               icon="el-icon-picture"
               size="mini"
-              v-waves
-              @click="handleClickBt('selectFile')">
-              {{formInfo.data.avatar ? '更换头像' : '选择头像'}}
+              @click="handleClickBt('selectFile')"
+            >
+              {{ formInfo.data.avatar ? '更换头像' : '选择头像' }}
             </el-button>
           </div>
         </template>
       </page-form>
       <!-- 用户转移 -->
-      <div class="" v-else>
+      <div
+        v-else
+        class=""
+      >
         是否将
-        <span style="color: red">{{userTransferInfo.userName}}</span>
+        <span style="color: red">{{ userTransferInfo.userName }}</span>
         创建的用户转移给
-        <el-select class="filter-item" v-model="userTransferInfo.toUser" placeholder="请选择一个用户" filterable clearable>
-          <el-option v-for="item in listTypeInfo.userList.filter(item => !userTransferInfo.createUserList.includes(item.value) && item.value !== userTransferInfo.user)"
+        <el-select
+          v-model="userTransferInfo.toUser"
+          class="filter-item"
+          placeholder="请选择一个用户"
+          filterable
+          clearable
+        >
+          <el-option
+            v-for="item in listTypeInfo.userList.filter(item => !userTransferInfo.createUserList.includes(item.value) && item.value !== userTransferInfo.user)"
             :key="item.id"
             :label="item.key"
-            :value="item.value">
-          </el-option>
+            :value="item.value"
+          />
         </el-select>
       </div>
     </page-dialog>
     <!-- 选择文件组件 -->
     <select-file
-      v-model="formInfo.data.avatar"
       v-if="selectFileInfo.visible"
+      v-model="formInfo.data.avatar"
       :type="selectFileInfo.type"
-      :visible.sync="selectFileInfo.visible">
-    </select-file>
+      :visible.sync="selectFileInfo.visible"
+    />
   </div>
 </template>
 
@@ -111,7 +129,6 @@ import PageForm from '@/components/PageForm'
 import SelectFile from '@/components/SelectFile'
 
 export default {
-  mixins: [Validate, HandleApi],
   components: {
     PageFilter,
     PageTable,
@@ -119,6 +136,7 @@ export default {
     PageForm,
     SelectFile
   },
+  mixins: [Validate, HandleApi],
   data () {
     // 检测用户账号
     const checkAccount = (rule, value, callback) => {

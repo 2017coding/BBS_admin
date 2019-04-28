@@ -1,106 +1,134 @@
 <template>
-  <div class="page-table" :class="className">
-      <!-- 显示表格 -->
-      <el-table
-        ref="table"
-        :max-height="listInfo.tableHeight || undefined"
-        :data="data"
-        border
-        style="width:100%"
-        v-loading="listInfo.loading"
-        @select-all="handleSelectionChange"
-        @selection-change="handleSelectionChange">
-        <el-table-column
-          v-if="checkBox"
-          :key="'selection'"
-          type="selection"
-          width="55">
-        </el-table-column>
-        <el-table-column align="center" label="序号" :width="fieldList.length === 0 ? '' : 80" fixed v-if="tabIndex" :key="'index'">
-          <template v-slot="scope">
-            <span>{{scope.$index + 1 + (listInfo.query.curPage - 1) * listInfo.query.pageSize}}</span>
+  <div
+    class="page-table"
+    :class="className"
+  >
+    <!-- 显示表格 -->
+    <el-table
+      ref="table"
+      v-loading="listInfo.loading"
+      :max-height="listInfo.tableHeight || undefined"
+      :data="data"
+      border
+      style="width:100%"
+      @select-all="handleSelectionChange"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column
+        v-if="checkBox"
+        :key="'selection'"
+        type="selection"
+        width="55"
+      />
+      <el-table-column
+        v-if="tabIndex"
+        :key="'index'"
+        align="center"
+        label="序号"
+        :width="fieldList.length === 0 ? '' : 80"
+        fixed
+      >
+        <template v-slot="scope">
+          <span>{{ scope.$index + 1 + (listInfo.query.curPage - 1) * listInfo.query.pageSize }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        v-for="(item, index) in fieldList.filter(item => !item.hidden)"
+        :key="index"
+        :prop="item.value"
+        :label="item.label"
+        :fixed="item.fixed"
+        align="center"
+        :width="item.width"
+        :min-width="item.minWidth || '100px'"
+      >
+        <template v-slot="scope">
+          <!-- solt 自定义列-->
+          <template v-if="item.type === 'slot'">
+            <slot
+              :name="item.value"
+              :row="scope.row"
+            />
           </template>
-        </el-table-column>
-        <el-table-column
-          v-for="(item, index) in fieldList.filter(item => !item.hidden)"
-          :key="index"
-          :prop="item.value"
-          :label="item.label"
-          :fixed="item.fixed"
-          align="center"
-          :width="item.width"
-          :min-width="item.minWidth || '100px'">
-          <template v-slot="scope">
-            <!-- solt 自定义列-->
-            <template v-if="item.type === 'slot'">
-              <slot :name="item.value" :row="scope.row"></slot>
-            </template>
-            <!-- 嵌套表格 -->
-            <template v-else-if="item.children">
-              <el-table-column
-                v-for="(childItem, childIndex) in item.children"
-                :key="childIndex"
-                :prop="childItem.value"
-                :label="childItem.label"
-                align="center"
-                :width="item.width"
-                :min-width="item.minWidth || '85px'">
-              </el-table-column>
-            </template>
-            <!-- 标签 -->
-            <el-tag v-else-if="item.type === 'tag'">{{scope.row[item.value]}}</el-tag>
-            <!-- 图片 -->
-            <img
-              v-else-if="item.type === 'image' && scope.row[item.value]"
-              height="50px"
-              :src="scope.row[item.value]"/>
-            <!-- 其他 -->
-            <span v-else>
-              {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: scope.row[item.value]}) || '-'}}
-            </span>
+          <!-- 嵌套表格 -->
+          <template v-else-if="item.children">
+            <el-table-column
+              v-for="(childItem, childIndex) in item.children"
+              :key="childIndex"
+              :prop="childItem.value"
+              :label="childItem.label"
+              align="center"
+              :width="item.width"
+              :min-width="item.minWidth || '85px'"
+            />
           </template>
-        </el-table-column>
-        <el-table-column
-          v-if="handle"
-          :fixed="handle.fixed"
-          align="center"
-          :label="handle.label"
-          :width="handle.width"
-          :key="'handle'">
-          <template v-slot="scope">
-            <template v-for="(item, index) in handle.btList">
-              <!-- 自定义操作类型 -->
-              <slot :name="'bt_' + item.event" :data="{item, row: scope.row}" v-if="item.slot"></slot>
-              <!-- 操作按钮 -->
-              <el-button
-                v-if="!item.slot && item.show && (!item.ifRender || item.ifRender(scope.row))"
-                :key="index"
-                size="mini"
-                :type="item.type"
-                :icon="item.icon"
-                v-waves
-                @click="handleClickBt(item.event, scope.row)"
-                :disabled="item.disabled"
-                :loading="scope.row[item.loading]">
-                {{item.label}}
-              </el-button>
-            </template>
+          <!-- 标签 -->
+          <el-tag v-else-if="item.type === 'tag'">
+            {{ scope.row[item.value] }}
+          </el-tag>
+          <!-- 图片 -->
+          <img
+            v-else-if="item.type === 'image' && scope.row[item.value]"
+            height="50px"
+            :src="scope.row[item.value]"
+          >
+          <!-- 其他 -->
+          <span v-else>
+            {{ $fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: scope.row[item.value]}) || '-' }}
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        v-if="handle"
+        :key="'handle'"
+        :fixed="handle.fixed"
+        align="center"
+        :label="handle.label"
+        :width="handle.width"
+      >
+        <template v-slot="scope">
+          <template v-for="(item, index) in handle.btList">
+            <!-- 自定义操作类型 -->
+            <slot
+              v-if="item.slot"
+              :name="'bt_' + item.event"
+              :data="{item, row: scope.row}"
+            />
+            <!-- 操作按钮 -->
+            <el-button
+              v-if="!item.slot && item.show && (!item.ifRender || item.ifRender(scope.row))"
+              :key="index"
+              v-waves
+              size="mini"
+              :type="item.type"
+              :icon="item.icon"
+              :disabled="item.disabled"
+              :loading="scope.row[item.loading]"
+              @click="handleClickBt(item.event, scope.row)"
+            >
+              {{ item.label }}
+            </el-button>
           </template>
-        </el-table-column>
-      </el-table>
-      <!-- 分页组件 -->
-      <template v-if="pager">
-        <div v-show="!listInfo.loading" class="pagination-container">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page.sync="listInfo.query.curPage"
-            :page-sizes="listInfo.pageSizes"
-            :page-size="listInfo.query.pageSize" layout="total, sizes, prev, pager, next, jumper"
-            :total="listInfo.total">
-          </el-pagination>
-        </div>
-      </template>
+        </template>
+      </el-table-column>
+    </el-table>
+    <!-- 分页组件 -->
+    <template v-if="pager">
+      <div
+        v-show="!listInfo.loading"
+        class="pagination-container"
+      >
+        <el-pagination
+          :current-page.sync="listInfo.query.curPage"
+          :page-sizes="listInfo.pageSizes"
+          :page-size="listInfo.query.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="listInfo.total"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
+      </div>
+    </template>
   </div>
 </template>
 

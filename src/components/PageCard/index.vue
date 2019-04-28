@@ -1,17 +1,30 @@
 <template>
-  <el-card class="page-card" :class="className">
-    <div slot="header" class="clearfix">
-      <span class="title">{{title}}</span>
+  <el-card
+    class="page-card"
+    :class="className"
+  >
+    <div
+      slot="header"
+      class="clearfix"
+    >
+      <span class="title">{{ title }}</span>
       <i
         :title="title"
         class="el-icon-info"
-        style="float: right; padding: 3px 0; color: rgb(150, 150, 150)">
-      </i>
+        style="float: right; padding: 3px 0; color: rgb(150, 150, 150)"
+      />
     </div>
     <ul class="info">
-      <li class="item" v-for="(item, index) in fieldList" :key="index">
-        <span class="label" :style="`width: ${lableWidth}; text-align: ${textAligin}`">{{item.label}}</span>
-        <span class="value">{{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: data[item.value]}) || '-'}}</span>
+      <li
+        v-for="(item, index) in fieldList"
+        :key="index"
+        class="item"
+      >
+        <span
+          class="label"
+          :style="`width: ${lableWidth}; text-align: ${textAligin}`"
+        >{{ item.label }}</span>
+        <span class="value">{{ $fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: data[item.value]}) || '-' }}</span>
       </li>
     </ul>
   </el-card>

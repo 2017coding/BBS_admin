@@ -1,16 +1,25 @@
 <template>
-  <div class="app-wrapper" :class="className">
+  <div
+    class="app-wrapper"
+    :class="className"
+  >
     <transition name="el-fade-in-linear">
-      <Sidebar class="sidebar-container" v-show="!fullScreen"></Sidebar>
+      <Sidebar
+        v-show="!fullScreen"
+        class="sidebar-container"
+      />
     </transition>
-    <div class="main-container" :style="fullScreen ? 'margin-left: 0' : ''">
+    <div
+      class="main-container"
+      :style="fullScreen ? 'margin-left: 0' : ''"
+    >
       <transition name="el-fade-in-linear">
         <div style="position: relative; z-index: 99">
           <navbar v-show="!fullScreen" />
-          <tags-view v-show="!fullScreen"/>
+          <tags-view v-show="!fullScreen" />
         </div>
       </transition>
-      <app-main/>
+      <app-main />
     </div>
   </div>
 </template>

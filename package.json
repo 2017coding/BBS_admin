@@ -7,7 +7,7 @@
     "dev": "vue-cli-service serve",
     "dev:prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
     "axios": "~0.18.0",

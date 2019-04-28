@@ -3,48 +3,51 @@
     <!-- 左侧树 -->
     <div class="left">
       <page-tree
-        :baseData.sync="treeInfo.baseData"
-        :nodeKey="treeInfo.nodeKey"
+        :base-data.sync="treeInfo.baseData"
+        :node-key="treeInfo.nodeKey"
         :lazy="true"
-        :lazyInfo="treeInfo.lazyInfo"
-        :rightMenuList="treeInfo.rightMenuList"
-        :treeRefresh="treeInfo.refresh"
-        :refreshLevel="treeInfo.refreshLevel"
+        :lazy-info="treeInfo.lazyInfo"
+        :right-menu-list="treeInfo.rightMenuList"
+        :tree-refresh="treeInfo.refresh"
+        :refresh-level="treeInfo.refreshLevel"
         @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent"></page-tree>
+        @handleEvent="handleEvent"
+      />
     </div>
     <div class="right">
       <!-- 表格 -->
       <page-table
         :refresh="tableInfo.refresh"
-        :initCurpage="tableInfo.initCurpage"
+        :init-curpage="tableInfo.initCurpage"
         :data.sync="tableInfo.data"
         :api="getListApi"
         :query="filterInfo.query"
-        :fieldList="tableInfo.fieldList"
-        :listTypeInfo="listTypeInfo"
+        :field-list="tableInfo.fieldList"
+        :list-type-info="listTypeInfo"
         :handle="tableInfo.handle"
         @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent">
+        @handleEvent="handleEvent"
+      >
         <!-- 自定义插槽显示状态 -->
         <template v-slot:status="scope">
           <i
             :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
-            :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
-          </i>
+            :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}"
+          />
         </template>
         <!-- 自定义插槽状态按钮 -->
         <template v-slot:bt_status="scope">
           <el-button
             v-if="scope.data.item.show && (!scope.data.item.ifRender || scope.data.item.ifRender(scope.data.row))"
+            v-waves
             size="mini"
             :type="scope.data.row.status - 1 >= 0 ? 'danger' : 'success'"
             :icon="scope.data.item.icon"
-            v-waves
-            @click="handleClickBt(scope.data.item.event, scope.data.row)"
             :disabled="scope.data.item.disabled"
-            :loading="scope.data.row[scope.data.item.loading]">
-            {{scope.data.row.status - 1 >= 0 ? '停用' : '启用'}}
+            :loading="scope.data.row[scope.data.item.loading]"
+            @click="handleClickBt(scope.data.item.event, scope.data.row)"
+          >
+            {{ scope.data.row.status - 1 >= 0 ? '停用' : '启用' }}
           </el-button>
         </template>
       </page-table>
@@ -61,12 +64,12 @@ import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 
 export default {
-  mixins: [HandleApi],
   components: {
     PageTree,
     PageFilter,
     PageTable
   },
+  mixins: [HandleApi],
   data () {
     return {
       getListApi,

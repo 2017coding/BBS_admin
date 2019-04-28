@@ -3,75 +3,83 @@
     <!-- 条件栏 -->
     <page-filter
       :query.sync="filterInfo.query"
-      :filterList="filterInfo.list"
-      :listTypeInfo="listTypeInfo"
+      :filter-list="filterInfo.list"
+      :list-type-info="listTypeInfo"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
-    </page-filter>
+      @handleEvent="handleEvent"
+    />
     <!-- 表格 -->
     <page-table
       :refresh="tableInfo.refresh"
-      :initCurpage="tableInfo.initCurpage"
+      :init-curpage="tableInfo.initCurpage"
       :data.sync="tableInfo.data"
       :api="getListApi"
       :query="filterInfo.query"
-      :fieldList="tableInfo.fieldList"
-      :listTypeInfo="listTypeInfo"
+      :field-list="tableInfo.fieldList"
+      :list-type-info="listTypeInfo"
       :handle="tableInfo.handle"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
-        <!-- 自定义插槽显示状态 -->
-        <template v-slot:status="scope">
-          <i
-            :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
-            :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}">
-          </i>
-        </template>
-        <!-- 自定义插槽状态按钮 -->
-        <template v-slot:bt_status="scope">
-          <el-button
-            v-if="scope.data.item.show && (!scope.data.item.ifRender || scope.data.item.ifRender(scope.data.row))"
-            size="mini"
-            :type="scope.data.row.status - 1 >= 0 ? 'danger' : 'success'"
-            :icon="scope.data.item.icon"
-            v-waves
-            @click="handleClickBt(scope.data.item.event, scope.data.row)"
-            :disabled="scope.data.item.disabled"
-            :loading="scope.data.row[scope.data.item.loading]">
-            {{scope.data.row.status - 1 >= 0 ? '停用' : '启用'}}
-          </el-button>
-        </template>
+      @handleEvent="handleEvent"
+    >
+      <!-- 自定义插槽显示状态 -->
+      <template v-slot:status="scope">
+        <i
+          :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
+          :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}"
+        />
+      </template>
+      <!-- 自定义插槽状态按钮 -->
+      <template v-slot:bt_status="scope">
+        <el-button
+          v-if="scope.data.item.show && (!scope.data.item.ifRender || scope.data.item.ifRender(scope.data.row))"
+          v-waves
+          size="mini"
+          :type="scope.data.row.status - 1 >= 0 ? 'danger' : 'success'"
+          :icon="scope.data.item.icon"
+          :disabled="scope.data.item.disabled"
+          :loading="scope.data.row[scope.data.item.loading]"
+          @click="handleClickBt(scope.data.item.event, scope.data.row)"
+        >
+          {{ scope.data.row.status - 1 >= 0 ? '停用' : '启用' }}
+        </el-button>
+      </template>
     </page-table>
     <!-- 弹窗 -->
     <page-dialog
       :title="dialogInfo.title[dialogInfo.type]"
       :visible.sync="dialogInfo.visible"
       :width="dialogInfo.width"
-      :btLoading="dialogInfo.btLoading"
-      :btList="dialogInfo.type === 'view' ? undefined : dialogInfo.btList"
+      :bt-loading="dialogInfo.btLoading"
+      :bt-list="dialogInfo.type === 'view' ? undefined : dialogInfo.btList"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
+      @handleEvent="handleEvent"
+    >
       <!-- form -->
       <page-form
-        :refObj.sync="formInfo.ref"
+        :ref-obj.sync="formInfo.ref"
         :data="formInfo.data"
-        :fieldList="formInfo.fieldList"
+        :field-list="formInfo.fieldList"
         :rules="formInfo.rules"
-        :labelWidth="formInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
+        :label-width="formInfo.labelWidth"
+        :list-type-info="listTypeInfo"
+      >
         <!-- 自定义插槽的使用 -->
         <template v-slot:icon>
           <div class="slot-icon">
-            <img :src="formInfo.data.icon" style="height: 30px;">
+            <img
+              :src="formInfo.data.icon"
+              style="height: 30px;"
+            >
             <span v-if="dialogInfo.type === 'view' && !formInfo.data.icon">暂未设置图标</span>
             <el-button
               v-if="dialogInfo.type !== 'view'"
+              v-waves
               type="primary"
               icon="el-icon-picture"
               size="mini"
-              v-waves
-              @click="handleClickBt('selectFile')">
-              {{formInfo.data.icon ? '更换图标' : '选择图标'}}
+              @click="handleClickBt('selectFile')"
+            >
+              {{ formInfo.data.icon ? '更换图标' : '选择图标' }}
             </el-button>
           </div>
         </template>
@@ -80,20 +88,23 @@
             <mavon-editor
               v-if="dialogInfo.type !== 'view'"
               :value.sync="formInfo.data.wikipedia"
-              placeholder="请编写标签百科...">
-            </mavon-editor>
-            <div v-else v-html="_markedGetHtml(formInfo.data.wikipedia || '目前还没有关于这个标签的解释')"></div>
+              placeholder="请编写标签百科..."
+            />
+            <div
+              v-else
+              v-html="_markedGetHtml(formInfo.data.wikipedia || '目前还没有关于这个标签的解释')"
+            />
           </div>
         </template>
       </page-form>
     </page-dialog>
     <!-- 选择文件组件 -->
     <select-file
-      v-model="formInfo.data.icon"
       v-if="selectFileInfo.visible"
+      v-model="formInfo.data.icon"
       :type="selectFileInfo.type"
-      :visible.sync="selectFileInfo.visible">
-    </select-file>
+      :visible.sync="selectFileInfo.visible"
+    />
   </div>
 </template>
 
@@ -112,7 +123,6 @@ import MavonEditor from '@/components/MavonEditor'
 import SelectFile from '@/components/SelectFile'
 
 export default {
-  mixins: [Validate, HandleApi, Marked],
   components: {
     PageFilter,
     PageTable,
@@ -121,6 +131,7 @@ export default {
     MavonEditor,
     SelectFile
   },
+  mixins: [Validate, HandleApi, Marked],
   data () {
     return {
       getListApi,

@@ -3,75 +3,76 @@
     <!-- 左侧树 -->
     <div class="left">
       <page-tree
-        :expandAll="true"
-        :defaultClicked="treeInfo.defaultClicked"
-        :defaultHighLight="treeInfo.defaultHighLight"
-        :defaultExpanded="treeInfo.defaultExpanded"
-        :baseData.sync="treeInfo.baseData"
-        :nodeKey="treeInfo.nodeKey"
-        :loadInfo.sync="treeInfo.loadInfo"
-        :rightMenuList="treeInfo.rightMenuList"
-        :treeRefresh="treeInfo.refresh"
-        :refreshLevel="treeInfo.refreshLevel"
+        :expand-all="true"
+        :default-clicked="treeInfo.defaultClicked"
+        :default-high-light="treeInfo.defaultHighLight"
+        :default-expanded="treeInfo.defaultExpanded"
+        :base-data.sync="treeInfo.baseData"
+        :node-key="treeInfo.nodeKey"
+        :load-info.sync="treeInfo.loadInfo"
+        :right-menu-list="treeInfo.rightMenuList"
+        :tree-refresh="treeInfo.refresh"
+        :refresh-level="treeInfo.refreshLevel"
         @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent">
-      </page-tree>
+        @handleEvent="handleEvent"
+      />
     </div>
     <div class="right">
       <!-- 条件栏 -->
       <page-filter
         :query.sync="filterInfo.query"
-        :filterList="filterInfo.list"
-        :listTypeInfo="listTypeInfo"
+        :filter-list="filterInfo.list"
+        :list-type-info="listTypeInfo"
         @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent">
-      </page-filter>
+        @handleEvent="handleEvent"
+      />
       <!-- 表格 -->
       <page-table
         :refresh="tableInfo.refresh"
-        :initCurpage="tableInfo.initCurpage"
+        :init-curpage="tableInfo.initCurpage"
         :data.sync="tableInfo.data"
         :api="getListApi"
         :query="filterInfo.query"
-        :fieldList="tableInfo.fieldList"
-        :listTypeInfo="listTypeInfo"
+        :field-list="tableInfo.fieldList"
+        :list-type-info="listTypeInfo"
         :handle="tableInfo.handle"
         @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent">
-      </page-table>
+        @handleEvent="handleEvent"
+      />
     </div>
     <!-- 弹窗 -->
     <page-dialog
       :title="dialogInfo.title[dialogInfo.type]"
       :visible.sync="dialogInfo.visible"
       :width="dialogInfo.width"
-      :btLoading="dialogInfo.btLoading"
-      :btList="dialogInfo.type === 'uploadFile' ? undefined : dialogInfo.btList"
+      :bt-loading="dialogInfo.btLoading"
+      :bt-list="dialogInfo.type === 'uploadFile' ? undefined : dialogInfo.btList"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
+      @handleEvent="handleEvent"
+    >
       <page-form
         v-if="dialogInfo.type === 'create' || dialogInfo.type === 'update'"
-        :refObj.sync="formInfo.ref"
+        :ref-obj.sync="formInfo.ref"
         :data="formInfo.data"
-        :fieldList="formInfo.fieldList"
+        :field-list="formInfo.fieldList"
         :rules="formInfo.rules"
-        :labelWidth="formInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
-      </page-form>
+        :label-width="formInfo.labelWidth"
+        :list-type-info="listTypeInfo"
+      />
       <page-form
         v-else-if="dialogInfo.type === 'updateFile'"
-        :refObj.sync="fileFormInfo.ref"
+        :ref-obj.sync="fileFormInfo.ref"
         :data="fileFormInfo.data"
-        :fieldList="fileFormInfo.fieldList"
+        :field-list="fileFormInfo.fieldList"
         :rules="fileFormInfo.rules"
-        :labelWidth="fileFormInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
-      </page-form>
+        :label-width="fileFormInfo.labelWidth"
+        :list-type-info="listTypeInfo"
+      />
       <Upload
         v-else-if="dialogInfo.type === 'uploadFile' && dialogInfo.visible"
-        :uploadData="{fid: treeInfo.rightClickData.id, type: treeInfo.rightClickData.type}"
-        @handleEvent="handleEvent">
-      </Upload>
+        :upload-data="{fid: treeInfo.rightClickData.id, type: treeInfo.rightClickData.type}"
+        @handleEvent="handleEvent"
+      />
     </page-dialog>
   </div>
 </template>
@@ -90,7 +91,6 @@ import PageForm from '@/components/PageForm'
 import Upload from '@/components/Upload'
 
 export default {
-  mixins: [Validate, HandleApi],
   components: {
     PageTree,
     PageFilter,
@@ -99,6 +99,7 @@ export default {
     PageForm,
     Upload
   },
+  mixins: [Validate, HandleApi],
   data () {
     return {
       createApi,

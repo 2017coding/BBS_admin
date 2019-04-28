@@ -1,12 +1,12 @@
 <template>
-  <div :style="'height:' + height + '; width: ' + width"></div>
+  <div :style="'height:' + height + '; width: ' + width" />
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'chart-bar',
+  name: 'ChartBar',
   props: {
     height: {
       type: String,
@@ -97,13 +97,6 @@ export default {
       'sidebar'
     ])
   },
-  mounted () {
-    this.init()
-    this.initData()
-  },
-  beforeDestroy () {
-    this.removeChart()
-  },
   watch: {
     // 监听到数据改变，重新加载echarts数据
     chartData (val) {
@@ -118,6 +111,13 @@ export default {
         }
       }, 300)
     }
+  },
+  mounted () {
+    this.init()
+    this.initData()
+  },
+  beforeDestroy () {
+    this.removeChart()
   },
   methods: {
     // 初始化

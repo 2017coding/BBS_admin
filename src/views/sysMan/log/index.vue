@@ -3,24 +3,24 @@
     <!-- 条件栏 -->
     <page-filter
       :query.sync="filterInfo.query"
-      :filterList="filterInfo.list"
-      :listTypeInfo="listTypeInfo"
+      :filter-list="filterInfo.list"
+      :list-type-info="listTypeInfo"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
-    </page-filter>
+      @handleEvent="handleEvent"
+    />
     <!-- 表格 -->
     <page-table
       :refresh="tableInfo.refresh"
-      :initCurpage="tableInfo.initCurpage"
+      :init-curpage="tableInfo.initCurpage"
       :data.sync="tableInfo.data"
       :api="getListApi"
       :query="filterInfo.query"
-      :fieldList="tableInfo.fieldList"
-      :listTypeInfo="listTypeInfo"
+      :field-list="tableInfo.fieldList"
+      :list-type-info="listTypeInfo"
       :handle="tableInfo.handle"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
-    </page-table>
+      @handleEvent="handleEvent"
+    />
   </div>
 </template>
 
@@ -32,11 +32,11 @@ import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 
 export default {
-  mixins: [HandleApi],
   components: {
     PageFilter,
     PageTable
   },
+  mixins: [HandleApi],
   data () {
     return {
       getListApi,

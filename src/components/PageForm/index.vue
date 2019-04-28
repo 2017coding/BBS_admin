@@ -1,59 +1,67 @@
 <template>
   <el-form
+    ref="form"
     class="page-form"
     :class="className"
     :model="data"
     :rules="rules"
-    ref="form"
-    :label-width="labelWidth">
+    :label-width="labelWidth"
+  >
     <el-form-item
       v-for="(item, index) in getConfigList()"
       :key="index"
       :prop="item.value"
       :label="item.label"
-      :class="item.className">
+      :class="item.className"
+    >
       <!-- solt -->
       <template v-if="item.type === 'slot'">
-        <slot :name="item.value"></slot>
+        <slot :name="item.value" />
       </template>
       <!-- 普通输入框 -->
       <el-input
         v-if="item.type === 'input' || item.type === 'password'"
+        v-model="data[item.value]"
         :type="item.type"
         :disabled="item.disabled"
         :placeholder="getPlaceholder(item)"
         @focus="handleEvent(item.event)"
-        v-model="data[item.value]">
-      </el-input>
+      />
       <!-- 文本输入框 -->
       <el-input
         v-if="item.type === 'textarea'"
+        v-model.trim="data[item.value]"
         :type="item.type"
         :disabled="item.disabled"
         :placeholder="getPlaceholder(item)"
         :autosize="{minRows: 2, maxRows: 10}"
         @focus="handleEvent(item.event)"
-        v-model.trim="data[item.value]">
-      </el-input>
+      />
       <!-- 计数器 -->
       <el-input-number
         v-if="item.type === 'inputNumber'"
         v-model="data[item.value]"
-        @change="handleEvent(item.event)"
         size="small"
         :min="item.min"
-        :max="item.max">
-      </el-input-number>
+        :max="item.max"
+        @change="handleEvent(item.event)"
+      />
       <!-- 选择框 -->
       <el-select
         v-if="item.type === 'select'"
         v-model="data[item.value]"
-        @change="handleEvent(item.event, data[item.value])"
         :disabled="item.disabled"
         :clearable="item.clearable"
         :filterable="item.filterable"
-        :placeholder="getPlaceholder(item)">
-        <el-option v-for="(item ,index) in  listTypeInfo[item.list]" :key="index" :label="item.key" :value="item.value"></el-option>
+        :placeholder="getPlaceholder(item)"
+        @change="handleEvent(item.event, data[item.value])"
+      >
+        <el-option
+          v-for="(item ,index) in listTypeInfo[item.list]"
+          :key="index"
+          :label="item.key"
+          :value="item.value"
+        />
       </el-select>
       <!-- 日期选择框 -->
       <el-date-picker
@@ -62,12 +70,12 @@
         :type="item.dateType"
         :clearable="item.clearable"
         :disabled="item.disabled"
+        :placeholder="getPlaceholder(item)"
         @focus="handleEvent(item.event)"
-        :placeholder="getPlaceholder(item)">
-      </el-date-picker>
+      />
       <!-- 信息展示框 -->
       <el-tag v-if="item.type === 'tag'">
-        {{$fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: data[item.value]}) || '-'}}
+        {{ $fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: data[item.value]}) || '-' }}
       </el-tag>
     </el-form-item>
   </el-form>

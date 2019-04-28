@@ -3,18 +3,19 @@
     <!-- 左侧树 -->
     <div class="left">
       <page-tree
-        :expandAll="true"
-        :defaultClicked="treeInfo.defaultClicked"
-        :defaultHighLight="treeInfo.defaultHighLight"
-        :defaultExpanded="treeInfo.defaultExpanded"
-        :baseData.sync="treeInfo.baseData"
-        :nodeKey="treeInfo.nodeKey"
-        :loadInfo.sync="treeInfo.loadInfo"
-        :rightMenuList="treeInfo.rightMenuList"
-        :treeRefresh="treeInfo.refresh"
-        :refreshLevel="treeInfo.refreshLevel"
+        :expand-all="true"
+        :default-clicked="treeInfo.defaultClicked"
+        :default-high-light="treeInfo.defaultHighLight"
+        :default-expanded="treeInfo.defaultExpanded"
+        :base-data.sync="treeInfo.baseData"
+        :node-key="treeInfo.nodeKey"
+        :load-info.sync="treeInfo.loadInfo"
+        :right-menu-list="treeInfo.rightMenuList"
+        :tree-refresh="treeInfo.refresh"
+        :refresh-level="treeInfo.refreshLevel"
         @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent"></page-tree>
+        @handleEvent="handleEvent"
+      />
     </div>
     <div class="right">
       <!-- 卡片 -->
@@ -22,37 +23,43 @@
         class="page-card"
         :title="cardInfo.title"
         :data.sync="cardInfo.data"
-        :fieldList="cardInfo.fieldList"
-        :listTypeInfo="listTypeInfo">
-      </page-card>
+        :field-list="cardInfo.fieldList"
+        :list-type-info="listTypeInfo"
+      />
     </div>
     <!-- 弹窗 -->
     <page-dialog
       :title="dialogInfo.title[dialogInfo.type]"
       :visible.sync="dialogInfo.visible"
       :width="dialogInfo.type === 'permissions' ? '80%' : dialogInfo.width"
-      :btLoading="dialogInfo.btLoading"
-      :btList="dialogInfo.btList"
+      :bt-loading="dialogInfo.btLoading"
+      :bt-list="dialogInfo.btList"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
+      @handleEvent="handleEvent"
+    >
       <!-- form -->
       <page-form
         v-if="dialogInfo.type === 'create' || dialogInfo.type === 'update'"
-        :refObj.sync="formInfo.ref"
+        :ref-obj.sync="formInfo.ref"
         :data="formInfo.data"
-        :fieldList="formInfo.fieldList"
+        :field-list="formInfo.fieldList"
         :rules="formInfo.rules"
-        :labelWidth="formInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
-      </page-form>
+        :label-width="formInfo.labelWidth"
+        :list-type-info="listTypeInfo"
+      />
       <!-- 权限分配组件 -->
       <permissions
         v-if="dialogInfo.type === 'permissions' && dialogInfo.visible"
-        :roleId="treeInfo.rightClickData.id"
-        :rolePId="treeInfo.rightClickData.pid"
-        :params.sync="roleParams"></permissions>
+        :role-id="treeInfo.rightClickData.id"
+        :role-p-id="treeInfo.rightClickData.pid"
+        :params.sync="roleParams"
+      />
       <!-- 绑定用户组件 -->
-      <bind-user v-if="dialogInfo.type === 'bindUser' && dialogInfo.visible" :roleId="treeInfo.rightClickData.id" :params.sync="bindUserParams"></bind-user>
+      <bind-user
+        v-if="dialogInfo.type === 'bindUser' && dialogInfo.visible"
+        :role-id="treeInfo.rightClickData.id"
+        :params.sync="bindUserParams"
+      />
     </page-dialog>
   </div>
 </template>
@@ -70,7 +77,6 @@ import Permissions from './components/Permissions'
 import BindUser from './components/BindUser'
 
 export default {
-  mixins: [Validate, HandleApi],
   components: {
     PageTree,
     PageCard,
@@ -79,6 +85,7 @@ export default {
     Permissions,
     BindUser
   },
+  mixins: [Validate, HandleApi],
   data () {
     return {
       createApi,

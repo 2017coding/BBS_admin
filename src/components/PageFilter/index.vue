@@ -1,60 +1,76 @@
 <template>
-  <div class="page-filter" :class="className">
-    <div class="filter-item" v-for="(item, index) in getConfigList()" :key="index">
+  <div
+    class="page-filter"
+    :class="className"
+  >
+    <div
+      v-for="(item, index) in getConfigList()"
+      :key="index"
+      class="filter-item"
+    >
       <!-- <label class="filter-label" v-if="item.type !== 'button'">{{item.key}}</label> -->
       <!-- 输入框 -->
       <el-input
-        :class="`filter-${item.type}`"
         v-if="item.type === 'input'"
+        v-model="searchQuery[item.value]"
+        :class="`filter-${item.type}`"
         :type="item.type"
         :disabled="item.disabled"
         :clearable="item.clearable === false ? item.clearable : true"
         :placeholder="getPlaceholder(item)"
         @focus="handleEvent(item.event)"
-        v-model="searchQuery[item.value]">
-      </el-input>
+      />
       <!-- 选择框 -->
       <el-select
-        :class="`filter-${item.type}`"
         v-if="item.type === 'select'"
         v-model="searchQuery[item.value]"
+        :class="`filter-${item.type}`"
         :disabled="item.disabled"
-        @change="handleEvent(item.even)"
         :clearable="item.clearable === false ? item.clearable : true"
         :filterable="item.filterable === false ? item.filterable : true"
-        :placeholder="getPlaceholder(item)">
-        <el-option v-for="(item ,index) in  listTypeInfo[item.list]" :key="index" :label="item.key" :value="item.value"></el-option>
+        :placeholder="getPlaceholder(item)"
+        @change="handleEvent(item.even)"
+      >
+        <el-option
+          v-for="(item ,index) in listTypeInfo[item.list]"
+          :key="index"
+          :label="item.key"
+          :value="item.value"
+        />
       </el-select>
       <!-- 时间选择框 -->
       <el-time-select
-        :class="`filter-${item.type}`"
         v-if="item.type === 'time'"
         v-model="searchQuery[item.value]"
+        :class="`filter-${item.type}`"
         :picker-options="item.TimePickerOptions"
         :clearable="item.clearable === false ? item.clearable : true"
         :disabled="item.disabled"
-        :placeholder="getPlaceholder(item)">
-      </el-time-select>
+        :placeholder="getPlaceholder(item)"
+      />
       <!-- 日期选择框 -->
       <el-date-picker
-        :class="`filter-${item.type}`"
         v-if="item.type === 'date'"
         v-model="searchQuery[item.value]"
+        :class="`filter-${item.type}`"
         :picker-options="item.datePickerOptions || datePickerOptions"
         :type="item.dateType"
         :clearable="item.clearable === false ? item.clearable : true"
         :disabled="item.disabled"
+        :placeholder="getPlaceholder(item)"
         @focus="handleEvent(item.event)"
-        :placeholder="getPlaceholder(item)">
-      </el-date-picker>
+      />
       <!-- 按钮 -->
       <el-button
-        :class="`filter-${item.type}`"
         v-else-if="item.type === 'button'"
         v-waves
+        :class="`filter-${item.type}`"
         :type="item.btType"
         :icon="item.icon"
-        @click="handleClickBt(item.event)">{{item.label}}</el-button>
+        @click="handleClickBt(item.event)"
+      >
+        {{ item.label }}
+      </el-button>
     </div>
   </div>
 </template>

@@ -1,11 +1,10 @@
 <template>
-    <div style="width: 100%;height: 30vh"></div>
-
+  <div style="width: 100%;height: 30vh" />
 </template>
 
 <script>
 export default {
-  name: 'chart-pie',
+  name: 'ChartPie',
   props: {
     chartData: Object
   },

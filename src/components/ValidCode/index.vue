@@ -1,12 +1,20 @@
 <template>
-  <div class="ValidCode disabled-select" :style="`width:${width}; height:${height}`" @click="refreshCode">
-    <span v-for="(item, index) in codeList" :key="index" :style="getStyle(item)">{{item.code}}</span>
+  <div
+    class="ValidCode disabled-select"
+    :style="`width:${width}; height:${height}`"
+    @click="refreshCode"
+  >
+    <span
+      v-for="(item, index) in codeList"
+      :key="index"
+      :style="getStyle(item)"
+    >{{ item.code }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'validCode',
+  name: 'ValidCode',
   model: {
     prop: 'value',
     event: 'input'

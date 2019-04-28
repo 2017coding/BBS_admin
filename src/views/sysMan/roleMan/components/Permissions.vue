@@ -2,54 +2,58 @@
   <div class="permissions">
     <el-tabs v-model="menuType">
       <el-tab-pane
+        v-for="(item, index) in listTypeInfo.menuTypeList"
+        :key="index"
         class="tab"
         :label="item.key"
-        v-for="(item, index) in listTypeInfo.menuTypeList"
         :name="item.value + ''"
-        :key="index">
+      >
         <!-- 点击加载 -->
         <template v-if="item.status">
           <!-- 左侧树 -->
           <div class="left">
             <page-tree
-              :expandAll="true"
-              :rightClick="false"
-              :checkBox="true"
-              :defaultClicked="treeInfo.defaultClicked"
-              :defaultHighLight="treeInfo.defaultHighLight"
-              :defaultExpanded="treeInfo.defaultExpanded"
-              :defaultChecked="treeInfo.defaultChecked"
-              :baseData.sync="treeInfo.baseData"
-              :nodeKey="treeInfo.nodeKey"
-              :loadInfo.sync="treeInfo.loadInfo"
-              :treeRefresh="treeInfo.refresh"
-              :refreshLevel="treeInfo.refreshLevel"
+              :expand-all="true"
+              :right-click="false"
+              :check-box="true"
+              :default-clicked="treeInfo.defaultClicked"
+              :default-high-light="treeInfo.defaultHighLight"
+              :default-expanded="treeInfo.defaultExpanded"
+              :default-checked="treeInfo.defaultChecked"
+              :base-data.sync="treeInfo.baseData"
+              :node-key="treeInfo.nodeKey"
+              :load-info.sync="treeInfo.loadInfo"
+              :tree-refresh="treeInfo.refresh"
+              :refresh-level="treeInfo.refreshLevel"
               @handleClickBt="handleClickBt"
-              @handleEvent="handleEvent">
-            </page-tree>
+              @handleEvent="handleEvent"
+            />
           </div>
           <div class="right">
             <!-- 点击页面组件时显示 -->
             <!-- 表格 -->
             <page-table
               v-show="treeInfo.leftClickData.component === 1"
-              :listenHeight="false"
-              :checkBox="true"
+              :listen-height="false"
+              :check-box="true"
               :class="'table'"
               :refresh="tableInfo.refresh"
               :pager="tableInfo.pager"
               :data.sync="tableInfo.data"
-              :checkedList="roleRelation.permissions"
+              :checked-list="roleRelation.permissions"
               :api="getRoleDataPermsApi"
               :query="{menuId: treeInfo.leftClickData.id}"
-              :fieldList="tableInfo.fieldList"
-              :listTypeInfo="listTypeInfo"
+              :field-list="tableInfo.fieldList"
+              :list-type-info="listTypeInfo"
               :handle="tableInfo.handle"
               @handleClickBt="handleClickBt"
-              @handleEvent="handleEvent">
-            </page-table>
+              @handleEvent="handleEvent"
+            />
             <!-- 提示 -->
-            <p v-show="treeInfo.leftClickData.component !== 1" class="tips">
+            <p
+              v-show="treeInfo.leftClickData.component !== 1"
+              class="tips"
+            >
               选择功能页面可查看相关数据权限
             </p>
           </div>
@@ -68,6 +72,10 @@ import PageTree from '@/components/PageTree'
 import PageTable from '@/components/PageTable'
 
 export default {
+  components: {
+    PageTree,
+    PageTable
+  },
   mixins: [HandleApi],
   props: {
     roleId: {
@@ -79,10 +87,6 @@ export default {
     params: {
       type: Object
     }
-  },
-  components: {
-    PageTree,
-    PageTable
   },
   data () {
     return {

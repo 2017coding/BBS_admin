@@ -1,78 +1,172 @@
 <template>
   <div class="retrieve-password">
     <div class="header">
-      <img src="./img/cloud_1.png" class="cloud_1">
-      <img src="./img/cloud_1.png" class="cloud_2">
+      <img
+        src="./img/cloud_1.png"
+        class="cloud_1"
+      >
+      <img
+        src="./img/cloud_1.png"
+        class="cloud_2"
+      >
       <span class="tittle">找回密码</span>
-      <p class="msg">请您按照操作步骤填写找回密码</p>
+      <p class="msg">
+        请您按照操作步骤填写找回密码
+      </p>
     </div>
     <div class="container">
       <div class="steps-box">
         <el-steps :active="activeSteps">
-          <el-step v-for="(item, index) in stepsList" :key="index" :title="item"></el-step>
+          <el-step
+            v-for="(item, index) in stepsList"
+            :key="index"
+            :title="item"
+          />
         </el-steps>
         <!-- 不同步骤显示不同的内容 -->
-        <div class="steps1" v-if="activeSteps === 1">
-          <el-form :model="form" :rules="rules" ref="form">
+        <div
+          v-if="activeSteps === 1"
+          class="steps1"
+        >
+          <el-form
+            ref="form"
+            :model="form"
+            :rules="rules"
+          >
             <el-form-item prop="username">
-              <el-input v-model.trim="form.username" placeholder="请输入账号"></el-input>
+              <el-input
+                v-model.trim="form.username"
+                placeholder="请输入账号"
+              />
             </el-form-item>
             <div class="valid-code">
               <el-form-item prop="validCode">
-                <el-input v-model.trim="form.validCode" placeholder="验证码"></el-input>
+                <el-input
+                  v-model.trim="form.validCode"
+                  placeholder="验证码"
+                />
               </el-form-item>
-              <valid-code v-model="validCode"></valid-code>
+              <valid-code v-model="validCode" />
             </div>
           </el-form>
-          <el-button class="bt-next" type="primary" style="margin-top: 12px;" @click="handleNext">下一步</el-button>
+          <el-button
+            class="bt-next"
+            type="primary"
+            style="margin-top: 12px;"
+            @click="handleNext"
+          >
+            下一步
+          </el-button>
         </div>
-        <div class="steps2" v-if="activeSteps === 2">
+        <div
+          v-if="activeSteps === 2"
+          class="steps2"
+        >
           <div class="email-check">
             <img src="./img/email.jpg">
             <div class="desc">
-              <p class="title">邮箱找回</p>
-              <p class="msg">您已经绑定111的邮箱</p>
+              <p class="title">
+                邮箱找回
+              </p>
+              <p class="msg">
+                您已经绑定111的邮箱
+              </p>
             </div>
             <div class="bt">
-              <el-button type="primary" @click="handleNext">立即验证<i class="el-icon-arrow-right"></i></el-button>
+              <el-button
+                type="primary"
+                @click="handleNext"
+              >
+                立即验证<i class="el-icon-arrow-right" />
+              </el-button>
             </div>
           </div>
           <div class="phone-check">
             <img src="./img/phone_nobind.jpg">
             <div class="desc">
-              <p class="title">手机找回</p>
-              <p class="msg">您已经绑定111的号码</p>
+              <p class="title">
+                手机找回
+              </p>
+              <p class="msg">
+                您已经绑定111的号码
+              </p>
             </div>
             <div class="bt">
-              <el-button type="primary" @click="handleNext">立即验证<i class="el-icon-arrow-right"></i></el-button>
+              <el-button
+                type="primary"
+                @click="handleNext"
+              >
+                立即验证<i class="el-icon-arrow-right" />
+              </el-button>
             </div>
           </div>
         </div>
-        <div class="steps3" v-if="activeSteps === 3">
-          <div class="title">您正在使用"<span style="color: red">邮箱</span>"验证身份，请获取验证码重置登录密码</div>
+        <div
+          v-if="activeSteps === 3"
+          class="steps3"
+        >
+          <div class="title">
+            您正在使用"<span style="color: red">邮箱</span>"验证身份，请获取验证码重置登录密码
+          </div>
           <div class="warp">
             <span class="check-info">验证邮箱为:
               <span style="color: #409EFF">123</span>
             </span>
             <div class="getValidCode">
-              <el-input></el-input>
-              <el-button type="primary">获取验证码</el-button>
+              <el-input />
+              <el-button type="primary">
+                获取验证码
+              </el-button>
             </div>
-            <el-button class="bt-next" type="primary" style="margin-top: 12px;" @click="handleNext">下一步</el-button>
-            <a class="back" @click="activeSteps--">重新选择验证方式</a>
+            <el-button
+              class="bt-next"
+              type="primary"
+              style="margin-top: 12px;"
+              @click="handleNext"
+            >
+              下一步
+            </el-button>
+            <a
+              class="back"
+              @click="activeSteps--"
+            >重新选择验证方式</a>
           </div>
         </div>
-        <div class="steps4" v-if="activeSteps === 4">
-          <el-input class="new-pwd" placeholder="新密码"></el-input>
-          <el-input class="confirm-pwd" placeholder="确认密码"></el-input>
-          <el-button class="bt-next" type="primary" style="margin-top: 12px;" @click="handleNext">立刻重置</el-button>
+        <div
+          v-if="activeSteps === 4"
+          class="steps4"
+        >
+          <el-input
+            class="new-pwd"
+            placeholder="新密码"
+          />
+          <el-input
+            class="confirm-pwd"
+            placeholder="确认密码"
+          />
+          <el-button
+            class="bt-next"
+            type="primary"
+            style="margin-top: 12px;"
+            @click="handleNext"
+          >
+            立刻重置
+          </el-button>
         </div>
-        <div class="steps5" v-if="activeSteps === 5">
+        <div
+          v-if="activeSteps === 5"
+          class="steps5"
+        >
           <div class="warp">
             <img src="./img/finsh.jpg">
             <div class="right">
               <span class="msg">恭喜您"密码"重置成功</span>
-              <router-link to="/login" class="goto">立即登录</router-link>
+              <router-link
+                to="/login"
+                class="goto"
+              >
+                立即登录
+              </router-link>
             </div>
           </div>
         </div>

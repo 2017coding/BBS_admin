@@ -1,29 +1,35 @@
 <template>
-    <el-dialog
-      :title="title"
-      :visible.sync="visible"
-      :width="width"
-      :before-close="handleClose"
-      :append-to-body="true"
-      class="page-dialog"
-      :class="className">
-      <slot></slot>
-      <div slot="footer" class="dialog-footer" v-if="btList">
-        <template v-for="(item, index) in getConfigList()">
-          <el-button
-            v-if="item.show"
-            :key="index"
-            :type="item.type"
-            :icon="item.icon"
-            v-waves
-            @click="handleClickBt(item.event)"
-            :disabled="item.disabled"
-            :loading="btLoading">
-            {{item.label}}
-          </el-button>
-        </template>
-      </div>
-    </el-dialog>
+  <el-dialog
+    :title="title"
+    :visible.sync="visible"
+    :width="width"
+    :before-close="handleClose"
+    :append-to-body="true"
+    class="page-dialog"
+    :class="className"
+  >
+    <slot />
+    <div
+      v-if="btList"
+      slot="footer"
+      class="dialog-footer"
+    >
+      <template v-for="(item, index) in getConfigList()">
+        <el-button
+          v-if="item.show"
+          :key="index"
+          v-waves
+          :type="item.type"
+          :icon="item.icon"
+          :disabled="item.disabled"
+          :loading="btLoading"
+          @click="handleClickBt(item.event)"
+        >
+          {{ item.label }}
+        </el-button>
+      </template>
+    </div>
+  </el-dialog>
 </template>
 
 <script>

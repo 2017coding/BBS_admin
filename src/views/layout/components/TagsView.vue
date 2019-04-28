@@ -1,16 +1,50 @@
 <template>
-  <div class="tags-view-container" @contextmenu.prevent="_openMenu('', $event)">
-    <scroll-pane class='tags-view-wrapper' ref='scrollPane'>
-      <router-link ref='tag' class="tags-view-item" :class="isActive(tag)? 'active' : ''" :style="isActive(tag)" v-for="tag in Array.from(visitedViews)"
-        :to="tag" :key="tag.path" @contextmenu.prevent.native.stop="_openMenu(tag,$event)">
-        {{tag.title}}
-        <span class='el-icon-close' @click.prevent.stop='_closeSelectedTag(tag)' v-if="visitedViews.length > 1"></span>
+  <div
+    class="tags-view-container"
+    @contextmenu.prevent="_openMenu('', $event)"
+  >
+    <scroll-pane
+      ref="scrollPane"
+      class="tags-view-wrapper"
+    >
+      <router-link
+        v-for="tag in Array.from(visitedViews)"
+        ref="tag"
+        :key="tag.path"
+        class="tags-view-item"
+        :class="isActive(tag)? 'active' : ''"
+        :style="isActive(tag)"
+        :to="tag"
+        @contextmenu.prevent.native.stop="_openMenu(tag,$event)"
+      >
+        {{ tag.title }}
+        <span
+          v-if="visitedViews.length > 1"
+          class="el-icon-close"
+          @click.prevent.stop="_closeSelectedTag(tag)"
+        />
       </router-link>
     </scroll-pane>
-    <ul class='contextmenu' v-show="visible" :style="{left:left + 'px', top: top + 'px'}">
-      <li v-if="selectedTag && visitedViews.length > 1" @click="_closeSelectedTag(selectedTag)">关闭</li>
-      <li v-if="selectedTag" @click="_closeOthersTags">关闭其他</li>
-      <li @click="_closeAllTags">关闭所有</li>
+    <ul
+      v-show="visible"
+      class="contextmenu"
+      :style="{left:left + 'px', top: top + 'px'}"
+    >
+      <li
+        v-if="selectedTag && visitedViews.length > 1"
+        @click="_closeSelectedTag(selectedTag)"
+      >
+        关闭
+      </li>
+      <li
+        v-if="selectedTag"
+        @click="_closeOthersTags"
+      >
+        关闭其他
+      </li>
+      <li @click="_closeAllTags">
+        关闭所有
+      </li>
     </ul>
   </div>
 </template>
@@ -21,7 +55,7 @@ import ScrollPane from '@/components/ScrollPane'
 import baseScss from '@/common/style/base.scss'
 
 export default {
-  name: 'tagsView',
+  name: 'TagsView',
   components: { ScrollPane },
   data () {
     return {

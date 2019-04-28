@@ -2,57 +2,82 @@
   <div class="app-container">
     <!-- 左侧树 -->
     <div class="left">
-      <div class="" style="padding-bottom: 10px;">
-        <el-select v-model="formInfo.data.type" placeholder="请选择菜单类型" style="width: 240px">
-          <el-option v-for="(item, index) in listTypeInfo.menuTypeList" :key="index" :label="item.key" :value="item.value">
-          </el-option>
+      <div
+        class=""
+        style="padding-bottom: 10px;"
+      >
+        <el-select
+          v-model="formInfo.data.type"
+          placeholder="请选择菜单类型"
+          style="width: 240px"
+        >
+          <el-option
+            v-for="(item, index) in listTypeInfo.menuTypeList"
+            :key="index"
+            :label="item.key"
+            :value="item.value"
+          />
         </el-select>
       </div>
       <page-tree
-        :expandAll="true"
-        :defaultClicked="treeInfo.defaultClicked"
-        :defaultHighLight="treeInfo.defaultHighLight"
-        :defaultExpanded="treeInfo.defaultExpanded"
-        :baseData.sync="treeInfo.baseData"
-        :nodeKey="treeInfo.nodeKey"
-        :loadInfo.sync="treeInfo.loadInfo"
-        :rightMenuList="treeInfo.rightMenuList"
-        :treeRefresh="treeInfo.refresh"
-        :refreshLevel="treeInfo.refreshLevel"
+        :expand-all="true"
+        :default-clicked="treeInfo.defaultClicked"
+        :default-high-light="treeInfo.defaultHighLight"
+        :default-expanded="treeInfo.defaultExpanded"
+        :base-data.sync="treeInfo.baseData"
+        :node-key="treeInfo.nodeKey"
+        :load-info.sync="treeInfo.loadInfo"
+        :right-menu-list="treeInfo.rightMenuList"
+        :tree-refresh="treeInfo.refresh"
+        :refresh-level="treeInfo.refreshLevel"
         @handleClickBt="handleClickBt"
-        @handleEvent="handleEvent">
-      </page-tree>
+        @handleEvent="handleEvent"
+      />
     </div>
     <div class="right">
-      <el-tabs v-model="tabActive" @tab-click="handleEvent('tabClick')">
-        <el-tab-pane label="菜单详情" name="menu">
+      <el-tabs
+        v-model="tabActive"
+        @tab-click="handleEvent('tabClick')"
+      >
+        <el-tab-pane
+          label="菜单详情"
+          name="menu"
+        >
           <!-- 卡片 -->
           <page-card
             :class="'card'"
             :title="cardInfo.title"
             :data.sync="cardInfo.data"
-            :fieldList="cardInfo.fieldList"
-            :listTypeInfo="listTypeInfo">
-          </page-card>
+            :field-list="cardInfo.fieldList"
+            :list-type-info="listTypeInfo"
+          />
         </el-tab-pane>
         <!-- 点击页面组件时显示 -->
-        <el-tab-pane label="数据权限" name="menuData" v-if="treeInfo.leftClickData.component === 1">
+        <el-tab-pane
+          v-if="treeInfo.leftClickData.component === 1"
+          label="数据权限"
+          name="menuData"
+        >
           <template>
             <div class="">
               <el-button
+                v-if="dataPerms.includes('menuMan:persCreate')"
                 v-waves
                 icon="el-icon-plus"
                 type="primary"
                 style="margin-bottom: 10px;"
-                v-if="dataPerms.includes('menuMan:persCreate')"
-                @click="handleClickBt('persCreate')">添加
+                @click="handleClickBt('persCreate')"
+              >
+                添加
               </el-button>
               <el-button
                 v-waves
                 icon="el-icon-refresh"
                 type="primary"
                 style="margin-bottom: 10px;"
-                @click="tableInfo.refresh = Math.random()">刷新
+                @click="tableInfo.refresh = Math.random()"
+              >
+                刷新
               </el-button>
             </div>
             <!-- 表格 -->
@@ -63,12 +88,12 @@
               :data.sync="tableInfo.data"
               :api="dataPermsGetAllApi"
               :query="{menuId: treeInfo.leftClickData.id}"
-              :fieldList="tableInfo.fieldList"
-              :listTypeInfo="listTypeInfo"
+              :field-list="tableInfo.fieldList"
+              :list-type-info="listTypeInfo"
               :handle="tableInfo.handle"
               @handleClickBt="handleClickBt"
-              @handleEvent="handleEvent">
-            </page-table>
+              @handleEvent="handleEvent"
+            />
           </template>
         </el-tab-pane>
       </el-tabs>
@@ -78,28 +103,47 @@
       :title="dialogInfo.title[dialogInfo.type]"
       :visible.sync="dialogInfo.visible"
       :width="dialogInfo.width"
-      :btLoading="dialogInfo.btLoading"
-      :btList="dialogInfo.btList"
+      :bt-loading="dialogInfo.btLoading"
+      :bt-list="dialogInfo.btList"
       @handleClickBt="handleClickBt"
-      @handleEvent="handleEvent">
+      @handleEvent="handleEvent"
+    >
       <!-- form -->
       <page-form
         v-if="dialogInfo.type === 'create' || dialogInfo.type === 'update'"
-        :refObj.sync="formInfo.ref"
+        :ref-obj.sync="formInfo.ref"
         :data="formInfo.data"
-        :fieldList="formInfo.fieldList"
+        :field-list="formInfo.fieldList"
         :rules="formInfo.rules"
-        :labelWidth="formInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
+        :label-width="formInfo.labelWidth"
+        :list-type-info="listTypeInfo"
+      >
         <!-- 自定义插槽--选择图标 -->
         <template v-slot:icon>
-          <el-select v-model="formInfo.data.icon" placeholder="请选择图标" filterable clearable>
+          <el-select
+            v-model="formInfo.data.icon"
+            placeholder="请选择图标"
+            filterable
+            clearable
+          >
             <template slot="prefix">
-              <i :class="'header-icon ' + formInfo.data.icon" style="vertical-align: middle; font-size: 20px; color: black" v-if="formInfo.data.icon"></i>
+              <i
+                v-if="formInfo.data.icon"
+                :class="'header-icon ' + formInfo.data.icon"
+                style="vertical-align: middle; font-size: 20px; color: black"
+              />
             </template>
-            <el-option v-for="(item, index) in  listTypeInfo.iconList" :key="index" :label="item.key" :value="item.value">
+            <el-option
+              v-for="(item, index) in listTypeInfo.iconList"
+              :key="index"
+              :label="item.key"
+              :value="item.value"
+            >
               <slot>
-                <i :class="item.value" style="display: inline-block; vertical-align: middle; width: 30px; font-size: 20px"></i>{{item.class}}
+                <i
+                  :class="item.value"
+                  style="display: inline-block; vertical-align: middle; width: 30px; font-size: 20px"
+                />{{ item.class }}
               </slot>
             </el-option>
           </el-select>
@@ -107,13 +151,13 @@
       </page-form>
       <page-form
         v-if="dialogInfo.type === 'persCreate' || dialogInfo.type === 'persUpdate'"
-        :refObj.sync="dataControlFormInfo.ref"
+        :ref-obj.sync="dataControlFormInfo.ref"
         :data="dataControlFormInfo.data"
-        :fieldList="dataControlFormInfo.fieldList"
+        :field-list="dataControlFormInfo.fieldList"
         :rules="dataControlFormInfo.rules"
-        :labelWidth="dataControlFormInfo.labelWidth"
-        :listTypeInfo="listTypeInfo">
-      </page-form>
+        :label-width="dataControlFormInfo.labelWidth"
+        :list-type-info="listTypeInfo"
+      />
     </page-dialog>
   </div>
 </template>
@@ -131,7 +175,6 @@ import PageForm from '@/components/PageForm'
 import { iconList } from './icon.js'
 
 export default {
-  mixins: [Validate, HandleApi],
   components: {
     PageTree,
     PageCard,
@@ -139,6 +182,7 @@ export default {
     PageDialog,
     PageForm
   },
+  mixins: [Validate, HandleApi],
   data () {
     return {
       createApi,
