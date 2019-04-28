@@ -110,11 +110,11 @@ function validate (obj) {
     },
     // 得到验证结果
     checkResult: function (obj) {
-      let checkType,
-        result = true,
-        message = '验证成功',
-        validatorMethods = this.validator.methods,
-        validatorMessage = this.validator.messages
+      let checkType
+      let result = true
+      let message = '验证成功'
+      const validatorMethods = this.validator.methods
+      const validatorMessage = this.validator.messages
       // 循环验证
       for (let i = 0, len = obj.rules.length; i < len; i++) {
         // 当验证的规则不存在，默认跳过这个验证
@@ -138,10 +138,10 @@ function validate (obj) {
           })
         }
         message = message.replace('{0}', obj.label)
-        return {result, message}
+        return { result, message }
       }
 
-      return {result, message}
+      return { result, message }
     }
   }
   return validatorObj.checkResult(obj)

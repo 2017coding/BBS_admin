@@ -123,25 +123,25 @@ export default {
   data () {
     return {
       dropdownList: [
-        {key: 'GitHub地址', command: 'GitHub'},
-        {key: '个人信息', command: 'userInfo'},
-        {key: '修改密码', command: 'updatePassword'},
-        {key: '退出登录', command: 'loginOut'}
+        { key: 'GitHub地址', command: 'GitHub' },
+        { key: '个人信息', command: 'userInfo' },
+        { key: '修改密码', command: 'updatePassword' },
+        { key: '退出登录', command: 'loginOut' }
       ],
       // 相关列表
       listTypeInfo: {
         sexList: [
-          {key: '女', value: 1},
-          {key: '男', value: 0}
+          { key: '女', value: 1 },
+          { key: '男', value: 0 }
         ],
         accountTypeList: [
-          {key: '手机用户', value: 0},
-          {key: '论坛用户', value: 1},
-          {key: '平台用户', value: 2}
+          { key: '手机用户', value: 0 },
+          { key: '论坛用户', value: 1 },
+          { key: '平台用户', value: 2 }
         ],
         statusList: [
-          {key: '启用', value: 1},
-          {key: '停用', value: 0}
+          { key: '启用', value: 1 },
+          { key: '停用', value: 0 }
         ]
       },
       // 表单相关
@@ -167,17 +167,17 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '账号', value: 'account', type: 'tag', required: true},
+          { label: '账号', value: 'account', type: 'tag', required: true },
           // {label: '密码', value: 'password', type: 'tag', required: true},
-          {label: '昵称', value: 'name', type: 'input', required: true},
-          {label: '性别', value: 'sex', type: 'select', list: 'sexList', required: true},
-          {label: '头像', value: 'avatar', type: 'slot', className: 'el-form-block'},
-          {label: '手机号码', value: 'phone', type: 'input'},
-          {label: '微信', value: 'wechat', type: 'input'},
-          {label: 'QQ', value: 'qq', type: 'input'},
-          {label: '邮箱', value: 'email', type: 'input'},
-          {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
-          {label: '状态', value: 'status', type: 'tag', list: 'statusList', required: true}
+          { label: '昵称', value: 'name', type: 'input', required: true },
+          { label: '性别', value: 'sex', type: 'select', list: 'sexList', required: true },
+          { label: '头像', value: 'avatar', type: 'slot', className: 'el-form-block' },
+          { label: '手机号码', value: 'phone', type: 'input' },
+          { label: '微信', value: 'wechat', type: 'input' },
+          { label: 'QQ', value: 'qq', type: 'input' },
+          { label: '邮箱', value: 'email', type: 'input' },
+          { label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block' },
+          { label: '状态', value: 'status', type: 'tag', list: 'statusList', required: true }
         ],
         rules: {},
         labelWidth: '120px'
@@ -192,8 +192,8 @@ export default {
         type: '',
         btLoading: false,
         btList: [
-          {label: '取消', type: '', icon: '', event: 'close', show: true},
-          {label: '修改', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true}
+          { label: '取消', type: '', icon: '', event: 'close', show: true },
+          { label: '修改', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true }
         ]
       },
       // 选择文件组件相关参数
@@ -242,30 +242,30 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     handleCommand (command) {
-      const dialogInfo = this.dialogInfo,
-        formInfo = this.formInfo
+      const dialogInfo = this.dialogInfo
+      const formInfo = this.formInfo
       switch (command) {
-      case 'GitHub':
-        this.$fn.openWindow('https://github.com/2017coding/BBS_admin')
-        break
-      case 'userInfo':
-        dialogInfo.type = command
-        dialogInfo.visible = true
-        // 显示信息
-        for (let key in this.userInfo) {
+        case 'GitHub':
+          this.$fn.openWindow('https://github.com/2017coding/BBS_admin')
+          break
+        case 'userInfo':
+          dialogInfo.type = command
+          dialogInfo.visible = true
+          // 显示信息
+          for (const key in this.userInfo) {
           // 存在则赋值
-          if (key in formInfo.data) {
-            formInfo.data[key] = this.userInfo[key]
+            if (key in formInfo.data) {
+              formInfo.data[key] = this.userInfo[key]
+            }
           }
-        }
-        break
-      case 'updatePassword':
-        break
-      case 'loginOut':
-        this.$store.dispatch('user/loginOut').then(() => {
-          location.reload() // 为了重新实例化vue-router对象 避免bug
-        })
-        break
+          break
+        case 'updatePassword':
+          break
+        case 'loginOut':
+          this.$store.dispatch('user/loginOut').then(() => {
+            location.reload() // 为了重新实例化vue-router对象 避免bug
+          })
+          break
       }
     },
     // 按钮点击
@@ -273,31 +273,31 @@ export default {
       const dialogInfo = this.dialogInfo
       switch (event) {
       // 弹窗点击关闭
-      case 'close':
-        dialogInfo.visible = false
-        break
-      case 'save':
-        this.formInfo.ref.validate(valid => {
-          if (valid) {
-            let api = updateApi, params = this.formInfo.data
-            params.password = '123456'
-            dialogInfo.btLoading = true
-            this._handleAPI('update', api, params).then(res => {
-              if (res.success) {
-                dialogInfo.visible = false
-                // 设置userInfo
-                this.$store.commit('user/SET_USERINFO', JSON.parse(JSON.stringify(params)))
-              }
-              dialogInfo.btLoading = false
-            }).catch(e => {
-              dialogInfo.btLoading = false
-            })
-          }
-        })
-        break
-      case 'selectAvatar':
-        this.selectFileInfo.visible = true
-        break
+        case 'close':
+          dialogInfo.visible = false
+          break
+        case 'save':
+          this.formInfo.ref.validate(valid => {
+            if (valid) {
+              const api = updateApi; const params = this.formInfo.data
+              params.password = '123456'
+              dialogInfo.btLoading = true
+              this._handleAPI('update', api, params).then(res => {
+                if (res.success) {
+                  dialogInfo.visible = false
+                  // 设置userInfo
+                  this.$store.commit('user/SET_USERINFO', JSON.parse(JSON.stringify(params)))
+                }
+                dialogInfo.btLoading = false
+              }).catch(e => {
+                dialogInfo.btLoading = false
+              })
+            }
+          })
+          break
+        case 'selectAvatar':
+          this.selectFileInfo.visible = true
+          break
       }
     },
     // 触发事件

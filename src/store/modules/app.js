@@ -29,7 +29,7 @@ const app = {
   },
   actions: {
     // 切换侧边菜单
-    toggleSideBar ({commit, state}, status) {
+    toggleSideBar ({ commit, state }, status) {
       commit('TOGGLE_SIDEBAR', status)
     }
   }

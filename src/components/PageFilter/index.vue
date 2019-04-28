@@ -121,7 +121,7 @@ export default {
           return
         }
         // 修改传入进来的参数
-        this.$emit('update:query', {...this.query, ...val})
+        this.$emit('update:query', { ...this.query, ...val })
       },
       deep: true // 深度监听
     },
@@ -135,8 +135,8 @@ export default {
   },
   methods: {
     initParams () {
-      let obj = {}
-      for (let key in this.query) {
+      const obj = {}
+      for (const key in this.query) {
         if (this.query[key]) {
           obj[key] = this.query[key]
         }

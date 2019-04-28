@@ -56,22 +56,22 @@
 </template>
 
 <script>
-import {getAllApi} from '@/api/library/folder'
-import {getAllApi as getFileAllApi} from '@/api/library/file'
+import { getAllApi } from '@/api/library/folder'
+import { getAllApi as getFileAllApi } from '@/api/library/file'
 import PageTree from '@/components/PageTree'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
 function initType (type) {
   switch (type) {
-  case 1:
-    return '文件'
-  case 2:
-    return '图片'
-  case 3:
-    return '音乐'
-  case 4:
-    return '视频'
+    case 1:
+      return '文件'
+    case 2:
+      return '图片'
+    case 3:
+      return '音乐'
+    case 4:
+      return '视频'
   }
 }
 export default {
@@ -123,7 +123,7 @@ export default {
           pKey: 'pid', // 节点父级id
           label: 'name', // 节点名称字段
           api: getAllApi, // 获取数据的接口
-          params: {data: [{key: 'type', value: this.type}], type: 'query'}
+          params: { data: [{ key: 'type', value: this.type }], type: 'query' }
         },
         leftClickData: {},
         rightClickData: {},
@@ -138,11 +138,11 @@ export default {
           type: this.type
         },
         list: [
-          {type: 'input', label: initType(this.type) + '名称', value: 'name'},
+          { type: 'input', label: initType(this.type) + '名称', value: 'name' },
           // {type: 'input', label: initType(this.type) + '类型', value: 'suffix'},
-          {type: 'select', label: '所在目录', value: 'f_id', list: 'treeList'},
+          { type: 'select', label: '所在目录', value: 'f_id', list: 'treeList' },
           // {type: 'date', label: '创建时间', value: 'create_time'},
-          {type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true}
+          { type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true }
         ]
       },
       // 表格相关
@@ -153,17 +153,17 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属目录', value: 'f_id', list: 'treeList'},
-          {label: '图片', value: 'completePath', type: 'image', hidden: this.type !== 2},
-          {label: initType(this.type) + '名称', value: 'name'},
-          {label: initType(this.type) + '类型', value: 'suffix'}
+          { label: '所属目录', value: 'f_id', list: 'treeList' },
+          { label: '图片', value: 'completePath', type: 'image', hidden: this.type !== 2 },
+          { label: initType(this.type) + '名称', value: 'name' },
+          { label: initType(this.type) + '类型', value: 'suffix' }
         ],
         handle: {
           fixed: 'right',
           label: '操作',
           width: '100',
           btList: [
-            {label: '选择', type: 'primary', icon: 'el-icon-ship', event: 'selectFile', show: true}
+            { label: '选择', type: 'primary', icon: 'el-icon-ship', event: 'selectFile', show: true }
           ]
         }
       }
@@ -188,7 +188,7 @@ export default {
       // 操作完后，树刷新，重新设置默认项
       if (!treeInfo.initTree) {
         if (treeInfo.defaultClickedAsyc || treeInfo.defaultClickedAsyc === 0) {
-          treeInfo.defaultClicked = {id: treeInfo.defaultClickedAsyc}
+          treeInfo.defaultClicked = { id: treeInfo.defaultClickedAsyc }
         }
         if (treeInfo.defaultHighLightAsyc || treeInfo.defaultHighLightAsyc === 0) {
           treeInfo.defaultHighLight = treeInfo.defaultHighLightAsyc
@@ -220,57 +220,57 @@ export default {
     },
     // 按钮点击
     handleClickBt (event, data) {
-      const treeInfo = this.treeInfo,
-        tableInfo = this.tableInfo,
-        dialogInfo = this.dialogInfo,
-        filterInfo = this.filterInfo
+      const treeInfo = this.treeInfo
+      const tableInfo = this.tableInfo
+      const dialogInfo = this.dialogInfo
+      const filterInfo = this.filterInfo
       switch (event) {
       // 搜索
-      case 'search':
+        case 'search':
         // 重置分页
-        tableInfo.refresh = Math.random()
-        // 搜索完之后要将数据对应
-        treeInfo.defaultClicked = {id: filterInfo.query.f_id}
-        treeInfo.defaultHighLight = filterInfo.query.f_id || null
-        break
-      case 'selectFile':
+          tableInfo.refresh = Math.random()
+          // 搜索完之后要将数据对应
+          treeInfo.defaultClicked = { id: filterInfo.query.f_id }
+          treeInfo.defaultHighLight = filterInfo.query.f_id || null
+          break
+        case 'selectFile':
         // 将选择的数据派发出去
-        this.$emit('input', data.completePath)
-        // 关闭弹窗
-        this.handleClose()
-        break
-      // 弹窗点击关闭
-      case 'close':
-        dialogInfo.visible = false
-        break
+          this.$emit('input', data.completePath)
+          // 关闭弹窗
+          this.handleClose()
+          break
+          // 弹窗点击关闭
+        case 'close':
+          dialogInfo.visible = false
+          break
       }
     },
     // 触发事件
     handleEvent (event, data) {
-      const treeInfo = this.treeInfo,
-        tableInfo = this.tableInfo,
-        filterInfo = this.filterInfo
+      const treeInfo = this.treeInfo
+      const tableInfo = this.tableInfo
+      const filterInfo = this.filterInfo
       switch (event) {
       // 对表格获取到的数据做处理
-      case 'list':
-        if (!data) return
-        data.forEach(item => {
-          item.size = this.$fn.bytesToSize(item.size)
-          item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
-          item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
-        })
-        break
-      // 左键点击的处理
-      case 'leftClick':
-        let obj = JSON.parse(JSON.stringify(data.data))
-        treeInfo.leftClickData = obj
-        // 重置分页
-        tableInfo.initCurpage = Math.random()
-        // 刷新列表
-        tableInfo.refresh = Math.random()
-        // 定义当前数据搜索范围
-        filterInfo.query.f_id = obj.id
-        break
+        case 'list':
+          if (!data) return
+          data.forEach(item => {
+            item.size = this.$fn.bytesToSize(item.size)
+            item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
+            item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
+          })
+          break
+          // 左键点击的处理
+        case 'leftClick':
+          const obj = JSON.parse(JSON.stringify(data.data))
+          treeInfo.leftClickData = obj
+          // 重置分页
+          tableInfo.initCurpage = Math.random()
+          // 刷新列表
+          tableInfo.refresh = Math.random()
+          // 定义当前数据搜索范围
+          filterInfo.query.f_id = obj.id
+          break
       }
     },
     // 关闭弹窗前的回调

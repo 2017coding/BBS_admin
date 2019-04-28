@@ -95,8 +95,8 @@ export default {
       // 相关列表
       listTypeInfo: {
         statusList: [
-          {key: '启用', value: 1},
-          {key: '停用', value: 0}
+          { key: '启用', value: 1 },
+          { key: '停用', value: 0 }
         ],
         treeList: []
       },
@@ -133,16 +133,16 @@ export default {
         title: '角色详情',
         data: {},
         fieldList: [
-          {label: '所属角色', value: 'pName'},
-          {label: '角色名称', value: 'name'},
-          {label: '可创建专栏数', value: 'columns'},
-          {label: '可创建用户数', value: 'users'},
-          {label: '描述', value: 'desc'},
-          {label: '状态', value: 'status', list: 'statusList'},
-          {label: '创建人', value: 'create_user_name'},
-          {label: '创建时间', value: 'create_time'},
-          {label: '更新人', value: 'update_user_name'},
-          {label: '更新时间', value: 'update_time'}
+          { label: '所属角色', value: 'pName' },
+          { label: '角色名称', value: 'name' },
+          { label: '可创建专栏数', value: 'columns' },
+          { label: '可创建用户数', value: 'users' },
+          { label: '描述', value: 'desc' },
+          { label: '状态', value: 'status', list: 'statusList' },
+          { label: '创建人', value: 'create_user_name' },
+          { label: '创建时间', value: 'create_time' },
+          { label: '更新人', value: 'update_user_name' },
+          { label: '更新时间', value: 'update_time' }
         ]
       },
       // 表单相关
@@ -161,12 +161,12 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '所属角色', value: 'pid', type: 'tag', list: 'treeList', required: true},
-          {label: '名称', value: 'name', type: 'input', required: true},
-          {label: '可创建专栏数', value: 'columns', type: 'inputNumber', min: 1, max: 1, required: true},
-          {label: '可创建用户数', value: 'users', type: 'inputNumber', min: 1, max: 10, required: true},
-          {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
-          {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
+          { label: '所属角色', value: 'pid', type: 'tag', list: 'treeList', required: true },
+          { label: '名称', value: 'name', type: 'input', required: true },
+          { label: '可创建专栏数', value: 'columns', type: 'inputNumber', min: 1, max: 1, required: true },
+          { label: '可创建用户数', value: 'users', type: 'inputNumber', min: 1, max: 10, required: true },
+          { label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block' },
+          { label: '状态', value: 'status', type: 'select', list: 'statusList', required: true }
         ],
         rules: {},
         labelWidth: '120px'
@@ -183,8 +183,8 @@ export default {
         type: '',
         btLoading: false,
         btList: [
-          {label: '关闭', type: '', icon: '', event: 'close', show: true},
-          {label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true}
+          { label: '关闭', type: '', icon: '', event: 'close', show: true },
+          { label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true }
         ]
       }
     }
@@ -224,7 +224,7 @@ export default {
       // 操作完后，树刷新，重新设置默认项
       if (treeInfo.initTree) {
         if (treeInfo.defaultClickedAsyc || treeInfo.defaultClickedAsyc === 0) {
-          treeInfo.defaultClicked = {id: treeInfo.defaultClickedAsyc}
+          treeInfo.defaultClicked = { id: treeInfo.defaultClickedAsyc }
         }
         if (treeInfo.defaultHighLightAsyc || treeInfo.defaultHighLightAsyc === 0) {
           treeInfo.defaultHighLight = treeInfo.defaultHighLightAsyc
@@ -237,7 +237,7 @@ export default {
       if (!treeInfo.initTree) {
         treeInfo.initTree = true
         // 设置默认
-        treeInfo.defaultClicked = {id: val[0].id}
+        treeInfo.defaultClicked = { id: val[0].id }
         treeInfo.defaultHighLight = val[0].id
         treeInfo.defaultExpanded = [val[0].id]
       }
@@ -247,201 +247,201 @@ export default {
         item.value = item.id
         return item
       })
-      this.listTypeInfo.treeList.unshift({key: 'admin', value: 0})
+      this.listTypeInfo.treeList.unshift({ key: 'admin', value: 0 })
     },
     // 获取列表
     getList () {
     },
     // 按钮点击
     handleClickBt (event, data) {
-      const treeInfo = this.treeInfo,
-        dialogInfo = this.dialogInfo,
-        formInfo = this.formInfo
+      const treeInfo = this.treeInfo
+      const dialogInfo = this.dialogInfo
+      const formInfo = this.formInfo
       switch (event) {
       // 弹窗点击关闭
-      case 'close':
-        dialogInfo.visible = false
-        break
-      // 弹窗点击保存
-      case 'save':
+        case 'close':
+          dialogInfo.visible = false
+          break
+          // 弹窗点击保存
+        case 'save':
         // TODO: 暂时这样处理，后面需要将多个个保存区分开来
-        if (dialogInfo.type === 'permissions') {
-          dialogInfo.btLoading = true
-          setPermissionsApi(this.roleParams).then(res => {
-            if (res.success) {
-              dialogInfo.visible = false
-            }
-            this.$message({
-              showClose: true,
-              message: res.message,
-              type: res.success ? 'success' : 'error',
-              duration: 2000
-            })
-            dialogInfo.btLoading = false
-          }).catch(() => {
-            dialogInfo.btLoading = false
-          })
-          return
-        }
-        if (dialogInfo.type === 'bindUser') {
-          dialogInfo.btLoading = true
-          setBindUserApi(this.bindUserParams).then(res => {
-            if (res.success) {
-              dialogInfo.visible = false
-            }
-            this.$message({
-              showClose: true,
-              message: res.message,
-              type: res.success ? 'success' : 'error',
-              duration: 2000
-            })
-            dialogInfo.btLoading = false
-          }).catch(() => {
-            dialogInfo.btLoading = false
-          })
-          return
-        }
-        formInfo.ref.validate(valid => {
-          if (valid) {
-            let api, params = formInfo.data,
-              type = dialogInfo.type
-            if (type === 'create') {
-              api = createApi
-            } else if (type === 'update') {
-              api = updateApi
-            } else {
-              return
-            }
+          if (dialogInfo.type === 'permissions') {
             dialogInfo.btLoading = true
-            this._handleAPI(type, api, params).then(res => {
+            setPermissionsApi(this.roleParams).then(res => {
               if (res.success) {
                 dialogInfo.visible = false
-                // 刷新树
-                treeInfo.refresh = Math.random()
-                // 设置默认项
-                if (type === 'create') {
-                  treeInfo.defaultClickedAsyc = params.pid
-                  treeInfo.defaultHighLightAsyc = params.pid
-                  treeInfo.defaultExpandedAsyc = [params.pid]
-                } else if (type === 'update') {
-                  treeInfo.defaultClickedAsyc = params.id
-                  treeInfo.defaultHighLightAsyc = params.id
-                  treeInfo.defaultExpandedAsyc = [params.pid]
-                }
               }
+              this.$message({
+                showClose: true,
+                message: res.message,
+                type: res.success ? 'success' : 'error',
+                duration: 2000
+              })
               dialogInfo.btLoading = false
-            }).catch(e => {
+            }).catch(() => {
               dialogInfo.btLoading = false
             })
+            return
           }
-        })
-        break
+          if (dialogInfo.type === 'bindUser') {
+            dialogInfo.btLoading = true
+            setBindUserApi(this.bindUserParams).then(res => {
+              if (res.success) {
+                dialogInfo.visible = false
+              }
+              this.$message({
+                showClose: true,
+                message: res.message,
+                type: res.success ? 'success' : 'error',
+                duration: 2000
+              })
+              dialogInfo.btLoading = false
+            }).catch(() => {
+              dialogInfo.btLoading = false
+            })
+            return
+          }
+          formInfo.ref.validate(valid => {
+            if (valid) {
+              let api; const params = formInfo.data
+              const type = dialogInfo.type
+              if (type === 'create') {
+                api = createApi
+              } else if (type === 'update') {
+                api = updateApi
+              } else {
+                return
+              }
+              dialogInfo.btLoading = true
+              this._handleAPI(type, api, params).then(res => {
+                if (res.success) {
+                  dialogInfo.visible = false
+                  // 刷新树
+                  treeInfo.refresh = Math.random()
+                  // 设置默认项
+                  if (type === 'create') {
+                    treeInfo.defaultClickedAsyc = params.pid
+                    treeInfo.defaultHighLightAsyc = params.pid
+                    treeInfo.defaultExpandedAsyc = [params.pid]
+                  } else if (type === 'update') {
+                    treeInfo.defaultClickedAsyc = params.id
+                    treeInfo.defaultHighLightAsyc = params.id
+                    treeInfo.defaultExpandedAsyc = [params.pid]
+                  }
+                }
+                dialogInfo.btLoading = false
+              }).catch(e => {
+                dialogInfo.btLoading = false
+              })
+            }
+          })
+          break
       }
     },
     // 触发事件
     handleEvent (event, data) {
-      const cardInfo = this.cardInfo,
-        treeInfo = this.treeInfo
+      const cardInfo = this.cardInfo
+      const treeInfo = this.treeInfo
       // formInfo = this.formInfo
       switch (event) {
       // 对表格获取到的数据做处理
-      case 'list':
-        break
-      // 左键点击的处理
-      case 'leftClick':
-        let obj = JSON.parse(JSON.stringify(data.data))
-        if (obj.columns === -1) {
-          obj.columns = '无限'
-        }
-        if (obj.users === -1) {
-          obj.users = '无限'
-        }
-        obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
-        obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
-        cardInfo.data = obj
-        break
-      // 根据右键点击创建节点对应菜单
-      case 'rightClick':
-        let arr = []
-        // 根节点
-        if (data.node.level === 1) {
-          arr = [
-            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:create')},
-            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
-          ]
-        } else {
-          arr = [
-            {name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:create')},
-            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:update')},
-            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:delete')},
-            {name: '绑定用户', type: 'bindUser', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:bindUser')},
-            {name: '分配权限', type: 'permissions', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:permissions')},
-            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
-          ]
-        }
-        treeInfo.rightMenuList = arr
-        treeInfo.rightClickData = JSON.parse(JSON.stringify(data.data))
-        break
-      // 右键菜单对应的事件处理
-      case 'rightEvent':
-        this.handleRightEvent(data.type, data)
-        break
+        case 'list':
+          break
+          // 左键点击的处理
+        case 'leftClick':
+          const obj = JSON.parse(JSON.stringify(data.data))
+          if (obj.columns === -1) {
+            obj.columns = '无限'
+          }
+          if (obj.users === -1) {
+            obj.users = '无限'
+          }
+          obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
+          obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
+          cardInfo.data = obj
+          break
+          // 根据右键点击创建节点对应菜单
+        case 'rightClick':
+          let arr = []
+          // 根节点
+          if (data.node.level === 1) {
+            arr = [
+              { name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:create') },
+              { name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true }
+            ]
+          } else {
+            arr = [
+              { name: '添加下级角色', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:create') },
+              { name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:update') },
+              { name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:delete') },
+              { name: '绑定用户', type: 'bindUser', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:bindUser') },
+              { name: '分配权限', type: 'permissions', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('roleMan:permissions') },
+              { name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true }
+            ]
+          }
+          treeInfo.rightMenuList = arr
+          treeInfo.rightClickData = JSON.parse(JSON.stringify(data.data))
+          break
+          // 右键菜单对应的事件处理
+        case 'rightEvent':
+          this.handleRightEvent(data.type, data)
+          break
       }
     },
     // 具体的右键事务处理
     handleRightEvent (type, data) {
-      const nodeData = data.data,
-        dialogInfo = this.dialogInfo,
-        formInfo = this.formInfo,
-        treeInfo = this.treeInfo
+      const nodeData = data.data
+      const dialogInfo = this.dialogInfo
+      const formInfo = this.formInfo
+      const treeInfo = this.treeInfo
       switch (type) {
-      case 'refreshTree':
+        case 'refreshTree':
         // falls through 告诉ESlint不检查这一行
-      case 'refresh':
+        case 'refresh':
         // 树刷新
-        treeInfo.initTree = false
-        treeInfo.refreshLevel = !data.node ? 0 : data.node.level
-        treeInfo.refresh = Math.random()
-        break
-      case 'create':
-        dialogInfo.type = type
-        dialogInfo.visible = true
-        // 设置参数
-        formInfo.data.pid = nodeData.id
-        break
-      case 'update':
-        dialogInfo.type = type
-        dialogInfo.visible = true
-        // 显示信息
-        for (let key in nodeData) {
+          treeInfo.initTree = false
+          treeInfo.refreshLevel = !data.node ? 0 : data.node.level
+          treeInfo.refresh = Math.random()
+          break
+        case 'create':
+          dialogInfo.type = type
+          dialogInfo.visible = true
+          // 设置参数
+          formInfo.data.pid = nodeData.id
+          break
+        case 'update':
+          dialogInfo.type = type
+          dialogInfo.visible = true
+          // 显示信息
+          for (const key in nodeData) {
           // 存在则赋值
-          if (key in formInfo.data) {
-            formInfo.data[key] = nodeData[key]
+            if (key in formInfo.data) {
+              formInfo.data[key] = nodeData[key]
+            }
           }
-        }
-        break
-      case 'delete':
-        this._handleAPI(type, deleteApi, nodeData.id).then(res => {
-          if (res.success) {
+          break
+        case 'delete':
+          this._handleAPI(type, deleteApi, nodeData.id).then(res => {
+            if (res.success) {
             // 删除后，树组件默认指针指向删除元素的父级
-            treeInfo.defaultClickedAsyc = nodeData.pid
-            treeInfo.defaultHighLightAsyc = nodeData.pid
-            treeInfo.defaultExpandedAsyc = [nodeData.pid]
-            // 刷新树
-            treeInfo.refresh = Math.random()
-          }
-        })
-        break
-      case 'bindUser':
-        dialogInfo.type = type
-        dialogInfo.title[type] = `绑定用户(${treeInfo.rightClickData.name})`
-        dialogInfo.visible = true
-        break
-      case 'permissions':
-        dialogInfo.type = type
-        dialogInfo.title[type] = `分配权限(${treeInfo.rightClickData.name})`
-        dialogInfo.visible = true
-        break
+              treeInfo.defaultClickedAsyc = nodeData.pid
+              treeInfo.defaultHighLightAsyc = nodeData.pid
+              treeInfo.defaultExpandedAsyc = [nodeData.pid]
+              // 刷新树
+              treeInfo.refresh = Math.random()
+            }
+          })
+          break
+        case 'bindUser':
+          dialogInfo.type = type
+          dialogInfo.title[type] = `绑定用户(${treeInfo.rightClickData.name})`
+          dialogInfo.visible = true
+          break
+        case 'permissions':
+          dialogInfo.type = type
+          dialogInfo.title[type] = `分配权限(${treeInfo.rightClickData.name})`
+          dialogInfo.visible = true
+          break
       }
     },
     // 初始化表单

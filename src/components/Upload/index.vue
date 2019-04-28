@@ -95,11 +95,11 @@ export default {
     },
     fileList () {
       // 将内容派发到父组件
-      this.$emit('cdHandleUpload', {fileList: this.fileList})
+      this.$emit('cdHandleUpload', { fileList: this.fileList })
     },
     uploadMessage () {
       // 将内容派发到父组件
-      this.$emit('cdHandleUpload', {uploadMessage: this.uploadMessage})
+      this.$emit('cdHandleUpload', { uploadMessage: this.uploadMessage })
     }
   },
   created () {
@@ -109,7 +109,7 @@ export default {
     // 组件初始化
     init () {
       // 设置token
-      this.headersData = {Authorization: _getSessionStore('token')}
+      this.headersData = { Authorization: _getSessionStore('token') }
       if (this.listType === 'picture') {
         // 设置上传的类型
         if (this.uploadType === 'image') {
@@ -128,24 +128,24 @@ export default {
     checkFileType (check) {
       let result = true
       switch (this.uploadType) {
-      case 'image':
-        if (check !== 'jpg' && check !== 'gif' && check !== 'png' && check !== 'bmp' && check !== 'raw' && check !== 'jpeg') {
-          this.uploadMessage = '请选择图片文件'
+        case 'image':
+          if (check !== 'jpg' && check !== 'gif' && check !== 'png' && check !== 'bmp' && check !== 'raw' && check !== 'jpeg') {
+            this.uploadMessage = '请选择图片文件'
+            result = false
+          }
+          break
+        case 'json':
+          if (check !== 'json') {
+            this.uploadMessage = '请选择json文件'
+            result = false
+          }
+          break
+        case 'file':
+          break
+        default:
+          this.uploadMessage = '请选择正确的文件格式'
           result = false
-        }
-        break
-      case 'json':
-        if (check !== 'json') {
-          this.uploadMessage = '请选择json文件'
-          result = false
-        }
-        break
-      case 'file':
-        break
-      default:
-        this.uploadMessage = '请选择正确的文件格式'
-        result = false
-        break
+          break
       }
       this.checkType = result
 
@@ -157,7 +157,7 @@ export default {
     },
     // 文件上传之前
     uploadBefore (file) {
-      let fileType = file.name.split('.'), len = fileType.length - 1
+      const fileType = file.name.split('.'); const len = fileType.length - 1
       // 判断上传文件的后缀名, 将后缀名都转换成小写做比较
       if (!this.checkFileType(fileType[len].toLowerCase())) {
         this.$refs.upload.abort(file)
@@ -189,7 +189,7 @@ export default {
         if (this.uploadNums === -1 || fileList.length < this.uploadNums) {
           this.fileList = fileList
         } else if (fileList.length > this.uploadNums) {
-          let Arr = []
+          const Arr = []
           for (let i = 0, len = this.uploadNums; i < len; i++) {
             Arr.push(fileList[fileList.length - (i + 1)])
           }

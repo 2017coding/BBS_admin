@@ -41,23 +41,23 @@ export default {
   },
   methods: {
     getData () {
-      let arr = () => {
-          let arr = []
-          for (let i = 0, len = 24; i < len; i++) {
-            arr.push(i > 9 ? i + ':00' : '0' + i + ':00')
-          }
-          return arr
-        },
-        data = () => {
-          let arr = [[], [], [], [], [], [], []]
-          arr.forEach((item, index) => {
-            for (let i = 0, len = 24; i < len; i++) {
-              let max = 10, min = 1
-              arr[index].push(Math.round(Math.random() * (max - min + 1) + min))
-            }
-          })
-          return arr
+      const arr = () => {
+        const arr = []
+        for (let i = 0, len = 24; i < len; i++) {
+          arr.push(i > 9 ? i + ':00' : '0' + i + ':00')
         }
+        return arr
+      }
+      const data = () => {
+        const arr = [[], [], [], [], [], [], []]
+        arr.forEach((item, index) => {
+          for (let i = 0, len = 24; i < len; i++) {
+            const max = 10; const min = 1
+            arr[index].push(Math.round(Math.random() * (max - min + 1) + min))
+          }
+        })
+        return arr
+      }
       this.chartList = [
         {
           title: '近七天用户登录统计',

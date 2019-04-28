@@ -14,13 +14,13 @@ function addPage (arr) {
     path: '',
     component: Layout,
     redirect: '/',
-    meta: {title: '首页', icon: ''},
+    meta: { title: '首页', icon: '' },
     children: [
       {
         path: '/',
         component: () => import('@/views/home/index'),
         name: 'home',
-        meta: {title: '首页', icon: 'el-icon-albb-homepage'},
+        meta: { title: '首页', icon: 'el-icon-albb-homepage' },
         children: []
       }
     ]
@@ -48,7 +48,7 @@ function addPage (arr) {
 }
 // 得到页面路径
 function getPath (arr, child, code) {
-  let pItem = arr.find(item => child.pid === item.id)
+  const pItem = arr.find(item => child.pid === item.id)
   // 当前元素还存在父节点, 且父节点不为根节点
   if (arr.find(item => pItem.pid === item.id && item.pid > -1)) {
     getPath(arr, pItem, `${pItem.code}/${code}`)
@@ -77,12 +77,12 @@ const permission = {
   },
   actions: {
     // 获取用户权限数据
-    getPermissions ({commit, state}) {
+    getPermissions ({ commit, state }) {
       return new Promise((resolve, reject) => {
         getPermissionsApi().then(res => {
           if (res.success) {
-            let menu = res.content.mod.filter(item => item.pid > -1),
-              dataPerms = res.content.dataPerms.map(item => item.code), baseMenu = [], treeMenu = []
+            const menu = res.content.mod.filter(item => item.pid > -1)
+            const dataPerms = res.content.dataPerms.map(item => item.code); let baseMenu = []; let treeMenu = []
             // 将菜单数据处理成可挂载的路由数据
             baseMenu = menu.map((item, index) => {
               // 对基础数据的处理
@@ -96,18 +96,18 @@ const permission = {
               item.path = '/' + item.code
               // 设置页面对应的组件 对应组件: -1. 根节点 1. 页面组件 2.默认布局 3456...扩展布局
               switch (item.component) {
-              case -1:
-                console.log('根节点，已经过滤掉了')
-                break
-              case 1:
-                item.component = resolve => require([`@/views/${getPath(menu, item, item.code)}/index`], resolve)
-                break
-              case 2:
-                item.component = Layout
-                break
-              default:
-                item.component = resolve => require(['@/views/errorPage/401'], resolve)
-                break
+                case -1:
+                  console.log('根节点，已经过滤掉了')
+                  break
+                case 1:
+                  item.component = resolve => require([`@/views/${getPath(menu, item, item.code)}/index`], resolve)
+                  break
+                case 2:
+                  item.component = Layout
+                  break
+                default:
+                  item.component = resolve => require(['@/views/errorPage/401'], resolve)
+                  break
               }
               return {
                 id: item.id,
@@ -122,7 +122,7 @@ const permission = {
             // 数据排序
             baseMenu = baseMenu.sort((a, b) => a.sort - b.sort)
             // 得到树状数组
-            treeMenu = globalFn.getTreeArr({key: 'id', pKey: 'pid', data: baseMenu})
+            treeMenu = globalFn.getTreeArr({ key: 'id', pKey: 'pid', data: baseMenu })
             // 得到静态目录
             treeMenu = addPage(treeMenu)
             // 添加不需要权限也能访问的页面
@@ -131,7 +131,7 @@ const permission = {
             resolve(treeMenu)
           } else {
             // 得到静态目录
-            let treeMenu = addPage([])
+            const treeMenu = addPage([])
             commit('SET_MENU', treeMenu, treeMenu)
             reject()
           }

@@ -26,11 +26,11 @@ export default {
   },
   methods: {
     handleScroll (e) {
-      const eventDelta = e.wheelDelta || -e.deltaY * 3,
-        $container = this.$refs.scrollContainer,
-        $containerWidth = $container.offsetWidth,
-        $wrapper = this.$refs.scrollWrapper,
-        $wrapperWidth = $wrapper.offsetWidth
+      const eventDelta = e.wheelDelta || -e.deltaY * 3
+      const $container = this.$refs.scrollContainer
+      const $containerWidth = $container.offsetWidth
+      const $wrapper = this.$refs.scrollWrapper
+      const $wrapperWidth = $wrapper.offsetWidth
       if (eventDelta > 0) {
         this.left = Math.min(0, this.left + eventDelta)
       } else {
@@ -47,13 +47,13 @@ export default {
     },
     moveToTarget ($target) {
       // 容器
-      const $container = this.$refs.scrollContainer,
-        // 容器宽度
-        $containerWidth = $container.offsetWidth,
-        // 标签左偏移
-        $targetLeft = $target.offsetLeft,
-        // 标签可见宽度
-        $targetWidth = $target.offsetWidth
+      const $container = this.$refs.scrollContainer
+      // 容器宽度
+      const $containerWidth = $container.offsetWidth
+      // 标签左偏移
+      const $targetLeft = $target.offsetLeft
+      // 标签可见宽度
+      const $targetWidth = $target.offsetWidth
       if ($targetLeft < -this.left) {
         // 标签在可视区域左侧
         this.left = -$targetLeft + padding

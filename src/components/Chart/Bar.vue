@@ -133,12 +133,12 @@ export default {
     // 初始化数据
     initData () {
       if (!this.chartData) return
-      let obj = JSON.parse(JSON.stringify(this.chartData)), arr = []
+      const obj = JSON.parse(JSON.stringify(this.chartData)); const arr = []
       obj.dataList.forEach((item, index) => {
         // 随机的颜色和特定的颜色
-        let rgb = [Math.round(Math.random() * 220), Math.round(Math.random() * 240), Math.round(Math.random() * 200)],
-          rgbList = this.rgbList,
-          color = rgbList[index] || rgb
+        const rgb = [Math.round(Math.random() * 220), Math.round(Math.random() * 240), Math.round(Math.random() * 200)]
+        const rgbList = this.rgbList
+        const color = rgbList[index] || rgb
         // 对echarts数据做处理
         item = {
           name: obj.nameList[index],
@@ -167,15 +167,15 @@ export default {
         // 根据参数判断是否显示最值
         if (this.markPoint) {
           item.markPoint = {
-            label: {show: true},
+            label: { show: true },
             data: [
-              {type: 'max', name: '最大值', label: '最大值'},
-              {type: 'min', name: '最小值', label: '最小值'}
+              { type: 'max', name: '最大值', label: '最大值' },
+              { type: 'min', name: '最小值', label: '最小值' }
             ]
           }
           item.markLine = {
             data: [
-              {type: 'average', name: '平均值'}
+              { type: 'average', name: '平均值' }
             ]
           }
         }
@@ -217,10 +217,10 @@ export default {
         toolbox: {
           show: this.toolboxShow,
           feature: {
-            dataView: {show: true, readOnly: false},
+            dataView: { show: true, readOnly: false },
             // magicType: {show: true, type: ['line', 'bar']},
             // restore: {show: true},
-            saveAsImage: {show: true}
+            saveAsImage: { show: true }
           }
         },
         grid: {

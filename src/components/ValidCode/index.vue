@@ -54,13 +54,13 @@ export default {
       this.createdCode()
     },
     createdCode () {
-      let len = this.length,
-        codeList = [],
-        chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz0123456789',
-        charsLen = chars.length
+      const len = this.length
+      const codeList = []
+      const chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz0123456789'
+      const charsLen = chars.length
       // 生成
       for (let i = 0; i < len; i++) {
-        let rgb = [Math.round(Math.random() * 220), Math.round(Math.random() * 240), Math.round(Math.random() * 200)]
+        const rgb = [Math.round(Math.random() * 220), Math.round(Math.random() * 240), Math.round(Math.random() * 200)]
         codeList.push({
           code: chars.charAt(Math.floor(Math.random() * charsLen)),
           color: `rgb(${rgb})`,

@@ -45,10 +45,10 @@ export default {
   data () {
     return {
       list: [
-        {title: '问题数', type: 'questions', total: 0, icon: 'el-icon-albb-message_fill'},
-        {title: '文章数', type: 'articles', total: 0, icon: 'el-icon-albb-createtask_fill'},
-        {title: '专栏数', type: 'columns', total: 0, icon: 'el-icon-albb-order_fill'},
-        {title: '用户数', type: 'users', total: 0, icon: 'el-icon-albb-group_fill'}
+        { title: '问题数', type: 'questions', total: 0, icon: 'el-icon-albb-message_fill' },
+        { title: '文章数', type: 'articles', total: 0, icon: 'el-icon-albb-createtask_fill' },
+        { title: '专栏数', type: 'columns', total: 0, icon: 'el-icon-albb-order_fill' },
+        { title: '用户数', type: 'users', total: 0, icon: 'el-icon-albb-group_fill' }
       ]
     }
   },
@@ -63,7 +63,7 @@ export default {
       platformDataCountApi().then(res => {
         if (res.success) {
           const data = res.content
-          for (let item of this.list) {
+          for (const item of this.list) {
             if (data[item.type]) {
               item.total = data[item.type]
             }

@@ -5,7 +5,7 @@ export default {
      */
     // 验证号码格式
     const CHECK_PHONE = (rule, value, callback) => {
-      let check = this.$validate({label: '号码', value, rules: ['phone']})
+      const check = this.$validate({ label: '号码', value, rules: ['phone'] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -14,7 +14,7 @@ export default {
     }
     // 验证号码格式以及不能为空
     const CHECK_PHONE_NOTNULL = (rule, value, callback) => {
-      let check = this.$validate({label: '号码', value, rules: ['notnull', 'phone']})
+      const check = this.$validate({ label: '号码', value, rules: ['notnull', 'phone'] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -23,7 +23,7 @@ export default {
     }
     // 检测邮箱格式
     const CHECK_EMAIL = (rule, value, callback) => {
-      let check = this.$validate({label: '邮箱', value, rules: ['email']})
+      const check = this.$validate({ label: '邮箱', value, rules: ['email'] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -32,7 +32,7 @@ export default {
     }
     // 检测邮箱格式以及不能为空
     const CHECK_EMAIL_NOTNULL = (rule, value, callback) => {
-      let check = this.$validate({label: '邮箱', value, rules: ['notnull', 'email']})
+      const check = this.$validate({ label: '邮箱', value, rules: ['notnull', 'email'] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -49,11 +49,11 @@ export default {
   methods: {
     // 初始化验证数据
     _initValidate (formInfo) {
-      const obj = {},
-        fieldList = formInfo.fieldList
+      const obj = {}
+      const fieldList = formInfo.fieldList
       // 循环字段列表
-      for (let item of fieldList) {
-        let type = item.type === 'select' ? '选择' : '输入'
+      for (const item of fieldList) {
+        const type = item.type === 'select' ? '选择' : '输入'
         if (item.required) {
           if (item.validator) {
             obj[item.value] = {

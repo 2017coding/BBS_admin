@@ -52,7 +52,7 @@ export default {
   },
   watch: {
     bindUserList (val) {
-      this.$emit('update:params', {roleId: this.roleId, user: val})
+      this.$emit('update:params', { roleId: this.roleId, user: val })
     }
   },
   created () {
@@ -82,7 +82,7 @@ export default {
       })
     },
     getBindUser () {
-      getBindUserApi({roleId: this.roleId}).then(res => {
+      getBindUserApi({ roleId: this.roleId }).then(res => {
         if (res.success) {
           this.bindUserList = res.content.map(item => {
             return item.id
@@ -107,7 +107,7 @@ export default {
         this.timerList = []
         const timer = setTimeout(() => {
           this.loading = false
-          getAllApi({name: query, create_user: this.userInfo.id === 1 ? '' : this.userInfo.id}).then(res => {
+          getAllApi({ name: query, create_user: this.userInfo.id === 1 ? '' : this.userInfo.id }).then(res => {
             if (res.success) {
               this.userList = res.content
             } else {

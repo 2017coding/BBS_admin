@@ -256,14 +256,14 @@ export default {
   methods: {
     // 处理参数
     handleParams () {
-      let obj = {}
-      for (let key in this.query) {
+      const obj = {}
+      for (const key in this.query) {
         if (this.query[key] || this.query[key] === 0) {
           obj[key] = this.query[key]
         }
       }
       // 如果不需要分页，则无分页相关参数
-      return this.pager ? {...this.listInfo.query, ...obj} : obj
+      return this.pager ? { ...this.listInfo.query, ...obj } : obj
     },
     // 得到数据
     getList (api) {
@@ -283,7 +283,7 @@ export default {
             }
             // 设置当前选中项
             this.checkedList.forEach(selected => {
-              let row = arr.find(item => {
+              const row = arr.find(item => {
                 return item.id === selected
               })
               this.$nextTick(() => {
@@ -332,14 +332,14 @@ export default {
       if (document.getElementsByClassName('el-table').length === 0) {
         return
       }
-      let boxH = document.body.clientHeight,
-        navH = document.getElementsByClassName('navbar-container')[0] ? document.getElementsByClassName('navbar-container')[0].clientHeight : 0,
-        tagH = document.getElementsByClassName('tags-view-container')[0] ? document.getElementsByClassName('tags-view-container')[0].clientHeight : 0,
-        searchH = document.getElementsByClassName('page-filter')[0] ? document.getElementsByClassName('page-filter')[0].clientHeight : 0,
-        pagerH = document.getElementsByClassName('pagination-container')[0] || {clientHeight: 0},
-        bottomH = pagerH.clientHeight ? pagerH.clientHeight + 40 : pagerH.clientHeight - 35,
-        tab = document.getElementsByClassName('el-table')[0] || {offsetTop: 0},
-        tabOffT = tab.offsetTop
+      const boxH = document.body.clientHeight
+      const navH = document.getElementsByClassName('navbar-container')[0] ? document.getElementsByClassName('navbar-container')[0].clientHeight : 0
+      const tagH = document.getElementsByClassName('tags-view-container')[0] ? document.getElementsByClassName('tags-view-container')[0].clientHeight : 0
+      const searchH = document.getElementsByClassName('page-filter')[0] ? document.getElementsByClassName('page-filter')[0].clientHeight : 0
+      const pagerH = document.getElementsByClassName('pagination-container')[0] || { clientHeight: 0 }
+      const bottomH = pagerH.clientHeight ? pagerH.clientHeight + 40 : pagerH.clientHeight - 35
+      const tab = document.getElementsByClassName('el-table')[0] || { offsetTop: 0 }
+      const tabOffT = tab.offsetTop
 
       // 表格的高度 = 视口高度 - 表格到头部导航的距离 - 头部导航的高度137 - 分页组件的高度100 - 分页组件
       document.getElementsByClassName('el-table')[0].style.height = (boxH - tabOffT - navH - tagH - searchH - bottomH) + 'px'

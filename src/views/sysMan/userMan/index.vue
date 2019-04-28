@@ -140,7 +140,7 @@ export default {
   data () {
     // 检测用户账号
     const checkAccount = (rule, value, callback) => {
-      let check = this.$validate({label: '账号', value, rules: ['notnull', 'noChinese', 'max'], conditions: [12]})
+      const check = this.$validate({ label: '账号', value, rules: ['notnull', 'noChinese', 'max'], conditions: [12] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -149,7 +149,7 @@ export default {
     }
     // 验证密码
     const checkPwd = (rule, value, callback) => {
-      let check = this.$validate({label: '密码', value, rules: ['notnull', 'length'], conditions: [6, 15]})
+      const check = this.$validate({ label: '密码', value, rules: ['notnull', 'length'], conditions: [6, 15] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -158,7 +158,7 @@ export default {
     }
     // 检测号码
     const checkPhone = (rule, value, callback) => {
-      let check = this.$validate({label: '手机号码', value, rules: ['phone']})
+      const check = this.$validate({ label: '手机号码', value, rules: ['phone'] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -167,7 +167,7 @@ export default {
     }
     // 检测非中文
     const checkWechat = (rule, value, callback) => {
-      let check = this.$validate({label: '微信', value, rules: ['noChinese', 'max'], conditions: [12]})
+      const check = this.$validate({ label: '微信', value, rules: ['noChinese', 'max'], conditions: [12] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -175,7 +175,7 @@ export default {
       }
     }
     const checkQQ = (rule, value, callback) => {
-      let check = this.$validate({label: 'QQ', value, rules: ['noChinese', 'max'], conditions: [12]})
+      const check = this.$validate({ label: 'QQ', value, rules: ['noChinese', 'max'], conditions: [12] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -184,7 +184,7 @@ export default {
     }
     // 检测邮箱
     const checkEmail = (rule, value, callback) => {
-      let check = this.$validate({label: '邮箱', value, rules: ['email', 'max'], conditions: [24]})
+      const check = this.$validate({ label: '邮箱', value, rules: ['email', 'max'], conditions: [24] })
       if (!check.result) {
         callback(new Error(check.message))
       } else {
@@ -199,17 +199,17 @@ export default {
       // 相关列表
       listTypeInfo: {
         sexList: [
-          {key: '女', value: 1},
-          {key: '男', value: 0}
+          { key: '女', value: 1 },
+          { key: '男', value: 0 }
         ],
         accountTypeList: [
-          {key: '手机用户', value: 0},
-          {key: '论坛用户', value: 1},
-          {key: '平台用户', value: 2}
+          { key: '手机用户', value: 0 },
+          { key: '论坛用户', value: 1 },
+          { key: '平台用户', value: 2 }
         ],
         statusList: [
-          {key: '启用', value: 1},
-          {key: '停用', value: 0}
+          { key: '启用', value: 1 },
+          { key: '停用', value: 0 }
         ],
         userList: []
       },
@@ -221,12 +221,12 @@ export default {
           name: ''
         },
         list: [
-          {type: 'input', label: '账户', value: 'account'},
-          {type: 'input', label: '用户名', value: 'name'},
-          {type: 'select', label: '创建人', value: 'create_user', list: 'userList'},
+          { type: 'input', label: '账户', value: 'account' },
+          { type: 'input', label: '用户名', value: 'name' },
+          { type: 'select', label: '创建人', value: 'create_user', list: 'userList' },
           // {type: 'date', label: '创建时间', value: 'create_time'},
-          {type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true},
-          {type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'create', show: false}
+          { type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true },
+          { type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'create', show: false }
         ]
       },
       // 表格相关
@@ -235,25 +235,25 @@ export default {
         initCurpage: 1,
         data: [],
         fieldList: [
-          {label: '账号', value: 'account'},
-          {label: '用户名', value: 'name'},
-          {label: '所属角色', value: 'role_name', minWidth: 120},
-          {label: '性别', value: 'sex', width: 80, list: 'sexList'},
-          {label: '账号类型', value: 'type', width: 100, list: 'accountTypeList'},
-          {label: '状态', value: 'status', width: 90, type: 'slot', list: 'statusList'},
-          {label: '创建人', value: 'create_user_name'},
-          {label: '创建时间', value: 'create_time', minWidth: 180},
-          {label: '更新人', value: 'update_user_name'},
-          {label: '更新时间', value: 'update_time', minWidth: 180}
+          { label: '账号', value: 'account' },
+          { label: '用户名', value: 'name' },
+          { label: '所属角色', value: 'role_name', minWidth: 120 },
+          { label: '性别', value: 'sex', width: 80, list: 'sexList' },
+          { label: '账号类型', value: 'type', width: 100, list: 'accountTypeList' },
+          { label: '状态', value: 'status', width: 90, type: 'slot', list: 'statusList' },
+          { label: '创建人', value: 'create_user_name' },
+          { label: '创建时间', value: 'create_time', minWidth: 180 },
+          { label: '更新人', value: 'update_user_name' },
+          { label: '更新时间', value: 'update_time', minWidth: 180 }
         ],
         handle: {
           fixed: 'right',
           label: '操作',
           width: '280',
           btList: [
-            {label: '启用', type: 'success', icon: 'el-icon-albb-supply', event: 'status', loading: 'statusLoading', show: false, slot: true},
-            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false},
-            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false}
+            { label: '启用', type: 'success', icon: 'el-icon-albb-supply', event: 'status', loading: 'statusLoading', show: false, slot: true },
+            { label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false },
+            { label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false }
           ]
         }
       },
@@ -280,17 +280,17 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '账号', value: 'account', type: 'input', required: true, validator: checkAccount},
-          {label: '密码', value: 'password', type: 'password', required: true, validator: checkPwd},
-          {label: '昵称', value: 'name', type: 'input', required: true},
-          {label: '性别', value: 'sex', type: 'select', list: 'sexList', required: true},
-          {label: '头像', value: 'avatar', type: 'slot', className: 'el-form-block'},
-          {label: '手机号码', value: 'phone', type: 'input', validator: checkPhone},
-          {label: '微信', value: 'wechat', type: 'input', validator: checkWechat},
-          {label: 'QQ', value: 'qq', type: 'input', validator: checkQQ},
-          {label: '邮箱', value: 'email', type: 'input', validator: checkEmail},
-          {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
-          {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
+          { label: '账号', value: 'account', type: 'input', required: true, validator: checkAccount },
+          { label: '密码', value: 'password', type: 'password', required: true, validator: checkPwd },
+          { label: '昵称', value: 'name', type: 'input', required: true },
+          { label: '性别', value: 'sex', type: 'select', list: 'sexList', required: true },
+          { label: '头像', value: 'avatar', type: 'slot', className: 'el-form-block' },
+          { label: '手机号码', value: 'phone', type: 'input', validator: checkPhone },
+          { label: '微信', value: 'wechat', type: 'input', validator: checkWechat },
+          { label: 'QQ', value: 'qq', type: 'input', validator: checkQQ },
+          { label: '邮箱', value: 'email', type: 'input', validator: checkEmail },
+          { label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block' },
+          { label: '状态', value: 'status', type: 'select', list: 'statusList', required: true }
         ],
         rules: {},
         labelWidth: '120px'
@@ -306,8 +306,8 @@ export default {
         type: '',
         btLoading: false,
         btList: [
-          {label: '关闭', type: '', icon: '', event: 'close', show: true},
-          {label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true}
+          { label: '关闭', type: '', icon: '', event: 'close', show: true },
+          { label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true }
         ]
       },
       // 用户转移相关信息
@@ -354,20 +354,20 @@ export default {
     'dialogInfo.type' (val) {
       const formInfo = this.formInfo
       switch (val) {
-      case 'create':
-        for (let item of formInfo.fieldList) {
-          if (item.value === 'account') {
-            item.type = 'input'
+        case 'create':
+          for (const item of formInfo.fieldList) {
+            if (item.value === 'account') {
+              item.type = 'input'
+            }
           }
-        }
-        break
-      case 'update':
-        for (let item of formInfo.fieldList) {
-          if (item.value === 'account') {
-            item.type = 'tag'
+          break
+        case 'update':
+          for (const item of formInfo.fieldList) {
+            if (item.value === 'account') {
+              item.type = 'tag'
+            }
           }
-        }
-        break
+          break
       }
     }
   },
@@ -382,14 +382,14 @@ export default {
   methods: {
     // 初始化数据权限
     initDataPerms () {
-      const btList = this.tableInfo.handle.btList,
-        btList1 = this.filterInfo.list
-      for (let item of btList1) {
+      const btList = this.tableInfo.handle.btList
+      const btList1 = this.filterInfo.list
+      for (const item of btList1) {
         if (this.dataPerms.includes('userMan:' + item.event)) {
           item.show = true
         }
       }
-      for (let item of btList) {
+      for (const item of btList) {
         if (this.dataPerms.includes('userMan:' + item.event)) {
           item.show = true
         }
@@ -436,164 +436,164 @@ export default {
     },
     // 按钮点击
     handleClickBt (event, data) {
-      const tableInfo = this.tableInfo,
-        dialogInfo = this.dialogInfo,
-        formInfo = this.formInfo,
-        userTransferInfo = this.userTransferInfo
+      const tableInfo = this.tableInfo
+      const dialogInfo = this.dialogInfo
+      const formInfo = this.formInfo
+      const userTransferInfo = this.userTransferInfo
       switch (event) {
       // 搜索
-      case 'search':
+        case 'search':
         // 重置分页
-        tableInfo.initCurpage = Math.random()
-        tableInfo.refresh = Math.random()
-        break
-      // 创建
-      case 'create':
-        dialogInfo.type = event
-        dialogInfo.visible = true
-        break
-      // 编辑
-      case 'update':
-        dialogInfo.type = event
-        dialogInfo.visible = true
-        // 显示信息
-        for (let key in data) {
+          tableInfo.initCurpage = Math.random()
+          tableInfo.refresh = Math.random()
+          break
+          // 创建
+        case 'create':
+          dialogInfo.type = event
+          dialogInfo.visible = true
+          break
+          // 编辑
+        case 'update':
+          dialogInfo.type = event
+          dialogInfo.visible = true
+          // 显示信息
+          for (const key in data) {
           // 存在则赋值
-          if (key in formInfo.data) {
-            formInfo.data[key] = data[key]
+            if (key in formInfo.data) {
+              formInfo.data[key] = data[key]
+            }
           }
-        }
-        break
-      case 'status':
-        data.statusLoading = true
-        const params = {}
-        // 设置参数
-        for (let key in data) {
+          break
+        case 'status':
+          data.statusLoading = true
+          const params = {}
+          // 设置参数
+          for (const key in data) {
           // 存在则赋值
-          if (key in formInfo.data) {
-            params[key] = data[key]
+            if (key in formInfo.data) {
+              params[key] = data[key]
+            }
           }
-        }
-        params.status = params.status - 1 >= 0 ? 0 : 1
-        this._handleAPI('update', updateApi, params).then(res => {
-          data.statusLoading = false
-          if (res.success) {
-            data.status = params.status
-          }
-        }).catch(() => {
-          data.statusLoading = false
-        })
-        break
-      // 删除
-      case 'delete':
-        // 先判断当前用户下是否有子用户，有则需要先进行权限转移后才可删除当前用户
-        getCreateUserApi(data.id).then(res => {
-          if (res.success) {
-            this._handleAPI(event, deleteApi, data.id).then(res => {
-              if (res.success) {
-                tableInfo.refresh = Math.random()
-                // 刷新用户列表
-                this.initList()
-              }
-            })
-          } else {
-            this.$confirm('该用户有创建用户，是否将创建用户转移后删除?', '提示', {
-              confirmButtonText: '下一步',
-              cancelButtonText: '取消',
-              type: 'info'
-            }).then(() => {
-              dialogInfo.type = 'userTransfer'
-              dialogInfo.visible = true
-              // 设置当前选中数据
-              userTransferInfo.user = data.id
-              userTransferInfo.userName = data.name
-              userTransferInfo.createUserList = res.result
-            }).catch(() => {
-            })
-          }
-        })
-        break
-      // 弹窗点击关闭
-      case 'close':
-        dialogInfo.visible = false
-        break
-      // 弹窗点击保存
-      case 'save':
-        // 用户转移
-        if (dialogInfo.type === 'userTransfer') {
-          if (!userTransferInfo.toUser) {
-            this.$message({
-              showClose: true,
-              message: '接收用户不能为空',
-              type: 'error',
-              duration: 2000
-            })
-            return
-          }
-          dialogInfo.btLoading = true
-          userTransferApi({user: userTransferInfo.user, toUser: userTransferInfo.toUser}).then(res => {
+          params.status = params.status - 1 >= 0 ? 0 : 1
+          this._handleAPI('update', updateApi, params).then(res => {
+            data.statusLoading = false
             if (res.success) {
-              this._handleAPI('delete', deleteApi, userTransferInfo.user).then(res => {
+              data.status = params.status
+            }
+          }).catch(() => {
+            data.statusLoading = false
+          })
+          break
+          // 删除
+        case 'delete':
+        // 先判断当前用户下是否有子用户，有则需要先进行权限转移后才可删除当前用户
+          getCreateUserApi(data.id).then(res => {
+            if (res.success) {
+              this._handleAPI(event, deleteApi, data.id).then(res => {
                 if (res.success) {
                   tableInfo.refresh = Math.random()
                   // 刷新用户列表
                   this.initList()
                 }
               })
-              dialogInfo.visible = false
-            }
-            this.$message({
-              showClose: true,
-              message: res.message,
-              type: res.success ? 'success' : 'error',
-              duration: 2000
-            })
-          }).catch(() => {
-            dialogInfo.visible = false
-          })
-          return
-        }
-        this.formInfo.ref.validate(valid => {
-          if (valid) {
-            let api, params = this.formInfo.data,
-              type = this.dialogInfo.type
-            if (type === 'create') {
-              api = createApi
-            } else if (type === 'update') {
-              api = updateApi
             } else {
+              this.$confirm('该用户有创建用户，是否将创建用户转移后删除?', '提示', {
+                confirmButtonText: '下一步',
+                cancelButtonText: '取消',
+                type: 'info'
+              }).then(() => {
+                dialogInfo.type = 'userTransfer'
+                dialogInfo.visible = true
+                // 设置当前选中数据
+                userTransferInfo.user = data.id
+                userTransferInfo.userName = data.name
+                userTransferInfo.createUserList = res.result
+              }).catch(() => {
+              })
+            }
+          })
+          break
+          // 弹窗点击关闭
+        case 'close':
+          dialogInfo.visible = false
+          break
+          // 弹窗点击保存
+        case 'save':
+        // 用户转移
+          if (dialogInfo.type === 'userTransfer') {
+            if (!userTransferInfo.toUser) {
+              this.$message({
+                showClose: true,
+                message: '接收用户不能为空',
+                type: 'error',
+                duration: 2000
+              })
               return
             }
             dialogInfo.btLoading = true
-            this._handleAPI(type, api, params).then(res => {
+            userTransferApi({ user: userTransferInfo.user, toUser: userTransferInfo.toUser }).then(res => {
               if (res.success) {
+                this._handleAPI('delete', deleteApi, userTransferInfo.user).then(res => {
+                  if (res.success) {
+                    tableInfo.refresh = Math.random()
+                    // 刷新用户列表
+                    this.initList()
+                  }
+                })
                 dialogInfo.visible = false
-                tableInfo.refresh = Math.random()
               }
-              dialogInfo.btLoading = false
-            }).catch(e => {
-              dialogInfo.btLoading = false
+              this.$message({
+                showClose: true,
+                message: res.message,
+                type: res.success ? 'success' : 'error',
+                duration: 2000
+              })
+            }).catch(() => {
+              dialogInfo.visible = false
             })
+            return
           }
-        })
-        break
-      case 'selectFile':
-        this.selectFileInfo.visible = true
-        break
+          this.formInfo.ref.validate(valid => {
+            if (valid) {
+              let api; const params = this.formInfo.data
+              const type = this.dialogInfo.type
+              if (type === 'create') {
+                api = createApi
+              } else if (type === 'update') {
+                api = updateApi
+              } else {
+                return
+              }
+              dialogInfo.btLoading = true
+              this._handleAPI(type, api, params).then(res => {
+                if (res.success) {
+                  dialogInfo.visible = false
+                  tableInfo.refresh = Math.random()
+                }
+                dialogInfo.btLoading = false
+              }).catch(e => {
+                dialogInfo.btLoading = false
+              })
+            }
+          })
+          break
+        case 'selectFile':
+          this.selectFileInfo.visible = true
+          break
       }
     },
     // 触发事件
     handleEvent (event, data) {
       switch (event) {
       // 对表格获取到的数据做处理
-      case 'list':
-        if (!data) return
-        data.forEach(item => {
-          item.statusLoading = false
-          item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
-          item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
-        })
-        break
+        case 'list':
+          if (!data) return
+          data.forEach(item => {
+            item.statusLoading = false
+            item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
+            item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
+          })
+          break
       }
     },
     // 初始化表单

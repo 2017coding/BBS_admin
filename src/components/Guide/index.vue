@@ -25,16 +25,16 @@ export default {
       default: '24px'
     }
   },
-  data() {
+  data () {
     return {
       driver: null
     }
   },
-  mounted() {
+  mounted () {
     this.driver = new Driver()
   },
   methods: {
-    guide() {
+    guide () {
       this.driver.defineSteps(steps)
       this.driver.start()
     }

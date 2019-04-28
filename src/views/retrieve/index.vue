@@ -229,25 +229,25 @@ export default {
   methods: {
     handleNext () {
       switch (this.activeSteps) {
-      case 1:
-        this.$refs.form.validate(valid => {
-          if (valid) {
-            this.activeSteps++
-          }
-        })
-        break
-      case 2:
-        this.activeSteps++
-        break
-      case 3:
-        this.activeSteps++
-        break
-      case 4:
-        this.activeSteps++
-        break
-      case 5:
-        this.activeSteps++
-        break
+        case 1:
+          this.$refs.form.validate(valid => {
+            if (valid) {
+              this.activeSteps++
+            }
+          })
+          break
+        case 2:
+          this.activeSteps++
+          break
+        case 3:
+          this.activeSteps++
+          break
+        case 4:
+          this.activeSteps++
+          break
+        case 5:
+          this.activeSteps++
+          break
       }
     }
   }

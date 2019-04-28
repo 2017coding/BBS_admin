@@ -28,14 +28,14 @@ export const baseRouter = [
     component: () => import('@/views/login/index'),
     name: '登录',
     hidden: true,
-    meta: {title: '登录', icon: ''}
+    meta: { title: '登录', icon: '' }
   },
   {
     path: '/retrieve',
     component: () => import('@/views/retrieve/index'),
     name: '找回密码',
     hidden: true,
-    meta: {title: '找回密码', icon: ''}
+    meta: { title: '找回密码', icon: '' }
   },
   // {
   //   id: 0,
@@ -228,14 +228,14 @@ export const baseRouter = [
     path: '/401',
     name: '401',
     hidden: true,
-    meta: {title: '401', icon: ''},
+    meta: { title: '401', icon: '' },
     component: () => import('@/views/errorPage/401')
   },
   {
     path: '/404',
     name: '404',
     hidden: true,
-    meta: {title: '404', icon: ''},
+    meta: { title: '404', icon: '' },
     component: () => import('@/views/errorPage/404')
   }
 ]

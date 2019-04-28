@@ -55,25 +55,25 @@ const tagsView = {
   },
   actions: {
     // 添加访问标签
-    addVisitedViews ({commit}, view) {
+    addVisitedViews ({ commit }, view) {
       commit('ADD_VISITED_VIEWS', view)
     },
     // 删除访问标签
-    delVisitedViews ({commit, state}, view) {
+    delVisitedViews ({ commit, state }, view) {
       return new Promise((resolve) => {
         commit('DEL_VISITED_VIEWS', view)
         resolve([...state.visitedViews])
       })
     },
     // 删除其他标签
-    delOthersViews ({commit, state}, view) {
+    delOthersViews ({ commit, state }, view) {
       return new Promise((resolve) => {
         commit('DEL_OTHERS_VIEWS', view)
         resolve([...state.visitedViews])
       })
     },
     // 删除所有便签
-    delAllViews ({commit, state}) {
+    delAllViews ({ commit, state }) {
       return new Promise((resolve) => {
         commit('DEL_ALL_VIEWS')
         resolve([...state.visitedViews])

@@ -1,4 +1,4 @@
-import {Message} from 'element-ui'
+import { Message } from 'element-ui'
 
 export default {
   /**
@@ -28,55 +28,55 @@ export default {
    * @return message 返回处理过的提示信息
    */
   requestError: (code, message) => {
-    let statusCode = (code + '').replace(/[^0-9]+/g, '') - 0
+    const statusCode = (code + '').replace(/[^0-9]+/g, '') - 0
 
     switch (statusCode) {
-    case 400:
-      return 'Bad Request (错误的请求)'
-    case 401:
-      return 'Unauthorized (请求要求身份验证)'
-    case 403:
-      return 'Forbidden (服务器拒绝请求)'
-    case 404:
-      return 'NOT Found (服务器找不到请求的资源)'
-    case 405:
-      return 'Bad Request (禁用请求中指定的方法)'
-    case 406:
-      return 'Not Acceptable (无法使用请求的内容特性响应请求的网页)'
-    case 407:
-      return 'Proxy Authentication Required (需要代理授权)'
-    case 408:
-      return 'Request Timed-Out (服务器等候请求时发生超时)'
-    case 409:
-      return 'Conflict (服务器在完成请求时发生冲突。服务器必须在响应中包含有关冲突的信息)'
-    case 410:
-      return 'Gone (请求的资源已被永久删除)'
-    case 411:
-      return 'Length Required (服务器不接受不含有效内容长度标头字段的请求)'
-    case 412:
-      return 'Precondition Failed (未满足前提条件)'
-    case 413:
-      return 'Request Entity Too Large (请求实体过大)'
-    case 414:
-      return 'Request, URI Too Large (请求的 URI 过长)'
-    case 415:
-      return 'Unsupported Media Type (不支持的媒体类型)'
-    case 429:
-      return '您的操作过于频繁,请稍后重试'
-    case 500:
-      return 'Internal Server Error (服务器内部错误)'
-    case 501:
-      return 'Not Implemented (尚未实施)'
-    case 502:
-      return 'Bad Gateway (错误网关)'
-    case 503:
-      return 'Server Unavailable (服务不可用)'
-    case 504:
-      return 'Gateway Timed-Out (网关超时)'
-    case 505:
-      return 'HTTP Version not supported (HTTP 版本不受支持)'
-    default:
-      return message
+      case 400:
+        return 'Bad Request (错误的请求)'
+      case 401:
+        return 'Unauthorized (请求要求身份验证)'
+      case 403:
+        return 'Forbidden (服务器拒绝请求)'
+      case 404:
+        return 'NOT Found (服务器找不到请求的资源)'
+      case 405:
+        return 'Bad Request (禁用请求中指定的方法)'
+      case 406:
+        return 'Not Acceptable (无法使用请求的内容特性响应请求的网页)'
+      case 407:
+        return 'Proxy Authentication Required (需要代理授权)'
+      case 408:
+        return 'Request Timed-Out (服务器等候请求时发生超时)'
+      case 409:
+        return 'Conflict (服务器在完成请求时发生冲突。服务器必须在响应中包含有关冲突的信息)'
+      case 410:
+        return 'Gone (请求的资源已被永久删除)'
+      case 411:
+        return 'Length Required (服务器不接受不含有效内容长度标头字段的请求)'
+      case 412:
+        return 'Precondition Failed (未满足前提条件)'
+      case 413:
+        return 'Request Entity Too Large (请求实体过大)'
+      case 414:
+        return 'Request, URI Too Large (请求的 URI 过长)'
+      case 415:
+        return 'Unsupported Media Type (不支持的媒体类型)'
+      case 429:
+        return '您的操作过于频繁,请稍后重试'
+      case 500:
+        return 'Internal Server Error (服务器内部错误)'
+      case 501:
+        return 'Not Implemented (尚未实施)'
+      case 502:
+        return 'Bad Gateway (错误网关)'
+      case 503:
+        return 'Server Unavailable (服务不可用)'
+      case 504:
+        return 'Gateway Timed-Out (网关超时)'
+      case 505:
+        return 'HTTP Version not supported (HTTP 版本不受支持)'
+      default:
+        return message
     }
   },
   /**
@@ -87,9 +87,9 @@ export default {
    */
   switchTime: (val = +new Date(), dateType = 'YYYY-MM-DD hh:mm:ss') => {
     // 将字符串转换成数字
-    let timeStamp = +new Date(val),
-      dateStr,
-      str
+    const timeStamp = +new Date(val)
+    let dateStr
+    let str
 
     // 如果转换成数字出错
     if (!timeStamp) {
@@ -118,7 +118,7 @@ export default {
     if (document.getElementById(id)) {
       document.body.removeChild(document.getElementById(id))
     }
-    let a = document.createElement('a')
+    const a = document.createElement('a')
     a.setAttribute('href', url)
     a.setAttribute('download', url)
     a.setAttribute('target', targetType)
@@ -131,7 +131,7 @@ export default {
    * @param {String} id dom的ID
    */
   copyData (value) {
-    let inputDom = document.createElement('input')
+    const inputDom = document.createElement('input')
     inputDom.value = value
     document.body.appendChild(inputDom)
     inputDom.select() // 选择对象
@@ -156,7 +156,7 @@ export default {
       console.log('getTreeArr=>请传入数组')
       return []
     }
-    let arr = obj.data, arr1 = []
+    const arr = obj.data; const arr1 = []
     // 将数据处理成数状结构
     arr.forEach(item => {
       let index = 0
@@ -209,15 +209,15 @@ export default {
     if (document.getElementsByClassName('el-table').length === 0) {
       return
     }
-    let boxH = document.body.clientHeight,
-      navH = document.getElementsByClassName('navbar-container')[0].clientHeight,
-      navInfoH = document.getElementsByClassName('nav-info')[0].clientHeight,
-      filterContainer = document.getElementsByClassName('filter-container')[0] || {clientHeight: 0},
-      filterContainerH = filterContainer.clientHeight,
-      pageContainer = document.getElementsByClassName('pagination-container')[0] || {clientHeight: 0},
-      pageContainerH = pageContainer.clientHeight ? pageContainer.clientHeight + 15 : pageContainer.clientHeight - 35,
-      tab = document.getElementsByClassName('el-table')[0] || {offsetTop: 0},
-      tabOffT = tab.offsetTop
+    const boxH = document.body.clientHeight
+    const navH = document.getElementsByClassName('navbar-container')[0].clientHeight
+    const navInfoH = document.getElementsByClassName('nav-info')[0].clientHeight
+    const filterContainer = document.getElementsByClassName('filter-container')[0] || { clientHeight: 0 }
+    const filterContainerH = filterContainer.clientHeight
+    const pageContainer = document.getElementsByClassName('pagination-container')[0] || { clientHeight: 0 }
+    const pageContainerH = pageContainer.clientHeight ? pageContainer.clientHeight + 15 : pageContainer.clientHeight - 35
+    const tab = document.getElementsByClassName('el-table')[0] || { offsetTop: 0 }
+    const tabOffT = tab.offsetTop
 
     // 表格的高度 = 视口高度 - 表格到头部导航的距离 - 头部导航的高度137 - 分页组件的高度100 - 分页组件
     document.getElementsByClassName('el-table')[0].style.height = (boxH - tabOffT - navH - navInfoH - filterContainerH - pageContainerH) + 'px'
@@ -243,7 +243,7 @@ export default {
    * @param {String} key 作为去重依据的字段 (处理对象数组时需要传入)
    * @return arr 返回处理后的数据
    */
-  handleRepeatArr ({data, key}) {
+  handleRepeatArr ({ data, key }) {
     if (!Array.isArray(data)) {
       console.log('请传入数组')
       return
@@ -271,9 +271,9 @@ export default {
     // return data
 
     /** 2.根据对象的属性不同去重 */
-    let arr = [], obj = {}
+    const arr = []; const obj = {}
     data.forEach((item, index) => {
-      let attr = key ? item[key] : item
+      const attr = key ? item[key] : item
       if (!obj[attr]) {
         obj[attr] = index + 1
         arr.push(item)
@@ -322,18 +322,18 @@ export default {
    * @return {Object}
    */
   getLocationSearch (str) {
-    let arr = str.substr(1).split('&'), obj = {}
-    for (let item of arr) {
-      let data = item.split('=')
+    const arr = str.substr(1).split('&'); const obj = {}
+    for (const item of arr) {
+      const data = item.split('=')
       obj[data[0]] = data[1]
     }
     return obj
   },
   bytesToSize (bytes) {
     if (bytes === 0) return '0 B'
-    var k = 1024, // or 1024
-      sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-      i = Math.floor(Math.log(bytes) / Math.log(k))
+    var k = 1024 // or 1024
+    var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+    var i = Math.floor(Math.log(bytes) / Math.log(k))
     return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i]
   }
 }

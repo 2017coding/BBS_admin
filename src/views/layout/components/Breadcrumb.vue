@@ -52,10 +52,10 @@ export default {
       let matched = this.$route.matched.filter(item => item.meta.title)
       const first = matched[0]
       if (first && first.name !== 'index') {
-        matched = [{path: '/', meta: { title: '' }}].concat(matched)
+        matched = [{ path: '/', meta: { title: '' }}].concat(matched)
       }
       // 当父目录和子目录名字一样的时候, 去重
-      let arr = []
+      const arr = []
       matched.forEach(item => {
         if (arr.length === 0) {
           arr.push(item)

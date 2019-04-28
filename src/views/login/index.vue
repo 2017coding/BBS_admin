@@ -102,8 +102,8 @@ export default {
   methods: {
     // 初始化记住选择
     initRemember (remember) {
-      let formInfo = this.formInfo,
-        data = formInfo.data
+      const formInfo = this.formInfo
+      const data = formInfo.data
       // 登录成功进入这里
       if (remember === true) {
         localStorage.setItem('remember', formInfo.remember)

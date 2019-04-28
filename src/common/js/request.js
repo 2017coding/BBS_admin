@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {Message, MessageBox} from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 import store from '@/store'
 import { _getSessionStore } from '@/common/js/storage'
 import globalFn from '@/common/js/utils'
@@ -19,13 +19,13 @@ service.interceptors.request.use(config => {
   }
   // 对全局参数做过滤，把不存在的参数删除
   if (config.method === 'post') {
-    for (let key in config.data) {
+    for (const key in config.data) {
       if (!config.data[key] && config.data[key] !== 0) {
         delete config.data[key]
       }
     }
   } else if (config.method === 'get') {
-    for (let key in config.params) {
+    for (const key in config.params) {
       if (!config.params[key] && config.params[key] !== 0) {
         delete config.params[key]
       }
@@ -42,7 +42,7 @@ service.interceptors.request.use(config => {
         }
       }
     } else if (typeof data === 'object') {
-      for (let key in data) {
+      for (const key in data) {
         if (typeof data[key] === 'object') {
           dataTrim(data[key])
         } else if (typeof data[key] === 'string') {
@@ -69,17 +69,17 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-    let tips = '用户信息错误', btMsg = '重新登录'
+    let tips = '用户信息错误'; let btMsg = '重新登录'
     if (res.code === 20101 || res.code === 20201) {
       switch (res.code) {
-      case 20101:
-        tips = '当前账号在其他地方登陆, 如不是本人操作，请及时修改密码'
-        btMsg = '确定'
-        break
-      case 20201:
-        tips = '用户信息错误, 请重新登录'
-        btMsg = '重新登录'
-        break
+        case 20101:
+          tips = '当前账号在其他地方登陆, 如不是本人操作，请及时修改密码'
+          btMsg = '确定'
+          break
+        case 20201:
+          tips = '用户信息错误, 请重新登录'
+          btMsg = '重新登录'
+          break
       // case 20203:
       //   tips = '用户未绑定角色，无法登陆'
       //   btMsg = '确定'
@@ -96,13 +96,13 @@ service.interceptors.response.use(
       })
       return Promise.reject('error')
     } else {
-      let data = response.data
+      const data = response.data
       return data
     }
   },
   error => {
     console.log(error) // for debug
-    let message = error.response ? globalFn.requestError(error.response.status) : '请求超时'
+    const message = error.response ? globalFn.requestError(error.response.status) : '请求超时'
     Message({
       showClose: true,
       message: message,

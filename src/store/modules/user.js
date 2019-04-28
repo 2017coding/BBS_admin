@@ -22,7 +22,7 @@ const user = {
   },
   actions: {
     // 存储Token
-    setToken ({commit}, data) {
+    setToken ({ commit }, data) {
       return new Promise((resolve, reject) => {
         commit('SET_TOKEN', data)
         // 将数据存到缓存
@@ -31,7 +31,7 @@ const user = {
       })
     },
     // 存储用户数据
-    setUserInfo ({commit, state}) {
+    setUserInfo ({ commit, state }) {
       return new Promise((resolve, reject) => {
         getUserInfoApi().then(res => {
           if (res.success) {
@@ -46,7 +46,7 @@ const user = {
       })
     },
     // 退出登录,将用户数据清除
-    loginOut ({commit, dispatch}) {
+    loginOut ({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           sessionStorage.clear()

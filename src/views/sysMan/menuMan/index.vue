@@ -203,33 +203,33 @@ export default {
           return item
         }),
         statusList: [
-          {key: '启用', value: 1},
-          {key: '停用', value: 0}
+          { key: '启用', value: 1 },
+          { key: '停用', value: 0 }
         ],
         menuTypeList: [
-          {key: '平台端', value: 1},
-          {key: '论坛端', value: 2},
-          {key: '移动端', value: 3}
+          { key: '平台端', value: 1 },
+          { key: '论坛端', value: 2 },
+          { key: '移动端', value: 3 }
         ],
         componentList: [
-          {key: '根目录', value: -1},
-          {key: '页面组件', value: 1},
-          {key: '默认布局组件', value: 2}
+          { key: '根目录', value: -1 },
+          { key: '页面组件', value: 1 },
+          { key: '默认布局组件', value: 2 }
         ],
         componentList1: [
-          {key: '页面组件', value: 1},
-          {key: '默认布局组件', value: 2}
+          { key: '页面组件', value: 1 },
+          { key: '默认布局组件', value: 2 }
         ],
         dataControlTypeList: [
-          {key: '按钮点击', value: 1},
-          {key: '右键菜单', value: 2},
-          {key: '链接访问', value: 3}
+          { key: '按钮点击', value: 1 },
+          { key: '右键菜单', value: 2 },
+          { key: '链接访问', value: 3 }
         ],
         reqTypeList: [
-          {key: 'GET', value: 1},
-          {key: 'POST', value: 2},
-          {key: 'PUT', value: 3},
-          {key: 'DELETE', value: 4}
+          { key: 'GET', value: 1 },
+          { key: 'POST', value: 2 },
+          { key: 'PUT', value: 3 },
+          { key: 'DELETE', value: 4 }
         ],
         treeList: []
       },
@@ -252,7 +252,7 @@ export default {
           pKey: 'pid', // 节点父级id
           label: 'name', // 节点名称字段
           api: getAllApi, // 获取数据的接口
-          params: {data: [{key: 'type', value: 1}], type: 'query'}
+          params: { data: [{ key: 'type', value: 1 }], type: 'query' }
         },
         leftClickData: {},
         rightClickData: {},
@@ -263,20 +263,20 @@ export default {
         title: '菜单详情',
         data: {},
         fieldList: [
-          {label: '所属菜单', value: 'pid', list: 'treeList'},
-          {label: '菜单类型', value: 'type', list: 'menuTypeList'},
-          {label: '菜单编码', value: 'code'},
-          {label: '菜单名称', value: 'name'},
-          {label: '菜单组件', value: 'component', list: 'componentList'},
-          {label: '菜单图标', value: 'icon'},
-          {label: '重定向路径', value: 'redirect'},
-          {label: '排序', value: 'sort'},
-          {label: '描述', value: 'desc'},
-          {label: '状态', value: 'status', list: 'statusList'},
-          {label: '创建人', value: 'create_user_name'},
-          {label: '创建时间', value: 'create_time'},
-          {label: '更新人', value: 'update_user_name'},
-          {label: '更新时间', value: 'update_time'}
+          { label: '所属菜单', value: 'pid', list: 'treeList' },
+          { label: '菜单类型', value: 'type', list: 'menuTypeList' },
+          { label: '菜单编码', value: 'code' },
+          { label: '菜单名称', value: 'name' },
+          { label: '菜单组件', value: 'component', list: 'componentList' },
+          { label: '菜单图标', value: 'icon' },
+          { label: '重定向路径', value: 'redirect' },
+          { label: '排序', value: 'sort' },
+          { label: '描述', value: 'desc' },
+          { label: '状态', value: 'status', list: 'statusList' },
+          { label: '创建人', value: 'create_user_name' },
+          { label: '创建时间', value: 'create_time' },
+          { label: '更新人', value: 'update_user_name' },
+          { label: '更新时间', value: 'update_time' }
         ]
       },
       // 表格相关
@@ -287,12 +287,12 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属菜单', value: 'menu_id', list: 'treeList', required: true},
-          {label: '功能类型', value: 'type', list: 'dataControlTypeList', required: true},
-          {label: '功能编码', value: 'code', required: true, minWidth: 160},
-          {label: '功能名称', value: 'name', required: true},
-          {label: '功能api', value: 'api', required: true},
-          {label: '请求方式', value: 'method', list: 'reqTypeList', required: true}
+          { label: '所属菜单', value: 'menu_id', list: 'treeList', required: true },
+          { label: '功能类型', value: 'type', list: 'dataControlTypeList', required: true },
+          { label: '功能编码', value: 'code', required: true, minWidth: 160 },
+          { label: '功能名称', value: 'name', required: true },
+          { label: '功能api', value: 'api', required: true },
+          { label: '请求方式', value: 'method', list: 'reqTypeList', required: true }
           // {label: '创建人', value: 'create_user'},
           // {label: '创建时间', value: 'create_time', minWidth: 180},
           // {label: '更新人', value: 'update_user'},
@@ -303,8 +303,8 @@ export default {
           label: '操作',
           width: '180',
           btList: [
-            {label: '编辑', type: '', icon: 'el-icon-edit', event: 'persUpdate', show: false},
-            {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'persDelete', show: false}
+            { label: '编辑', type: '', icon: 'el-icon-edit', event: 'persUpdate', show: false },
+            { label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'persDelete', show: false }
           ]
         }
       },
@@ -329,16 +329,16 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '所属菜单', value: 'pid', type: 'select', list: 'treeList', required: true},
-          {label: '菜单类型', value: 'type', type: 'tag', list: 'menuTypeList', required: true},
-          {label: '菜单编码', value: 'code', type: 'input', required: true},
-          {label: '菜单名称', value: 'name', type: 'input', required: true},
-          {label: '菜单组件', value: 'component', type: 'select', list: 'componentList1', required: true},
-          {label: '菜单图标', value: 'icon', type: 'slot', filterable: true},
-          {label: '重定向路径', value: 'redirect', type: 'input'},
-          {label: '排序', value: 'sort', type: 'input', required: true},
-          {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
-          {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
+          { label: '所属菜单', value: 'pid', type: 'select', list: 'treeList', required: true },
+          { label: '菜单类型', value: 'type', type: 'tag', list: 'menuTypeList', required: true },
+          { label: '菜单编码', value: 'code', type: 'input', required: true },
+          { label: '菜单名称', value: 'name', type: 'input', required: true },
+          { label: '菜单组件', value: 'component', type: 'select', list: 'componentList1', required: true },
+          { label: '菜单图标', value: 'icon', type: 'slot', filterable: true },
+          { label: '重定向路径', value: 'redirect', type: 'input' },
+          { label: '排序', value: 'sort', type: 'input', required: true },
+          { label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block' },
+          { label: '状态', value: 'status', type: 'select', list: 'statusList', required: true }
         ],
         rules: {},
         labelWidth: '120px'
@@ -359,12 +359,12 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          {label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true},
-          {label: '功能类型', value: 'type', type: 'select', list: 'dataControlTypeList', required: true},
-          {label: '功能编码', value: 'code', type: 'input', required: true},
-          {label: '功能名称', value: 'name', type: 'input', required: true},
-          {label: '功能api', value: 'api', type: 'input'},
-          {label: '请求方式', value: 'method', type: 'select', list: 'reqTypeList', required: true}
+          { label: '所属菜单', value: 'menu_id', type: 'tag', list: 'treeList', required: true },
+          { label: '功能类型', value: 'type', type: 'select', list: 'dataControlTypeList', required: true },
+          { label: '功能编码', value: 'code', type: 'input', required: true },
+          { label: '功能名称', value: 'name', type: 'input', required: true },
+          { label: '功能api', value: 'api', type: 'input' },
+          { label: '请求方式', value: 'method', type: 'select', list: 'reqTypeList', required: true }
         ],
         rules: {},
         labelWidth: '120px'
@@ -381,8 +381,8 @@ export default {
         type: '',
         btLoading: false,
         btList: [
-          {label: '关闭', type: '', icon: '', event: 'close', show: true},
-          {label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true}
+          { label: '关闭', type: '', icon: '', event: 'close', show: true },
+          { label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true }
         ]
       }
     }
@@ -395,8 +395,8 @@ export default {
   },
   watch: {
     'dialogInfo.visible' (val) {
-      const formInfo = this.formInfo,
-        dataControlFormInfo = this.dataControlFormInfo
+      const formInfo = this.formInfo
+      const dataControlFormInfo = this.dataControlFormInfo
       if (!val) {
         // 表单验证初始化
         if (formInfo.ref) {
@@ -444,7 +444,7 @@ export default {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      for (let item of btList) {
+      for (const item of btList) {
         if (this.dataPerms.includes('menuMan:' + item.event)) {
           item.show = true
         }
@@ -455,7 +455,7 @@ export default {
       // 操作完后，树刷新，重新设置默认项
       if (treeInfo.initTree) {
         if (treeInfo.defaultClickedAsyc || treeInfo.defaultClickedAsyc === 0) {
-          treeInfo.defaultClicked = {id: treeInfo.defaultClickedAsyc}
+          treeInfo.defaultClicked = { id: treeInfo.defaultClickedAsyc }
         }
         if (treeInfo.defaultHighLightAsyc || treeInfo.defaultHighLightAsyc === 0) {
           treeInfo.defaultHighLight = treeInfo.defaultHighLightAsyc
@@ -470,7 +470,7 @@ export default {
         // 容错处理
         val[0] = val[0] ? val[0] : {}
         // 设置默认
-        treeInfo.defaultClicked = {id: val[0].id}
+        treeInfo.defaultClicked = { id: val[0].id }
         treeInfo.defaultHighLight = val[0].id
         treeInfo.defaultExpanded = [val[0].id]
       }
@@ -486,93 +486,93 @@ export default {
     },
     // 按钮点击
     handleClickBt (event, data) {
-      const treeInfo = this.treeInfo,
-        tableInfo = this.tableInfo,
-        dialogInfo = this.dialogInfo,
-        formInfo = this.formInfo,
-        dataControlFormInfo = this.dataControlFormInfo
+      const treeInfo = this.treeInfo
+      const tableInfo = this.tableInfo
+      const dialogInfo = this.dialogInfo
+      const formInfo = this.formInfo
+      const dataControlFormInfo = this.dataControlFormInfo
       switch (event) {
-      case 'persCreate':
-        dialogInfo.type = event
-        dialogInfo.visible = true
-        // 设置参数
-        dataControlFormInfo.data.menu_id = treeInfo.leftClickData.id
-        break
-      case 'persUpdate':
-        dialogInfo.type = event
-        dialogInfo.visible = true
-        // 显示信息
-        for (let key in data) {
+        case 'persCreate':
+          dialogInfo.type = event
+          dialogInfo.visible = true
+          // 设置参数
+          dataControlFormInfo.data.menu_id = treeInfo.leftClickData.id
+          break
+        case 'persUpdate':
+          dialogInfo.type = event
+          dialogInfo.visible = true
+          // 显示信息
+          for (const key in data) {
           // 存在则赋值
-          if (key in dataControlFormInfo.data) {
-            dataControlFormInfo.data[key] = data[key]
-          }
-        }
-        break
-      case 'persDelete':
-        this._handleAPI('delete', dataPermsDeleteApi, data.id).then(res => {
-          if (res.success) {
-            tableInfo.refresh = Math.random()
-          }
-        })
-        break
-      // 弹窗点击关闭
-      case 'close':
-        dialogInfo.visible = false
-        break
-      // 弹窗点击保存
-      case 'save':
-        let api, params, type = dialogInfo.type, ref
-        if (type === 'create' || type === 'update') {
-          params = formInfo.data
-          ref = formInfo.ref
-        } else if (type === 'persCreate' || type === 'persUpdate') {
-          params = dataControlFormInfo.data
-          ref = dataControlFormInfo.ref
-        } else {
-          return
-        }
-        ref.validate(valid => {
-          if (valid) {
-            if (type === 'create') {
-              api = createApi
-            } else if (type === 'update') {
-              api = updateApi
-            } else if (type === 'persCreate') {
-              api = dataPermsCreateApi
-            } else if (type === 'persUpdate') {
-              api = dataPermsUpdateApi
-            } else {
-              return
+            if (key in dataControlFormInfo.data) {
+              dataControlFormInfo.data[key] = data[key]
             }
-            dialogInfo.btLoading = true
-            this._handleAPI(this.getApiType(type), api, params).then(res => {
-              if (res.success) {
-                dialogInfo.visible = false
-                // 设置默认项
-                if (type === 'create') {
-                  treeInfo.defaultClickedAsyc = params.pid
-                  treeInfo.defaultHighLightAsyc = params.pid
-                  treeInfo.defaultExpandedAsyc = [params.pid]
-                  // 刷新树
-                  treeInfo.refresh = Math.random()
-                } else if (type === 'update') {
-                  treeInfo.defaultClickedAsyc = params.id
-                  treeInfo.defaultHighLightAsyc = params.id
-                  treeInfo.defaultExpandedAsyc = [params.pid]
-                  // 刷新树
-                  treeInfo.refresh = Math.random()
-                } else if (type === 'persCreate' || type === 'persUpdate') {
-                  tableInfo.refresh = Math.random()
-                }
-              }
-              dialogInfo.btLoading = false
-            }).catch(e => {
-              dialogInfo.btLoading = false
-            })
           }
-        })
-        break
+          break
+        case 'persDelete':
+          this._handleAPI('delete', dataPermsDeleteApi, data.id).then(res => {
+            if (res.success) {
+              tableInfo.refresh = Math.random()
+            }
+          })
+          break
+          // 弹窗点击关闭
+        case 'close':
+          dialogInfo.visible = false
+          break
+          // 弹窗点击保存
+        case 'save':
+          let api; let params; const type = dialogInfo.type; let ref
+          if (type === 'create' || type === 'update') {
+            params = formInfo.data
+            ref = formInfo.ref
+          } else if (type === 'persCreate' || type === 'persUpdate') {
+            params = dataControlFormInfo.data
+            ref = dataControlFormInfo.ref
+          } else {
+            return
+          }
+          ref.validate(valid => {
+            if (valid) {
+              if (type === 'create') {
+                api = createApi
+              } else if (type === 'update') {
+                api = updateApi
+              } else if (type === 'persCreate') {
+                api = dataPermsCreateApi
+              } else if (type === 'persUpdate') {
+                api = dataPermsUpdateApi
+              } else {
+                return
+              }
+              dialogInfo.btLoading = true
+              this._handleAPI(this.getApiType(type), api, params).then(res => {
+                if (res.success) {
+                  dialogInfo.visible = false
+                  // 设置默认项
+                  if (type === 'create') {
+                    treeInfo.defaultClickedAsyc = params.pid
+                    treeInfo.defaultHighLightAsyc = params.pid
+                    treeInfo.defaultExpandedAsyc = [params.pid]
+                    // 刷新树
+                    treeInfo.refresh = Math.random()
+                  } else if (type === 'update') {
+                    treeInfo.defaultClickedAsyc = params.id
+                    treeInfo.defaultHighLightAsyc = params.id
+                    treeInfo.defaultExpandedAsyc = [params.pid]
+                    // 刷新树
+                    treeInfo.refresh = Math.random()
+                  } else if (type === 'persCreate' || type === 'persUpdate') {
+                    tableInfo.refresh = Math.random()
+                  }
+                }
+                dialogInfo.btLoading = false
+              }).catch(e => {
+                dialogInfo.btLoading = false
+              })
+            }
+          })
+          break
       }
     },
     // 返回对应的api类型
@@ -587,117 +587,117 @@ export default {
     },
     // 触发事件
     handleEvent (event, data) {
-      const cardInfo = this.cardInfo,
-        treeInfo = this.treeInfo,
-        tableInfo = this.tableInfo
+      const cardInfo = this.cardInfo
+      const treeInfo = this.treeInfo
+      const tableInfo = this.tableInfo
       switch (event) {
       // 对表格获取到的数据做处理
-      case 'list':
-        if (!data) return
-        data.forEach(item => {
-          item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
-          item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
-        })
-        break
-      case 'tabClick':
+        case 'list':
+          if (!data) return
+          data.forEach(item => {
+            item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
+            item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
+          })
+          break
+        case 'tabClick':
         // 懒加载，第一次点击，刷新列表
-        if (this.tabActive === 'menuData' && !tableInfo.initTable) {
-          tableInfo.initTable = true
-          tableInfo.refresh = !tableInfo.refresh
-        }
-        break
-      // 左键点击的处理
-      case 'leftClick':
-        let obj = JSON.parse(JSON.stringify(data.data))
-        if (obj.columns === -1) {
-          obj.columns = '无限'
-        }
-        if (obj.users === -1) {
-          obj.users = '无限'
-        }
-        obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
-        obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
-        cardInfo.data = obj
-        treeInfo.leftClickData = obj
-        // tab为数据权限页面，点击刷新表格
-        if (this.tabActive === 'menuData') {
-          tableInfo.data = []
-          tableInfo.refresh = Math.random()
-        }
-        // 点击不为页面组件，tab显示为菜单详情
-        if (obj.component !== 1) {
-          this.tabActive = 'menu'
-        }
-        break
-      // 根据右键点击创建节点对应菜单
-      case 'rightClick':
-        let arr = []
-        // 根节点
-        if (data.node.level === 1) {
-          arr = [
-            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:create')},
-            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
-          ]
-        } else {
-          arr = [
-            {name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:create')},
-            {name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:update')},
-            {name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:delete')},
-            {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
-          ]
-        }
-        this.treeInfo.rightMenuList = arr
-        break
-      // 右键菜单对应的事件处理
-      case 'rightEvent':
-        this.handleRightEvent(data.type, data)
-        break
+          if (this.tabActive === 'menuData' && !tableInfo.initTable) {
+            tableInfo.initTable = true
+            tableInfo.refresh = !tableInfo.refresh
+          }
+          break
+          // 左键点击的处理
+        case 'leftClick':
+          const obj = JSON.parse(JSON.stringify(data.data))
+          if (obj.columns === -1) {
+            obj.columns = '无限'
+          }
+          if (obj.users === -1) {
+            obj.users = '无限'
+          }
+          obj.create_time = this.$fn.switchTime(obj.create_time, 'YYYY-MM-DD hh:mm:ss')
+          obj.update_time = this.$fn.switchTime(obj.update_time, 'YYYY-MM-DD hh:mm:ss')
+          cardInfo.data = obj
+          treeInfo.leftClickData = obj
+          // tab为数据权限页面，点击刷新表格
+          if (this.tabActive === 'menuData') {
+            tableInfo.data = []
+            tableInfo.refresh = Math.random()
+          }
+          // 点击不为页面组件，tab显示为菜单详情
+          if (obj.component !== 1) {
+            this.tabActive = 'menu'
+          }
+          break
+          // 根据右键点击创建节点对应菜单
+        case 'rightClick':
+          let arr = []
+          // 根节点
+          if (data.node.level === 1) {
+            arr = [
+              { name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:create') },
+              { name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true }
+            ]
+          } else {
+            arr = [
+              { name: '添加下级菜单', type: 'create', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:create') },
+              { name: '编辑', type: 'update', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:update') },
+              { name: '删除', type: 'delete', data: data.data, node: data.node, vm: data.vm, show: this.dataPerms.includes('menuMan:delete') },
+              { name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true }
+            ]
+          }
+          this.treeInfo.rightMenuList = arr
+          break
+          // 右键菜单对应的事件处理
+        case 'rightEvent':
+          this.handleRightEvent(data.type, data)
+          break
       }
     },
     // 具体的右键事务处理
     handleRightEvent (type, data) {
-      const nodeData = data.data,
-        dialogInfo = this.dialogInfo,
-        formInfo = this.formInfo,
-        treeInfo = this.treeInfo
+      const nodeData = data.data
+      const dialogInfo = this.dialogInfo
+      const formInfo = this.formInfo
+      const treeInfo = this.treeInfo
       switch (type) {
-      case 'refreshTree':
+        case 'refreshTree':
         // falls through 告诉ESlint不检查这一行
-      case 'refresh':
+        case 'refresh':
         // 树刷新
-        treeInfo.initTree = false
-        treeInfo.refreshLevel = !data.node ? 0 : data.node.level
-        treeInfo.refresh = Math.random()
-        break
-      case 'create':
-        dialogInfo.type = type
-        dialogInfo.visible = true
-        // 设置参数
-        formInfo.data.pid = nodeData.id
-        break
-      case 'update':
-        dialogInfo.type = type
-        dialogInfo.visible = true
-        // 显示信息
-        for (let key in nodeData) {
+          treeInfo.initTree = false
+          treeInfo.refreshLevel = !data.node ? 0 : data.node.level
+          treeInfo.refresh = Math.random()
+          break
+        case 'create':
+          dialogInfo.type = type
+          dialogInfo.visible = true
+          // 设置参数
+          formInfo.data.pid = nodeData.id
+          break
+        case 'update':
+          dialogInfo.type = type
+          dialogInfo.visible = true
+          // 显示信息
+          for (const key in nodeData) {
           // 存在则赋值
-          if (key in formInfo.data) {
-            formInfo.data[key] = nodeData[key]
+            if (key in formInfo.data) {
+              formInfo.data[key] = nodeData[key]
+            }
           }
-        }
-        break
-      case 'delete':
-        this._handleAPI(type, deleteApi, nodeData.id).then(res => {
-          if (res.success) {
+          break
+        case 'delete':
+          this._handleAPI(type, deleteApi, nodeData.id).then(res => {
+            if (res.success) {
             // 删除后，树组件默认指针指向删除元素的父级
-            treeInfo.defaultClickedAsyc = nodeData.pid
-            treeInfo.defaultHighLightAsyc = nodeData.pid
-            treeInfo.defaultExpandedAsyc = [nodeData.pid]
-            // 刷新树
-            treeInfo.refresh = Math.random()
-          }
-        })
-        break
+              treeInfo.defaultClickedAsyc = nodeData.pid
+              treeInfo.defaultHighLightAsyc = nodeData.pid
+              treeInfo.defaultExpandedAsyc = [nodeData.pid]
+              // 刷新树
+              treeInfo.refresh = Math.random()
+            }
+          })
+          break
       }
     },
     // 初始化表单

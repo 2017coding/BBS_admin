@@ -26,7 +26,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import {AppMain, Sidebar, Navbar, TagsView} from './components'
+import { AppMain, Sidebar, Navbar, TagsView } from './components'
 
 export default {
   name: 'Layout',
@@ -61,7 +61,7 @@ export default {
   methods: {
     // 全屏显示
     handleFullScreen (event) {
-      let e = event || window.event
+      const e = event || window.event
       // 按下 shift + F11 组合 全屏显示
       if (e.keyCode === 122 && e.shiftKey) {
         // this.fullScreen = !this.fullScreen
@@ -93,7 +93,7 @@ export default {
           duration: 30000,
           offset: 50
         })
-      }, 200)  
+      }, 200)
       setTimeout(() => {
         this.$notify({
           title: '用户管理',

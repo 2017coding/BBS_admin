@@ -78,7 +78,7 @@ export default {
             label: 'name',
             type: '',
             api: () => {},
-            params: {key: '', value: '', type: 'url'}, // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
+            params: { key: '', value: '', type: 'url' }, // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
             leaf: true
           }
         ]
@@ -95,7 +95,7 @@ export default {
           key: 'id',
           label: 'name',
           api: () => {},
-          params: {key: '', value: '', type: 'url'} // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
+          params: { key: '', value: '', type: 'url' } // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
         }
       }
     },
@@ -210,7 +210,7 @@ export default {
     },
     treeRefresh (val) {
       if (this.lazy) {
-        let level = 'node' + (this.refreshLevel - 1 >= 0 ? this.refreshLevel - 1 : 0)
+        const level = 'node' + (this.refreshLevel - 1 >= 0 ? this.refreshLevel - 1 : 0)
         this.nodeInfoList[level].node.childNodes = [] // 清空子节点, 保证数据不会重复渲染
         this.handleLoadNode(this.nodeInfoList[level].node, this.nodeInfoList[level].resolve)
       } else {
@@ -229,7 +229,7 @@ export default {
     defaultClicked (val) {
       if (!val.id) return
       const data = this.lazy ? this.lazyInfo : this.loadInfo
-      this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(data.key, this.baseData, val.id)})
+      this.$emit('handleEvent', 'leftClick', { data: this.getSelectData(data.key, this.baseData, val.id) })
     },
     // 设置选中的节点，直接使用这个属性可能会导致父节点勾中，子节点全部选中的问题
     defaultChecked (val) {
@@ -257,16 +257,16 @@ export default {
       let dom
       if (data.leaf) {
         dom = (
-          <p class="custom-tree-node">
+          <p class='custom-tree-node'>
             <img src={require('@/assets/image/doc.png')}></img>
-            <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
+            <span style='margin-left:5px;' title={data.desc}>{node.label}</span>
           </p>
         )
       } else {
         dom = (
-          <p class="custom-tree-node">
+          <p class='custom-tree-node'>
             <img src={node.expanded ? require('@/assets/image/file-open.png') : require('@/assets/image/file-close.png')}></img>
-            <span style="margin-left:5px;" title={data.desc}>{node.label}</span>
+            <span style='margin-left:5px;' title={data.desc}>{node.label}</span>
           </p>
         )
       }
@@ -282,12 +282,12 @@ export default {
       if (!this.rightClick) return
       // 初始菜单
       this.rightMenu.list = [
-        {name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true}
+        { name: '刷新', type: 'refreshTree', data: null, node: null, vm: null, show: true }
       ]
       // 显示菜单，并且根据点击的位置生成菜单显示的坐标
       this.rightMenu.show = true
-      let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-        len = this.rightMenu.list.length, top
+      const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+      const len = this.rightMenu.list.length; let top
       if (len * 30 + e.clientY > h) {
         top = e.clientY - len * 30
       } else {
@@ -300,15 +300,15 @@ export default {
     handleClickLeft (data, node, vm) {
       // 关闭菜单
       this.handlecCloseMenu()
-      this.$emit('handleEvent', 'leftClick', {data, node, vm})
+      this.$emit('handleEvent', 'leftClick', { data, node, vm })
     },
     // 右键的点击事件 => 参数依次为 event, 数据， 节点， 节点组件本身
     handleClickRight (e, data, node, vm) {
       if (!this.rightClick) return
       // 显示菜单，并且根据点击的位置生成菜单显示的坐标
       this.rightMenu.show = true
-      let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
-        len = this.rightMenu.list.length, top
+      const h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+      const len = this.rightMenu.list.length; let top
       if (len * 30 + e.clientY > h) {
         top = e.clientY - len * 30
       } else {
@@ -316,11 +316,11 @@ export default {
       }
       this.rightMenu.left = e.clientX
       this.rightMenu.top = top
-      this.$emit('handleEvent', 'rightClick', {data, node, vm})
+      this.$emit('handleEvent', 'rightClick', { data, node, vm })
     },
     // 右键的事件触发， 派发到父组件处理
     handleRightEvent (type, data, node, vm) {
-      this.$emit('handleEvent', 'rightEvent', {type, data, node, vm})
+      this.$emit('handleEvent', 'rightEvent', { type, data, node, vm })
     },
     // 关闭右键菜单
     handlecCloseMenu () {
@@ -336,7 +336,7 @@ export default {
       checkeds = this.$refs.TreeComponent.getCheckedNodes()
       checkedKeys = this.$refs.TreeComponent.getCheckedKeys()
       // 将当前选择的数据派发到父级处理
-      this.$emit('handleEvent', 'treeCheck', {haleKeys: haleKeys.concat(checkedKeys), halfs: halfs.concat(checkeds)})
+      this.$emit('handleEvent', 'treeCheck', { haleKeys: haleKeys.concat(checkedKeys), halfs: halfs.concat(checkeds) })
     },
     // 是否可以放置, 设置为只能同一层级拖拽
     handleDrop (draggingNode, dropNode, type) {
@@ -348,9 +348,9 @@ export default {
       if (this.lazy) return
       // 加载loading
       this.treeLoading = true
-      let treeProps = this.treeProps,
-        loadInfo = this.loadInfo,
-        params = loadInfo.params || {}, data
+      const treeProps = this.treeProps
+      const loadInfo = this.loadInfo
+      const params = loadInfo.params || {}; let data
       if (params.type === 'url') {
         data = params.value
       } else if (params.type === 'query') {
@@ -382,10 +382,10 @@ export default {
             // 设置默认点击
             if ((this.defaultClicked && (this.defaultClicked.id || this.defaultClicked.id === 0))) {
               // 页面初始化，设置默认点击项， 并将点击事件派发到父级
-              this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(loadInfo.key, this.baseData, this.defaultClicked.id)})
+              this.$emit('handleEvent', 'leftClick', { data: this.getSelectData(loadInfo.key, this.baseData, this.defaultClicked.id) })
             }
           }
-          this.treeData = this.$fn.getTreeArr({key: loadInfo.key, pKey: loadInfo.pKey, data: arr})
+          this.treeData = this.$fn.getTreeArr({ key: loadInfo.key, pKey: loadInfo.pKey, data: arr })
         } else {
           this.$message({
             showClose: true,
@@ -403,7 +403,7 @@ export default {
     },
     // 在树状数据中找到某一条数据
     getSelectData (key, data, val) {
-      for (let item of data) {
+      for (const item of data) {
         if (item[key] === val) {
           return item
         }
@@ -416,12 +416,12 @@ export default {
         this.treeLoading = true
       }
       // 存下每个懒加载的数据
-      this.$set(this.nodeInfoList, 'node' + node.level, {node, resolve})
+      this.$set(this.nodeInfoList, 'node' + node.level, { node, resolve })
       // 懒加载延迟时间
-      let timeStamp = 100,
-        treeProps = this.treeProps,
-        levelInfo = this.lazyInfo[node.level],
-        params = levelInfo.params, data
+      const timeStamp = 100
+      const treeProps = this.treeProps
+      const levelInfo = this.lazyInfo[node.level]
+      const params = levelInfo.params; let data
       if (params.type === 'url') {
         data = this.refreshLevel > 0 ? node.data[levelInfo.key] : params.value || params.value === 0 ? params.value : node.data[levelInfo.key]
       } else if (params.type === 'query') {
@@ -456,7 +456,7 @@ export default {
             // 设置默认点击
             if ((this.defaultClicked && (this.defaultClicked.id || this.defaultClicked.id === 0))) {
               // 页面初始化，设置默认点击项， 并将点击事件派发到父级
-              this.$emit('handleEvent', 'leftClick', {data: this.getSelectData(levelInfo.key, this.baseData, this.defaultClicked.id)})
+              this.$emit('handleEvent', 'leftClick', { data: this.getSelectData(levelInfo.key, this.baseData, this.defaultClicked.id) })
             }
           }
         } else {

@@ -96,29 +96,29 @@ export default {
       // 相关列表
       listTypeInfo: {
         statusList: [
-          {key: '启用', value: 1},
-          {key: '停用', value: 0}
+          { key: '启用', value: 1 },
+          { key: '停用', value: 0 }
         ],
         menuTypeList: [
-          {key: '平台端', value: 1, status: false},
-          {key: '论坛端', value: 2, status: false},
-          {key: '移动端', value: 3, status: false}
+          { key: '平台端', value: 1, status: false },
+          { key: '论坛端', value: 2, status: false },
+          { key: '移动端', value: 3, status: false }
         ],
         componentsList: [
-          {key: '根目录', value: -1},
-          {key: '页面组件', value: 1},
-          {key: '默认布局组件', value: 2}
+          { key: '根目录', value: -1 },
+          { key: '页面组件', value: 1 },
+          { key: '默认布局组件', value: 2 }
         ],
         dataControlTypeList: [
-          {key: '按钮点击', value: 1},
-          {key: '右键菜单', value: 2},
-          {key: '链接访问', value: 3}
+          { key: '按钮点击', value: 1 },
+          { key: '右键菜单', value: 2 },
+          { key: '链接访问', value: 3 }
         ],
         reqTypeList: [
-          {key: 'GET', value: 1},
-          {key: 'POST', value: 2},
-          {key: 'PUT', value: 3},
-          {key: 'DELETE', value: 4}
+          { key: 'GET', value: 1 },
+          { key: 'POST', value: 2 },
+          { key: 'PUT', value: 3 },
+          { key: 'DELETE', value: 4 }
         ],
         treeList: []
       },
@@ -142,7 +142,7 @@ export default {
           pKey: 'pid', // 节点父级id
           label: 'name', // 节点名称字段
           api: getRoleMenuApi, // 获取数据的接口
-          params: {data: [{key: 'type', value: 1}, {key: 'roleId', value: this.rolePId}], type: 'query'}
+          params: { data: [{ key: 'type', value: 1 }, { key: 'roleId', value: this.rolePId }], type: 'query' }
         },
         leftClickData: {}
       },
@@ -154,10 +154,10 @@ export default {
         pager: false,
         data: [],
         fieldList: [
-          {label: '所属菜单', value: 'menu_id', list: 'treeList', required: true},
-          {label: '触发类型', value: 'type', list: 'dataControlTypeList', required: true},
+          { label: '所属菜单', value: 'menu_id', list: 'treeList', required: true },
+          { label: '触发类型', value: 'type', list: 'dataControlTypeList', required: true },
           // {label: '功能编码', value: 'code', required: true},
-          {label: '功能名称', value: 'name', required: true}
+          { label: '功能名称', value: 'name', required: true }
           // {label: '功能api', value: 'api', required: true},
           // {label: '请求方式', value: 'method', list: 'reqTypeList', required: true}
         ]
@@ -198,7 +198,7 @@ export default {
       handler: function (val) {
         if (!val) return
         this.getPermissions()
-        this.$emit('update:params', {...this.params, ...{roleId: val}})
+        this.$emit('update:params', { ...this.params, ...{ roleId: val }})
       },
       immediate: true
     }
@@ -220,7 +220,7 @@ export default {
         // 容错处理
         val[0] = val[0] ? val[0] : {}
         // 设置默认
-        treeInfo.defaultClicked = {id: val[0].id}
+        treeInfo.defaultClicked = { id: val[0].id }
         treeInfo.defaultHighLight = val[0].id
         treeInfo.defaultExpanded = [val[0].id]
       }
@@ -234,7 +234,7 @@ export default {
     },
     // 获取权限
     getPermissions () {
-      getPermissionsApi({roleId: this.roleId}).then(res => {
+      getPermissionsApi({ roleId: this.roleId }).then(res => {
         if (res.success) {
           const data = res.content
           this.treeInfo.defaultChecked = data.menu
@@ -252,66 +252,66 @@ export default {
     // 按钮点击
     handleClickBt (event, data) {
       switch (event) {
-      case 'save':
-        break
+        case 'save':
+          break
       }
     },
     // 触发事件
     handleEvent (event, data) {
-      const treeInfo = this.treeInfo,
-        tableInfo = this.tableInfo,
-        roleRelation = this.roleRelation
+      const treeInfo = this.treeInfo
+      const tableInfo = this.tableInfo
+      const roleRelation = this.roleRelation
       switch (event) {
       // 左键点击的处理
-      case 'leftClick':
-        tableInfo.data = []
-        tableInfo.refresh = Math.random()
-        treeInfo.leftClickData = JSON.parse(JSON.stringify(data.data))
-        break
-      // 树选中事件
-      case 'treeCheck':
-        roleRelation.menu = data.haleKeys
-        this.$emit('update:params', {...this.params, ...roleRelation})
-        break
-      // 表格的选中事件 (实现分页保存选中功能)
-      case 'tableCheck':
-        let selectIds = [],
-          unSelectedIds = [],
-          selectedList = JSON.parse(JSON.stringify(roleRelation.permissions))
-        // 拿到当前列表中未选中的数据
-        if (data.length === 0) {
-          unSelectedIds = this.tableInfo.data.map(item => {
-            return item.id
-          })
-        } else {
-          this.tableInfo.data.forEach(item => {
-            let index = 0
-            data.forEach((item1, index1) => {
-              if (item1 && item1.id) {
+        case 'leftClick':
+          tableInfo.data = []
+          tableInfo.refresh = Math.random()
+          treeInfo.leftClickData = JSON.parse(JSON.stringify(data.data))
+          break
+          // 树选中事件
+        case 'treeCheck':
+          roleRelation.menu = data.haleKeys
+          this.$emit('update:params', { ...this.params, ...roleRelation })
+          break
+          // 表格的选中事件 (实现分页保存选中功能)
+        case 'tableCheck':
+          const selectIds = []
+          let unSelectedIds = []
+          const selectedList = JSON.parse(JSON.stringify(roleRelation.permissions))
+          // 拿到当前列表中未选中的数据
+          if (data.length === 0) {
+            unSelectedIds = this.tableInfo.data.map(item => {
+              return item.id
+            })
+          } else {
+            this.tableInfo.data.forEach(item => {
+              let index = 0
+              data.forEach((item1, index1) => {
+                if (item1 && item1.id) {
                 // 得到当前选中的ID
-                selectIds.push(item1.id)
-                // 当列表中的数据在选择的数据中不存在
-                if (item.id !== item1.id) {
-                  index++
+                  selectIds.push(item1.id)
+                  // 当列表中的数据在选择的数据中不存在
+                  if (item.id !== item1.id) {
+                    index++
+                  }
                 }
+              })
+              // 得到当前未选中的id
+              if (index === data.length) {
+                unSelectedIds.push(item.id)
               }
             })
-            // 得到当前未选中的id
-            if (index === data.length) {
-              unSelectedIds.push(item.id)
-            }
-          })
-        }
-        // 从当期列表中将未选中的元素删除
-        unSelectedIds.forEach(item1 => {
+          }
+          // 从当期列表中将未选中的元素删除
+          unSelectedIds.forEach(item1 => {
           // 判断要删除的数据是否在选择的数据中
-          if (selectedList.indexOf(item1) === -1) return
-          selectedList.splice(selectedList.indexOf(item1), 1)
-        })
-        // 合并选中并去重
-        roleRelation.permissions = [...new Set(selectIds.concat(selectedList))]
-        this.$emit('update:params', {...this.params, ...roleRelation})
-        break
+            if (selectedList.indexOf(item1) === -1) return
+            selectedList.splice(selectedList.indexOf(item1), 1)
+          })
+          // 合并选中并去重
+          roleRelation.permissions = [...new Set(selectIds.concat(selectedList))]
+          this.$emit('update:params', { ...this.params, ...roleRelation })
+          break
       }
     }
   }
