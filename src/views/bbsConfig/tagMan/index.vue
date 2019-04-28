@@ -169,7 +169,7 @@ export default {
           width: '380',
           btList: [
             {label: '查看', type: 'primary', icon: 'el-icon-browse', event: 'view', show: true},
-            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false, slot: true},
+            {label: '启用', type: 'success', icon: 'el-icon-albb-supply', event: 'status', loading: 'statusLoading', show: false, slot: true},
             {label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false},
             {label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false}
           ]

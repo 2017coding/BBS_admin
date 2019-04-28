@@ -103,7 +103,7 @@ export const iconList = [
   {class: 'el-icon-albb-playon'},
   {class: 'el-icon-albb-praise_fill'},
   {class: 'el-icon-albb-praise'},
-  {class: 'el-icon-albb-process'},
+  {class: 'el-icon-albb-supply'},
   {class: 'el-icon-albb-prompt_fill'},
   {class: 'el-icon-albb-prompt'},
   {class: 'el-icon-albb-qrcode_fill'},

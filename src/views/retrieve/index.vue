@@ -21,7 +21,7 @@
               <el-form-item prop="validCode">
                 <el-input v-model.trim="form.validCode" placeholder="验证码"></el-input>
               </el-form-item>
-              <valid-code :value.sync="validCode"></valid-code>
+              <valid-code v-model="validCode"></valid-code>
             </div>
           </el-form>
           <el-button class="bt-next" type="primary" style="margin-top: 12px;" @click="handleNext">下一步</el-button>

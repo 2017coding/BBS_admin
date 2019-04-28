@@ -1,27 +1,18 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    sourceType: 'module'
   },
   env: {
     browser: true,
+    node: true,
+    es6: true,
   },
-  extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential', 
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard'
-  ],
-  // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
-  // 设置可以使用的全局变量
-  globals: {"tpwidget": true},
+  extends: ['plugin:vue/recommended', 'eslint:recommended'],
+
   // add your custom rules here
+  //it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
     // allow async-await
     'generator-star-spacing': 'off',

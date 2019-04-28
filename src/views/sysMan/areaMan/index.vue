@@ -127,7 +127,7 @@ export default {
           label: '操作',
           width: '100',
           btList: [
-            {label: '启用', type: 'success', icon: 'el-icon-process', event: 'status', loading: 'statusLoading', show: false, slot: true}
+            {label: '启用', type: 'success', icon: 'el-icon-albb-supply', event: 'status', loading: 'statusLoading', show: false, slot: true}
           ]
         }
       }

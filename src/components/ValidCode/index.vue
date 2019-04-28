@@ -7,6 +7,10 @@
 <script>
 export default {
   name: 'validCode',
+  model: {
+    prop: 'value',
+    event: 'input'
+  },
   props: {
     width: {
       type: String,
@@ -19,11 +23,19 @@ export default {
     length: {
       type: Number,
       default: 4
+    },
+    refresh: {
+      type: Number
     }
   },
   data () {
     return {
       codeList: []
+    }
+  },
+  watch: {
+    refresh () {
+      this.createdCode()
     }
   },
   mounted () {
@@ -44,7 +56,7 @@ export default {
         codeList.push({
           code: chars.charAt(Math.floor(Math.random() * charsLen)),
           color: `rgb(${rgb})`,
-          fontSize: `1${[Math.floor(Math.random() * 10)]}px`,
+          fontSize: `${10 + (+[Math.floor(Math.random() * 10)] + 6)}px`,
           padding: `${[Math.floor(Math.random() * 10)]}px`,
           transform: `rotate(${Math.floor(Math.random() * 90) - Math.floor(Math.random() * 90)}deg)`
         })
@@ -53,7 +65,7 @@ export default {
       this.codeList = codeList
       // 将当前数据派发出去
       console.log(codeList.map(item => item.code).join(''))
-      this.$emit('update:value', codeList.map(item => item.code).join(''))
+      this.$emit('input', codeList.map(item => item.code).join(''))
     },
     getStyle (data) {
       return `color: ${data.color}; font-size: ${data.fontSize}; padding: ${data.padding}; transform: ${data.transform}`
