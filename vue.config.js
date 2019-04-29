@@ -13,7 +13,7 @@ module.exports = {
     port: 2020,
     open: true,
     overlay: {
-      warnings: false,
+      warnings: true,
       errors: true
     },
     proxy: {

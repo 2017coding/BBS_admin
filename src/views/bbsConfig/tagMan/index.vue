@@ -150,11 +150,13 @@ export default {
       filterInfo: {
         query: {
           name: '',
-          type_id: ''
+          // type_id: '',
+          status: ''
         },
         list: [
-          { type: 'select', label: '标签类型', value: 'type_id', list: 'tagTypeList' },
+          // { type: 'select', label: '标签类型', value: 'type_id', list: 'tagTypeList' },
           { type: 'input', label: '标签名称', value: 'name', list: 'tagTypeList' },
+          { type: 'select', label: '状态', value: 'status', list: 'statusList' },
           { type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true },
           { type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'create', show: false }
         ]

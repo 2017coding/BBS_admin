@@ -21,15 +21,19 @@ export default {
     },
     // 图表位置
     gridTop: {
+      type: String,
       default: '25%'
     },
     gridLeft: {
+      type: String,
       default: '3%'
     },
     gridRight: {
+      type: String,
       default: '5%'
     },
     gridBottom: {
+      type: String,
       default: '13%'
     },
     // 标题

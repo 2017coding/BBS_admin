@@ -119,7 +119,7 @@
         :list-type-info="listTypeInfo"
       >
         <!-- 自定义插槽--选择图标 -->
-        <template v-slot:icon>
+        <template v-slot:form-icon>
           <el-select
             v-model="formInfo.data.icon"
             placeholder="请选择图标"

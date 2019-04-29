@@ -465,8 +465,8 @@ export default {
           }
           break
         case 'status':
-          data.statusLoading = true
           const params = {}
+          data.statusLoading = true
           // 设置参数
           for (const key in data) {
           // 存在则赋值

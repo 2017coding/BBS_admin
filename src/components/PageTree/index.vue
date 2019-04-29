@@ -116,6 +116,7 @@ export default {
     },
     // 默认高亮
     defaultHighLight: {
+      type: null // 匹配所有类型, 因为不确定key是数字还是字符串
       // type: String || Number
     },
     // 是否全部展开
@@ -328,13 +329,12 @@ export default {
     },
     // 选择框的点击事件
     handleCheck () {
-      let halfs, checkeds, haleKeys, checkedKeys
       // 获取半选中的节点和key
-      halfs = this.$refs.TreeComponent.getHalfCheckedNodes()
-      haleKeys = this.$refs.TreeComponent.getHalfCheckedKeys()
+      const halfs = this.$refs.TreeComponent.getHalfCheckedNodes()
+      const haleKeys = this.$refs.TreeComponent.getHalfCheckedKeys()
       // 得到全选中的节点和key
-      checkeds = this.$refs.TreeComponent.getCheckedNodes()
-      checkedKeys = this.$refs.TreeComponent.getCheckedKeys()
+      const checkeds = this.$refs.TreeComponent.getCheckedNodes()
+      const checkedKeys = this.$refs.TreeComponent.getCheckedKeys()
       // 将当前选择的数据派发到父级处理
       this.$emit('handleEvent', 'treeCheck', { haleKeys: haleKeys.concat(checkedKeys), halfs: halfs.concat(checkeds) })
     },

@@ -23,16 +23,16 @@ import baseScss from '@/common/style/base.scss'
 
 export default {
   components: { SidebarItem },
+  data () {
+    return {
+      baseScss
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebar',
       'menu'
     ])
-  },
-  data () {
-    return {
-      baseScss
-    }
   },
   mounted () {
   }

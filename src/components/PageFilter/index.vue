@@ -32,10 +32,10 @@
         @change="handleEvent(item.even)"
       >
         <el-option
-          v-for="(item ,index) in listTypeInfo[item.list]"
-          :key="index"
-          :label="item.key"
-          :value="item.value"
+          v-for="(childItem, childIndex) in listTypeInfo[item.list]"
+          :key="childIndex"
+          :label="childItem.key"
+          :value="childItem.value"
         />
       </el-select>
       <!-- 时间选择框 -->

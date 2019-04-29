@@ -129,10 +129,12 @@ export default {
       // 过滤相关配置
       filterInfo: {
         query: {
-          name: ''
+          name: '',
+          status: ''
         },
         list: [
           { type: 'input', label: '类型名称', value: 'name' },
+          { type: 'select', label: '状态', value: 'status', list: 'statusList' },
           { type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true },
           { type: 'button', label: '添加', btType: 'primary', icon: 'el-icon-plus', event: 'create', show: false }
         ]

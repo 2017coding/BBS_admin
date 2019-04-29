@@ -7,8 +7,8 @@
       class="charts"
     >
       <component
-        v-loading="loading"
         :is="'chart-' + item.chartType"
+        v-loading="loading"
         :chart-data="item.chartData || {nameList: [], xList: [], dataList: []}"
         :mark-point="item.markPoint"
         :title="item.title"
@@ -42,6 +42,8 @@ export default {
           title: '近七天用户登录分析',
           height: '100%',
           chartType: 'line',
+          xUnit: '小时',
+          yUnit: '次',
           chartData: {
             nameList: [],
             xList: [],
@@ -67,7 +69,7 @@ export default {
   methods: {
     getCharts () {
       this.loading = true
-      userLoginAnalyzeApi({days: 7}).then(res => {
+      userLoginAnalyzeApi({ days: 7 }).then(res => {
         this.loading = false
         if (res.success) {
           const data = res.content

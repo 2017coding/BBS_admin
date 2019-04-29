@@ -21,15 +21,19 @@ export default {
     },
     // 图表位置
     gridTop: {
+      type: String,
       default: '25%'
     },
     gridLeft: {
+      type: String,
       default: '3%'
     },
     gridRight: {
+      type: String,
       default: '5%'
     },
     gridBottom: {
+      type: String,
       default: '13%'
     },
     // 标题
@@ -147,7 +151,7 @@ export default {
           symbolSize: 5,
           symbol: 'circle',
           areaStyle: {
-            opacity: .1
+            opacity: 0.1
           }, // 设置是否按区域显示
           smooth: true, // 设置线条光滑
           itemStyle: {
