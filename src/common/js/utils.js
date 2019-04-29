@@ -167,7 +167,7 @@ export default {
           item.children.push(item1)
         }
         // 判断根节点
-        if (item1.id !== item.pid) {
+        if (item1[obj.key] !== item[obj.pKey]) {
           index++
         }
       })
