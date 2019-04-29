@@ -53,7 +53,7 @@
         :list-type-info="listTypeInfo"
       >
         <!-- 自定义插槽的使用 -->
-        <template v-slot:avatar>
+        <template v-slot:form-avatar>
           <div class="slot-avatar">
             <img
               :src="formInfo.data.avatar"

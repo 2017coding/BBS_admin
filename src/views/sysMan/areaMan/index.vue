@@ -29,14 +29,14 @@
         @handleEvent="handleEvent"
       >
         <!-- 自定义插槽显示状态 -->
-        <template v-slot:status="scope">
+        <template v-slot:col-status="scope">
           <i
             :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
             :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}"
           />
         </template>
         <!-- 自定义插槽状态按钮 -->
-        <template v-slot:bt_status="scope">
+        <template v-slot:bt-status="scope">
           <el-button
             v-if="scope.data.item.show && (!scope.data.item.ifRender || scope.data.item.ifRender(scope.data.row))"
             v-waves
@@ -130,7 +130,7 @@ export default {
           label: '操作',
           width: '100',
           btList: [
-            { label: '启用', type: 'success', icon: 'el-icon-albb-supply', event: 'status', loading: 'statusLoading', show: false, slot: true }
+            { label: '启用', type: 'success', icon: 'el-icon-albb-process', event: 'status', loading: 'statusLoading', show: false, slot: true }
           ]
         }
       }
@@ -200,7 +200,7 @@ export default {
           if (!data) return
           // 初始化数据
           data.forEach(item => {
-            item.statusLoading = false
+            this.$set(item, 'statusLoading', false)
           })
           break
           // 左键点击的处理

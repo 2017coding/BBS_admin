@@ -146,7 +146,9 @@ export default {
           type: 'line',
           symbolSize: 5,
           symbol: 'circle',
-          // areaStyle: {}, // 设置是否按区域显示
+          areaStyle: {
+            opacity: .1
+          }, // 设置是否按区域显示
           smooth: true, // 设置线条光滑
           itemStyle: {
             normal: {

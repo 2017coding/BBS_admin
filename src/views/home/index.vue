@@ -7,6 +7,7 @@
       class="charts"
     >
       <component
+        v-loading="loading"
         :is="'chart-' + item.chartType"
         :chart-data="item.chartData || {nameList: [], xList: [], dataList: []}"
         :mark-point="item.markPoint"
@@ -34,10 +35,11 @@ export default {
   },
   data () {
     return {
+      loading: false,
       chartList: [
         {
           dataType: 'loginAnalyze',
-          title: '近七天用户登录统计',
+          title: '近七天用户登录分析',
           height: '100%',
           chartType: 'line',
           chartData: {
@@ -64,7 +66,9 @@ export default {
   },
   methods: {
     getCharts () {
+      this.loading = true
       userLoginAnalyzeApi({days: 7}).then(res => {
+        this.loading = false
         if (res.success) {
           const data = res.content
           this.chartList.forEach(item => {
@@ -77,6 +81,8 @@ export default {
             }
           })
         }
+      }).catch(() => {
+        this.loading = false
       })
     }
   }

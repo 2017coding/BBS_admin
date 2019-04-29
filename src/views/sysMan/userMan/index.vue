@@ -22,14 +22,14 @@
       @handleEvent="handleEvent"
     >
       <!-- 自定义插槽显示状态 -->
-      <template v-slot:status="scope">
+      <template v-slot:col-status="scope">
         <i
           :class="scope.row.status === 1 ? 'el-icon-check' : 'el-icon-close'"
           :style="{color: scope.row.status === 1 ? '#67c23a' : '#f56c6c', fontSize: '20px'}"
         />
       </template>
       <!-- 自定义插槽状态按钮 -->
-      <template v-slot:bt_status="scope">
+      <template v-slot:bt-status="scope">
         <el-button
           v-if="scope.data.item.show && (!scope.data.item.ifRender || scope.data.item.ifRender(scope.data.row))"
           v-waves
@@ -65,7 +65,7 @@
         :list-type-info="listTypeInfo"
       >
         <!-- 自定义插槽-选择头像 -->
-        <template v-slot:avatar>
+        <template v-slot:form-avatar>
           <div class="slot-avatar">
             <img
               :src="formInfo.data.avatar"
@@ -251,7 +251,7 @@ export default {
           label: '操作',
           width: '280',
           btList: [
-            { label: '启用', type: 'success', icon: 'el-icon-albb-supply', event: 'status', loading: 'statusLoading', show: false, slot: true },
+            { label: '启用', type: 'success', icon: 'el-icon-albb-process', event: 'status', loading: 'statusLoading', show: false, slot: true },
             { label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false },
             { label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false }
           ]
@@ -589,7 +589,7 @@ export default {
         case 'list':
           if (!data) return
           data.forEach(item => {
-            item.statusLoading = false
+            this.$set(item, 'statusLoading', false)
             item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
             item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
           })

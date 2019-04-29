@@ -46,7 +46,7 @@
           <!-- solt 自定义列-->
           <template v-if="item.type === 'slot'">
             <slot
-              :name="item.value"
+              :name="'col-' + item.value"
               :row="scope.row"
             />
           </template>
@@ -91,7 +91,7 @@
             <!-- 自定义操作类型 -->
             <slot
               v-if="item.slot"
-              :name="'bt_' + item.event"
+              :name="'bt-' + item.event"
               :data="{item, row: scope.row}"
             />
             <!-- 操作按钮 -->
