@@ -49,7 +49,7 @@ export default {
     // 上传的地址
     url: {
       type: String,
-      default: `http://www.lyh.red/api/file/upload`
+      default: `https://www.lyh.red/api/file/upload`
     },
     // 显示上传的内容
     fileData: {
