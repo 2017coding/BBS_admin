@@ -15,6 +15,8 @@ import '@/common/style/index.scss' // 自定义样式
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import vueWaves from '@/directive/waves/index'// 水波纹指令
+import vueFocus from '@/directive/focus/index'// 聚焦指令
+import vueImgAlart from '@/directive/imgAlart/index'// 图片弹窗指令
 import '@/common/config/errorLog' // 错误日志
 import '@/common/config/permission' // 路由动态配置
 import commonPlug from '@/common/js/commonPlug' // 自定义插件
@@ -23,6 +25,8 @@ Vue.use(commonPlug)
 Vue.use(ElementUI)
 Vue.use(mavonEditor)
 Vue.use(vueWaves)
+Vue.use(vueFocus)
+Vue.use(vueImgAlart)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

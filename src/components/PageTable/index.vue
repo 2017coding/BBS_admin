@@ -69,6 +69,7 @@
           <!-- 图片 -->
           <img
             v-else-if="item.type === 'image' && scope.row[item.value]"
+            v-imgAlart
             height="50px"
             :src="scope.row[item.value]"
           >

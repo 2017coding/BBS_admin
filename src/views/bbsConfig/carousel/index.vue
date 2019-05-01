@@ -154,7 +154,7 @@ export default {
         data: [],
         fieldList: [
           { label: '标题', value: 'title' },
-          { label: '图标', value: 'image', type: 'image', width: 100 },
+          { label: '图片', value: 'image', type: 'image', width: 100 },
           { label: '排序', value: 'sort', width: 80 },
           { label: '点击触发', value: 'click', type: 'select', list: 'eventList', minWidth: 120 },
           { label: '跳转地址', value: 'href', minWidth: 120 },

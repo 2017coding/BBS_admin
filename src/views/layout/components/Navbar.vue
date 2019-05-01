@@ -56,6 +56,7 @@
         <template v-slot:form-avatar>
           <div class="slot-avatar">
             <img
+              v-imgAlart
               :src="formInfo.data.avatar"
               style="height: 30px;"
             >
@@ -302,8 +303,8 @@ export default {
     },
     // 触发事件
     handleEvent (event, data) {
-      switch (event) {
-      }
+      // switch (event) {
+      // }
     }
   }
 }

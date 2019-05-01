@@ -68,6 +68,7 @@
         <template v-slot:form-avatar>
           <div class="slot-avatar">
             <img
+              v-imgAlart
               :src="formInfo.data.avatar"
               style="height: 30px;"
             >

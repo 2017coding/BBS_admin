@@ -1,0 +1,24 @@
+.g-img-alart{
+}
+.g-img-alart-mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .5);
+  z-index: 9999;
+}
+.g-img-alart-content{
+  padding: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 10001;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 10px;
+}
+.g-img-alart-img{
+  max-width: 500px;
+}
