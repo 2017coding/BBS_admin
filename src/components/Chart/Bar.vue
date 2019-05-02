@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import echarts from 'echarts'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -126,7 +127,7 @@ export default {
   methods: {
     // 初始化
     init () {
-      this.chart = this.$echarts.init(this.$el)
+      this.chart = echarts.init(this.$el)
       // 监听页面大小改变
       window.addEventListener('resize', () => {
         if (this.chart) {

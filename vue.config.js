@@ -18,17 +18,27 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:1313',
-        // target: 'https://www.lyh.red:1313',
+        // target: 'http://localhost:1313',
+        target: 'https://www.lyh.red',
         pathRewrite: {
           '^/api': '/api'
         }
       }
     }
   },
-  chainWebpack: (config)=>{
+  chainWebpack: config => {
     //修改文件引入自定义路径
     config.resolve.alias
       .set('@', resolve('src'))
+      .end()
+    // 图片压缩
+    config.module
+      .rule('images')
+      .use('image-webpack-loader')
+      .loader('image-webpack-loader')
+      .options({
+        bypassOnDebug: true
+      })
+      .end()
   }
 }

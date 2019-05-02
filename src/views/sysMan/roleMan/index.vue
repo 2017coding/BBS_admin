@@ -67,8 +67,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import { createApi, updateApi, deleteApi, getAllApi, setPermissionsApi, setBindUserApi } from '@/api/sysMan/roleMan'
-import Validate from '@/common/mixin/validate'
-import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageCard from '@/components/PageCard'
 import PageDialog from '@/components/PageDialog'
@@ -85,7 +83,6 @@ export default {
     Permissions,
     BindUser
   },
-  mixins: [Validate, HandleApi],
   data () {
     return {
       createApi,
@@ -215,10 +212,17 @@ export default {
   },
   mounted () {
     this.getList()
-    // mixin中的方法, 初始化字段验证规则
-    this._initValidate(this.formInfo)
+    this.initRules()
   },
   methods: {
+    // 初始化数据权限
+    initDataPerms () {
+    },
+    // 初始化验证
+    initRules () {
+      const formInfo = this.formInfo
+      formInfo.rules = this.$initRules(formInfo.fieldList)
+    },
     initTree (val) {
       const treeInfo = this.treeInfo
       // 操作完后，树刷新，重新设置默认项
@@ -313,7 +317,7 @@ export default {
                 return
               }
               dialogInfo.btLoading = true
-              this._handleAPI(type, api, params).then(res => {
+              this.$handleAPI(type, api, params).then(res => {
                 if (res.success) {
                   dialogInfo.visible = false
                   // 刷新树
@@ -421,7 +425,7 @@ export default {
           }
           break
         case 'delete':
-          this._handleAPI(type, deleteApi, nodeData.id).then(res => {
+          this.$handleAPI(type, deleteApi, nodeData.id).then(res => {
             if (res.success) {
             // 删除后，树组件默认指针指向删除元素的父级
               treeInfo.defaultClickedAsyc = nodeData.pid

@@ -87,8 +87,6 @@
 import { mapGetters } from 'vuex'
 import { updateApi } from '@/api/sysMan/userMan'
 import Breadcrumb from './Breadcrumb' // 导航
-import Validate from '@/common/mixin/validate'
-import HandleApi from '@/common/mixin/handleApi'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 import SelectFile from '@/components/SelectFile'
@@ -120,7 +118,6 @@ export default {
     PageForm,
     SelectFile
   },
-  mixins: [Validate, HandleApi],
   data () {
     return {
       dropdownList: [
@@ -213,10 +210,14 @@ export default {
   },
   mounted () {
     this.initWeather()
-    // mixin中的方法, 初始化字段验证规则
-    this._initValidate(this.formInfo)
+    this.initRules()
   },
   methods: {
+    // 初始化验证
+    initRules () {
+      const formInfo = this.formInfo
+      formInfo.rules = this.$initRules(formInfo.fieldList)
+    },
     // 使用天气
     initWeather () {
       // 方法存在开始加载
@@ -283,7 +284,7 @@ export default {
               const api = updateApi; const params = this.formInfo.data
               params.password = '123456'
               dialogInfo.btLoading = true
-              this._handleAPI('update', api, params).then(res => {
+              this.$handleAPI('update', api, params).then(res => {
                 if (res.success) {
                   dialogInfo.visible = false
                   // 设置userInfo

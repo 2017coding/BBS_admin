@@ -78,9 +78,12 @@ export default {
           password: '123456',
           type: 2 // 平台用户
         },
+        fieldList: [
+          { label: '账号', value: 'account', required: true },
+          { label: '密码', value: 'password', required: true }
+        ],
         // 验证规则
-        rules: {
-        }
+        rules: {}
       },
       buttonInfo: {
         btLoading: false
@@ -98,8 +101,14 @@ export default {
   },
   created () {
     this.initRemember()
+    this.initRules()
   },
   methods: {
+    // 初始化规则
+    initRules () {
+      const formInfo = this.formInfo
+      formInfo.rules = this.$initRules(formInfo.fieldList)
+    },
     // 初始化记住选择
     initRemember (remember) {
       const formInfo = this.formInfo

@@ -92,7 +92,7 @@
             />
             <div
               v-else
-              v-html="_markedGetHtml(formInfo.data.wikipedia || '目前还没有关于这个标签的解释')"
+              v-html="marked(formInfo.data.wikipedia || '目前还没有关于这个标签的解释')"
             />
           </div>
         </template>
@@ -112,9 +112,7 @@
 import { mapGetters } from 'vuex'
 import { getAllApi } from '@/api/bbsConfig/tagTypeMan'
 import { getListApi, createApi, updateApi, deleteApi } from '@/api/bbsConfig/tagMan'
-import Validate from '@/common/mixin/validate'
-import HandleApi from '@/common/mixin/handleApi'
-import Marked from '@/common/mixin/marked'
+import marked from '@/common/js/marked'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
@@ -131,13 +129,13 @@ export default {
     MavonEditor,
     SelectFile
   },
-  mixins: [Validate, HandleApi, Marked],
   data () {
     return {
       getListApi,
       createApi,
       updateApi,
       deleteApi,
+      marked,
       // 相关列表
       listTypeInfo: {
         tagTypeList: [],
@@ -258,11 +256,9 @@ export default {
     }
   },
   mounted () {
-    this.initParams()
     this.initList()
     this.initDataPerms()
-    // mixin中的方法, 初始化字段验证规则
-    this._initValidate(this.formInfo)
+    this.initRules()
     this.getList()
   },
   methods: {
@@ -270,19 +266,13 @@ export default {
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
       const btList1 = this.filterInfo.list
-      for (const item of btList1) {
-        if (this.dataPerms.includes('tagMan:' + item.event)) {
-          item.show = true
-        }
-      }
-      for (const item of btList) {
-        if (this.dataPerms.includes('tagMan:' + item.event)) {
-          item.show = true
-        }
-      }
+      this.$initDataPerms('tagMan', btList)
+      this.$initDataPerms('tagMan', btList1)
     },
-    initParams () {
-      // this.filterInfo.query.create_user = this.userInfo.id
+    // 初始化验证
+    initRules () {
+      const formInfo = this.formInfo
+      formInfo.rules = this.$initRules(formInfo.fieldList)
     },
     initList () {
       const listTypeInfo = this.listTypeInfo
@@ -362,7 +352,7 @@ export default {
           }
           params.status = params.status - 1 >= 0 ? 0 : 1
           data.statusLoading = true
-          this._handleAPI('update', updateApi, params).then(res => {
+          this.$handleAPI('update', updateApi, params).then(res => {
             data.statusLoading = false
             if (res.success) {
               data.status = params.status
@@ -373,7 +363,7 @@ export default {
           break
           // 删除
         case 'delete':
-          this._handleAPI(event, deleteApi, data.id).then(res => {
+          this.$handleAPI(event, deleteApi, data.id).then(res => {
             if (res.success) {
               tableInfo.refresh = Math.random()
             }
@@ -397,7 +387,7 @@ export default {
                 return
               }
               dialogInfo.btLoading = true
-              this._handleAPI(type, api, params).then(res => {
+              this.$handleAPI(type, api, params).then(res => {
                 if (res.success) {
                   dialogInfo.visible = false
                   tableInfo.refresh = Math.random()

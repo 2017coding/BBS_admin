@@ -7,7 +7,7 @@
  *  @param {Array} conditions: 条件字段 例如： ['2', '10'] ,则验证长度错误会提示: 密码的长度在2到10个字符,以传入数组的条件去做验证, 验证的提示{1}开始将匹配的是当前数组
  * @return {obj} { result, message } 验证结果对象
  */
-function validate (obj) {
+export default (obj) => {
   let reg
   const validatorObj = {
     // 验证定义
@@ -146,5 +146,3 @@ function validate (obj) {
   }
   return validatorObj.checkResult(obj)
 }
-
-export default validate

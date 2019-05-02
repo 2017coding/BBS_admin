@@ -58,18 +58,14 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getListApi, updateApi, getAllApi } from '@/api/sysMan/areaMan'
-import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
-import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 
 export default {
   components: {
     PageTree,
-    PageFilter,
     PageTable
   },
-  mixins: [HandleApi],
   data () {
     return {
       getListApi,
@@ -147,9 +143,6 @@ export default {
       this.setList(this.treeInfo.type)
     }
   },
-  created () {
-    this.initParams()
-  },
   mounted () {
     this.getList()
     this.initDataPerms()
@@ -164,8 +157,6 @@ export default {
         }
       }
     },
-    initParams () {
-    },
     // 获取列表
     getList () {
       this.tableInfo.refresh = Math.random()
@@ -178,7 +169,7 @@ export default {
           params.status = params.status - 1 >= 0 ? 0 : 1
           data.statusLoading = true
           delete params.statusLoading
-          this._handleAPI('update', updateApi, params).then(res => {
+          this.$handleAPI('update', updateApi, params).then(res => {
             data.statusLoading = false
             if (res.success) {
               data.status = params.status

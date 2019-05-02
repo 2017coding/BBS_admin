@@ -67,7 +67,6 @@
 import { mapGetters } from 'vuex'
 import { getPermissionsApi } from '@/api/sysMan/roleMan'
 import { getRoleMenuApi, getRoleDataPermsApi } from '@/api/sysMan/menuMan'
-import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageTable from '@/components/PageTable'
 
@@ -76,7 +75,6 @@ export default {
     PageTree,
     PageTable
   },
-  mixins: [HandleApi],
   props: {
     roleId: {
       type: Number

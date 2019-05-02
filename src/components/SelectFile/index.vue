@@ -61,7 +61,6 @@ import { getAllApi as getFileAllApi } from '@/api/library/file'
 import PageTree from '@/components/PageTree'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
-import PageDialog from '@/components/PageDialog'
 function initType (type) {
   switch (type) {
     case 1:
@@ -79,8 +78,7 @@ export default {
   components: {
     PageTree,
     PageFilter,
-    PageTable,
-    PageDialog
+    PageTable
   },
   // 注册v-model
   model: {

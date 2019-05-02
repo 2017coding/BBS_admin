@@ -96,8 +96,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getListApi, createApi, updateApi, deleteApi } from '@/api/bbsConfig/carousel'
-import Validate from '@/common/mixin/validate'
-import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
@@ -112,7 +110,6 @@ export default {
     PageForm,
     SelectFile
   },
-  mixins: [Validate, HandleApi],
   data () {
     return {
       getListApi,
@@ -247,10 +244,8 @@ export default {
     }
   },
   mounted () {
-    this.initParams()
     this.initDataPerms()
-    // mixin中的方法, 初始化字段验证规则
-    this._initValidate(this.formInfo)
+    this.initRules()
     this.getList()
   },
   methods: {
@@ -258,19 +253,13 @@ export default {
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
       const btList1 = this.filterInfo.list
-      for (const item of btList1) {
-        if (this.dataPerms.includes('carousel:' + item.event)) {
-          item.show = true
-        }
-      }
-      for (const item of btList) {
-        if (this.dataPerms.includes('carousel:' + item.event)) {
-          item.show = true
-        }
-      }
+      this.$initDataPerms('carousel', btList)
+      this.$initDataPerms('carousel', btList1)
     },
-    initParams () {
-      // this.filterInfo.query.create_user = this.userInfo.id
+    // 初始化验证
+    initRules () {
+      const formInfo = this.formInfo
+      formInfo.rules = this.$initRules(formInfo.fieldList)
     },
     // 获取列表
     getList () {
@@ -328,7 +317,7 @@ export default {
           }
           params.status = params.status - 1 >= 0 ? 0 : 1
           data.statusLoading = true
-          this._handleAPI('update', updateApi, params).then(res => {
+          this.$handleAPI('update', updateApi, params).then(res => {
             data.statusLoading = false
             if (res.success) {
               data.status = params.status
@@ -339,7 +328,7 @@ export default {
           break
           // 删除
         case 'delete':
-          this._handleAPI(event, deleteApi, data.id).then(res => {
+          this.$handleAPI(event, deleteApi, data.id).then(res => {
             if (res.success) {
               tableInfo.refresh = Math.random()
             }
@@ -363,7 +352,7 @@ export default {
                 return
               }
               dialogInfo.btLoading = true
-              this._handleAPI(type, api, params).then(res => {
+              this.$handleAPI(type, api, params).then(res => {
                 if (res.success) {
                   dialogInfo.visible = false
                   tableInfo.refresh = Math.random()

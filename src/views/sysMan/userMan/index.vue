@@ -121,8 +121,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getAllApi, getListApi, getCreateUserApi, userTransferApi, createApi, updateApi, deleteApi } from '@/api/sysMan/userMan'
-import Validate from '@/common/mixin/validate'
-import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
@@ -137,7 +135,6 @@ export default {
     PageForm,
     SelectFile
   },
-  mixins: [Validate, HandleApi],
   data () {
     // 检测用户账号
     const checkAccount = (rule, value, callback) => {
@@ -373,11 +370,9 @@ export default {
     }
   },
   mounted () {
-    this.initParams()
     this.initList()
     this.initDataPerms()
-    // mixin中的方法, 初始化字段验证规则
-    this._initValidate(this.formInfo)
+    this.initRules()
     this.getList()
   },
   methods: {
@@ -385,19 +380,13 @@ export default {
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
       const btList1 = this.filterInfo.list
-      for (const item of btList1) {
-        if (this.dataPerms.includes('userMan:' + item.event)) {
-          item.show = true
-        }
-      }
-      for (const item of btList) {
-        if (this.dataPerms.includes('userMan:' + item.event)) {
-          item.show = true
-        }
-      }
+      this.$initDataPerms('userMan', btList)
+      this.$initDataPerms('userMan', btList1)
     },
-    initParams () {
-      // this.filterInfo.query.create_user = this.userInfo.id
+    // 初始化验证
+    initRules () {
+      const formInfo = this.formInfo
+      formInfo.rules = this.$initRules(formInfo.fieldList)
     },
     initList () {
       const listTypeInfo = this.listTypeInfo
@@ -476,7 +465,7 @@ export default {
             }
           }
           params.status = params.status - 1 >= 0 ? 0 : 1
-          this._handleAPI('update', updateApi, params).then(res => {
+          this.$handleAPI('update', updateApi, params).then(res => {
             data.statusLoading = false
             if (res.success) {
               data.status = params.status
@@ -490,7 +479,7 @@ export default {
         // 先判断当前用户下是否有子用户，有则需要先进行权限转移后才可删除当前用户
           getCreateUserApi(data.id).then(res => {
             if (res.success) {
-              this._handleAPI(event, deleteApi, data.id).then(res => {
+              this.$handleAPI(event, deleteApi, data.id).then(res => {
                 if (res.success) {
                   tableInfo.refresh = Math.random()
                   // 刷新用户列表
@@ -534,7 +523,7 @@ export default {
             dialogInfo.btLoading = true
             userTransferApi({ user: userTransferInfo.user, toUser: userTransferInfo.toUser }).then(res => {
               if (res.success) {
-                this._handleAPI('delete', deleteApi, userTransferInfo.user).then(res => {
+                this.$handleAPI('delete', deleteApi, userTransferInfo.user).then(res => {
                   if (res.success) {
                     tableInfo.refresh = Math.random()
                     // 刷新用户列表
@@ -566,7 +555,7 @@ export default {
                 return
               }
               dialogInfo.btLoading = true
-              this._handleAPI(type, api, params).then(res => {
+              this.$handleAPI(type, api, params).then(res => {
                 if (res.success) {
                   dialogInfo.visible = false
                   tableInfo.refresh = Math.random()

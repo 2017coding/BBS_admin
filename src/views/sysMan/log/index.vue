@@ -27,7 +27,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import { getListApi } from '@/api/sysMan/log'
-import HandleApi from '@/common/mixin/handleApi'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 
@@ -36,7 +35,6 @@ export default {
     PageFilter,
     PageTable
   },
-  mixins: [HandleApi],
   data () {
     return {
       getListApi,
@@ -88,15 +86,10 @@ export default {
       'userInfo'
     ])
   },
-  created () {
-    this.initParams()
-  },
   mounted () {
     this.getList()
   },
   methods: {
-    initParams () {
-    },
     // 获取列表
     getList () {
       this.tableInfo.refresh = Math.random()

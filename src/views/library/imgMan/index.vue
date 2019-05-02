@@ -81,8 +81,6 @@
 import { mapGetters } from 'vuex'
 import { createApi, updateApi, deleteApi, getAllApi } from '@/api/library/folder'
 import { updateApi as updateFileApi, deleteApi as deleteFileApi, getListApi } from '@/api/library/file'
-import Validate from '@/common/mixin/validate'
-import HandleApi from '@/common/mixin/handleApi'
 import PageTree from '@/components/PageTree'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
@@ -99,7 +97,6 @@ export default {
     PageForm,
     Upload
   },
-  mixins: [Validate, HandleApi],
   data () {
     return {
       createApi,
@@ -294,19 +291,20 @@ export default {
   mounted () {
     this.getList()
     this.initDataPerms()
-    // mixin中的方法, 初始化字段验证规则
-    this._initValidate(this.formInfo)
-    this._initValidate(this.fileFormInfo)
+    this.initRules()
   },
   methods: {
     // 初始化数据权限
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
-      for (const item of btList) {
-        if (this.dataPerms.includes('imgMan:' + item.event)) {
-          item.show = true
-        }
-      }
+      this.$initDataPerms('imgMan', btList)
+    },
+    // 初始化验证
+    initRules () {
+      const formInfo = this.formInfo
+      const fileFormInfo = this.fileFormInfo
+      formInfo.rules = this.$initRules(formInfo.fieldList)
+      fileFormInfo.rules = this.$initRules(fileFormInfo.fieldList)
     },
     initTree (val) {
       const treeInfo = this.treeInfo
@@ -373,7 +371,7 @@ export default {
           }
           break
         case 'deleteFile':
-          this._handleAPI('delete', deleteFileApi, data.id).then(res => {
+          this.$handleAPI('delete', deleteFileApi, data.id).then(res => {
             if (res.success) {
               tableInfo.refresh = Math.random()
             }
@@ -409,7 +407,7 @@ export default {
                 return
               }
               dialogInfo.btLoading = true
-              this._handleAPI(this.getApiType(type), api, params).then(res => {
+              this.$handleAPI(this.getApiType(type), api, params).then(res => {
                 if (res.success) {
                   dialogInfo.visible = false
                   // 设置默认项
@@ -556,7 +554,7 @@ export default {
           }
           break
         case 'delete':
-          this._handleAPI(type, deleteApi, nodeData.id).then(res => {
+          this.$handleAPI(type, deleteApi, nodeData.id).then(res => {
             if (res.success) {
             // 删除后，树组件默认指针指向删除元素的父级
               treeInfo.defaultClickedAsyc = nodeData.pid

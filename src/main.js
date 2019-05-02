@@ -19,9 +19,9 @@ import vueFocus from '@/directive/focus/index'// 聚焦指令
 import vueImgAlart from '@/directive/imgAlart/index'// 图片弹窗指令
 import '@/common/config/errorLog' // 错误日志
 import '@/common/config/permission' // 路由动态配置
-import commonPlug from '@/common/js/commonPlug' // 自定义插件
+import prototype from '@/common/js/prototype' // 挂载在原型上的方法
 
-Vue.use(commonPlug)
+Vue.use(prototype)
 Vue.use(ElementUI)
 Vue.use(mavonEditor)
 Vue.use(vueWaves)

@@ -5,10 +5,8 @@ import Layout from '@/views/layout/index'
 
 // 添加默认页面
 function addPage (arr) {
-  let home
-  // , HOWTOUSE
   // 首页
-  home = {
+  const home = {
     id: 0,
     pid: 1,
     path: '',
@@ -25,7 +23,7 @@ function addPage (arr) {
       }
     ]
   }
-  // HOWTOUSE = {
+  // const HOWTOUSE = {
   //   id: 0,
   //   pid: 1,
   //   path: '/HOWTOUSE',
