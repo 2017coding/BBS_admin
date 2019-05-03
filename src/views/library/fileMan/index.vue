@@ -4,9 +4,11 @@
     <div class="left">
       <page-tree
         :expand-all="true"
+        :load-type="1"
         :default-clicked="treeInfo.defaultClicked"
         :default-high-light="treeInfo.defaultHighLight"
         :default-expanded="treeInfo.defaultExpanded"
+        :tree-data="treeInfo.treeData"
         :base-data.sync="treeInfo.baseData"
         :node-key="treeInfo.nodeKey"
         :load-info.sync="treeInfo.loadInfo"

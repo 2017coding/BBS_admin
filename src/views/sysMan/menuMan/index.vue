@@ -476,11 +476,12 @@ export default {
       if (!treeInfo.initTree) {
         treeInfo.initTree = true
         // 容错处理
-        val[0] = val[0] ? val[0] : {}
-        // 设置默认
-        treeInfo.defaultClicked = { id: val[0].id }
-        treeInfo.defaultHighLight = val[0].id
-        treeInfo.defaultExpanded = [val[0].id]
+        if (val[0]) {
+          // 设置默认
+          treeInfo.defaultClicked = { id: val[0].id }
+          treeInfo.defaultHighLight = val[0].id
+          treeInfo.defaultExpanded = [val[0].id]
+        }
       }
       // 设置列表
       this.listTypeInfo.treeList = val.map(item => {

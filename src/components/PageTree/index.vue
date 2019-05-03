@@ -15,6 +15,7 @@
       :check-strictly="checkStrictly"
       :filter-node-method="filterNode"
       :default-expanded-keys="defaultExpanded"
+      :default-checked-keys="defaultChecked"
       highlight-current
       :render-content="renderContent"
       :props="treeProps"
@@ -226,31 +227,12 @@ export default {
       if (!val.id) return
       const data = this.lazy ? this.lazyInfo : this.loadInfo
       this.$emit('handleEvent', 'leftClick', { data: this.getSelectData(data.key, this.baseData, val.id) })
-    },
-    // 设置选中的节点，直接使用这个属性可能会导致父节点勾中，子节点全部选中的问题
-    defaultChecked (val) {
-      this.initDefaultChecked(val)
     }
   },
   mounted () {
     this.initData()
-    this.initDefaultChecked(this.defaultChecked)
   },
   methods: {
-    // TODO: elementui-tree组件内部问题，有时无法成功选中，先用延时器的方法保证效果
-    initDefaultChecked (val = []) {
-      if (val.length === 0) return
-      setTimeout(() => {
-        this.$nextTick(() => {
-          // 将节点选中的状态初始化
-          this.$refs.TreeComponent.setCheckedNodes([])
-          for (let i = 0; i < val.length; i++) {
-            // 得到选中的节点,这个方法ojbk
-            this.$refs.TreeComponent.setChecked(val[i], true)
-          }
-        })
-      }, 100)
-    },
     // 自定义渲染内容
     renderContent (h, { node, data, store }) {
       let dom
@@ -329,12 +311,25 @@ export default {
     handleCheck () {
       // 获取半选中的节点和key
       const halfs = this.$refs.TreeComponent.getHalfCheckedNodes()
-      const haleKeys = this.$refs.TreeComponent.getHalfCheckedKeys()
+      const halfKeys = this.$refs.TreeComponent.getHalfCheckedKeys()
       // 得到全选中的节点和key
       const checkeds = this.$refs.TreeComponent.getCheckedNodes()
       const checkedKeys = this.$refs.TreeComponent.getCheckedKeys()
       // 将当前选择的数据派发到父级处理
-      this.$emit('handleEvent', 'treeCheck', { haleKeys: haleKeys.concat(checkedKeys), halfs: halfs.concat(checkeds) })
+      this.$emit('handleEvent', 'treeCheck', {
+        // 半选中和全选中的节点
+        keys: halfKeys.concat(checkedKeys),
+        // 半选中和全选中的node
+        nodes: halfs.concat(checkeds),
+        // 半选中的节点
+        halfKeys,
+        // 全选中的节点
+        checkedKeys,
+        // 半选中的node
+        halfs,
+        // 全选中的node
+        checkeds
+      })
     },
     // 是否可以放置, 设置为只能同一层级拖拽
     handleDrop (draggingNode, dropNode, type) {
@@ -369,26 +364,25 @@ export default {
           for (let i = 0; i < resFieldList.length; i++) {
             resData = resData[resFieldList[i]]
           }
-          if (resData.length > 0) {
-            arr = JSON.parse(JSON.stringify(resData))
-            arr.forEach(item => {
-              // 保证刷新之后key的唯一
-              item.key = item[loadInfo.key]
-              item[treeProps.label] = item[loadInfo.label]
+          // 数据处理
+          arr = JSON.parse(JSON.stringify(resData))
+          arr.forEach(item => {
+            // 保证刷新之后key的唯一
+            item.key = item[loadInfo.key]
+            item[treeProps.label] = item[loadInfo.label]
+          })
+          // 得到数据后把数据给到父级，方便父级用到
+          this.$emit('update:baseData', arr)
+          // 设置默认高亮
+          if (this.defaultHighLight || this.defaultHighLight === 0) {
+            this.$nextTick(() => {
+              this.$refs.TreeComponent.setCurrentKey(this.defaultHighLight)
             })
-            // 得到数据后把数据给到父级，方便父级用到
-            this.$emit('update:baseData', arr)
-            // 设置默认高亮
-            if (this.defaultHighLight || this.defaultHighLight === 0) {
-              this.$nextTick(() => {
-                this.$refs.TreeComponent.setCurrentKey(this.defaultHighLight)
-              })
-            }
-            // 设置默认点击
-            if ((this.defaultClicked && (this.defaultClicked.id || this.defaultClicked.id === 0))) {
-              // 页面初始化，设置默认点击项， 并将点击事件派发到父级
-              this.$emit('handleEvent', 'leftClick', { data: this.getSelectData(loadInfo.key, this.baseData, this.defaultClicked.id) })
-            }
+          }
+          // 设置默认点击
+          if ((this.defaultClicked && (this.defaultClicked.id || this.defaultClicked.id === 0))) {
+            // 页面初始化，设置默认点击项， 并将点击事件派发到父级
+            this.$emit('handleEvent', 'leftClick', { data: this.getSelectData(loadInfo.key, this.baseData, this.defaultClicked.id) || {}})
           }
         } else {
           this.$message({
@@ -447,29 +441,28 @@ export default {
           for (let i = 0; i < resFieldList.length; i++) {
             resData = resData[resFieldList[i]]
           }
-          if (resData.length > 0) {
-            arr = JSON.parse(JSON.stringify(resData))
-            arr.forEach(item => {
-              // 保证key的唯一
-              item.key = levelInfo.type + item[levelInfo.key]
-              item['level' + node.level + 'data'] = node.data
-              item[treeProps.label] = item[levelInfo.label]
-              item.type = levelInfo.type
-              item[treeProps.isLeaf] = levelInfo.leaf
+          // 数据处理
+          arr = JSON.parse(JSON.stringify(resData))
+          arr.forEach(item => {
+            // 保证key的唯一
+            item.key = levelInfo.type + item[levelInfo.key]
+            item['level' + node.level + 'data'] = node.data
+            item[treeProps.label] = item[levelInfo.label]
+            item.type = levelInfo.type
+            item[treeProps.isLeaf] = levelInfo.leaf
+          })
+          // 得到数据后把数据给到父级，方便父级用到
+          this.$emit('update:baseData', [...this.baseData, ...arr])
+          // 设置默认高亮
+          if (this.defaultHighLight || this.defaultHighLight === 0) {
+            this.$nextTick(() => {
+              this.$refs.TreeComponent.setCurrentKey(this.defaultHighLight)
             })
-            // 得到数据后把数据给到父级，方便父级用到
-            this.$emit('update:baseData', [...this.baseData, ...arr])
-            // 设置默认高亮
-            if (this.defaultHighLight || this.defaultHighLight === 0) {
-              this.$nextTick(() => {
-                this.$refs.TreeComponent.setCurrentKey(this.defaultHighLight)
-              })
-            }
-            // 设置默认点击
-            if ((this.defaultClicked && (this.defaultClicked.id || this.defaultClicked.id === 0))) {
-              // 页面初始化，设置默认点击项， 并将点击事件派发到父级
-              this.$emit('handleEvent', 'leftClick', { data: this.getSelectData(levelInfo.key, this.baseData, this.defaultClicked.id) })
-            }
+          }
+          // 设置默认点击
+          if ((this.defaultClicked && (this.defaultClicked.id || this.defaultClicked.id === 0))) {
+            // 页面初始化，设置默认点击项， 并将点击事件派发到父级
+            this.$emit('handleEvent', 'leftClick', { data: this.getSelectData(levelInfo.key, this.baseData, this.defaultClicked.id) || {}})
           }
         } else {
           this.$message({

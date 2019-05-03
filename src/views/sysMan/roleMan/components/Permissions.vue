@@ -9,20 +9,22 @@
         :name="item.value + ''"
       >
         <!-- 点击加载 -->
-        <template v-if="item.status">
+        <template v-if="item.value + '' === menuType">
           <!-- 左侧树 -->
           <div class="left">
             <page-tree
               :expand-all="true"
-              :right-click="false"
               :check-box="true"
+              :load-type="1"
               :default-clicked="treeInfo.defaultClicked"
               :default-high-light="treeInfo.defaultHighLight"
               :default-expanded="treeInfo.defaultExpanded"
               :default-checked="treeInfo.defaultChecked"
+              :tree-data="treeInfo.treeData"
               :base-data.sync="treeInfo.baseData"
               :node-key="treeInfo.nodeKey"
               :load-info.sync="treeInfo.loadInfo"
+              :right-menu-list="treeInfo.rightMenuList"
               :tree-refresh="treeInfo.refresh"
               :refresh-level="treeInfo.refreshLevel"
               @handleClickBt="handleClickBt"
@@ -83,7 +85,14 @@ export default {
       type: Number
     },
     params: {
-      type: Object
+      type: Object,
+      default: () => {
+        return {
+          menu: [],
+          permissions: [],
+          roleId: ''
+        }
+      }
     }
   },
   data () {
@@ -133,6 +142,7 @@ export default {
         defaultClickedAsyc: '', // 默认点击
         defaultHighLightAsyc: '', // 默认高亮
         defaultExpandedAsyc: [], // 默认展开
+        treeData: [], // 树渲染数据(非懒加载时由外部渲染)
         baseData: [], // 树的基础数据，从组件中获取到
         // 加载相关数据
         loadInfo: {
@@ -140,7 +150,8 @@ export default {
           pKey: 'pid', // 节点父级id
           label: 'name', // 节点名称字段
           api: getRoleMenuApi, // 获取数据的接口
-          params: { data: [{ key: 'type', value: 1 }, { key: 'roleId', value: this.rolePId }], type: 'query' }
+          params: { data: [{ key: 'type', value: 1 }, { key: 'roleId', value: this.rolePId }], type: 'query' },
+          resFieldList: ['content'] // 数据所在字段
         },
         leftClickData: {}
       },
@@ -174,12 +185,6 @@ export default {
   },
   watch: {
     'menuType' (val) {
-      // tab懒加载
-      this.listTypeInfo.menuTypeList.forEach(item => {
-        if (+item.value === +val && !item.status) {
-          item.status = true
-        }
-      })
       const treeInfo = this.treeInfo
       // 修改树组件参数
       treeInfo.loadInfo.params.data[0].value = val
@@ -190,6 +195,12 @@ export default {
     },
     // 得到树组件数据，处理相关事件
     'treeInfo.baseData' (val) {
+      // 得到树状数据
+      this.treeInfo.treeData = this.$fn.getTreeArr({
+        key: 'id',
+        pKey: 'pid',
+        data: val
+      })
       this.initTree(val)
     },
     roleId: {
@@ -208,7 +219,7 @@ export default {
     initTree (val) {
       const treeInfo = this.treeInfo
       val.forEach(item => {
-        if (item.pid === 0) {
+        if (item.pid === -1) {
           item.disabled = true
         }
       })
@@ -216,11 +227,12 @@ export default {
       if (!treeInfo.initTree) {
         treeInfo.initTree = true
         // 容错处理
-        val[0] = val[0] ? val[0] : {}
-        // 设置默认
-        treeInfo.defaultClicked = { id: val[0].id }
-        treeInfo.defaultHighLight = val[0].id
-        treeInfo.defaultExpanded = [val[0].id]
+        if (val[0]) {
+          // 设置默认
+          treeInfo.defaultClicked = { id: val[0].id }
+          treeInfo.defaultHighLight = val[0].id
+          treeInfo.defaultExpanded = [val[0].id]
+        }
       }
 
       // 设置列表
@@ -235,7 +247,24 @@ export default {
       getPermissionsApi({ roleId: this.roleId }).then(res => {
         if (res.success) {
           const data = res.content
-          this.treeInfo.defaultChecked = data.menu
+          const checkArr = data.menu
+          // 得到要勾选的数据, 将父级过滤掉
+          for (const item of this.treeInfo.baseData) {
+            checkArr.forEach((item1, index1) => {
+              let key
+              // 得到属于父节点的数据
+              if (item.pid === item1) {
+                key = index1
+              }
+              checkArr.forEach((item2, index2) => {
+                // 如果当前项为父节点，则把他删除
+                if (item2 === checkArr[key]) {
+                  checkArr.splice(index2, 1)
+                }
+              })
+            })
+          }
+          this.treeInfo.defaultChecked = checkArr
           this.roleRelation.permissions = data.permissions
         } else {
           this.$message({
@@ -268,7 +297,7 @@ export default {
           break
           // 树选中事件
         case 'treeCheck':
-          roleRelation.menu = data.haleKeys
+          roleRelation.menu = data.keys
           this.$emit('update:params', { ...this.params, ...roleRelation })
           break
           // 表格的选中事件 (实现分页保存选中功能)
