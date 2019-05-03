@@ -23,6 +23,7 @@
 ├── .babelrc                   // babel-loader 配置
 ├── eslintrc.js                // eslint 配置项
 ├── .gitignore                 // git 忽略项
+├── vue.config.js              // vue-cli@3.0+ 配置文件
 └── package.json               // package.json
 ```
 
