@@ -5,7 +5,7 @@
       <page-tree
         :base-data.sync="treeInfo.baseData"
         :node-key="treeInfo.nodeKey"
-        :lazy="true"
+        :load-type="2"
         :lazy-info="treeInfo.lazyInfo"
         :right-menu-list="treeInfo.rightMenuList"
         :tree-refresh="treeInfo.refresh"
@@ -92,7 +92,8 @@ export default {
             label: 'name', // 节点显示字段
             type: 1, // 数据类型
             api: getAllApi, // 获取数据的接口
-            params: { key: 'pid', value: 1, type: 'url' } // 获取数据的参数
+            params: { key: 'pid', value: 1, type: 'url' }, // 获取数据的参数
+            resFieldList: ['content'] // 数据所在字段
           },
           {
             key: 'id',
@@ -100,6 +101,7 @@ export default {
             type: 2,
             api: getAllApi,
             params: { key: 'pid', value: '', type: 'url' },
+            resFieldList: ['content'], // 数据所在字段
             leaf: true
           }
         ],

@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-loading="treeLoading"
-    class="page-tree"
-    @contextmenu.prevent="handleTreeClick"
-  >
+  <div v-loading="treeLoading" class="page-tree" @contextmenu.prevent="handleTreeClick">
     <el-tree
       ref="TreeComponent"
       class="tree-component disabled-select"
@@ -11,7 +7,7 @@
       :node-key="nodeKey"
       :data="treeData"
       :load="handleLoadNode"
-      :lazy="lazy"
+      :lazy="loadType === 2"
       :draggable="draggable"
       :allow-drop="handleDrop"
       :default-expand-all="expandAll"
@@ -30,18 +26,8 @@
       @node-expand="handleCheck"
     />
     <!-- 右键菜单 -->
-    <ul
-      v-show="rightMenu.show"
-      class="contextmenu"
-      :style="{left: rightMenu.left +'px',top: rightMenu.top +'px'}"
-    >
-      <li
-        v-for="(item, index) in rightMenu.list.filter(item => item.show)"
-        :key="index"
-        @click="handleRightEvent(item.type, item.data, item.node, item.vm)"
-      >
-        {{ item.name }}
-      </li>
+    <ul v-show="rightMenu.show" class="contextmenu" :style="{left: rightMenu.left +'px',top: rightMenu.top +'px'}">
+      <li v-for="(item, index) in rightMenu.list.filter(item => item.show)" :key="index" @click="handleRightEvent(item.type, item.data, item.node, item.vm)">{{ item.name }}</li>
     </ul>
   </div>
 </template>
@@ -50,24 +36,33 @@
 export default {
   name: 'PageTree',
   props: {
+    treeData: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
     // 容器，内部获取到的数据提供外部的接口
     baseData: {
-      type: Array
+      type: Array,
+      default: () => {
+        return []
+      }
     },
     // 是否手风琴点击
     clickNode: {
       type: Boolean,
       defalult: false
     },
-    // 是否懒加载
-    lazy: {
-      type: Boolean,
-      defalult: false
+    // 加载方式
+    loadType: {
+      type: Number,
+      defalult: 1 // 1: 正常通过接口加载 2: 懒加载 3: 传入数据
     },
     /**
-     * 懒加载相关数据
-     * key -> 唯一标识 label -> 显示 type -> 类型 api -> 接口 params -> 参数 leaf -> 是否叶子节点
-     */
+      * 懒加载相关数据
+      * key -> 唯一标识 label -> 显示 type -> 类型 api -> 接口 params -> 参数 leaf -> 是否叶子节点
+      */
     lazyInfo: {
       type: Array,
       default: () => {
@@ -79,23 +74,25 @@ export default {
             type: '',
             api: () => {},
             params: { key: '', value: '', type: 'url' }, // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
+            resFieldList: [], // 数据响应成功的字段列表
             leaf: true
           }
         ]
       }
     },
     /**
-     * 正常加载相关
-     */
+      * 正常加载相关
+      */
     loadInfo: {
       type: Object,
       default: () => {
         return {
-          data: [],
-          key: 'id',
+          key: 'id', // 节点
+          pKey: 'pid', // 父节点
           label: 'name',
           api: () => {},
-          params: { key: '', value: '', type: 'url' } // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
+          params: { key: '', value: '', type: 'url' }, // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
+          resFieldList: [] // 数据响应成功的字段列表
         }
       }
     },
@@ -116,8 +113,7 @@ export default {
     },
     // 默认高亮
     defaultHighLight: {
-      type: null // 匹配所有类型, 因为不确定key是数字还是字符串
-      // type: String || Number
+      type: null
     },
     // 是否全部展开
     expandAll: {
@@ -184,7 +180,6 @@ export default {
   data () {
     return {
       treeLoading: false,
-      treeData: [],
       rightMenu: {
         show: false,
         left: 0,
@@ -239,19 +234,22 @@ export default {
   },
   mounted () {
     this.initData()
+    this.initDefaultChecked(this.defaultChecked)
   },
   methods: {
     // TODO: elementui-tree组件内部问题，有时无法成功选中，先用延时器的方法保证效果
     initDefaultChecked (val = []) {
       if (val.length === 0) return
-      this.$nextTick(() => {
-        // 将节点选中的状态初始化
-        this.$refs.TreeComponent.setCheckedNodes([])
-        for (let i = 0; i < val.length; i++) {
-          // 得到选中的节点,这个方法ojbk
-          this.$refs.TreeComponent.setChecked(val[i], true)
-        }
-      })
+      setTimeout(() => {
+        this.$nextTick(() => {
+          // 将节点选中的状态初始化
+          this.$refs.TreeComponent.setCheckedNodes([])
+          for (let i = 0; i < val.length; i++) {
+            // 得到选中的节点,这个方法ojbk
+            this.$refs.TreeComponent.setChecked(val[i], true)
+          }
+        })
+      }, 100)
     },
     // 自定义渲染内容
     renderContent (h, { node, data, store }) {
@@ -342,15 +340,16 @@ export default {
     handleDrop (draggingNode, dropNode, type) {
       return draggingNode.level === dropNode.level && type !== 'inner'
     },
-    // 非懒加载
+    // 正常通过接口加载
     initData () {
-      // 懒加载不往下处理
-      if (this.lazy) return
+      // 非正常加载
+      if (this.loadType !== 1) return
       // 加载loading
       this.treeLoading = true
       const treeProps = this.treeProps
       const loadInfo = this.loadInfo
-      const params = loadInfo.params || {}; let data
+      const params = loadInfo.params || {}
+      let data
       if (params.type === 'url') {
         data = params.value
       } else if (params.type === 'query') {
@@ -364,15 +363,21 @@ export default {
       loadInfo.api(data).then(res => {
         let arr = []
         if (res.success) {
-          if (res.content.length > 0) {
-            // 得到数据后把数据给到父级，方便父级用到
-            this.$emit('update:baseData', res.content)
-            arr = JSON.parse(JSON.stringify(res.content))
+          let resData = res
+          const resFieldList = loadInfo.resFieldList
+          // 得到定义的响应成功的数据字段
+          for (let i = 0; i < resFieldList.length; i++) {
+            resData = resData[resFieldList[i]]
+          }
+          if (resData.length > 0) {
+            arr = JSON.parse(JSON.stringify(resData))
             arr.forEach(item => {
               // 保证刷新之后key的唯一
               item.key = item[loadInfo.key]
               item[treeProps.label] = item[loadInfo.label]
             })
+            // 得到数据后把数据给到父级，方便父级用到
+            this.$emit('update:baseData', arr)
             // 设置默认高亮
             if (this.defaultHighLight || this.defaultHighLight === 0) {
               this.$nextTick(() => {
@@ -385,7 +390,6 @@ export default {
               this.$emit('handleEvent', 'leftClick', { data: this.getSelectData(loadInfo.key, this.baseData, this.defaultClicked.id) })
             }
           }
-          this.treeData = this.$fn.getTreeArr({ key: loadInfo.key, pKey: loadInfo.pKey, data: arr })
         } else {
           this.$message({
             showClose: true,
@@ -411,6 +415,8 @@ export default {
     },
     // 懒加载数据
     handleLoadNode (node, resolve) {
+      // 非懒加载
+      if (this.loadType !== 2) return
       // 加载loading
       if (node.level === 0) {
         this.treeLoading = true
@@ -435,10 +441,14 @@ export default {
       levelInfo.api(data).then(res => {
         let arr = []
         if (res.success) {
-          if (res.content.length > 0) {
-            // 得到数据后把数据给到父级，方便父级用到
-            this.$emit('update:baseData', [...this.baseData, ...res.content])
-            arr = JSON.parse(JSON.stringify(res.content))
+          let resData = res
+          const resFieldList = levelInfo.resFieldList
+          // 得到定义的响应成功的数据字段
+          for (let i = 0; i < resFieldList.length; i++) {
+            resData = resData[resFieldList[i]]
+          }
+          if (resData.length > 0) {
+            arr = JSON.parse(JSON.stringify(resData))
             arr.forEach(item => {
               // 保证key的唯一
               item.key = levelInfo.type + item[levelInfo.key]
@@ -447,6 +457,8 @@ export default {
               item.type = levelInfo.type
               item[treeProps.isLeaf] = levelInfo.leaf
             })
+            // 得到数据后把数据给到父级，方便父级用到
+            this.$emit('update:baseData', [...this.baseData, ...arr])
             // 设置默认高亮
             if (this.defaultHighLight || this.defaultHighLight === 0) {
               this.$nextTick(() => {

@@ -120,7 +120,7 @@ const permission = {
             // 数据排序
             baseMenu = baseMenu.sort((a, b) => a.sort - b.sort)
             // 得到树状数组
-            treeMenu = globalFn.getTreeArr({ key: 'id', pKey: 'pid', data: baseMenu })
+            treeMenu = globalFn.getTreeArr({ key: 'id', pKey: 'pid', data: baseMenu, jsonData: false })
             // 得到静态目录
             treeMenu = addPage(treeMenu)
             // 添加不需要权限也能访问的页面

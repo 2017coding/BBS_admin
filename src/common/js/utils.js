@@ -147,6 +147,7 @@ export default {
    *  @param obj.pKey 父字段名称 比如 pid
    *  @param obj.rootPValue 根节点的父字段的值
    *  @param obj.data 需要处理的数据
+   *  @param obj.jsonData 是否深复制数据（默认是true）
    * @return {Array} arr
    */
   getTreeArr: (obj) => {
@@ -154,7 +155,9 @@ export default {
       console.log('getTreeArr=>请传入数组')
       return []
     }
-    const arr = obj.data; const arr1 = []
+    obj.jsonData = obj.jsonData === false ? obj.jsonData : true
+    const arr = obj.jsonData ? JSON.parse(JSON.stringify(obj.data)) : obj.data
+    const arr1 = []
     // 将数据处理成数状结构
     arr.forEach(item => {
       let index = 0

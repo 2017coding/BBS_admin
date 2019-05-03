@@ -4,9 +4,11 @@
     <div class="left">
       <page-tree
         :expand-all="true"
+        :load-type="1"
         :default-clicked="treeInfo.defaultClicked"
         :default-high-light="treeInfo.defaultHighLight"
         :default-expanded="treeInfo.defaultExpanded"
+        :tree-data="treeInfo.treeData"
         :base-data.sync="treeInfo.baseData"
         :node-key="treeInfo.nodeKey"
         :load-info.sync="treeInfo.loadInfo"
@@ -125,6 +127,7 @@ export default {
         defaultClickedAsyc: '', // 默认点击
         defaultHighLightAsyc: '', // 默认高亮
         defaultExpandedAsyc: [], // 默认展开
+        treeData: [], // 树渲染数据(非懒加载时由外部渲染)
         baseData: [], // 树的基础数据，从组件中获取到
         // 加载相关数据
         loadInfo: {
@@ -132,7 +135,8 @@ export default {
           pKey: 'pid', // 节点父级id
           label: 'name', // 节点名称字段
           api: getAllApi, // 获取数据的接口
-          params: { data: [{ key: 'type', value: 2 }], type: 'query' }
+          params: { data: [{ key: 'type', value: 2 }], type: 'query' },
+          resFieldList: ['content'] // 数据所在字段
         },
         leftClickData: {},
         rightClickData: {},
@@ -285,6 +289,12 @@ export default {
     },
     // 得到树组件数据，处理相关事件
     'treeInfo.baseData' (val) {
+      // 得到树状数据
+      this.treeInfo.treeData = this.$fn.getTreeArr({
+        key: 'id',
+        pKey: 'pid',
+        data: val
+      })
       this.initTree(val)
     }
   },
