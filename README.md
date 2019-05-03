@@ -1,9 +1,9 @@
 
 ## 代码结构
 ```
-├── build                      // 构建相关  
-├── config                     // 配置相关
+├── admin                      // 打包产出文件
 ├── node_module                // npm加载所需的项目依赖模块
+├── public                     // 静态入口
 ├── src                        // 源代码
 │   ├── api                    // 所有请求
 │   ├── assets                 // 主题 字体 图片等静态资源
@@ -13,6 +13,7 @@
 │   │   ├── js                 // 编写公有的方法
 │   │   └── style              // 编写公有的样式
 │   ├── components             // 全局公用组件
+│   ├── directive              // 自定义指令
 │   ├── router                 // 路由
 │   ├── store                  // 全局 store管理
 │   ├── views                  // view
@@ -22,7 +23,6 @@
 ├── .babelrc                   // babel-loader 配置
 ├── eslintrc.js                // eslint 配置项
 ├── .gitignore                 // git 忽略项
-├── index.html                 // html模板
 └── package.json               // package.json
 ```
 
@@ -40,16 +40,19 @@
 |-|文章管理|articleMan||
 |-|讲堂管理|liveMan||
 |-|活动管理|activityMan||
+|-|广告位|advertising||
+|工作流||workflow||
+|-|流程设计|processDesign||
+|-|业务管理|businessMan||
+|-|已办事项|finishedItems||
+|-|未办事项|unfinishedItems||
 |文件库||library||
 |-|图片管理|imgMan||
 |-|文件管理|fileMan||
 |论坛配置||bbsConfig||
-|-|首页轮播|carousel||
+|-|轮播|carousel||
 |-|技术频道|techSquare||
-|-|提示语|notices||
-|-|广告位|advertising||
-|-|讲座推荐|liveRecommend||
-|-|活动推荐|activityRecommend||
+|-|通知|notices||
 |-|标签类型管理|tagTypeMan||
 |-|标签管理|tagMan||
 |系统管理||sysMan||
@@ -57,7 +60,7 @@
 |-|角色管理|roleMan||
 |-|菜单管理|menuMan||
 |-|区域管理|areaMan||
-|-|字典管理|dictMan||
+|-|图表配置|chartConfig||
 |-|系统日志|log||
 
 ## 基本业务分析
