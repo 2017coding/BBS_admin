@@ -120,7 +120,6 @@ export default {
         // 加载相关数据
         loadInfo: {
           key: 'id', // 节点id
-          pKey: 'pid', // 节点父级id
           label: 'name', // 节点名称字段
           api: getAllApi, // 获取数据的接口
           resFieldList: ['content'] // 数据所在字段

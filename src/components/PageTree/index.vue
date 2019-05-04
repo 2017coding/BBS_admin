@@ -37,6 +37,7 @@
 export default {
   name: 'PageTree',
   props: {
+    // shu
     treeData: {
       type: Array,
       default: () => {
@@ -69,7 +70,6 @@ export default {
       default: () => {
         return [
           {
-            data: [],
             key: 'id',
             label: 'name',
             type: '',
@@ -89,7 +89,6 @@ export default {
       default: () => {
         return {
           key: 'id', // 节点
-          pKey: 'pid', // 父节点
           label: 'name',
           api: () => {},
           params: { key: '', value: '', type: 'url' }, // url/query->{data: [{key: '', value: '', default: ''}] type: 'query'}
