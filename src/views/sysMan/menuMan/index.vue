@@ -7,7 +7,7 @@
         style="padding-bottom: 10px;"
       >
         <el-select
-          v-model="formInfo.data.type"
+          v-model="menuType"
           placeholder="请选择菜单类型"
           style="width: 240px"
         >
@@ -192,6 +192,8 @@ export default {
       dataPermsUpdateApi,
       dataPermsDeleteApi,
       dataPermsGetAllApi,
+      // 默认的菜单类型
+      menuType: 1,
       // 选项卡默认点击
       tabActive: 'menu',
       // 相关列表
@@ -314,7 +316,7 @@ export default {
         data: {
           id: '', // *唯一ID
           pid: '', // *父ID
-          type: 1, // *菜单类型
+          type: '', // *菜单类型
           code: '', // *菜单编码
           name: '', // *菜单名称
           component: '', // *菜单组件
@@ -394,6 +396,12 @@ export default {
     ])
   },
   watch: {
+    menuType: {
+      handler (val) {
+        this.formInfo.data.type = val
+      },
+      immediate: true
+    },
     'dialogInfo.visible' (val) {
       const formInfo = this.formInfo
       const dataControlFormInfo = this.dataControlFormInfo
@@ -713,7 +721,7 @@ export default {
       this.formInfo.data = {
         id: '', // *唯一ID
         pid: '', // *父ID
-        type: 1, // *菜单类型
+        type: this.menuType, // *菜单类型
         code: '', // *菜单编码
         name: '', // *菜单名称
         component: '', // *菜单组件

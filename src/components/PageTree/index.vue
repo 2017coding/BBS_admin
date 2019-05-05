@@ -235,17 +235,27 @@ export default {
     // 自定义渲染内容
     renderContent (h, { node, data, store }) {
       let dom
-      if (data.leaf) {
-        dom = (
-          <p class='custom-tree-node'>
-            <img src={require('@/assets/image/doc.png')}></img>
-            <span style='margin-left:5px;' title={data.desc}>{node.label}</span>
-          </p>
-        )
+      // 懒加载图标设置
+      if (this.loadType === 2) {
+        if (data.leaf) {
+          dom = (
+            <p class='custom-tree-node'>
+              <img src={require('@/assets/image/doc.png')}></img>
+              <span style='margin-left:5px;' title={data.desc}>{node.label}</span>
+            </p>
+          )
+        } else {
+          dom = (
+            <p class='custom-tree-node'>
+              <img src={node.expanded ? require('@/assets/image/file-open.png') : require('@/assets/image/file-close.png')}></img>
+              <span style='margin-left:5px;' title={data.desc}>{node.label}</span>
+            </p>
+          )
+        }
       } else {
         dom = (
-          <p class='custom-tree-node'>
-            <img src={node.expanded ? require('@/assets/image/file-open.png') : require('@/assets/image/file-close.png')}></img>
+          <p class='custom-tree-node' title={data.desc}>
+            <i class={node.expanded ? 'el-icon-albb-int' : 'el-icon-albb-earth'}></i>
             <span style='margin-left:5px;' title={data.desc}>{node.label}</span>
           </p>
         )
