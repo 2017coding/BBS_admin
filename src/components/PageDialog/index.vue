@@ -4,7 +4,7 @@
     :visible.sync="visible"
     :width="width"
     :before-close="handleClose"
-    :append-to-body="true"
+    :append-to-body="appendToBody"
     class="page-dialog"
     :class="className"
   >
@@ -23,7 +23,7 @@
           :icon="item.icon"
           :disabled="item.disabled"
           :loading="btLoading"
-          @click="handleClickBt(item.event)"
+          @click="handleClick(item.event)"
         >
           {{ item.label }}
         </el-button>
@@ -60,6 +60,11 @@ export default {
     // 操作栏配置
     btList: {
       type: Array
+    },
+    // 插入到body
+    appendToBody: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -81,8 +86,8 @@ export default {
       this.$emit('handleEvent', evnet)
     },
     // 派发按钮点击事件
-    handleClickBt (event, data) {
-      this.$emit('handleClickBt', event, data)
+    handleClick (event, data) {
+      this.$emit('handleClick', event, data)
     },
     // 关闭弹窗前的回调
     handleClose (done) {

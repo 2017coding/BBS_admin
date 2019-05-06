@@ -18,7 +18,7 @@
           {{ userInfo.name }}
           <span
             class="avatar"
-            :style="`background-image: url(${userInfo.avatar || 'https://www.lyh.red/image/b2.jpg'})`"
+            :style="`background-image: url(${userInfo.avatar || 'https://www.lyh.red/file/%E9%A6%96%E9%A1%B5%E8%BD%AE%E6%92%AD_20190418155210_g6fk/20190418160520_a4e7.jpg'})`"
           />
           <!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
         </span>
@@ -40,7 +40,7 @@
       :width="dialogInfo.width"
       :bt-loading="dialogInfo.btLoading"
       :bt-list="dialogInfo.btList"
-      @handleClickBt="handleClickBt"
+      @handleClick="handleClick"
       @handleEvent="handleEvent"
     >
       <!-- form -->
@@ -65,7 +65,7 @@
               type="primary"
               icon="el-icon-picture"
               size="mini"
-              @click="handleClickBt('selectAvatar')"
+              @click="handleClick('selectAvatar')"
             >
               {{ formInfo.data.avatar ? '更换头像' : '选择头像' }}
             </el-button>
@@ -271,7 +271,7 @@ export default {
       }
     },
     // 按钮点击
-    handleClickBt (event, data) {
+    handleClick (event, data) {
       const dialogInfo = this.dialogInfo
       switch (event) {
       // 弹窗点击关闭

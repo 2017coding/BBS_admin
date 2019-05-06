@@ -105,7 +105,7 @@
               :icon="item.icon"
               :disabled="item.disabled"
               :loading="scope.row[item.loading]"
-              @click="handleClickBt(item.event, scope.row)"
+              @click="handleClick(item.event, scope.row)"
             >
               {{ item.label }}
             </el-button>
@@ -320,8 +320,8 @@ export default {
       this.getList(this.api)
     },
     // 派发按钮点击事件
-    handleClickBt (event, data) {
-      this.$emit('handleClickBt', event, data)
+    handleClick (event, data) {
+      this.$emit('handleClick', event, data)
     },
     // 选中数据
     handleSelectionChange (rows) {

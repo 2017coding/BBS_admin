@@ -27,7 +27,7 @@
               :right-menu-list="treeInfo.rightMenuList"
               :tree-refresh="treeInfo.refresh"
               :refresh-level="treeInfo.refreshLevel"
-              @handleClickBt="handleClickBt"
+              @handleClick="handleClick"
               @handleEvent="handleEvent"
             />
           </div>
@@ -48,7 +48,7 @@
               :field-list="tableInfo.fieldList"
               :list-type-info="listTypeInfo"
               :handle="tableInfo.handle"
-              @handleClickBt="handleClickBt"
+              @handleClick="handleClick"
               @handleEvent="handleEvent"
             />
             <!-- 提示 -->
@@ -277,7 +277,7 @@ export default {
       })
     },
     // 按钮点击
-    handleClickBt (event, data) {
+    handleClick (event, data) {
       switch (event) {
         case 'save':
           break
