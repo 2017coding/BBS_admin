@@ -67,7 +67,7 @@
         :class="`filter-${item.type}`"
         :type="item.btType"
         :icon="item.icon"
-        @click="handleClickBt(item.event)"
+        @click="handleClick(item.event)"
       >
         {{ item.label }}
       </el-button>
@@ -164,8 +164,8 @@ export default {
       this.$emit('handleEvent', evnet)
     },
     // 派发按钮点击事件
-    handleClickBt (event, data) {
-      this.$emit('handleClickBt', event, data)
+    handleClick (event, data) {
+      this.$emit('handleClick', event, data)
     }
   }
 }

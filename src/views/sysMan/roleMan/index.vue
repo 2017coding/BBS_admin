@@ -15,7 +15,7 @@
         :right-menu-list="treeInfo.rightMenuList"
         :tree-refresh="treeInfo.refresh"
         :refresh-level="treeInfo.refreshLevel"
-        @handleClickBt="handleClickBt"
+        @handleClick="handleClick"
         @handleEvent="handleEvent"
       />
     </div>
@@ -36,7 +36,7 @@
       :width="dialogInfo.type === 'permissions' ? '80%' : dialogInfo.width"
       :bt-loading="dialogInfo.btLoading"
       :bt-list="dialogInfo.btList"
-      @handleClickBt="handleClickBt"
+      @handleClick="handleClick"
       @handleEvent="handleEvent"
     >
       <!-- form -->
@@ -269,7 +269,7 @@ export default {
     getList () {
     },
     // 按钮点击
-    handleClickBt (event, data) {
+    handleClick (event, data) {
       const treeInfo = this.treeInfo
       const dialogInfo = this.dialogInfo
       const formInfo = this.formInfo

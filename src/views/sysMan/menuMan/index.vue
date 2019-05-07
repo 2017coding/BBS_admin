@@ -32,7 +32,7 @@
         :right-menu-list="treeInfo.rightMenuList"
         :tree-refresh="treeInfo.refresh"
         :refresh-level="treeInfo.refreshLevel"
-        @handleClickBt="handleClickBt"
+        @handleClick="handleClick"
         @handleEvent="handleEvent"
       />
     </div>
@@ -68,7 +68,7 @@
                 icon="el-icon-plus"
                 type="primary"
                 style="margin-bottom: 10px;"
-                @click="handleClickBt('persCreate')"
+                @click="handleClick('persCreate')"
               >
                 添加
               </el-button>
@@ -93,7 +93,7 @@
               :field-list="tableInfo.fieldList"
               :list-type-info="listTypeInfo"
               :handle="tableInfo.handle"
-              @handleClickBt="handleClickBt"
+              @handleClick="handleClick"
               @handleEvent="handleEvent"
             />
           </template>
@@ -107,7 +107,7 @@
       :width="dialogInfo.width"
       :bt-loading="dialogInfo.btLoading"
       :bt-list="dialogInfo.btList"
-      @handleClickBt="handleClickBt"
+      @handleClick="handleClick"
       @handleEvent="handleEvent"
     >
       <!-- form -->
@@ -501,7 +501,7 @@ export default {
     getList () {
     },
     // 按钮点击
-    handleClickBt (event, data) {
+    handleClick (event, data) {
       const treeInfo = this.treeInfo
       const tableInfo = this.tableInfo
       const dialogInfo = this.dialogInfo

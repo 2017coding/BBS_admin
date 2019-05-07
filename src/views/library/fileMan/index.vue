@@ -15,7 +15,7 @@
         :right-menu-list="treeInfo.rightMenuList"
         :tree-refresh="treeInfo.refresh"
         :refresh-level="treeInfo.refreshLevel"
-        @handleClickBt="handleClickBt"
+        @handleClick="handleClick"
         @handleEvent="handleEvent"
       />
     </div>
@@ -25,7 +25,7 @@
         :query.sync="filterInfo.query"
         :filter-list="filterInfo.list"
         :list-type-info="listTypeInfo"
-        @handleClickBt="handleClickBt"
+        @handleClick="handleClick"
         @handleEvent="handleEvent"
       />
       <!-- 表格 -->
@@ -38,7 +38,7 @@
         :field-list="tableInfo.fieldList"
         :list-type-info="listTypeInfo"
         :handle="tableInfo.handle"
-        @handleClickBt="handleClickBt"
+        @handleClick="handleClick"
         @handleEvent="handleEvent"
       />
     </div>
@@ -49,7 +49,7 @@
       :width="dialogInfo.width"
       :bt-loading="dialogInfo.btLoading"
       :bt-list="dialogInfo.type === 'uploadFile' ? undefined : dialogInfo.btList"
-      @handleClickBt="handleClickBt"
+      @handleClick="handleClick"
       @handleEvent="handleEvent"
     >
       <page-form
@@ -353,7 +353,7 @@ export default {
       this.tableInfo.refresh = Math.random()
     },
     // 按钮点击
-    handleClickBt (event, data) {
+    handleClick (event, data) {
       const treeInfo = this.treeInfo
       const tableInfo = this.tableInfo
       const dialogInfo = this.dialogInfo
@@ -520,7 +520,7 @@ export default {
             // 刷新列表
             tableInfo.refresh = Math.random()
             // 关闭弹窗
-            this.handleClickBt('close')
+            this.handleClick('close')
           }
           break
       }

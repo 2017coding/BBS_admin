@@ -153,8 +153,8 @@ export default {
       this.$emit('handleEvent', evnet)
     },
     // 派发按钮点击事件
-    handleClickBt (event, data) {
-      this.$emit('handleClickBt', event, data)
+    handleClick (event, data) {
+      this.$emit('handleClick', event, data)
     }
   }
 }

@@ -10,7 +10,7 @@
         :right-menu-list="treeInfo.rightMenuList"
         :tree-refresh="treeInfo.refresh"
         :refresh-level="treeInfo.refreshLevel"
-        @handleClickBt="handleClickBt"
+        @handleClick="handleClick"
         @handleEvent="handleEvent"
       />
     </div>
@@ -25,7 +25,7 @@
         :field-list="tableInfo.fieldList"
         :list-type-info="listTypeInfo"
         :handle="tableInfo.handle"
-        @handleClickBt="handleClickBt"
+        @handleClick="handleClick"
         @handleEvent="handleEvent"
       >
         <!-- 自定义插槽显示状态 -->
@@ -45,7 +45,7 @@
             :icon="scope.data.item.icon"
             :disabled="scope.data.item.disabled"
             :loading="scope.data.row[scope.data.item.loading]"
-            @click="handleClickBt(scope.data.item.event, scope.data.row)"
+            @click="handleClick(scope.data.item.event, scope.data.row)"
           >
             {{ scope.data.row.status - 1 >= 0 ? '停用' : '启用' }}
           </el-button>
@@ -164,7 +164,7 @@ export default {
       this.tableInfo.refresh = Math.random()
     },
     // 按钮点击
-    handleClickBt (event, data) {
+    handleClick (event, data) {
       switch (event) {
         case 'status':
           const params = JSON.parse(JSON.stringify(data))

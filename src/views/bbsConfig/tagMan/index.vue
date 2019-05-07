@@ -5,7 +5,7 @@
       :query.sync="filterInfo.query"
       :filter-list="filterInfo.list"
       :list-type-info="listTypeInfo"
-      @handleClickBt="handleClickBt"
+      @handleClick="handleClick"
       @handleEvent="handleEvent"
     />
     <!-- 表格 -->
@@ -18,7 +18,7 @@
       :field-list="tableInfo.fieldList"
       :list-type-info="listTypeInfo"
       :handle="tableInfo.handle"
-      @handleClickBt="handleClickBt"
+      @handleClick="handleClick"
       @handleEvent="handleEvent"
     >
       <!-- 自定义插槽显示状态 -->
@@ -38,7 +38,7 @@
           :icon="scope.data.item.icon"
           :disabled="scope.data.item.disabled"
           :loading="scope.data.row[scope.data.item.loading]"
-          @click="handleClickBt(scope.data.item.event, scope.data.row)"
+          @click="handleClick(scope.data.item.event, scope.data.row)"
         >
           {{ scope.data.row.status - 1 >= 0 ? '停用' : '启用' }}
         </el-button>
@@ -51,7 +51,7 @@
       :width="dialogInfo.width"
       :bt-loading="dialogInfo.btLoading"
       :bt-list="dialogInfo.type === 'view' ? undefined : dialogInfo.btList"
-      @handleClickBt="handleClickBt"
+      @handleClick="handleClick"
       @handleEvent="handleEvent"
     >
       <!-- form -->
@@ -77,7 +77,7 @@
               type="primary"
               icon="el-icon-picture"
               size="mini"
-              @click="handleClickBt('selectFile')"
+              @click="handleClick('selectFile')"
             >
               {{ formInfo.data.icon ? '更换图标' : '选择图标' }}
             </el-button>
@@ -311,7 +311,7 @@ export default {
       return placeholder
     },
     // 按钮点击
-    handleClickBt (event, data) {
+    handleClick (event, data) {
       const tableInfo = this.tableInfo
       const dialogInfo = this.dialogInfo
       const formInfo = this.formInfo
