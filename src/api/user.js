@@ -19,10 +19,11 @@ export function loginApi (data) {
 }
 
 // 退出登录
-export function loginOutApi () {
+export function loginOutApi (params) {
   return request({
     url: '/api/user/loginOut',
-    method: 'post'
+    method: 'post',
+    params
   })
 }
 

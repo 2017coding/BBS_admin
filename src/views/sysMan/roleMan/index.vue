@@ -213,7 +213,7 @@ export default {
       // 得到树状数据
       this.treeInfo.treeData = this.$fn.getTreeArr({
         key: 'id',
-        pKey: 'pid',
+        pKey: 'f_id',
         data: val
       })
       this.initTree(val)

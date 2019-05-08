@@ -52,7 +52,7 @@ const user = {
           sessionStorage.clear()
           resolve()
         }, 500)
-        loginOutApi().then(res => {
+        loginOutApi({ type: 'admin' }).then(res => {
           if (res.success) {
             sessionStorage.clear()
             // localStorage.clear()
