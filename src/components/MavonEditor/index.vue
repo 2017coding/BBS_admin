@@ -7,7 +7,7 @@
       :style="`max-height: ${maxHeight}`"
       :font-size="'13px'"
       :placeholder="placeholder"
-      :toolbars="toolbars"
+      :toolbars="initToolbars()"
       :subfield="true"
     />
   </div>
@@ -35,8 +35,7 @@ export default {
       errPlaceholder: `1. 描述你的问题
                     2. 贴上相关代码 (请勿用图片代替代码)
                     3. 贴上报错信息
-                    4 已经尝试过哪些方法仍然没解决 (附上相关链接)`,
-      toolbars: {}
+                    4 已经尝试过哪些方法仍然没解决 (附上相关链接)`
     }
   },
   watch: {
@@ -56,12 +55,9 @@ export default {
       immediate: true
     }
   },
-  mounted () {
-    this.initToolbars()
-  },
   methods: {
     initToolbars () {
-      this.toolbars = {
+      return {
         bold: true, // 粗体
         italic: true, // 斜体
         header: true, // 标题
@@ -103,6 +99,10 @@ export default {
 
 <style lang="scss">
 .v-note-wrapper{
+  .shadow{
+    border: 1px solid rgb(224, 224, 224)!important;
+    box-shadow: none!important;
+  }
   .v-note-op{
     // height: 30px!important;
     // min-height: 30px!important;
