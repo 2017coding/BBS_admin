@@ -18,8 +18,8 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:1313',
-        // target: 'https://www.lyh.red',
+        // target: 'http://localhost:1313',
+        target: 'https://www.lyh.red',
         pathRewrite: {
           '^/api': '/api'
         }

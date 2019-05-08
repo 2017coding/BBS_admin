@@ -331,16 +331,16 @@ export default {
           // update_time: '' // 修改时间
         },
         fieldList: [
-          { label: '所属菜单', value: 'pid', type: 'select', list: 'treeList', required: true },
-          { label: '菜单类型', value: 'type', type: 'tag', list: 'menuTypeList', required: true },
-          { label: '菜单编码', value: 'code', type: 'input', required: true },
-          { label: '菜单名称', value: 'name', type: 'input', required: true },
-          { label: '菜单组件', value: 'component', type: 'select', list: 'componentList1', required: true },
-          { label: '菜单图标', value: 'icon', type: 'slot', filterable: true },
+          { label: '所属菜单', value: 'pid', type: 'select', list: 'treeList' },
+          { label: '菜单类型', value: 'type', type: 'tag', list: 'menuTypeList' },
+          { label: '菜单编码', value: 'code', type: 'input' },
+          { label: '菜单名称', value: 'name', type: 'input' },
+          { label: '菜单组件', value: 'component', type: 'select', list: 'componentList1' },
+          { label: '菜单图标', value: 'icon', type: 'slot' },
           { label: '重定向路径', value: 'redirect', type: 'input' },
-          { label: '排序', value: 'sort', type: 'input', required: true },
-          { label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block' },
-          { label: '状态', value: 'status', type: 'select', list: 'statusList', required: true }
+          { label: '排序', value: 'sort', type: 'input' },
+          { label: '描述', value: 'desc', type: 'textarea' },
+          { label: '状态', value: 'status', type: 'select', list: 'statusList' }
         ],
         rules: {},
         labelWidth: '120px'
