@@ -380,6 +380,7 @@ export default {
             item.key = item[loadInfo.key]
             item[treeProps.label] = item[loadInfo.label]
           })
+          console.log(resData)
           // 得到数据后把数据给到父级，方便父级用到
           this.$emit('update:baseData', arr)
           // 设置默认高亮

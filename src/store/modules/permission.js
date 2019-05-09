@@ -23,25 +23,25 @@ function addPage (arr) {
       }
     ]
   }
-  // const HOWTOUSE = {
-  //   id: 0,
-  //   pid: 1,
-  //   path: '/HOWTOUSE',
-  //   component: Layout,
-  //   redirect: '/HOWTOUSE/PAGE',
-  //   meta: {title: '使用说明', icon: ''},
-  //   children: [
-  //     {
-  //       path: 'PAGE',
-  //       component: () => import('@/views/HOWTOUSE/index'),
-  //       name: 'PAGE',
-  //       meta: {title: '使用说明', icon: 'el-icon-feedback'},
-  //       children: []
-  //     }
-  //   ]
-  // }
+  const HOWTOUSE = {
+    id: 0,
+    pid: 1,
+    path: '/HOWTOUSE',
+    component: Layout,
+    redirect: '/HOWTOUSE/PAGE',
+    meta: { title: '使用说明', icon: '' },
+    children: [
+      {
+        path: 'PAGE',
+        component: () => import('@/views/HOWTOUSE/index'),
+        name: 'PAGE',
+        meta: { title: '使用说明', icon: 'el-icon-albb-feedback' },
+        children: []
+      }
+    ]
+  }
   arr.unshift(home)
-  // arr.push(HOWTOUSE)
+  arr.push(HOWTOUSE)
   return arr
 }
 // 得到页面路径
