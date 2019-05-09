@@ -68,6 +68,7 @@
         v-if="item.type === 'date'"
         v-model="data[item.value]"
         :type="item.dateType"
+        :picker-options="item.TimePickerOptions"
         :clearable="item.clearable"
         :disabled="item.disabled"
         :placeholder="getPlaceholder(item)"
