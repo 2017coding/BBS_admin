@@ -253,7 +253,7 @@ export default {
           btList: [
             { label: '启用', type: 'success', icon: 'el-icon-albb-process', event: 'status', loading: 'statusLoading', show: false, slot: true },
             { label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false },
-            { label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false }
+            { label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', loading: 'deleteLoading', show: false }
           ]
         }
       },
@@ -478,8 +478,10 @@ export default {
           break
           // 删除
         case 'delete':
-        // 先判断当前用户下是否有子用户，有则需要先进行权限转移后才可删除当前用户
+          data.deleteLoading = true
+          // 先判断当前用户下是否有子用户，有则需要先进行权限转移后才可删除当前用户
           getCreateUserApi(data.id).then(res => {
+            data.deleteLoading = false
             if (res.success) {
               this.$handleAPI(event, deleteApi, data.id).then(res => {
                 if (res.success) {
@@ -503,6 +505,8 @@ export default {
               }).catch(() => {
               })
             }
+          }).catch(() => {
+            data.deleteLoading = false
           })
           break
           // 弹窗点击关闭
@@ -582,6 +586,7 @@ export default {
           if (!data) return
           data.forEach(item => {
             this.$set(item, 'statusLoading', false)
+            this.$set(item, 'deleteLoading', false)
             item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
             item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')
           })
