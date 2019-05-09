@@ -54,7 +54,7 @@ export default {
     ])
   },
   mounted () {
-    // this.startTips()
+    this.startTips()
     // 添加全局的键盘事件
     document.body.addEventListener('keyup', this.handleFullScreen)
   },

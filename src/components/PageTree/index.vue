@@ -255,11 +255,11 @@ export default {
       } else {
         dom = (
           <p class='custom-tree-node' title={data.desc}>
-            <i class={node.expanded ? 'el-icon-albb-int' : 'el-icon-albb-earth'}></i>
             <span style='margin-left:5px;' title={data.desc}>{node.label}</span>
           </p>
         )
       }
+      // <i class={node.expanded ? 'el-icon-albb-int' : 'el-icon-albb-earth'}></i>
       return dom
     },
     // 过滤节点
