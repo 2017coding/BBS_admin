@@ -177,7 +177,7 @@ export default {
       // 得到树状数据
       this.treeInfo.treeData = this.$fn.getTreeArr({
         key: 'id',
-        pKey: 'f_id',
+        pKey: 'pid',
         data: val
       })
       console.log(val)

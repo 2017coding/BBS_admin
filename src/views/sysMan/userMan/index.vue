@@ -63,6 +63,8 @@
         :rules="formInfo.rules"
         :label-width="formInfo.labelWidth"
         :list-type-info="listTypeInfo"
+        @handleClick="handleClick"
+        @handleEvent="handleEvent"
       >
         <!-- 自定义插槽-选择头像 -->
         <template v-slot:form-avatar>
