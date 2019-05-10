@@ -3,6 +3,16 @@ const path = require('path')
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
+function getProxy (path, type) {
+  if (path === '/api') {
+    switch (type) {
+      case 'localhost':
+        return 'http://localhost:1313'
+      case 'service':
+        return 'https://www.lyh.red'
+    }
+  }
+}
 module.exports = {
   publicPath: './',
   outputDir: 'admin',
@@ -18,8 +28,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:1313',
-        // target: 'https://www.lyh.red',
+        target: getProxy('/api', process.env.VUE_APP_TYPE),
         pathRewrite: {
           '^/api': '/api'
         }
