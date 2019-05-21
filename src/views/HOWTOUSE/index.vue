@@ -1,5 +1,5 @@
 <template>
-  <div class="HOWTOUSE" v-html="marked(init())" />
+  <div class="HOWTOUSE markdown" v-html="marked(init())" />
 </template>
 
 <script>
@@ -93,28 +93,28 @@ export default {
 <style lang="scss">
   .HOWTOUSE{
     padding: 20px;
-    h1, h2, h3, h4{
-      padding: 10px;
-    }
-    h1{
-      margin: 20px 0;
-      margin-bottom: 10px;
-      font-size: 24px;
-      border-bottom: 1px solid rgb(200, 200, 200);
-    }
-    h2{
-      font-size: 18px;
-    }
-    h3{
-      font-size: 16px;
-    }
-    p{
-      padding: 5px;
-      color: rgb(100, 100, 100);
-    }
-    a{
-      color: red;
-      text-decoration: underline;
-    }
+  //   h1, h2, h3, h4{
+  //     padding: 10px;
+  //   }
+  //   h1{
+  //     margin: 20px 0;
+  //     margin-bottom: 10px;
+  //     font-size: 24px;
+  //     border-bottom: 1px solid rgb(200, 200, 200);
+  //   }
+  //   h2{
+  //     font-size: 18px;
+  //   }
+  //   h3{
+  //     font-size: 16px;
+  //   }
+  //   p{
+  //     padding: 5px;
+  //     color: rgb(100, 100, 100);
+  //   }
+  //   a{
+  //     color: red;
+  //     text-decoration: underline;
+  //   }
   }
 </style>

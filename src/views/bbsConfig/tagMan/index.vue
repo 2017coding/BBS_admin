@@ -92,6 +92,7 @@
             />
             <div
               v-else
+              class="markdown"
               v-html="marked(formInfo.data.wikipedia || '目前还没有关于这个标签的解释')"
             />
           </div>
