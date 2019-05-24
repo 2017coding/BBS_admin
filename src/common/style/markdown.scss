@@ -18,7 +18,6 @@
   h2 {
     font-size: 1.4em;
     margin: 40px 10px 20px 0;
-    padding-left: 9px;
     font-weight: 700;
     line-height: 1.4;
   }
@@ -67,11 +66,12 @@
   }
   a {
     color: $g_theme;
-    text-decoration: none;
+    text-decoration: underline;
+    opacity: .8;
   }
   a:hover {
     color: $g_theme;
-    text-decoration: underline;
+    opacity: 1;
   }
   a:focus {
     outline-offset: -2px;
@@ -89,6 +89,14 @@
     color: #555;
     border-left: 2px solid $g_theme;
   }
+  blockquote ul{
+    margin: 0px;
+    padding: 0px;
+  }
+  blockquote li{
+    margin: 2px;
+    list-style: none;
+  }
   strong, dfn {
     font-weight: 700;
   }
@@ -99,9 +107,6 @@
   del {
     text-decoration: line-through;
   }
-  /*code {font-size:90%;}*/
-  
-  /*pre {text-align:left; overflow-x: scroll; color: #257fa0; background: #f6f6f6; padding: 10pt 15pt; border-radius: 3px; border: solid 1px #e2e2e2;}*/
   pre {
     max-height: 600px;
     overflow: auto;
@@ -121,7 +126,7 @@
     font-family: Courier, sans-serif;
   }
   code {
-    color: $g_theme;
+    // color: $g_theme;
     border-radius: 4px;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     padding: 2px 4px;
@@ -157,6 +162,7 @@
   li {
     margin-bottom: 0.75em;
     margin-top: 0.75em;
+    list-style: inherit;
   }
   ol#footnotes {
     font-size: 0.95em;
