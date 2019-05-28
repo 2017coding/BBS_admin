@@ -56,6 +56,7 @@
     >
       <!-- form -->
       <page-form
+        v-if="dialogInfo.type !== 'bind'"
         :ref-obj.sync="formInfo.ref"
         :data="formInfo.data"
         :field-list="formInfo.fieldList"
@@ -82,6 +83,13 @@
           </div>
         </template>
       </page-form>
+      <!-- tag -->
+      <select-tags
+        v-if="dialogInfo.visible && dialogInfo.type === 'bind'"
+        :bind-tags.sync="bindTagsInfo.tags"
+        :size="'medium'"
+        style="width: 100%;"
+      />
     </page-dialog>
     <!-- 选择文件组件 -->
     <select-file
@@ -95,12 +103,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getListApi, createApi, updateApi, deleteApi } from '@/api/bbsConfig/tagTypeMan'
+import { getListApi, createApi, updateApi, deleteApi,
+  setBindTagApi, getBindTagApi } from '@/api/bbsConfig/tagTypeMan'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 import SelectFile from '@/components/SelectFile'
+import SelectTags from './components/SelectTags'
 
 export default {
   components: {
@@ -108,7 +118,8 @@ export default {
     PageTable,
     PageDialog,
     PageForm,
-    SelectFile
+    SelectFile,
+    SelectTags
   },
   data () {
     return {
@@ -154,8 +165,9 @@ export default {
         handle: {
           fixed: 'right',
           label: '操作',
-          width: '280',
+          width: '380',
           btList: [
+            { label: '绑定标签', type: 'info', icon: 'el-icon-albb-tools', event: 'bind', loading: 'bindLoading', show: true },
             { label: '启用', type: 'success', icon: 'el-icon-albb-process', event: 'status', loading: 'statusLoading', show: false, slot: true },
             { label: '编辑', type: '', icon: 'el-icon-edit', event: 'update', show: false },
             { label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'delete', show: false }
@@ -191,7 +203,8 @@ export default {
       dialogInfo: {
         title: {
           create: '添加',
-          update: '编辑'
+          update: '编辑',
+          bind: '绑定标签'
         },
         visible: false,
         type: '',
@@ -200,6 +213,11 @@ export default {
           { label: '关闭', type: '', icon: '', event: 'close', show: true },
           { label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true }
         ]
+      },
+      // 绑定的标签
+      bindTagsInfo: {
+        tagTypeId: '',
+        tags: []
       },
       // 选择文件组件相关参数
       selectFileInfo: {
@@ -224,6 +242,11 @@ export default {
           formInfo.ref.resetFields()
         }
         this.resetForm()
+        // 重置绑定信息
+        this.bindTagsInfo = {
+          tagTypeId: '',
+          tags: []
+        }
         // 重置弹窗按钮loading
         this.dialogInfo.btLoading = false
       }
@@ -263,6 +286,25 @@ export default {
       }
       return placeholder
     },
+    handleBindTags () {
+      const params = this.bindTagsInfo
+      const dialogInfo = this.dialogInfo
+      dialogInfo.btLoading = true
+      setBindTagApi(params).then(res => {
+        if (res.success) {
+          dialogInfo.visible = false
+        }
+        dialogInfo.btLoading = false
+        this.$message({
+          showClose: true,
+          message: res.message,
+          type: res.success ? 'success' : 'error',
+          duration: 2000
+        })
+      }).catch(e => {
+        dialogInfo.btLoading = false
+      })
+    },
     // 按钮点击
     handleClick (event, data) {
       const tableInfo = this.tableInfo
@@ -291,6 +333,19 @@ export default {
               formInfo.data[key] = data[key]
             }
           }
+          break
+        case 'bind':
+          dialogInfo.type = event
+          dialogInfo.visible = true
+          this.bindTagsInfo.tagTypeId = data.id
+          // 获取到当前的标签类型绑定的标签
+          getBindTagApi({ tagTypeId: data.id }).then(res => {
+            if (res.success) {
+              this.bindTagsInfo.tags = res.content.map(item => {
+                return item.tag_id
+              })
+            }
+          })
           break
         case 'status':
           const params = {}
@@ -326,10 +381,15 @@ export default {
           break
           // 弹窗点击保存
         case 'save':
+          const type = this.dialogInfo.type
+          if (type === 'bind') {
+            this.handleBindTags()
+            return
+          }
           this.formInfo.ref.validate(valid => {
             if (valid) {
-              let api; const params = this.formInfo.data
-              const type = this.dialogInfo.type
+              let api
+              const params = this.formInfo.data
               if (type === 'create') {
                 api = createApi
               } else if (type === 'update') {
@@ -362,6 +422,7 @@ export default {
         case 'list':
           if (!data) return
           data.forEach(item => {
+            this.$set(item, 'bindLoading', false)
             this.$set(item, 'statusLoading', false)
             item.create_time = this.$fn.switchTime(item.create_time, 'YYYY-MM-DD hh:mm:ss')
             item.update_time = this.$fn.switchTime(item.update_time, 'YYYY-MM-DD hh:mm:ss')

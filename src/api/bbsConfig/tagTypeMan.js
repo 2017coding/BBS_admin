@@ -51,3 +51,22 @@ export function getAllApi (params) {
     params
   })
 }
+
+// 和标签的依赖关系
+// 获取关联
+export function setBindTagApi (data) {
+  return request({
+    url: '/api/tagRelation/setBindTag',
+    method: 'post',
+    data
+  })
+}
+
+// 设置关联
+export function getBindTagApi (params) {
+  return request({
+    url: '/api/tagRelation/getBindTag',
+    method: 'get',
+    params
+  })
+}

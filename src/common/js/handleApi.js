@@ -43,7 +43,21 @@ export default (type, api, data) => {
     default:
       console.log('未设置的API操作类型')
       return new Promise((resolve, reject) => {
-        reject('找不到的类型设置')
+        api(data).then(res => {
+          if (!res) return
+          Message({
+            showClose: true,
+            message: res.message,
+            type: res.success ? 'success' : 'error',
+            duration: 2000
+          })
+          resolve(res)
+        }).catch(e => {
+          reject(e)
+        })
       })
+      // return new Promise((resolve, reject) => {
+      //   reject('找不到的类型设置')
+      // })
   }
 }

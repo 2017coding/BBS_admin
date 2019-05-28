@@ -39,7 +39,7 @@ export default {
       chartList: [
         {
           dataType: 'loginAnalyze',
-          title: '近15天用户登录分析',
+          title: '近7天用户登录分析',
           height: '100%',
           chartType: 'line',
           xUnit: '小时',
@@ -69,7 +69,7 @@ export default {
   methods: {
     getCharts () {
       this.loading = true
-      userLoginAnalyzeApi({ days: 15 }).then(res => {
+      userLoginAnalyzeApi({ days: 7 }).then(res => {
         this.loading = false
         if (res.success) {
           const data = res.content

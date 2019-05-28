@@ -67,6 +67,7 @@
         <template v-slot:form-image>
           <div class="slot-image">
             <img
+              v-imgAlart
               :src="formInfo.data.image"
               style="height: 100px;"
             >
