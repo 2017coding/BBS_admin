@@ -538,6 +538,7 @@ export default {
                 })
                 dialogInfo.visible = false
               }
+              dialogInfo.btLoading = false
               this.$message({
                 showClose: true,
                 message: res.message,
@@ -545,6 +546,7 @@ export default {
                 duration: 2000
               })
             }).catch(() => {
+              dialogInfo.btLoading = false
               dialogInfo.visible = false
             })
             return

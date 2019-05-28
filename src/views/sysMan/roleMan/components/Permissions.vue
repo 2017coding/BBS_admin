@@ -202,11 +202,11 @@ export default {
         data: val
       })
       this.initTree(val)
+      this.getPermissions()
     },
     roleId: {
       handler: function (val) {
         if (!val) return
-        this.getPermissions()
         this.$emit('update:params', { ...this.params, ...{ roleId: val }})
       },
       immediate: true
