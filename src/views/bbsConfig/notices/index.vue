@@ -7,7 +7,13 @@
           <i class="dot2" />
           <i class="dot3" />
         </div>
-        <div v-if="!edit" class="mac-right" @click="handleClick('update')"><i class="el-icon-edit" />编辑</div>
+        <div
+          v-if="!edit && dataPerms.includes('notices:set')"
+          class="mac-right"
+          @click="handleClick('update')"
+        >
+          <i class="el-icon-edit" />编辑
+        </div>
       </div>
       <div class="mac-body">
         <p v-if="!edit" class="notices">{{ formInfo.data.content || '暂无通知' }}</p>
@@ -30,6 +36,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { setNoticesApi, getNoticesApi } from '@/api/bbsConfig/notices'
 import PageForm from '@/components/PageForm'
 
 export default {
@@ -44,7 +52,8 @@ export default {
         ref: null,
         data: {
           href: '',
-          content: ''
+          content: '',
+          status: 1
         },
         fieldList: [
           { label: '跳转地址', value: 'href', type: 'input', className: 'el-form-block', validator: '' },
@@ -54,13 +63,53 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'dataPerms'
+    ])
+  },
+  mounted () {
+    this.getData()
+  },
   methods: {
+    // 获取数据
+    getData () {
+      getNoticesApi().then(res => {
+        if (res.success) {
+          this.formInfo.data = res.content[0]
+        }
+      })
+    },
+    // 绑定点击
     handleClick (type) {
       switch (type) {
         case 'update':
         case 'canel':
           this.edit = !this.edit
           break
+        case 'save':
+          this.formInfo.ref.validate(valid => {
+            if (valid) {
+              this.btLoading = true
+              const params = this.formInfo.data
+              this.$handleAPI('set', setNoticesApi, params).then(res => {
+                if (res.success) {
+                  this.edit = false
+                }
+                this.btLoading = false
+              }).catch(e => {
+                this.btLoading = false
+              })
+            }
+          })
+          break
+      }
+    },
+    // 初始化表单
+    resetForm () {
+      this.formInfo.data = {
+        href: '',
+        content: ''
       }
     }
   }
@@ -77,6 +126,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       height: 32px;
+      border-radius: 8px 8px 0 0;
       background-color: #E3E3E3;
       .mac-left{
         display: flex;
@@ -105,6 +155,7 @@ export default {
       padding: 40px;
       min-height: calc(100% - 32px);
       background-color: #EEEEEE;
+      border-radius: 0 0 6px 6px;
       .notices{
         color: #666666;
       }

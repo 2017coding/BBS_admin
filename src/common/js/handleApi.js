@@ -41,7 +41,7 @@ export default (type, api, data) => {
         })
       })
     default:
-      console.log('未设置的API操作类型')
+      console.log('warning: 未设置的API操作类型')
       return new Promise((resolve, reject) => {
         api(data).then(res => {
           if (!res) return
