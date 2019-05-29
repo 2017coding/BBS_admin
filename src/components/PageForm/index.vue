@@ -34,7 +34,7 @@
         :type="item.type"
         :disabled="item.disabled"
         :placeholder="getPlaceholder(item)"
-        :autosize="{minRows: 2, maxRows: 10}"
+        :autosize="item.autosize || {minRows: 2, maxRows: 10}"
         @focus="handleEvent(item.event)"
       />
       <!-- 计数器 -->
