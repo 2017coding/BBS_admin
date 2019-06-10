@@ -164,8 +164,8 @@ export default {
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
       const btList1 = this.filterInfo.list
-      this.$initDataPerms('articleMan', btList)
-      this.$initDataPerms('articleMan', btList1)
+      this.$initDataPerms('questionMan', btList)
+      this.$initDataPerms('questionMan', btList1)
     },
     initList () {
     },

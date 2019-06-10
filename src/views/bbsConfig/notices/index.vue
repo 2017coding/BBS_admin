@@ -57,7 +57,7 @@ export default {
         },
         fieldList: [
           { label: '跳转地址', value: 'href', type: 'input', className: 'el-form-block', validator: '' },
-          { label: '内容', value: 'content', type: 'textarea', autosize: { minRows: 8, maxRows: 10 }, className: 'el-form-block' }
+          { label: '内容', value: 'content', type: 'textarea', className: 'el-form-block' }
         ],
         rules: {}
       }
@@ -116,6 +116,21 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.mac-body{
+  .el-form{
+    height: 90%;
+  }
+  .el-form-item:last-child{
+    height: calc(100% - 40px - 20px);
+  }
+  .el-form-item__content, .el-textarea, textarea{
+    height: 100%!important;
+    resize: none!important;
+  }
+}
+</style>
+
 <style scoped lang="scss">
 .app-container{
   .mac{
@@ -128,6 +143,7 @@ export default {
       height: 32px;
       border-radius: 8px 8px 0 0;
       background-color: #E3E3E3;
+      overflow: auto;
       .mac-left{
         display: flex;
         .dot1, .dot2, .dot3{
@@ -153,7 +169,7 @@ export default {
     }
     .mac-body{
       padding: 40px;
-      min-height: calc(100% - 32px);
+      height: calc(100% - 32px);
       background-color: #EEEEEE;
       border-radius: 0 0 6px 6px;
       .notices{
@@ -163,6 +179,7 @@ export default {
         margin-bottom: 20px;
       }
       .bt{
+        margin-top: 3%;
         text-align: right;
       }
     }
