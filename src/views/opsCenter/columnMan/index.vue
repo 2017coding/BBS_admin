@@ -37,17 +37,13 @@
       :bt-list="dialogInfo.type === 'view' ? undefined : dialogInfo.btList"
       @handleClick="handleClick"
       @handleEvent="handleEvent"
-    >
-      <p class="title">{{ articleInfo.title }}</p>
-      <div class="markdown" v-html="marked(articleInfo.content)" />
-    </page-dialog>
+    />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { getListApi, getRowApi, createApi, updateApi, deleteApi } from '@/api/opsCenter/questionMan'
-import marked from '@/common/js/marked'
+import { getListApi, getRowApi, createApi, updateApi, deleteApi } from '@/api/opsCenter/columnMan'
 import PageFilter from '@/components/PageFilter'
 import PageTable from '@/components/PageTable'
 import PageDialog from '@/components/PageDialog'
@@ -64,7 +60,6 @@ export default {
       createApi,
       updateApi,
       deleteApi,
-      marked,
       // 相关列表
       listTypeInfo: {
         flagList: [
@@ -74,10 +69,14 @@ export default {
           { key: '审核失败', value: 4 },
           { key: '封禁', value: 5 }
         ],
-        progressList: [
-          { key: '等待回答', value: 1 },
-          { key: '已有回答', value: 2 },
-          { key: '已解决', value: 3 }
+        typeList: [
+          { key: '原创', value: 1 },
+          { key: '转载', value: 2 },
+          { key: '翻译', value: 3 }
+        ],
+        statusList: [
+          { key: '启用', value: 1 },
+          { key: '停用', value: 0 }
         ]
       },
       // 过滤相关配置
@@ -88,7 +87,7 @@ export default {
           flag: ''
         },
         list: [
-          { type: 'input', label: '问题标题', value: 'title' },
+          { type: 'input', label: '专栏名称', value: 'name' },
           { type: 'select', label: '状态', value: 'flag', list: 'flagList' },
           { type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true }
         ]
@@ -99,8 +98,8 @@ export default {
         initCurpage: 1,
         data: [],
         fieldList: [
-          { label: '问题标题', value: 'title', type: 'slot', minWidth: 180 },
-          { label: '解答进度', value: 'progress', width: 120 },
+          { label: '专栏名称', value: 'name', minWidth: 180 },
+          { label: '专栏地址', value: 'url', minWidth: 180 },
           { label: '状态', value: 'flag', width: 90, type: 'select', list: 'flagList' },
           { label: '创建人', value: 'create_user_name' },
           { label: '创建时间', value: 'create_time', width: 180 }
@@ -127,8 +126,7 @@ export default {
         width: '80%',
         title: {
           create: '添加',
-          update: '编辑',
-          view: '文章信息'
+          update: '编辑'
         },
         visible: false,
         type: '',
@@ -137,12 +135,6 @@ export default {
           { label: '关闭', type: '', icon: '', event: 'close', show: true },
           { label: '保存', type: 'primary', icon: '', event: 'save', saveLoading: false, show: true }
         ]
-      },
-      // 选择文件组件相关参数
-      selectFileInfo: {
-        type: 2,
-        visible: false,
-        value: ''
       }
     }
   },
