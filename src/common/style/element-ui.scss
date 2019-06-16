@@ -37,3 +37,15 @@
   min-width: 750px;
   border-radius: 6px!important;
 }
+
+// 树组件横向超出出现滚动条
+// .el-scrollbar .el-scrollbar__wrap, .tree {overflow-x: hidden;}
+.el-tree>.el-tree-node{
+  display: inline-block;
+  min-width: 100%;
+}
+// 树组件高亮颜色
+.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content{
+  // background: rgb(240,247,255)
+  // background: rgb(200,207,215)!important;
+}
