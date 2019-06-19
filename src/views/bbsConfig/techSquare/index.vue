@@ -148,11 +148,11 @@ export default {
           { label: '技术类型', value: 'tag_type_id', list: 'tagTypeList' },
           { label: '别名', value: 'name' },
           { label: '排序', value: 'sort', width: 80 },
-          { label: '状态', value: 'status', width: 90, type: 'slot' }
-          // {label: '创建人', value: 'create_user_name'},
-          // {label: '创建时间', value: 'create_time', minWidth: 180},
-          // {label: '更新人', value: 'update_user_name'},
-          // {label: '更新时间', value: 'update_time', minWidth: 180}
+          { label: '状态', value: 'status', width: 90, type: 'slot' },
+          // {label: '创建人', value: 'create_user'},
+          { label: '创建时间', value: 'create_time', width: 180 },
+          // {label: '更新人', value: 'update_user'},
+          { label: '更新时间', value: 'update_time', width: 180 }
         ],
         handle: {
           fixed: 'right',

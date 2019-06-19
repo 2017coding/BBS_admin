@@ -289,7 +289,7 @@ export default {
       const tableInfo = this.tableInfo
       const roleRelation = this.roleRelation
       switch (event) {
-      // 左键点击的处理
+        // 左键点击的处理
         case 'leftClick':
           tableInfo.data = []
           tableInfo.refresh = Math.random()

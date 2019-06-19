@@ -99,7 +99,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'sidebar'
+      'sidebar',
+      'fullScreen'
     ])
   },
   watch: {
@@ -110,6 +111,13 @@ export default {
     },
     // 左侧菜单变化触发
     'sidebar.opened' () {
+      setTimeout(() => {
+        if (this.chart) {
+          this.chart.resize()
+        }
+      }, 350)
+    },
+    'fullScreen' () {
       setTimeout(() => {
         if (this.chart) {
           this.chart.resize()

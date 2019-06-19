@@ -171,11 +171,11 @@ export default {
           { label: '图片名称', value: 'name' },
           // {label: '文件路径', value: 'completePath'},
           { label: '图片类型', value: 'suffix', type: 'tag' },
-          { label: '图片大小', value: 'size' }
+          { label: '图片大小', value: 'size' },
           // {label: '创建人', value: 'create_user'},
-          // {label: '创建时间', value: 'create_time', minWidth: 180},
+          { label: '创建时间', value: 'create_time', width: 180 },
           // {label: '更新人', value: 'update_user'},
-          // {label: '更新时间', value: 'update_time', minWidth: 180}
+          { label: '更新时间', value: 'update_time', width: 180 }
         ],
         handle: {
           fixed: 'right',

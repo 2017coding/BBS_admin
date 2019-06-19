@@ -4,6 +4,7 @@
 
 <script>
 import echarts from 'echarts'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'ChartPie',
@@ -28,11 +29,32 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapGetters([
+      'sidebar',
+      'fullScreen'
+    ])
+  },
   watch: {
     // 监听到数据改变，重新加载echarts数据
     chartData (val) {
       this.removeChart('reset')
       this.initData(val)
+    },
+    // 左侧菜单变化触发
+    'sidebar.opened' () {
+      setTimeout(() => {
+        if (this.chart) {
+          this.chart.resize()
+        }
+      }, 350)
+    },
+    'fullScreen' () {
+      setTimeout(() => {
+        if (this.chart) {
+          this.chart.resize()
+        }
+      }, 300)
     }
   },
   mounted () {

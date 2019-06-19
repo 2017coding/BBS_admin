@@ -13,6 +13,8 @@
         id="tp-weather-widget"
         style="padding: 10px"
       />
+      <i class="nav_icon el-icon-albb-fullscreen" @click="handleClick('fullscreen')" />
+      <i class="nav_icon el-icon-albb-remind11" @click="handleClick('msg')" />
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           {{ userInfo.name }}
@@ -300,6 +302,14 @@ export default {
         case 'selectAvatar':
           this.selectFileInfo.visible = true
           break
+        case 'fullscreen':
+          this.$emit('handleFullScreen', window.event, true)
+          break
+        case 'msg':
+          this.$message({
+            message: '暂无消息'
+          })
+          break
       }
     },
     // 触发事件
@@ -357,6 +367,11 @@ export default {
     }
     .right{
       cursor: pointer;
+      .nav_icon{
+        padding: 5px;
+        font-size: 20px;
+        color: rgb(130, 130, 130);
+      }
       .tp-weather-widget{
         padding-right: 20px;
       }
@@ -365,6 +380,7 @@ export default {
         align-items: center;
         color: $g_theme;
         padding-top: 3px;
+        margin-left: 10px;
         font-size: 13px;
       }
       .avatar{

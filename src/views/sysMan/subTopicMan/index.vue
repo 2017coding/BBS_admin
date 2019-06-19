@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    页面图表配置
+    订阅主题管理
   </div>
 </template>
 
@@ -9,5 +9,5 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 </style>

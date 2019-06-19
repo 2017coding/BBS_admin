@@ -156,11 +156,11 @@ export default {
           { label: '类型名称', value: 'name', minWidth: 90 },
           { label: '图标', value: 'icon', type: 'image', width: 100 },
           { label: '描述', value: 'desc', minWidth: 160 },
-          { label: '状态', value: 'status', width: 90, type: 'slot' }
-          // {label: '创建人', value: 'create_user_name'},
-          // {label: '创建时间', value: 'create_time', minWidth: 180},
-          // {label: '更新人', value: 'update_user_name'},
-          // {label: '更新时间', value: 'update_time', minWidth: 180}
+          { label: '状态', value: 'status', width: 90, type: 'slot' },
+          // {label: '创建人', value: 'create_user'},
+          { label: '创建时间', value: 'create_time', width: 180 },
+          // {label: '更新人', value: 'update_user'},
+          { label: '更新时间', value: 'update_time', width: 180 }
         ],
         handle: {
           fixed: 'right',
