@@ -264,7 +264,7 @@ export default {
             showClose: true,
             message: res.message,
             type: res.success ? 'success' : 'error',
-            duration: 2000
+            duration: 3500
           })
         }
       })

@@ -405,7 +405,7 @@ export default {
             showClose: true,
             message: res.message,
             type: res.success ? 'success' : 'error',
-            duration: 2000
+            duration: 3500
           })
         }
       })
@@ -522,7 +522,7 @@ export default {
                 showClose: true,
                 message: '接收用户不能为空',
                 type: 'error',
-                duration: 2000
+                duration: 3500
               })
               return
             }
@@ -543,7 +543,7 @@ export default {
                 showClose: true,
                 message: res.message,
                 type: res.success ? 'success' : 'error',
-                duration: 2000
+                duration: 3500
               })
             }).catch(() => {
               dialogInfo.btLoading = false

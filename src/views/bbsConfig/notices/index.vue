@@ -92,7 +92,7 @@ export default {
             if (valid) {
               this.btLoading = true
               const params = this.formInfo.data
-              this.$handleAPI('set', setNoticesApi, params).then(res => {
+              this.$handleAPI('create', setNoticesApi, params).then(res => {
                 if (res.success) {
                   this.edit = false
                 }

@@ -398,7 +398,7 @@ export default {
             showClose: true,
             message: res.message,
             type: res.success ? 'success' : 'error',
-            duration: 2000
+            duration: 3500
           })
         }
         // 加载loading
@@ -478,7 +478,7 @@ export default {
             showClose: true,
             message: res.message,
             type: res.success ? 'success' : 'error',
-            duration: 2000
+            duration: 3500
           })
         }
         // 延迟加载，保证加载动画

@@ -208,7 +208,7 @@ export default {
         showClose: true,
         message: res.success ? '上传成功' : '上传失败',
         type: res.success ? 'success' : 'error',
-        duration: 2000
+        duration: 3500
       })
 
       this.$emit('handleEvent', 'upload', res.success)
@@ -229,7 +229,7 @@ export default {
         showClose: true,
         message: '上传失败',
         type: 'error',
-        duration: 2000
+        duration: 3500
       })
     },
     // 文件移除时

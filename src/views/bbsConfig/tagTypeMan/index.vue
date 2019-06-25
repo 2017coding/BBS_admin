@@ -262,8 +262,8 @@ export default {
     initDataPerms () {
       const btList = this.tableInfo.handle.btList
       const btList1 = this.filterInfo.list
-      this.$initDataPerms('tagMan', btList)
-      this.$initDataPerms('tagMan', btList1)
+      this.$initDataPerms('tagTypeMan', btList)
+      this.$initDataPerms('tagTypeMan', btList1)
     },
     // 初始化验证
     initRules () {
@@ -299,7 +299,7 @@ export default {
           showClose: true,
           message: res.message,
           type: res.success ? 'success' : 'error',
-          duration: 2000
+          duration: 3500
         })
       }).catch(e => {
         dialogInfo.btLoading = false

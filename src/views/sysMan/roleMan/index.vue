@@ -291,7 +291,7 @@ export default {
                 showClose: true,
                 message: res.message,
                 type: res.success ? 'success' : 'error',
-                duration: 2000
+                duration: 3500
               })
               dialogInfo.btLoading = false
             }).catch(() => {
@@ -309,7 +309,7 @@ export default {
                 showClose: true,
                 message: res.message,
                 type: res.success ? 'success' : 'error',
-                duration: 2000
+                duration: 3500
               })
               dialogInfo.btLoading = false
             }).catch(() => {
