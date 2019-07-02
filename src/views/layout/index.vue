@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import mqtt from 'mqtt'
 import { mapGetters } from 'vuex'
 import { AppMain, Sidebar, Navbar, TagsView } from './components'
 
@@ -54,21 +55,7 @@ export default {
     ])
   },
   mounted () {
-    // 添加全局的键盘事件
-    document.body.addEventListener('keyup', this.handleFullScreen)
-
-    const html = `<ul>
-                    <li style="list-style: inherit; padding: 2px;">页面上的树使用右键点击</li>
-                    <li style="list-style: inherit; padding: 2px;">shift+f11页面全屏</li>
-                    <li style="list-style: inherit; padding: 2px;">图片点击会放大显示</li>
-                    <li style="list-style: inherit; padding: 2px;"><a style="color: red; text-decoration: underline" href="/#/HOWTOUSE/PAGE">更多</a></li>
-                 </ul>`
-    this.$notify({
-      title: '小提示',
-      dangerouslyUseHTMLString: true,
-      message: html,
-      duration: 0
-    })
+    this.initMqtt()
   },
   methods: {
     // 全屏显示
@@ -90,6 +77,30 @@ export default {
       if (this.fullScreen && e.keyCode === 27) {
         this.$store.commit('app/TOGGLE_FULLSCREEN', !this.fullScreen)
       }
+    },
+    initMqtt () {
+      const URL = process.env.VUE_APP_TYPE === 'localhost' ? '10.61.0.69' : 'www.lyh.red'
+      const client = mqtt.connect(`mqtt://${URL}:1212`)
+      // 连接
+      client.on('connect', () => {
+        console.log('连接' + new Date())
+        const topic = '/11123'
+        client.subscribe(topic, function (err) {
+          if (!err) {
+            client.publish(topic, 'Hello mqtt')
+          }
+          console.log('订阅成功: ' + topic)
+        })
+      })
+      // 获取到消息
+      client.on('message', (topic, message) => {
+        // message is Buffer
+        console.log(message.toString())
+      })
+      // 断开自动重连
+      client.on('close', () => {
+        console.log('close重新连接' + new Date())
+      })
     }
   }
 }

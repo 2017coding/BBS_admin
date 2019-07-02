@@ -192,6 +192,16 @@ export default {
     }
   },
   watch: {
+    defaultChecked (val) {
+      // 将节点选中的状态初始化
+      this.$refs.TreeComponent.setCheckedNodes([])
+      // const result = [];
+      for (let i = 0; i < val.length; i++) {
+        // result.push(data.data[i].id);
+        // 得到选中的节点,这个方法ojbk
+        this.$refs.TreeComponent.setChecked(val[i], true)
+      }
+    },
     'rightMenu.show' (val) {
       if (val) {
         document.body.addEventListener('click', this.handlecCloseMenu)
