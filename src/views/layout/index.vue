@@ -79,7 +79,7 @@ export default {
       }
     },
     initMqtt () {
-      const URL = process.env.VUE_APP_TYPE === 'localhost' ? '10.61.0.69' : 'www.lyh.red'
+      const URL = '127.0.0.1'
       const client = mqtt.connect(`mqtt://${URL}:1212`)
       // 连接
       client.on('connect', () => {

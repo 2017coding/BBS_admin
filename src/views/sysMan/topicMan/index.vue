@@ -124,7 +124,7 @@ export default {
         },
         list: [
           { type: 'input', label: '主题名称', value: 'name' },
-          { type: 'input', label: '主题编码', value: 'name' },
+          { type: 'input', label: '主题编码', value: 'code' },
           { type: 'select', label: '订阅的客户端', value: 'client', list: 'typeList' },
           { type: 'select', label: '状态', value: 'status', list: 'statusList' },
           { type: 'button', label: '搜索', btType: 'primary', icon: 'el-icon-search', event: 'search', show: true },
@@ -137,8 +137,8 @@ export default {
         initCurpage: 1,
         data: [],
         fieldList: [
-          { label: '主题名称', value: 'name' },
-          { label: '主题编码', value: 'code' },
+          { label: '主题名称', value: 'name', minWidth: 160 },
+          { label: '主题编码', value: 'code', minWidth: 200 },
           { label: '订阅的客户端', value: 'client', minWidth: 230, type: 'slot' },
           { label: '状态', value: 'status', width: 90, type: 'slot' },
           // {label: '创建人', value: 'create_user'},
@@ -327,7 +327,7 @@ export default {
               } else {
                 return
               }
-              params.client = params.client.join(',')
+              params.client = params.client.sort((a, b) => a - b).join(',')
               dialogInfo.btLoading = true
               this.$handleAPI(type, api, params).then(res => {
                 if (res.success) {

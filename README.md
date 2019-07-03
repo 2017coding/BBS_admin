@@ -62,6 +62,15 @@
 |-|菜单管理|menuMan||
 |-|区域管理|areaMan||
 |-|图表配置|chartConfig||
+|-|订阅主题管理|topicMan||
 |-|系统日志|log||
 
 ## 基本业务分析
+
+## mqtt主题订阅
+```
+  /chat/user/${userID} // 用户聊天频道
+  /chat/group/${groupID} // 群聊天频道
+  /message/user/${userID} // 通过用户id订阅，当收到文章，问题评论等相关操作时进行通讯
+  /message/audit/${roleID} // 消息通知, 相关角色可收到消息并前往处理
+```
