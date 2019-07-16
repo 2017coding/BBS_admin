@@ -51,11 +51,14 @@ export default {
     },
     ...mapGetters([
       'sidebar',
-      'fullScreen'
+      'fullScreen',
+      'userInfo'
     ])
   },
   mounted () {
     this.initMqtt()
+    // 添加全局的键盘事件
+    document.body.addEventListener('keyup', this.handleFullScreen)
   },
   methods: {
     // 全屏显示
@@ -79,23 +82,29 @@ export default {
       }
     },
     initMqtt () {
-      const URL = '127.0.0.1'
+      const URL = process.env.VUE_APP_TYPE === 'localhost' ? '127.0.0.1' : 'www.lyh.red'
       const client = mqtt.connect(`mqtt://${URL}:1212`)
+      const TopicList = [
+        `/chat/user/${this.userInfo.id}`,
+        `/chat/group/#`,
+        `/message/user/${this.userInfo.id}`,
+        `/message/audit/#`
+      ]
       // 连接
       client.on('connect', () => {
         console.log('连接' + new Date())
-        const topic = '/11123'
-        client.subscribe(topic, function (err) {
-          if (!err) {
-            client.publish(topic, 'Hello mqtt')
-          }
-          console.log('订阅成功: ' + topic)
+        TopicList.forEach(topic => {
+          client.subscribe(topic, function (err) {
+            if (!err) {
+              console.log('订阅成功: ' + topic)
+            }
+          })
         })
       })
       // 获取到消息
       client.on('message', (topic, message) => {
         // message is Buffer
-        console.log(message.toString())
+        console.log(topic, message.toString())
       })
       // 断开自动重连
       client.on('close', () => {
