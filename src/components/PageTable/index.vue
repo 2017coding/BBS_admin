@@ -351,5 +351,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+// 自定义表格相关
+.page-table{
+  .pagination-container{
+    padding: 15px 0;
+  }
+}
 </style>

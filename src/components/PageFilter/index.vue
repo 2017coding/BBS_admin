@@ -171,5 +171,25 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+// 自定义过滤相关
+.page-filter {
+  padding-bottom: 5px;
+  .filter-item {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 7px;
+    margin-right: 10px;
+  }
+  .filter-label{
+    padding-right: 5px;
+    font-size: 14px;
+    color: #606266;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .filter-input, .filter-time, .filter-date, .filter-select{
+    width: 180px;
+  }
+}
 </style>

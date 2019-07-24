@@ -21,7 +21,6 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     port: 2020,
-    open: true,
     overlay: {
       warnings: true,
       errors: true
@@ -76,9 +75,9 @@ module.exports = {
       .end()
     config
       // https://webpack.js.org/configuration/devtool/#development
-      .when(process.env.NODE_ENV === 'development',
-        config => config.devtool('cheap-source-map')
-      )
+      // .when(process.env.NODE_ENV === 'development',
+      //   config => config.devtool('cheap-source-map')
+      // )
     config
       .when(process.env.NODE_ENV !== 'development',
         config => {

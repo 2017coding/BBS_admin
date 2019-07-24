@@ -161,5 +161,56 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+// 自定义form相关
+.page-form{
+  .el-form-item{
+    display: inline-block;
+    // float: left;
+    width: 48%;
+    .el-form-item__content{
+      .el-input, .el-select, .el-textarea{
+        width: 240px;
+      }
+      .el-input-number{
+        .el-input{
+          width: inherit;
+        }
+      }
+    }
+  }
+  .el-form-block{
+    display: block;
+    width: 100%;
+    .el-form-item__content{
+      .el-textarea{
+        width: 100%;
+      }
+    }
+  }
+}
+.page-form-block{
+  .el-form-item{
+    display: block;
+    .el-form-item__content{
+      .el-input, .el-select, .el-textarea{
+        width: inherit;
+      }
+      .el-input-number{
+        .el-input{
+          width: inherit;
+        }
+      }
+    }
+  }
+  .el-form-block{
+    display: block;
+    width: 100%;
+    .el-form-item__content{
+      .el-textarea{
+        width: 100%;
+      }
+    }
+  }
+}
 </style>
