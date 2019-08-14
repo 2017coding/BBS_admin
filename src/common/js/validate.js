@@ -46,7 +46,9 @@ export default (obj) => {
         },
         length: obj => {
           if (!obj.value) return true
-          return obj.conditions[0] <= obj.value.length && obj.value.length <= obj.conditions[1]
+          // 如果是number，是没有length方法的，所以统一转换为String
+          const value = obj.value + ''
+          return obj.conditions[0] <= value.length && value.length <= obj.conditions[1]
         },
         number: obj => {
           if (!obj.value) return true
@@ -75,17 +77,17 @@ export default (obj) => {
         },
         lon: obj => {
           if (!obj.value) return true
-          reg = /^[\-\+]?(0?\d{1,2}\.\d{1,10}|1[0-7]?\d{1}\.\d{1,10}|180\.0{1,10})$/
+          reg = /^[-+]?(0?\d{1,2}\.\d{1,10}|1[0-7]?\d{1}\.\d{1,10}|180\.0{1,10})$/
           return reg.test(obj.value)
         },
         lat: obj => {
           if (!obj.value) return true
-          reg = /^[\-\+]?([0-8]?\d{1}\.\d{1,10}|90\.0{1,10})$/
+          reg = /^[-+]?([0-8]?\d{1}\.\d{1,10}|90\.0{1,10})$/
           return reg.test(obj.value)
         },
         url: obj => {
           if (!obj.value) return true
-          reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/
+          reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~/])+$/
           return reg.test(obj.value)
         },
         repeat: obj => {
@@ -94,7 +96,7 @@ export default (obj) => {
         },
         email: obj => {
           if (!obj.value) return true
-          reg = /^([-_A-Za-z0-9\.]+)@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/
+          reg = /^([-_A-Za-z0-9.]+)@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/
           return reg.test(obj.value)
         },
         password: obj => {

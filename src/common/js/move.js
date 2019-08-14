@@ -6,7 +6,7 @@
  * @param {Object} data 数据
  * @param {Function} callback 移动完调用的方法
  */
-export default (el, handle, move, parentBox = 'body', data= {}, callback) => {
+export default (el, handle, move, parentBox = 'body', data = {}, callback) => {
   const handleDom = el.querySelector(handle)
   const moveDom = el.querySelector(move)
   handleDom.style.cssText += 'cursor:move;'
@@ -51,7 +51,7 @@ export default (el, handle, move, parentBox = 'body', data= {}, callback) => {
       // 得到父级盒子的宽高
       const W = document.querySelector(parentBox).clientWidth
       const H = document.querySelector(parentBox).clientHeight
-      
+
       // 得到当前块的宽高
       const domW = moveDom.clientWidth
       const domH = moveDom.clientHeight
@@ -72,9 +72,9 @@ export default (el, handle, move, parentBox = 'body', data= {}, callback) => {
         Y = -offTop
       }
       // 此时当前的索引值为去到的索引值 父盒子距离改变
-      moveDom.style.transform = 'translate3D(' + X + 'px, '+ Y +'px, 0)'
+      moveDom.style.transform = 'translate3D(' + X + 'px, ' + Y + 'px, 0)'
       result.x = X / W
-      result.y = Y /H
+      result.y = Y / H
     }
     document.onmouseup = (e) => {
       obj.moveStatus = false
@@ -85,7 +85,7 @@ export default (el, handle, move, parentBox = 'body', data= {}, callback) => {
       // 得到父级盒子的宽高
       const W = document.querySelector(parentBox).clientWidth
       const H = document.querySelector(parentBox).clientHeight
-      
+
       moveDom.style.left = +moveDom.style.left.replace('%', '') + +(result.x * 100).toFixed(6) + '%'
       moveDom.style.top = +moveDom.style.top.replace('%', '') + +(result.y * 100).toFixed(6) + '%'
       // 设置当前相对于父级元素的移动信息

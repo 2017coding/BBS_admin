@@ -82,8 +82,10 @@ export default {
       }
     },
     initMqtt () {
-      const URL = process.env.VUE_APP_TYPE === 'localhost' ? '127.0.0.1' : 'www.lyh.red'
-      const client = mqtt.connect(`mqtt://${URL}:1212`)
+      const URL = process.env.VUE_APP_TYPE === 'localhost' ? '127.0.0.1:1212' : 'www.lyh.red/mqttwss'
+      // 在不同协议下，使用不同的连接方式
+      const protocol = location.protocol === 'http:' ? 'mqtt:' : 'mqtts:'
+      const client = mqtt.connect(`${protocol}//${URL}`)
       const TopicList = [
         `/chat/user/${this.userInfo.id}`,
         `/chat/group/#`,

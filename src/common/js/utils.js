@@ -166,6 +166,21 @@ export default {
     })
   },
   /**
+   * 将树结构转换为一级列表
+   * @param {Array} treeData
+   *@return {Array} arr
+   */
+  treeToList (treeData, arr = []) {
+    for (let i = 0; i < treeData.length; i++) {
+      const item = treeData[i]
+      arr.push(item)
+      if (item.children && item.children.length !== 0) {
+        this.treeToList(item.children, arr)
+      }
+    }
+    return arr
+  },
+  /**
    * 将一级的数据结构处理成树状数据结构
    * @param {Object} obj {key, pKey, data}
    *  @param obj.key  字段名称 比如id
