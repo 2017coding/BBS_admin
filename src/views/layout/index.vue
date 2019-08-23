@@ -1,17 +1,14 @@
 <template>
   <div
     class="app-wrapper"
-    :class="className"
   >
-    <transition name="el-fade-in-linear">
-      <Sidebar
-        v-show="!fullScreen"
-        class="sidebar-container"
-      />
-    </transition>
+    <Sidebar
+      v-show="!fullScreen"
+      class="sidebar-container"
+      :class="className"
+    />
     <div
       class="main-container"
-      :style="fullScreen ? 'margin-left: 0' : ''"
     >
       <transition name="el-fade-in-linear">
         <div style="position: relative; z-index: 99">
@@ -119,31 +116,26 @@ export default {
 
 <style scoped lang="scss">
   .app-wrapper{
+    display: flex;
     height: 100%;
     .sidebar-container{
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 220px;
-      // transition: width 10s;
+      // width: 220px;
+      transition: all 0.28s;
       overflow-y: auto;
+      &.hideSidebar{
+        width: 60px;
+      }
+      &.openSidebar{
+        width: 200px;
+      }
       &::-webkit-scrollbar {
         display: none;
       }
     }
     .main-container{
-      transition: all .3s linear;
-    }
-  }
-  .hideSidebar{
-    .main-container{
-      margin-left: 60px;
-    }
-  }
-  .openSidebar{
-    .main-container{
-      margin-left: 220px;
+      flex: 1;
+      width: 0;
+      transition: all 0.28s;
     }
   }
 </style>

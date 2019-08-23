@@ -1,22 +1,37 @@
 <template>
   <div class="navbar-container">
     <div class="left">
-      <i
-        :class="sidebar.opened ? 'el-icon-more toggle open' : 'el-icon-more toggle close'"
-        @click="handleToggle"
-      />
+      <toggle :is-active="sidebar.opened" class="hamburger-container" @toggleClick="handleToggle" />
       <breadcrumb class="breadcrumb-container" />
     </div>
     <div class="right">
       <!-- 天气信息的容器 -->
       <div
         id="tp-weather-widget"
-        style="padding: 10px"
+        class="tool-item"
       />
-      <i class="nav_icon el-icon-albb-fullscreen" @click="handleClick('fullscreen')" />
-      <i class="nav_icon el-icon-albb-remind11" @click="handleClick('msg')" />
+      <!-- 开启全屏 -->
+      <el-tooltip :content="$t('navbar.screen')" effect="dark" placement="bottom" class="tool-item">
+        <i class="el-icon-albb-fullscreen" @click="handleClick('fullscreen')" />
+      </el-tooltip>
+      <!-- 消息 -->
+      <el-tooltip :content="$t('navbar.size')" effect="dark" placement="bottom" class="tool-item">
+        <i class="el-icon-albb-remind11" @click="handleClick('msg')" />
+      </el-tooltip>
+      <!-- 切换尺寸 -->
+      <el-tooltip :content="$t('navbar.size')" effect="dark" placement="bottom" class="tool-item">
+        <size-select />
+      </el-tooltip>
+      <!-- 设置语言 -->
+      <el-tooltip :content="$t('navbar.lang')" effect="dark" placement="bottom" class="tool-item">
+        <lang-select />
+      </el-tooltip>
+      <!-- 换肤 -->
+      <el-tooltip :content="$t('navbar.theme')" effect="dark" placement="bottom" class="tool-item">
+        <theme-picker style="height: 26px; margin-bottom: 8px;" @change="themeChange" />
+      </el-tooltip>
       <el-dropdown @command="handleCommand">
-        <span class="el-dropdown-link">
+        <span class="el-dropdown-link" :style="`color: ${theme}; white-space: nowrap;`">
           {{ userInfo.name }}
           <span
             class="avatar"
@@ -88,10 +103,14 @@
 <script>
 import { mapGetters } from 'vuex'
 import { updateApi } from '@/api/sysMan/userMan'
+import Toggle from './Toggle'
 import Breadcrumb from './Breadcrumb' // 导航
+import SizeSelect from './SizeSelect'
+import LangSelect from './LanguageSelect'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 import SelectFile from '@/components/SelectFile'
+import ThemePicker from '@/components/ThemePicker'
 
 // 显示天气的方法， 要在这个位置初始化
 (function (T, h, i, n, k, P, a, g, e) {
@@ -115,10 +134,14 @@ import SelectFile from '@/components/SelectFile'
 
 export default {
   components: {
+    Toggle,
     Breadcrumb,
+    SizeSelect,
+    LangSelect,
     PageDialog,
     PageForm,
-    SelectFile
+    SelectFile,
+    ThemePicker
   },
   data () {
     return {
@@ -206,6 +229,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'theme',
       'sidebar',
       'userInfo'
     ])
@@ -316,6 +340,9 @@ export default {
     handleEvent (event, data) {
       // switch (event) {
       // }
+    },
+    themeChange (val) {
+      this.$store.dispatch('app/settingTheme', val)
     }
   }
 }
@@ -367,7 +394,7 @@ export default {
     }
     .right{
       cursor: pointer;
-      .nav_icon{
+      .tool-item{
         padding: 5px;
         font-size: 20px;
         color: rgb(130, 130, 130);

@@ -92,7 +92,7 @@
         class=""
       >
         是否将
-        <span style="color: red">{{ userTransferInfo.userName }}</span>
+        <span :style="`color: ${theme};`">{{ userTransferInfo.userName }}</span>
         创建的用户转移给
         <el-select
           v-model="userTransferInfo.toUser"
@@ -327,6 +327,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'theme',
       'userInfo',
       'dataPerms'
     ])

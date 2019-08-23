@@ -22,6 +22,18 @@ Vue.use(Router)
  * 基础路由, 不被权限控制的
  */
 export const baseRouter = [
+  // 实现路由刷新效果
+  {
+    path: '/redirect',
+    component: resolve => require([`@/components/RouterView`], resolve),
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path*',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
   // 登录页面
   {
     path: '/login',

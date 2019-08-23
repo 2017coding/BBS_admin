@@ -24,7 +24,7 @@
       <!-- 自定义插槽显示标题-->
       <template v-slot:col-title="scope">
         <el-tooltip class="item" effect="dark" content="查看文章详细信息" placement="left">
-          <a style="color: red; padding: 0 20px;" @click="handleClick('view', scope.row)">{{ scope.row.title }}</a>
+          <a :style="`color: ${theme}; padding: 0 20px;`" @click="handleClick('view', scope.row)">{{ scope.row.title }}</a>
         </el-tooltip>
       </template>
     </page-table>
@@ -140,6 +140,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'theme',
       'userInfo',
       'dataPerms'
     ])

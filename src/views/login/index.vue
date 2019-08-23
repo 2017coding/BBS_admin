@@ -12,7 +12,7 @@
           <span class="LLL">LLL</span>
           <span class="yh">yh</span>
         </p> -->
-        <p class="name">
+        <p class="name" :style="`color: ${theme}`">
           {{ $config.SYSTEMNAME }}
         </p>
       </div>
@@ -46,6 +46,7 @@
           tag="a"
           target="_blank"
           to="/retrieve"
+          :style="`color: ${theme}`"
         >
           忘记密码?
         </router-link>
@@ -65,8 +66,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { loginApi } from '@/api/user'
 import config from '../../../package.json'
+
 export default {
   data () {
     return {
@@ -89,6 +92,11 @@ export default {
         btLoading: false
       }
     }
+  },
+  computed: {
+    ...mapGetters([
+      'theme'
+    ])
   },
   watch: {
     'formInfo.remember' (val) {

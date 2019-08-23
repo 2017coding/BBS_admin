@@ -13,7 +13,7 @@
         :key="tag.path"
         class="tags-view-item"
         :class="isActive(tag)? 'active' : ''"
-        :style="isActive(tag)"
+        :style="isActive(tag) ? `background: ${theme}` : ''"
         :to="tag"
         @contextmenu.prevent.native.stop="_openMenu(tag,$event)"
       >
@@ -68,6 +68,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'theme',
       'sidebar'
     ]),
     visitedViews () {
@@ -99,12 +100,8 @@ export default {
       }
       return false
     },
-    // 返回当前访问路由的样式
-    isActive (tag) {
-      if (tag.path === this.$route.path) {
-        return 'background-color: ' + baseScss.theme + '; color: #fff;border-color: ' + baseScss.theme + ';'
-      }
-      return false
+    isActive (route) {
+      return route.path === this.$route.path
     },
     _addViewTags () {
       const route = this._generateRoute()
@@ -196,7 +193,7 @@ export default {
       }
       &.active {
         // background-color: $g_theme;
-        // color: #fff;
+        color: #fff;
         // border-color: $g_theme;
         &::before {
           content: '';
@@ -240,7 +237,7 @@ export default {
 .tags-view-wrapper {
   height: 30px;
   background: white;
-  box-shadow: 0 2px 3px -1px #FCCFD4;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
   .tags-view-item {
     .el-icon-close {
       width: 16px;

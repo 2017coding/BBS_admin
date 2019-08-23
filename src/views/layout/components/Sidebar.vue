@@ -2,9 +2,10 @@
   <el-menu
     :default-active="$route.path"
     :collapse="!sidebar.opened"
-    :background-color="''"
-    :text-color="baseScss.textColor"
-    :active-text-color="baseScss.theme"
+    :background-color="baseScss.sideBarBg"
+    :text-color="baseScss.sideBarText"
+    :active-text-color="theme || baseScss.theme"
+    :collapse-transition="false"
     mode="vertical"
     unique-opened
   >
@@ -30,6 +31,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'theme',
       'sidebar',
       'menu'
     ])
