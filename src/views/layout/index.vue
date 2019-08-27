@@ -1,11 +1,11 @@
 <template>
   <div
     class="app-wrapper"
+    :class="className"
   >
     <Sidebar
       v-show="!fullScreen"
       class="sidebar-container"
-      :class="className"
     />
     <div
       class="main-container"
@@ -119,15 +119,9 @@ export default {
     display: flex;
     height: 100%;
     .sidebar-container{
-      // width: 220px;
-      transition: all 0.28s;
+      width: 200px !important;
+      transition: width 0.28s;
       overflow-y: auto;
-      &.hideSidebar{
-        width: 60px;
-      }
-      &.openSidebar{
-        width: 200px;
-      }
       &::-webkit-scrollbar {
         display: none;
       }
@@ -138,4 +132,19 @@ export default {
       transition: all 0.28s;
     }
   }
+  .hideSidebar{
+    .sidebar-container{
+      width: 60px !important;
+    }
+  }
+  .openSidebar{
+    .sidebar-container{
+      width: 200px !important;
+    }
+  }
+</style>
+<style>
+.horizontal-collapse-transition {
+  transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+}
 </style>

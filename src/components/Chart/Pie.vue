@@ -31,6 +31,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'theme',
       'sidebar',
       'fullScreen'
     ])

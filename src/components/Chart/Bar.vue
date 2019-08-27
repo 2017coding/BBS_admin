@@ -99,6 +99,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'theme',
       'sidebar',
       'fullScreen'
     ])
@@ -211,7 +212,7 @@ export default {
           axisPointer: {
             type: 'cross',
             label: {
-              backgroundColor: 'red'
+              backgroundColor: this.theme
             }
           }
         },
