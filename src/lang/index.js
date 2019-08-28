@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import {
-  _getSessionStore
+  _getLocalStore
 } from '@/common/js/storage'
 import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
 import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
@@ -30,7 +30,7 @@ const messages = {
 const i18n = new VueI18n({
   // set locale
   // options: en | zh | es
-  locale: _getSessionStore('language') || 'zh',
+  locale: _getLocalStore('language') || 'zh',
   // set locale messages
   messages
 })

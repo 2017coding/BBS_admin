@@ -17,7 +17,7 @@
         :to="tag"
         @contextmenu.prevent.native.stop="_openMenu(tag,$event)"
       >
-        {{ tag.title }}
+        {{ generateTitle(tag.meta.code) }}
         <span
           v-if="visitedViews.length > 1"
           class="el-icon-close"
@@ -34,16 +34,16 @@
         v-if="selectedTag && visitedViews.length > 1"
         @click="_closeSelectedTag(selectedTag)"
       >
-        关闭
+        {{ $t('tagsView.close') }}
       </li>
       <li
         v-if="selectedTag"
         @click="_closeOthersTags"
       >
-        关闭其他
+        {{ $t('tagsView.closeOthers') }}
       </li>
       <li @click="_closeAllTags">
-        关闭所有
+        {{ $t('tagsView.closeAll') }}
       </li>
     </ul>
   </div>
@@ -94,6 +94,17 @@ export default {
     this._addViewTags()
   },
   methods: {
+    generateTitle (title) {
+      const hasKey = this.$te('route.' + title)
+
+      if (hasKey) {
+        // $t :this method from vue-i18n, inject in @/lang/index.js
+        const translatedTitle = this.$t('route.' + title)
+
+        return translatedTitle
+      }
+      return title
+    },
     _generateRoute () {
       if (this.$route.name) {
         return this.$route

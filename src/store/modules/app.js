@@ -12,9 +12,9 @@ const app = {
     sidebar: {
       opened: _getSessionStore('sidebarStatus') ? !!+_getSessionStore('sidebarStatus') : true
     },
-    language: _getSessionStore('language') || 'en',
-    size: _getSessionStore('size') || 'small',
-    theme: _getLocalStore('theme') || 'red',
+    language: _getLocalStore('language') || 'en',
+    size: _getLocalStore('size') || 'small',
+    theme: _getLocalStore('theme') || '#6959CD',
     // 全屏状态
     fullScreen: false
   },
@@ -28,21 +28,18 @@ const app = {
         _setSessionStore('sidebarStatus', 0)
       }
     },
-    TOGGLE_FULLSCREEN: (state, val) => {
-      state.fullScreen = val
+    TOGGLE_FULLSCREEN: (state) => {
+      state.fullScreen = !state.fullScreen
     },
     // 设置语言
     SET_LANGUAGE: (state, language) => {
       state.language = language
-      _setSessionStore('language', language)
-    },
-    setLanguage ({ commit }, language) {
-      commit('SET_LANGUAGE', language)
+      _setLocalStore('language', language)
     },
     // 设置尺寸
     SET_SIZE: (state, size) => {
       state.size = size
-      _setSessionStore('size', size)
+      _setLocalStore('size', size)
     },
     // 设置主题
     SET_THEME: (state, theme) => {
@@ -54,6 +51,9 @@ const app = {
     // 切换侧边菜单
     toggleSideBar ({ commit, state }, status) {
       commit('TOGGLE_SIDEBAR', status)
+    },
+    setLanguage ({ commit }, lang) {
+      commit('SET_LANGUAGE', lang)
     },
     setSize ({ commit }, size) {
       commit('SET_SIZE', size)

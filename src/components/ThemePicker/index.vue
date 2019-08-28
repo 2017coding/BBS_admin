@@ -78,7 +78,7 @@ export default {
     }
   },
   created () {
-    this.theme = _getLocalStore('theme') || 'red'
+    this.theme = _getLocalStore('theme') || '#6959CD'
   },
   methods: {
     updateStyle (style, oldCluster, newCluster) {

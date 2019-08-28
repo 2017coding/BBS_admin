@@ -12,13 +12,13 @@ function addPage (arr) {
     path: '',
     component: Layout,
     redirect: '/',
-    meta: { title: '首页', icon: '' },
+    meta: { title: '首页', code: 'home', icon: '' },
     children: [
       {
         path: '/',
         component: () => import('@/views/home/index'),
         name: 'home',
-        meta: { title: '首页', icon: 'el-icon-albb-homepage' },
+        meta: { title: '首页', code: 'home', icon: 'el-icon-albb-homepage' },
         children: []
       }
     ]
@@ -29,13 +29,13 @@ function addPage (arr) {
     path: '/HOWTOUSE',
     component: Layout,
     redirect: '/HOWTOUSE/PAGE',
-    meta: { title: '使用说明', icon: '' },
+    meta: { title: '使用说明', code: 'howToUse', icon: '' },
     children: [
       {
         path: 'PAGE',
         component: () => import('@/views/HOWTOUSE/index'),
         name: 'PAGE',
-        meta: { title: '使用说明', icon: 'el-icon-albb-feedback' },
+        meta: { title: '使用说明', code: 'howToUse', icon: 'el-icon-albb-feedback' },
         children: []
       }
     ]
@@ -86,6 +86,7 @@ const permission = {
               // 对基础数据的处理
               item.meta = {}
               item.meta.title = item.name
+              item.meta.code = item.code
               item.meta.icon = item.icon
               item.meta.id = item.id
               // 使路由名字具有唯一性

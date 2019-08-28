@@ -5,7 +5,6 @@
     :background-color="baseScss.sideBarBg"
     :text-color="baseScss.sideBarText"
     :active-text-color="theme || baseScss.theme"
-    :collapse-transition="false"
     mode="vertical"
     unique-opened
   >

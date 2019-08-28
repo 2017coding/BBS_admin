@@ -1,11 +1,10 @@
 <template>
   <div
     class="app-wrapper"
-    :class="className"
   >
     <Sidebar
-      v-show="!fullScreen"
       class="sidebar-container"
+      :class="className"
     />
     <div
       class="main-container"
@@ -43,7 +42,8 @@ export default {
     className () {
       return {
         hideSidebar: !this.sidebar.opened,
-        openSidebar: this.sidebar.opened
+        openSidebar: this.sidebar.opened,
+        fullScreen: this.fullScreen
       }
     },
     ...mapGetters([
@@ -71,6 +71,7 @@ export default {
             center: true
           })
         } else {
+          if (!this.tip) return
           this.tip.close()
         }
       }
@@ -120,8 +121,17 @@ export default {
     height: 100%;
     .sidebar-container{
       width: 200px !important;
-      transition: width 0.28s;
+      transition: width 0.28s ease-in-out;
       overflow-y: auto;
+      &.hideSidebar{
+        width: 60px !important;
+      }
+      &.openSidebar{
+        width: 200px !important;
+      }
+      &.fullScreen{
+        width: 0px !important;
+      }
       &::-webkit-scrollbar {
         display: none;
       }
@@ -130,16 +140,6 @@ export default {
       flex: 1;
       width: 0;
       transition: all 0.28s;
-    }
-  }
-  .hideSidebar{
-    .sidebar-container{
-      width: 60px !important;
-    }
-  }
-  .openSidebar{
-    .sidebar-container{
-      width: 200px !important;
     }
   }
 </style>

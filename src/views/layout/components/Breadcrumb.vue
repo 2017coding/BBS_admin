@@ -11,13 +11,13 @@
         <span
           v-if="item.redirect === &quot;noredirect&quot; || index == levelList.length - 1"
           class="nav"
-        >{{ item.meta.title }}</span>
+        >{{ generateTitle(item.meta.code) }}</span>
         <!-- <router-link v-else :to="item.redirect || item.path">{{item.meta.title}}</router-link> -->
         <span
           v-else
           :to="item.redirect || item.path"
           class="nav"
-        >{{ item.meta.title }}</span>
+        >{{ generateTitle(item.meta.code) }}</span>
       </el-breadcrumb-item>
     </transition-group>
     <transition>
@@ -80,6 +80,17 @@ export default {
         }
       })
       return index === this.levelList.length
+    },
+    generateTitle (title) {
+      const hasKey = this.$te('route.' + title)
+
+      if (hasKey) {
+        // $t :this method from vue-i18n, inject in @/lang/index.js
+        const translatedTitle = this.$t('route.' + title)
+
+        return translatedTitle
+      }
+      return title
     }
   }
 }

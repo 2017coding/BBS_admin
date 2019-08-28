@@ -303,7 +303,7 @@ export default {
         handle: {
           fixed: 'right',
           label: '操作',
-          width: '180',
+          width: '200',
           btList: [
             { label: '编辑', type: '', icon: 'el-icon-edit', event: 'persUpdate', show: false },
             { label: '删除', type: 'danger', icon: 'el-icon-delete', event: 'persDelete', show: false }

@@ -14,7 +14,7 @@
           <span
             v-if="item.children[0].meta && item.children[0].meta.title"
             slot="title"
-          >{{ item.children[0].meta.title }}</span>
+          >{{ generateTitle(item.children[0].meta.code) }}</span>
         </el-menu-item>
       </router-link>
     </template>
@@ -29,7 +29,7 @@
           <span
             v-if="item.meta && item.meta.title"
             slot="title"
-          >{{ item.meta.title }}</span>
+          >{{ generateTitle(item.meta.code) }}</span>
         </el-menu-item>
       </router-link>
     </template>
@@ -48,7 +48,7 @@
         <span
           v-if="item.meta && item.meta.title"
           slot="title"
-        >{{ item.meta.title }}</span>
+        >{{ generateTitle(item.meta.code) }}</span>
       </template>
       <sidebar-item
         v-for="child in item.children"
@@ -92,6 +92,17 @@ export default {
         return true
       }
       return false
+    },
+    generateTitle (title) {
+      const hasKey = this.$te('route.' + title)
+
+      if (hasKey) {
+        // $t :this method from vue-i18n, inject in @/lang/index.js
+        const translatedTitle = this.$t('route.' + title)
+
+        return translatedTitle
+      }
+      return title
     }
   }
 }
