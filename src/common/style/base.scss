@@ -1,17 +1,19 @@
-// 基础变量
-$g_font_s: 16px;// 一般字体大小
-$g_font_c: rgb(100, 100, 100);// 一般字体颜色
-$g_vice_font_s1: 14px;// 副标题字体大小1
-$g_vice_font_s2: 12px;// 副标题字体大小2s
-$g_vice_font_c: #97a8be;// 副标题字体颜色
-$g_theme: #6959CD;// ElementUI全局背景颜色
-$g_padding_20: 20px;// 一般padding
-$g_margin_20:20px;// 一般margin
-$g_spacing: 20px;
-$g_vice_spacing: 10px;
+/* 主题色 */
+$primary-color: #6959CD;
+
+/* 布局 */
+$layout-nav-height: 50px;
+$layout-tag-height: 34px;
+$layout-sider-width: 200px;
+$layout-sider-hide-width: 60px;
+$layout-sider-color: #bfcbd9;
+$layout-sider-background: #0e1c26;
+$layout-sider-hover-background: rgb(54, 68, 78);
+$layout-sider-sub-hover-background: rgb(54, 68, 78);
+
 
 :export {
-  sideBarBg: #0e1c26;
-  theme: $g_theme;
-  sideBarText: #bfcbd9;
+  layout-sider-background: $layout-sider-background;
+  theme: $primary-color;
+  layout-sider-color: $layout-sider-color;
 }

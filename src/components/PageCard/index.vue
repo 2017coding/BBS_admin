@@ -7,7 +7,7 @@
       slot="header"
       class="clearfix"
     >
-      <span class="title">{{ title }}</span>
+      <span class="title" :style="`color: ${theme}`">{{ title }}</span>
       <i
         :title="title"
         class="el-icon-info"
@@ -22,7 +22,7 @@
       >
         <span
           class="label"
-          :style="`width: ${lableWidth}; text-align: ${textAligin}`"
+          :style="`width: ${lableWidth}; text-align: ${textAligin};`"
         >{{ item.label }}</span>
         <span class="value">{{ $fn.getDataName({dataList: listTypeInfo[item.list], value: 'value', label: 'key', data: data[item.value]}) || '-' }}</span>
       </li>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   props: {
     className: {
@@ -56,6 +57,11 @@ export default {
     listTypeInfo: {
       type: Object
     }
+  },
+  computed: {
+    ...mapGetters([
+      'theme'
+    ])
   }
 }
 </script>
@@ -66,7 +72,7 @@ export default {
   .page-card{
     .title{
       font-size: 16px;
-      color: $g_theme;
+      color: $primary-color;
     }
     .info{
       .item{

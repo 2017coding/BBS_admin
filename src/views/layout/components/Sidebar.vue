@@ -2,8 +2,8 @@
   <el-menu
     :default-active="$route.path"
     :collapse="!sidebar.opened"
-    :background-color="baseScss.sideBarBg"
-    :text-color="baseScss.sideBarText"
+    :background-color="baseScss['layout-sider-background']"
+    :text-color="baseScss['layout-sider-color']"
     :active-text-color="theme || baseScss.theme"
     mode="vertical"
     unique-opened

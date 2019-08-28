@@ -65,12 +65,12 @@
     line-height: 1.8;
   }
   a {
-    color: $g_theme;
+    color: $primary-color;
     text-decoration: underline;
     opacity: .8;
   }
   a:hover {
-    color: $g_theme;
+    color: $primary-color;
     opacity: 1;
   }
   a:focus {
@@ -87,7 +87,7 @@
     border: none;
     background: #F6F6F6;
     color: #555;
-    border-left: 2px solid $g_theme;
+    border-left: 2px solid $primary-color;
   }
   blockquote ul{
     margin: 0px;
@@ -126,14 +126,14 @@
     font-family: Courier, sans-serif;
   }
   code {
-    // color: $g_theme;
+    // color: $primary-color;
     border-radius: 4px;
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
     padding: 2px 4px;
     font-size: 90%;
   }
   p > code {
-    color: $g_theme;
+    color: $primary-color;
     font-size: .95em;
     border-radius: 3px;
     -moz-border-radius: 3px;

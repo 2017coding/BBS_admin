@@ -184,7 +184,7 @@ export default {
   // z-index: 1;
   .tags-view-wrapper {
     background: #fff;
-    height: 34px;
+    height: $layout-tag-height;
     // border-bottom: 1px solid #d8dce5;
     // box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
     .tags-view-item {
@@ -203,9 +203,9 @@ export default {
         margin-left: 15px;
       }
       &.active {
-        // background-color: $g_theme;
+        // background-color: $primary-color;
         color: #fff;
-        // border-color: $g_theme;
+        // border-color: $primary-color;
         &::before {
           content: '';
           background: #fff;

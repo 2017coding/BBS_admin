@@ -45,7 +45,7 @@
             :key="index"
             :command="item.command"
           >
-            {{ item.key }}
+            {{ $t(`user.${item.command}`) }}
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -367,7 +367,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding-right: 20px;
-    height: 50px;
+    height: $layout-nav-height;
     background: white;
     &::after{
       @include border-1px();
@@ -405,7 +405,7 @@ export default {
       .el-dropdown-link{
         display: flex;
         align-items: center;
-        color: $g_theme;
+        color: $primary-color;
         padding-top: 3px;
         margin-left: 10px;
         font-size: 13px;

@@ -5,10 +5,10 @@ import {
 } from '@/common/js/storage'
 import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
 import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
-import elementEsLocale from 'element-ui/lib/locale/lang/es'// element-ui lang
+// import elementEsLocale from 'element-ui/lib/locale/lang/es'// element-ui lang
 import enLocale from './en'
 import zhLocale from './zh'
-import esLocale from './es'
+// import esLocale from './es'
 
 Vue.use(VueI18n)
 
@@ -20,10 +20,6 @@ const messages = {
   zh: {
     ...zhLocale,
     ...elementZhLocale
-  },
-  es: {
-    ...esLocale,
-    ...elementEsLocale
   }
 }
 

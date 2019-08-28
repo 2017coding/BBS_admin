@@ -24,6 +24,7 @@
 import mqtt from 'mqtt'
 import { mapGetters } from 'vuex'
 import { AppMain, Sidebar, Navbar, TagsView } from './components'
+// import baseScss from '@/common/style/base.scss'
 
 export default {
   name: 'Layout',
@@ -47,10 +48,21 @@ export default {
       }
     },
     ...mapGetters([
+      'theme',
       'sidebar',
       'fullScreen',
       'userInfo'
     ])
+  },
+  watch: {
+    theme: {
+      handler (val) {
+        this.$nextTick(() => {
+          // this.setLayoutsidebar()
+        })
+      },
+      immediate: true
+    }
   },
   mounted () {
     this.initMqtt()
@@ -58,6 +70,38 @@ export default {
     document.body.addEventListener('keyup', this.handleFullScreen)
   },
   methods: {
+    // 动态替换style TODO: 暂时没找到通过js将scss变成css的方法
+    setLayoutsidebar () {
+      // const theme = this.theme
+      // const cssString = `.sidebar-container, .menu-wrapper .el-menu-item, .el-submenu .el-submenu__title{
+      //   background-color: mix(${baseScss['layout-sider-color']}, ${theme},70%) !important;
+      // }
+      // .menu-wrapper .el-menu-item, .el-submenu .el-submenu__title{
+      //   &:hover {
+      //     background-color: rgba(${theme}, .5) !important;
+      //   }
+      // }
+      // .el-submenu{
+      //   &.is-opened{
+      //     .menu-wrapper .el-menu-item{
+      //       background-color: mix(${baseScss['layout-sider-color']}, ${theme}, 80%) !important;
+      //       &:hover {
+      //         background-color: rgba(${theme}, .5) !important;
+      //       }
+      //     }
+      //   }
+      // }`
+      // const layoutSidebarStyle = document.querySelector('#layout-sidebar-style')
+      // if (!layoutSidebarStyle) {
+      //   const style = document.createElement('style')
+      //   style.setAttribute('id', 'layout-sidebar-style')
+      //   style.setAttribute('type', 'text/css')
+      //   style.innerHTML = cssString
+      //   document.head.appendChild(style)
+      // } else {
+      //   layoutSidebarStyle.innerHTML = cssString
+      // }
+    },
     // 全屏显示
     handleFullScreen (event, start) {
       const e = event || window.event
@@ -116,34 +160,54 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .app-wrapper{
-    display: flex;
-    height: 100%;
-    .sidebar-container{
-      width: 200px !important;
-      transition: width 0.28s ease-in-out;
-      overflow-y: auto;
-      &.hideSidebar{
-        width: 60px !important;
-      }
-      &.openSidebar{
-        width: 200px !important;
-      }
-      &.fullScreen{
-        width: 0px !important;
-      }
-      &::-webkit-scrollbar {
-        display: none;
-      }
+@import '@/common/style/base.scss';
+.app-wrapper{
+  display: flex;
+  height: 100%;
+  .sidebar-container{
+    width: $layout-sider-width !important;
+    transition: width 0.28s ease-in-out;
+    overflow-y: auto;
+    &.hideSidebar{
+      width: $layout-sider-hide-width !important;
     }
-    .main-container{
-      flex: 1;
-      width: 0;
-      transition: all 0.28s;
+    &.openSidebar{
+      width: $layout-sider-width !important;
+    }
+    &.fullScreen{
+      width: 0px !important;
+    }
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
+  .main-container{
+    flex: 1;
+    width: 0;
+    transition: all 0.28s;
+  }
+}
 </style>
-<style>
+<style lang="scss">
+@import '@/common/style/base.scss';
+.sidebar-container, .menu-wrapper .el-menu-item, .el-submenu .el-submenu__title{
+  background-color: $layout-sider-background !important;
+}
+.menu-wrapper .el-menu-item, .el-submenu .el-submenu__title{
+  &:hover {
+    background-color: mix($layout-sider-background, white, 85%) !important;
+  }
+}
+.el-submenu{
+  &.is-opened{
+    .menu-wrapper .el-menu-item{
+      background-color: mix($layout-sider-background, white, 95%) !important;
+      &:hover {
+        background-color: mix($layout-sider-background, white, 85%) !important;
+      }
+    }
+  }
+}
 .horizontal-collapse-transition {
   transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
 }

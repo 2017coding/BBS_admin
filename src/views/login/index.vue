@@ -234,7 +234,7 @@ export default {
             color: rgb(100, 100, 100);
           }
           .yh{
-            color: $g_theme;
+            color: $primary-color;
           }
         }
         .name{
@@ -242,7 +242,7 @@ export default {
           // font-size: 30px;
           font-weight: bold;
           letter-spacing: 2px;
-          color: $g_theme;
+          color: $primary-color;
         }
       }
       .remember{
@@ -251,7 +251,7 @@ export default {
         .forget{
           flex: 1;
           text-align: right;
-          color: $g_theme;
+          color: $primary-color;
         }
       }
       .login-bt{
