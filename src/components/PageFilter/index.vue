@@ -29,7 +29,7 @@
         :clearable="item.clearable === false ? item.clearable : true"
         :filterable="item.filterable === false ? item.filterable : true"
         :placeholder="getPlaceholder(item)"
-        @change="handleEvent(item.even)"
+        @change="handleEvent(item.event)"
       >
         <el-option
           v-for="(childItem, childIndex) in listTypeInfo[item.list]"
