@@ -39,6 +39,7 @@ export default {
     theme: 'Theme',
     screen: 'screen',
     size: 'Global Size',
+    message: 'message',
     lang: 'lang'
   },
   tagsView: {
@@ -53,5 +54,6 @@ export default {
     updatePassword: 'updatePwd',
     loginOut: 'loginOut'
   },
-  checkOutLanguage: 'Switch Language Success'
+  checkOutLanguage: 'Switch Language Success',
+  checkOutSize: 'Switch Size Success'
 }

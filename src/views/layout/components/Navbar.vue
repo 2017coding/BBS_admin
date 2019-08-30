@@ -15,7 +15,7 @@
         <i class="el-icon-albb-fullscreen" @click="handleClick('fullscreen')" />
       </el-tooltip>
       <!-- 消息 -->
-      <el-tooltip :content="$t('navbar.size')" effect="dark" placement="bottom" class="tool-item">
+      <el-tooltip :content="$t('navbar.message')" effect="dark" placement="bottom" class="tool-item">
         <i class="el-icon-albb-remind11" @click="handleClick('msg')" />
       </el-tooltip>
       <!-- 切换尺寸 -->

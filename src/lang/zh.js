@@ -39,6 +39,7 @@ export default {
     theme: '换肤',
     screen: '全屏',
     size: '布局大小',
+    message: '消息',
     lang: '语言'
   },
   tagsView: {
@@ -53,5 +54,6 @@ export default {
     updatePassword: '修改密码',
     loginOut: '退出登录'
   },
-  checkOutLanguage: '切换语言成功'
+  checkOutLanguage: '切换语言成功',
+  checkOutSize: '切换布局尺寸成功'
 }

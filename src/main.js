@@ -4,11 +4,7 @@ import Vue from 'vue'
 import App from '@/App'
 import router from '@/router'
 import store from '@/store'
-import {
-  _getSessionStore
-} from '@/common/js/storage'
-
-import 'babel-polyfill' // 编译ES6API
+import { _getLocalStore } from '@/common/js/storage'
 
 import 'normalize.css/normalize.css' // 样式初始化
 
@@ -34,7 +30,7 @@ Vue.use(vueImgAlart)
 Vue.config.productionTip = false
 
 Vue.use(ElementUI, {
-  size: _getSessionStore('size') || 'mini', // set element-ui default size
+  size: _getLocalStore('size') || 'mini', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
 })
 
