@@ -90,6 +90,8 @@
         </template>
       </page-form>
     </page-dialog>
+    <!-- 消息组件 -->
+    <msg-list :visible.sync="msgVisible" />
     <!-- 选择文件组件 -->
     <select-file
       v-if="selectFileInfo.visible"
@@ -103,14 +105,15 @@
 <script>
 import { mapGetters } from 'vuex'
 import { updateApi } from '@/api/sysMan/userMan'
-import Toggle from './Toggle'
-import Breadcrumb from './Breadcrumb' // 导航
-import SizeSelect from './SizeSelect'
-import LangSelect from './LanguageSelect'
+import Toggle from '../Toggle'
+import Breadcrumb from '../Breadcrumb' // 导航
+import SizeSelect from '../SizeSelect'
+import LangSelect from '../LanguageSelect'
 import PageDialog from '@/components/PageDialog'
 import PageForm from '@/components/PageForm'
 import SelectFile from '@/components/SelectFile'
 import ThemePicker from '@/components/ThemePicker'
+import MsgList from './components/MsgList'
 
 // 显示天气的方法， 要在这个位置初始化
 (function (T, h, i, n, k, P, a, g, e) {
@@ -141,7 +144,8 @@ export default {
     PageDialog,
     PageForm,
     SelectFile,
-    ThemePicker
+    ThemePicker,
+    MsgList
   },
   data () {
     return {
@@ -224,7 +228,8 @@ export default {
         type: 2,
         visible: false,
         value: ''
-      }
+      },
+      msgVisible: false
     }
   },
   computed: {
@@ -330,9 +335,7 @@ export default {
           this.$emit('handleFullScreen', window.event, true)
           break
         case 'msg':
-          this.$message({
-            message: '暂无消息'
-          })
+          this.msgVisible = !this.msgVisible
           break
       }
     },
