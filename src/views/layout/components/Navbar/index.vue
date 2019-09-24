@@ -117,6 +117,12 @@ import MsgList from './components/MsgList'
 
 // 显示天气的方法， 要在这个位置初始化
 (function (T, h, i, n, k, P, a, g, e) {
+  for (const val of [T, h, i, n, k, P, a, g, e]) {
+    if (!val) {
+      console.log([T, h, i, n, k, P, a, g, e].indexOf(val))
+      return
+    }
+  }
   g = function () {
     P = h.createElement(i)
     a = h.getElementsByTagName(i)[0]
